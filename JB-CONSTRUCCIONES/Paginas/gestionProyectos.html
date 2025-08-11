@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Proyectos</title>
+    <link rel="icon" href="Complementos/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Sidebar -->
+    <div class="flex h-screen">
+        <div class="sidebar bg-black text-white w-64 px-4 py-6 hidden md:block">
+            <div class="flex items-center justify-center mb-8">
+                <img src="https://example.com/logo.png" alt="Logo JB Constructores" class="h-10">
+            </div>
+            <div class="space-y-1 mb-8">
+                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Principal</div>
+                <a href="index.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Inicio</span>
+                    </div>
+                </a>
+            </div>
+            <div class="space-y-1 mb-8">
+                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Servicios</div>
+                <a href="portafolio.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Portafolio</span>
+                    </div>
+                </a>
+                <a href="blogs.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Blogs</span>
+                    </div>
+                </a>
+                <a href="simulador.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Simulador de Cotizaciones</span>
+                    </div>
+                </a>
+            </div>
+            <div class="space-y-1 mb-8">
+                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Usuario Registrado</div>
+                <a href="mis_cotizaciones.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Mis Cotizaciones</span>
+                    </div>
+                </a>
+                <a href="resenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Reseñas y Calificaciones</span>
+                    </div>
+                </a>
+                <a href="progresoObra.html" class="block px-4 py-2 bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Avance de Obra</span>
+                    </div>
+                </a>
+            </div>
+            <div class="space-y-1 mb-8">
+                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Administrador</div>
+                <a href="gestionProyectos.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Gestionar Proyectos</span>
+                    </div>
+                </a>
+                <a href="moderacionResenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Moderación de Reseñas</span>
+                    </div>
+                </a>
+                <a href="mensajes.html" class="block px-4 py-2 bg-red-800 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <span>Mensajes</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <h1 class="text-xl font-semibold text-gray-800">Gestión de Proyectos</h1>
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+                        onclick="window.location.href='nuevoProyecto.html'">
+                        + Nuevo Proyecto
+                    </button>
+                </div>
+            </header>
+            
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Proyectos Activos</h2>
+                    <p class="text-gray-600">Gestión y seguimiento de proyectos en curso</p>
+                    <div class="flex space-x-4 mt-4">
+                        <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">
+                            Actualizar
+                        </button>
+                        <button class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700">
+                            Exportar Listado
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Filtros -->
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex flex-wrap gap-4">
+                            <input type="text" placeholder="Buscar proyecto..." class="border rounded-md p-2 flex-1">
+                            <select class="border rounded-md p-2">
+                                <option>Todos los estados</option>
+                                <option>En planificación</option>
+                                <option>En progreso</option>
+                                <option>En pausa</option>
+                                <option>Finalizado</option>
+                            </select>
+                            <select class="border rounded-md p-2">
+                                <option>Todos los clientes</option>
+                                <option>Cliente A</option>
+                                <option>Cliente B</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="grid grid-cols-12 gap-4 p-4 border-b bg-gray-50 font-medium">
+                            <div class="col-span-3">Proyecto</div>
+                            <div class="col-span-2">Cliente</div>
+                            <div class="col-span-2">Fecha Inicio</div>  
+                            <div class="col-span-2">Fecha Fin</div>
+                            <div class="col-span-1">Avance</div>
+                            <div class="col-span-2">Acciones</div>
+                        </div>
+                        <div class="divide-y divide-gray-200">
+                            <div class="grid grid-cols-12 gap-4 p-4 items-center hover:bg-gray-50">
+                                <div class="col-span-3 font-medium">Casa Residencial Las Lomas</div>
+                                <div class="col-span-2">Juan Pérez</div>
+                                <div class="col-span-2">15/09/2023</div>
+                                <div class="col-span-2">15/12/2023</div>
+                                <div class="col-span-1">
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-green-600 h-2.5 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                    <span class="text-xs">65%</span>
+                                </div>
+                                <div class="col-span-2 flex space-x-2">
+                                    <button title="Editar" class="text-blue-600 hover:text-blue-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                        </svg>
+                                    </button>
+                                    <button title="Detalles" class="text-green-600 hover:text-green-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- More messages -->
+                        </div>
+                    </div>
+                    
+                    </div>
+                <!-- Paginación -->
+                <div class="mt-6 flex justify-between items-center">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-800">Enviar Nuevo Mensaje</h3>
+                    </div>
+                    <div class="p-4">
+                        <form>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Asunto</label>
+                                <input type="text" class="w-full border rounded-md p-2">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Mensaje</label>
+                                <textarea rows="4" class="w-full border rounded-md p-2"></textarea>
+                            </div>
+                            <button type="submit" class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700">
+                                Enviar Mensaje
+                            </button>
+                        <span class="text-sm text-gray-600">Mostrando 1 a 8 de 24 proyectos</span>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 border rounded-md">Anterior</button>
+                        <button class="px-3 py-1 bg-red-600 text-white rounded-md">1</button>
+                        <button class="px-3 py-1 border rounded-md">2</button>
+                        <button class="px-3 py-1 border rounded-md">3</button>
+                        <button class="px-3 py-1 border rounded-md">Siguiente</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
