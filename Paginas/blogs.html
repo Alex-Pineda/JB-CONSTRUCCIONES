@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - JB Constructores</title>
+    <link rel="icon" href="../Complementos/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+                .sidebar {
+            transition: all 0.3s;
+        }
+        .active-tab {
+            border-bottom: 3px solid #761f26;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+        <div class="flex h-screen">
+        <div id="sidebar-container"></div> <!-- Aquí insertamos el sidebar -->
+        
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow-sm">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <h1 class="text-xl font-semibold text-gray-800">Blogs de JB Constructores</h1>
+                </div>
+            </header>
+            
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Últimos Artículos</h2>
+                    <p class="text-gray-600">Mantente informado sobre las últimas tendencias y consejos en construcción.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <img src="https://example.com/blog1.jpg" alt="Blog 1" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Título del Blog 1</h3>
+                            <p class="text-gray-600">Resumen breve del contenido del blog 1.</p>
+                            <a href="blog1.html" class="text-red-600 hover:underline">Leer más</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <img src="https://example.com/blog2.jpg" alt="Blog 2" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Título del Blog 2</h3>
+                            <p class="text-gray-600">Resumen breve del contenido del blog 2.</p>
+                            <a href="blog2.html" class="text-red-600 hover:underline">Leer más</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <img src="https://example.com/blog3.jpg" alt="Blog 3" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Título del Blog 3</h3>
+                            <p class="text-gray-600">Resumen breve del contenido del blog 3.</p>
+                            <a href="blog3.html" class="text-red-600 hover:underline">Leer más</a>
+                        </div>
+                    </div>
+                    <!-- Agregar más blogs según sea necesario -->
+                </div>
+            </main>
+        </div>
+    </div>
+<script src="../Scripts/main.js"></script>  
+</body>
+</html>
