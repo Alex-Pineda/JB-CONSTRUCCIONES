@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JB Constructores - Construcción y Mantenimiento</title>
+    <link rel="icon" href="Complementos/favicon.ico" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/sidebar.css" />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      .sidebar {
+        transition: all 0.3s;
+      }
+      /* Estilo pestañas nav */
+      .tabs {
+        display: flex;
+        gap: 2rem;
+        border-bottom: 3px solid #761f26;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      .tabs button {
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        color: #4a4a4a;
+        background: transparent;
+        border: none;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
+        transition: border-color 0.3s ease, color 0.3s ease;
+      }
+      .tabs button:hover {
+        color: #761f26;
+      }
+      .tabs button.active {
+        border-bottom-color: #761f26;
+        color: #761f26;
+        font-weight: 700;
+      }
+    </style>
+</head>
+<body class="bg-gray-100">
+  <div class="flex h-screen">
+    <div id="sidebar-container"></div> <!-- Sidebar cargado con JS -->
+
+    <!-- Main content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Header -->
+      <header class="bg-white shadow-sm">
+        <div class="flex items-center justify-between px-6 py-4">
+          <h1 class="text-xl font-semibold text-gray-800">JB Constructores</h1>
+          <div class="flex items-center space-x-4">
+            <button class="relative text-gray-500 hover:text-gray-700">
+              <span
+                class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"
+              ></span>
+            </button>
+            <div class="relative">
+              <button class="flex items-center space-x-2 focus:outline-none">
+                <span class="text-gray-700">Usuario</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4 text-gray-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Navegación pestañas -->
+      <nav class="tabs px-6">
+        <button class="active" data-tab="obra-negra">Obra Negra</button>
+        <button data-tab="obra-blanca">Obra Blanca</button>
+        <button data-tab="mantenimiento">Mantenimiento</button>
+      </nav>
+
+      <!-- Main content area -->
+      <main
+        class="flex-1 overflow-y-auto px-6 pb-6"
+        style="background-color: rgba(34, 104, 77, 0.1);"
+      >
+        <!-- Secciones ocultas/visibles según pestaña -->
+        <section id="obra-negra" class="tab-content">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
+            Obra Negra
+          </h2>
+          <div id="obra-negra-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <section
+          id="obra-blanca"
+          class="tab-content hidden"
+        >
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
+            Obra Blanca
+          </h2>
+          <div id="obra-blanca-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <section
+          id="mantenimiento"
+          class="tab-content hidden"
+        >
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">
+            Mantenimiento
+          </h2>
+          <div id="mantenimiento-section" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="Scripts/main.js"></script>
+  <script>
+    // Lógica para pestañas nav
+    const tabs = document.querySelectorAll("nav.tabs button");
+    const contents = document.querySelectorAll(".tab-content");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        // Quitar activo de todos
+        tabs.forEach((t) => t.classList.remove("active"));
+        contents.forEach((c) => c.classList.add("hidden"));
+
+        // Activar tab clicked
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).classList.remove("hidden");
+      });
+    });
+  </script>
+
+</body>
+</html>
+
