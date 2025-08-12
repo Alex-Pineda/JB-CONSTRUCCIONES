@@ -1,4 +1,29 @@
 /* Fuentes y base */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor padre inmediato que tiene main: debe tener altura completa */
+.flex-1 {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ajustar main para que tome toda la altura disponible */
+main {
+  flex-grow: 1;      /* que ocupe el espacio restante */
+  height: auto;      /* quitar height fija si la tienes */
+  min-height: 0;     /* importante para que flex funcione bien */
+  padding-top: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-y: auto;
+  background-color: rgba(34, 104, 77, 0.1);  /* para scroll vertical si hay contenido extra */
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #f9fafb;
@@ -55,12 +80,6 @@ nav button.active-category {
   border-bottom: 4px solid #1f553c;
 }
 
-/* Main container */
-main {
-  padding-top: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
 .tabs {
   display: flex;
   justify-content: center;
@@ -102,7 +121,7 @@ main {
 }
 
 .service-card h3 {
-  color: #1f553c;
+  color: #191a19;
   font-weight: 700;
   font-size: 1.25rem;
   margin: 1rem 1rem 0.5rem 1rem;
@@ -132,7 +151,7 @@ button[type='submit'] {
 
 button:hover,
 button[type='submit']:hover {
-  background-color: #14532d;
+  background-color: #d1c18ceb;
 }
 
 /* Formularios */

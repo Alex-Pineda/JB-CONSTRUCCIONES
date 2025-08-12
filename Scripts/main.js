@@ -34,112 +34,112 @@ document.addEventListener('DOMContentLoaded', () => {
 
   {
     title: "Preparación y limpieza del terreno",
-    img: "Complementos/preparacion_limpieza.jpg",
+    img: "assets/img/obra_negra/preparacion_limpieza.jpg",
     description: "Despejamos y nivelamos el terreno para iniciar la construcción."
   },
   {
     title: "Verificación topográfica y marcación de ejes",
-    img: "Complementos/verificacion_topografica_marcacion.jpg",
+    img: "assets/img/obra_negra/verificacion_topografica_marcacion.jpg",
     description: "Comprobamos medidas y niveles, y trazamos los ejes para la cimentación."
   },
   {
     title: "Excavación y manejo de tierras",
-    img: "Complementos/excavacion.jpg",
+    img: "assets/img/obra_negra/excavacion.jpg",
     description: "Realizamos excavaciones y gestionamos el material sobrante."
   },
   {
     title: "Relleno y compactación",
-    img: "Complementos/relleno_compactacion.jpg",
+    img: "assets/img/obra_negra/relleno_compactacion.jpg",
     description: "Compactamos el terreno para garantizar la estabilidad de la cimentación."
   },
   {
     title: "Cimentación",
-    img: "Complementos/cimentacion.jpg",
+    img: "assets/img/obra_negra/cimentacion.jpg",
     description: "Construimos zapatas, pilotes o losa de cimentación según el diseño estructural."
   },
   {
     title: "Elaboración y armado de acero",
-    img: "Complementos/estructura_metalica.jpg",
+    img: "assets/img/obra_negra/estructura_metalica.jpg",
     description: "Cortamos, doblamos y ensamblamos el acero de refuerzo para la estructura."
   },
   {
     title: "Encofrado y vaciado de concreto",
-    img: "Complementos/encofrados_vaciados.jpg",
+    img: "assets/img/obra_negra/encofrados_vaciados.jpg",
     description: "Colocamos encofrados y vaciamos concreto para elementos estructurales."
   },
   {
     title: "Armado de losa",
-    img: "Complementos/losas.jpg",
+    img: "assets/img/obra_negra/losas.jpg",
     description: "Preparamos y fundimos las losas de entrepiso o cubierta."
   },
   {
     title: "Curado y control de calidad",
-    img: "Complementos/Curado.jpg",
+    img: "assets/img/obra_negra/Curado.jpg",
     description: "Aplicamos curado y realizamos ensayos para garantizar la resistencia del concreto."
   },
   {
     title: "Replanteo de mampostería",
-    img: "Complementos/replanteo_mamposteria.jpg",
+    img: "assets/img/obra_negra/replanteo_mamposteria.jpg",
     description: "Marcamos muros y aberturas antes de levantar mampostería."
   },
   {
     title: "Mampostería primer - segundo nivel",
-    img: "Complementos/mamposteria.jpeg",
+    img: "assets/img/obra_negra/mamposteria.jpeg",
     description: "Levantamos muros y paredes en primer, segundo nivel."
   },
   {
     title: "Instalaciones hidrosanitarias",
-    img: "Complementos/instalaciones_hidrosanitarias.jpg",
+    img: "assets/img/obra_negra/instalaciones_hidrosanitarias.jpg",
     description: "Instalamos tuberías de agua potable, aguas negras y pluviales."
   },
   {
     title: "Instalación eléctrica",
-    img: "Complementos/instalacion_electrica.jpg",
+    img: "assets/img/obra_negra/instalacion_electrica.jpg",
     description: "Realizamos el tendido de conduits y puntos eléctricos."
   },
   {
     title: "Impermeabilización",
-    img: "Complementos/impermeabilizacion.jpg",
+    img: "assets/img/obra_negra/impermeabilizacion.jpg",
     description: "Protegemos cubiertas y muros contra filtraciones de agua."
   },
   {
     title: "Revoque",
-    img: "Complementos/revoque.jpg",
+    img: "assets/img/obra_negra/revoque.jpg",
     description: "Aplicamos revoque en muros interiores y exteriores."
   },
   {
     title: "Morteros",
-    img: "Complementos/morteros.jpg",
+    img: "assets/img/obra_negra/morteros.jpg",
     description: "Preparamos y aplicamos morteros para nivelación y asiento."
   },
   {
     title: "Enchapes interiores",
-    img: "Complementos/enchapes.jpg",
+    img: "assets/img/obra_negra/enchapes.jpg",
     description: "Colocamos cerámica o porcelanato en pisos y paredes."
   },
   {
     title: "Instalación de baños",
-    img: "Complementos/instalacion_banos.jpg",
+    img: "assets/img/obra_negra/instalacion_banos.jpg",
     description: "Montamos inodoros, lavamanos, duchas y grifería."
   },
   {
     title: "Enchape fachada",
-    img: "Complementos/fachada.jpg",
+    img: "assets/img/obra_negra/fachada.jpeg",
     description: "Revestimos la fachada con piedra, cerámica o materiales decorativos."
   },
   {
     title: "Lechada y fragüe",
-    img: "Complementos/lechada.jpg",
+    img: "assets/img/obra_negra/lechada.jpg",
     description: "Sellamos juntas y realizamos la limpieza final de los enchapes."
   },
   {
     title: "Pruebas y limpieza final",
-    img: "Complementos/limpieza.jpg",
+    img: "assets/img/obra_negra/limpieza.jpg",
     description: "Realizamos pruebas de funcionamiento y limpieza general de obra."
   },
   {
     title: "Control de calidad y recepción",
-    img: "Complementos/control_calidad.jpg",
+    img: "assets/img/obra_negra/control_calidad.jpg",
     description: "Verificamos que la obra cumpla con las especificaciones antes de su entrega."
   }
 ];
