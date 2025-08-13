@@ -183,14 +183,15 @@ form textarea:focus {
 
 /* Enlaces */
 a {
-  color: #1f553c;
+  color: #13746f;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  margin-top: 8px;
 }
 
 a:hover {
-  color: #14532d;
+  color: #f8ffd8;
   text-decoration: underline;
 }
 
