@@ -148,86 +148,85 @@ document.addEventListener('DOMContentLoaded', () => {
   const obraBlancaItems = [
   {
     title: "Revoque fino y estuco",
-    img: "imagenes/obra-blanca/revoque_fino_estuco.jpg",
+    img: "assets/img/obra_blanca/estuco.jpg",
     description: "Aplicamos revoque fino y estuco para alisar muros y dejarlos listos para pintura."
   },
   {
     title: "Pintura interior",
-    img: "imagenes/obra-blanca/pintura_interior.jpg",
+    img: "assets/img/obra_blanca/pintura.jpg",
     description: "Pintamos muros y cielos rasos con acabados decorativos y de protección."
   },
   {
     title: "Pintura exterior",
-    img: "imagenes/obra-blanca/pintura_exterior.jpg",
+    img: "assets/img/obra_blanca/pintura_exterior.jpeg",
     description: "Aplicamos pintura y selladores especiales para proteger fachadas."
   },
   {
     title: "Instalación de pisos interiores",
-    img: "imagenes/obra-blanca/pisos_interiores.jpg",
+    img: "assets/img/obra_blanca/piso_interior.jpg",
     description: "Colocamos pisos en cerámica, porcelanato, madera o laminados."
   },
   {
     title: "Instalación de cielorrasos",
-    img: "imagenes/obra-blanca/cielorrasos.jpg",
+    img: "assets/img/obra_blanca/cieloraso.jpg",
     description: "Montamos cielorrasos en drywall, PVC o materiales acústicos."
   },
   {
     title: "Enchapes y revestimientos decorativos",
-    img: "imagenes/obra-blanca/enchapes_decorativos.jpg",
+    img: "assets/img/obra_blanca/revestimientos.jpg",
     description: "Instalamos enchapes y revestimientos en muros, cocinas y baños."
   },
   {
     title: "Instalación de estructura metálica",
-    img: "imagenes/obra-blanca/carpinteria_metalica.jpg",
+    img: "assets/img/obra_blanca/instalacion_estructura.jpg",
     description: "Armamos techos en hierro de diferentes dimensiones, barandas, rejas y elementos metálicos decorativos o de seguridad."
   },
   {
     title: "Instalación de ventanas y vidrios",
-    img: "imagenes/obra-blanca/ventanas_vidrios.jpg",
+    img: "assets/img/obra_blanca/ventanas.jpg",
     description: "Colocamos ventanas, ventanales y divisiones en vidrio templado o laminado."
   },
   {
     title: "Instalación de grifería y accesorios",
-    img: "imagenes/obra-blanca/griferia_accesorios.jpg",
+    img: "assets/img/obra_blanca/griferia.jpg",
     description: "Montamos grifería, toalleros, espejos y demás accesorios en baños y cocinas."
   },
   {
     title: "Instalación de iluminación",
-    img: "imagenes/obra-blanca/iluminacion.jpg",
+    img: "assets/img/obra_blanca/iluminacion.jpeg",
     description: "Instalamos lámparas, bombillas LED y sistemas de iluminación decorativa."
   },
   {
     title: "Instalación de tomacorrientes e interruptores",
-    img: "imagenes/obra-blanca/tomacorrientes_interruptores.jpg",
+    img: "assets/img/obra_blanca/tomacorriente.jpg",
     description: "Colocamos tomacorrientes, interruptores y placas eléctricas."
   },
   {
     title: "Instalación de sanitarios y lavamanos",
-    img: "imagenes/obra-blanca/sanitarios_lavamanos.jpg",
+    img: "assets/img/obra_blanca/instalacion_sanitarios.jpg",
     description: "Instalamos piezas sanitarias, lavamanos y lavaplatos."
   },
   {
     title: "Colocación de espejos y cristales decorativos",
-    img: "imagenes/obra-blanca/espejos_cristales.jpg",
+    img: "assets/img/obra_blanca/colocacion_espejos.jpg",
     description: "Instalamos espejos y vidrios decorativos en interiores."
   },
   {
     title: "Colocación de rodapiés y molduras",
-    img: "imagenes/obra-blanca/rodapies_molduras.jpg",
+    img: "assets/img/obra_blanca/molduras.jpg",
     description: "Instalamos rodapiés, guardas y molduras decorativas."
   },
   {
     title: "Limpieza final de obra",
-    img: "imagenes/obra-blanca/limpieza_final.jpg",
+    img: "assets/img/obra_blanca/limpieza_obra_blanca.jpg",
     description: "Realizamos limpieza profunda y detallada antes de la entrega."
   },
   {
     title: "Entrega de la obra",
-    img: "imagenes/obra-blanca/entrega_obra.jpg",
+    img: "assets/img/obra_blanca/entrega.jpg",
     description: "Hacemos la entrega oficial al cliente con todos los acabados completos."
   }
 ];
-
 
   // Datos para las tarjetas de Mantenimiento
   const mantenimientoItems = [

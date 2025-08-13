@@ -56,35 +56,40 @@
 <header class="bg-white shadow-sm">
   <div class="px-6 py-4">
     <!-- Encabezado -->
-    <div class="flex items-center justify-between mb-2">
+    <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between mb-2 text-center sm:text-left">
+      <!-- Texto -->
       <div>
         <h1 class="text-2xl font-bold text-gray-800">JB-CONSTRUCCIONES</h1>
-        <p class="text-gray-600 text-sm">
+        <p class="text-gray-600 text-sm sm:mr-32">
           Soluciones de obra civil con calidad, seguridad y cumplimiento. Elije el servicio que necesitas.
         </p>
       </div>
       <!-- Botones -->
-      <div class="flex items-center space-x-2">
-        <button onclick="window.location.href='Paginas/inicioSesion.html'" class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition duration-200" 
-          style="white-space: nowrap; min-width: 100px;">Iniciar sesión</button>
-        <button onclick="window.location.href='Paginas/registro.html'" class="px-3 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition duration-200">Registrarse</button>
-
+      <div class="flex flex-row space-x-2 mt-3 sm:mt-0 w-full sm:w-auto justify-center sm:justify-end" 
+           style="white-space: nowrap; min-width: 100px; margin-top: 1rem;">
+        <button onclick="window.location.href='Paginas/inicioSesion.html'" 
+          class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition duration-200">
+          Iniciar sesión
+        </button>
+        <button onclick="window.location.href='Paginas/registro.html'" 
+          class="px-3 py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition duration-200">
+          Registrarse
+        </button>
       </div>
     </div>
   </div>
 </header>
 
       <!-- Navegación pestañas -->
-      <nav class="tabs px-6">
+      <nav class="tabs px-6" style="margin-top: 1rem; font-size: 17px;">
         <button class="active" data-tab="obra-negra">Obra Negra</button>
         <button data-tab="obra-blanca">Obra Blanca</button>
         <button data-tab="mantenimiento">Mantenimiento</button>
-        
       </nav>
 
       <!-- Main content area -->
       <main
-        class="flex-1 overflow-y-auto px-6 pb-6">
+        class="flex-1 overflow-y-auto px-6 pb-6" style="margin-top: -0.5rem;">
         <!-- Secciones ocultas/visibles según pestaña -->
         <section id="obra-negra" class="tab-content">
           <h2 class="text-2xl font-semibold text-gray-800 mb-4 text-center">

@@ -84,6 +84,8 @@ nav button.active-category {
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
+  gap: 0;
+  padding: 0;
 }
 
 /* Tarjetas de servicios unificadas */
@@ -152,6 +154,7 @@ button[type='submit'] {
 button:hover,
 button[type='submit']:hover {
   background-color: #d1c18ceb;
+  border-radius: 30px;
 }
 
 /* Formularios */
