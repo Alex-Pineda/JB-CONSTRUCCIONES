@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sidebarPath = "../" + sidebarPath;
   }
 
+
   // Cargar sidebar
   fetch(sidebarPath)
     .then(response => response.text())
