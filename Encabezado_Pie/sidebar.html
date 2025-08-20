@@ -1,100 +1,34 @@
-        <!DOCTYPE html>
-        <html lang="es">   
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>JB-CONSTRUCTORES</title>
-            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-            <link rel="stylesheet" href="../assets/css/style.css">
-            <data></data>
-            <script src="https://cdn.tailwindcss.com"></script>
-        </head>
-        <div class="sidebar bg-black text-white w-64 px-4 py-6 hidden md:block " style="width: 14rem; background-color: rgb(6, 30, 23);">
-            <div class="flex items-center justify-center mb-8">
-                <img src="JB-CONSTRUCCIONES/assets/img/JB-CONSTRUCTORES.png" alt="JB-CONSTRUCTORES" 
-                    class="h-10" style="border-radius:20px; width: 180px; height: 180px;">
-            </div>          
-            <div class="space-y-1 mb-8">
-                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2"></div>
-                <a href="JB-CONSTRUCCIONES/index.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Inicio</span>
-                    </div>
-                </a>
-            </div>
+<aside id="sidebar" 
+       class="sidebar bg-black text-white w-64 px-4 py-6 fixed inset-0 h-full z-40 
+              transform -translate-x-full transition-transform md:static md:translate-x-0 md:block"
+       style="background-color: rgb(6, 30, 23);">
 
-                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2" style="font-size: 14px;">Servicios</div>
-                <a href="JB-CONSTRUCCIONES/Paginas/portafolio.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Portafolio</span>
-                    </div>
-                </a>
-                <a href="JB-CONSTRUCCIONES/Paginas/blogs.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Blogs</span>
-                    </div>
-                </a>
-                <a href="JB-CONSTRUCCIONES/Paginas/simulador.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Cotizaciones</span>
-                    </div>
-                </a>
-                <a href="JB-CONSTRUCCIONES/Paginas/mensajes.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Mensajes</span>
-                    </div>
-                </a>
+  <!-- Logo -->
+  <div class="flex items-center justify-center mb-8">
+    <img src="../assets/img/JB-CONSTRUCTORES.png" alt="JB-CONSTRUCTORES"
+         class="h-10" style="border-radius:20px; width: 180px; height: 180px;">
+  </div>          
 
-                <!-- ESTA PAGINA SE DEBE CAMBIAR PARA QUE LOS DEMAS USUARIOS VEAN LAS RESEÑAS PUBLICADAS -->
-                 <a href="/JB-CONSTRUCCIONES/Paginas/resenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Reseñas y Calificaciones</span>
-                    </div>
-                </a>
-            
+  <!-- Principal -->
+  <div class="space-y-1 mb-8">
+    <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Principal</div>
+    <a href="../index.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">Inicio</a>
+  </div>
 
+  <!-- Servicios -->
+  <div class="space-y-1 mb-8">
+    <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Servicios</div>
+    <a href="../Paginas/portafolio.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">Portafolio</a>
+    <a href="../Paginas/blogs.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">Blogs</a>
+    <a href="../Paginas/simulador.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">Cotizaciones</a>
+    <a href="../Paginas/mensajes.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">Mensajes</a>
+    <a href="../Paginas/resenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">Reseñas y Calificaciones</a>
+  </div>
 
-
-            <!-- USUARIO REGISTRADO -->
-                <!-- 
-            <div class="space-y-1 mb-8">
-                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Usuario Registrado</div>
-                <a href="JB-CONSTRUCCIONES/Paginas/cotizaciones.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Mis Cotizaciones</span>
-                    </div>
-                </a>    -->
-
-                <!-- ESTA PAGINA DEBE SER PARA QUE LOS USUARIOS REGISTRADOS PUBLIQUEN SUS CALIFICACIONES DEL SERVICIO-->
-                <!--
-                <a href="JB-CONSTRUCCIONES/Paginas/resenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Reseñas y Calificaciones</span>
-                    </div>
-                </a>
-
-                  
-
-                <a href="/Paginas/progresoObra.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Avance de Obra</span>
-                    </div>
-                </a>
-            </div>
-
-        ADMINISTRADOR -->
-
-                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Administrador</div>
-                <a href="JB-CONSTRUCCIONES/Paginas/gestionProyectos.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Gestionar Proyectos</span>
-                    </div>
-
-                </a>
-                <a href="/JB-CONSTRUCCIONES/Paginas/moderacionResenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Moderación de Reseñas</span>
-                    </div>
-                </a>
-        </div>
-        </html>
+  <!-- Administrador -->
+  <div class="space-y-1 mb-8">
+    <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Administrador</div>
+    <a href="../Paginas/gestionProyectos.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">Gestionar Proyectos</a>
+    <a href="../Paginas/moderacionResenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">Moderación de Reseñas</a>
+  </div>
+</aside>

@@ -204,7 +204,8 @@ a:hover {
     align-items: center;
   }
   nav button {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
+    padding: 0.25rem 0.5rem;
   }
 }
 

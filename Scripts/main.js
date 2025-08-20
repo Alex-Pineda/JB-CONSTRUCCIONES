@@ -1,34 +1,88 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Detectar la ruta correcta del sidebar según ubicación
   let sidebarPath = "Encabezado_Pie/sidebar.html";
   if (window.location.pathname.includes("/Paginas/")) {
     sidebarPath = "../" + sidebarPath;
   }
 
-
-  // Cargar sidebar
   fetch(sidebarPath)
     .then(response => response.text())
     .then(html => {
       document.getElementById("sidebar-container").innerHTML = html;
 
-      // Activar toggle para menú móvil
-      const mobileMenuButton = document.querySelector('.md\\:hidden');
-      const sidebar = document.querySelector('.sidebar');
-      if (mobileMenuButton && sidebar) {
-        mobileMenuButton.addEventListener('click', () => sidebar.classList.toggle('hidden'));
+      const sidebar = document.getElementById('sidebar');
+      const menuToggle = document.getElementById('menu-toggle');
+
+      // Crear overlay dinámicamente
+      let overlay = document.getElementById('overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'overlay';
+        overlay.className = 'fixed inset-0 bg-black opacity-0 z-30 hidden transition-opacity duration-300';
+        document.body.appendChild(overlay);
       }
 
-      // Marcar enlace activo según la URL actual
-      const currentPath = window.location.pathname.split('/').pop();
       const links = sidebar.querySelectorAll('a');
+      let autoCloseTimer;
+
+      function openSidebar() {
+        if (window.innerWidth < 1024) {
+          sidebar.classList.remove("-translate-x-full", "hidden");
+          sidebar.classList.add("translate-x-0", "z-40");
+          overlay.classList.remove("hidden");
+          // Animación suave
+          setTimeout(() => overlay.classList.add("opacity-50"), 10);
+          resetAutoCloseTimer();
+        }
+      }
+
+      function closeSidebar() {
+        if (window.innerWidth < 1024) {
+          sidebar.classList.add("-translate-x-full");
+          sidebar.classList.remove("translate-x-0");
+          overlay.classList.remove("opacity-50");
+          clearTimeout(autoCloseTimer);
+          // Esperar animación antes de ocultar overlay
+          setTimeout(() => overlay.classList.add("hidden"), 300);
+        }
+      }
+
+      function resetAutoCloseTimer() {
+        clearTimeout(autoCloseTimer);
+        autoCloseTimer = setTimeout(closeSidebar, 4000);
+      }
+
+      // Toggle botón hamburguesa
+      menuToggle.addEventListener('click', () => {
+        if (sidebar.classList.contains("-translate-x-full")) {
+          openSidebar();
+        } else {
+          closeSidebar();
+        }
+      });
+
+      // Cerrar al hacer clic fuera
+      overlay.addEventListener("click", closeSidebar);
+
+      // Resetear temporizador al interactuar dentro del sidebar
+      sidebar.addEventListener("mousemove", resetAutoCloseTimer);
+      sidebar.addEventListener("click", resetAutoCloseTimer);
+
+      // Resaltar enlace activo y cerrar sidebar al seleccionar un link
+      const currentPath = window.location.pathname.split('/').pop();
       links.forEach(link => {
         const href = link.getAttribute('href').split('/').pop();
         if (href === currentPath) {
-          link.classList.add('bg-red-800', 'font-semibold');
+          link.classList.add('bg-red-800', 'font-semibold', 'rounded-lg');
         }
+
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 1024) closeSidebar();
+          // navegación normal
+        });
       });
-    });
+
+    })
+    .catch(error => console.error("No se pudo cargar el sidebar:", error));
 
   // Datos para las tarjetas de Obra Negra
   const obraNegraItems = [

@@ -1,172 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avance de Obra - JB Constructores</title>
-    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avance de Obra - JB Constructores</title>
+  <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Sidebar -->
-    <div class="flex h-screen">
-            <button id="menu-toggle" class="p-2 bg-teal-800 text-white fixed top-4 right-4 z-50 md:hidden">
+  <div class="flex h-screen">
+    <!-- Botón toggle para móviles -->
+    <button id="menu-toggle" class="p-2 bg-teal-800 text-white fixed top-4 right-4 z-50 md:hidden">
       ☰
-  </button>
-        <div class="sidebar bg-black text-white w-64 px-4 py-6 hidden md:block">
-            <div class="flex items-center justify-center mb-8">
-                <img src="https://example.com/logo.png" alt="Logo JB Constructores" class="h-10">
-            </div>
-            <div class="space-y-1 mb-8">
-                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Principal</div>
-                <a href="index.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Inicio</span>
-                    </div>
-                </a>
-            </div>
-            <div class="space-y-1 mb-8">
-                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Servicios</div>
-                <a href="portafolio.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Portafolio</span>
-                    </div>
-                </a>
-                <a href="blogs.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Blogs</span>
-                    </div>
-                </a>
-                <a href="simulador.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Simulador de Cotizaciones</span>
-                    </div>
-                </a>
-            </div>
-            <div class="space-y-1 mb-8">
-                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Usuario Registrado</div>
-                <a href="mis_cotizaciones.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Mis Cotizaciones</span>
-                    </div>
-                </a>
-                <a href="resenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Reseñas y Calificaciones</span>
-                    </div>
-                </a>
-                <a href="progresoObra.html" class="block px-4 py-2 bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Avance de Obra</span>
-                    </div>
-                </a>
-            </div>
-            <div class="space-y-1 mb-8">
-                <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Administrador</div>
-                <a href="gestionProyectos.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Gestionar Proyectos</span>
-                    </div>
-                </a>
-                <a href="moderacionResenas.html" class="block px-4 py-2 hover:bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Moderación de Reseñas</span>
-                    </div>
-                </a>
-                <a href="mensajes.html" class="block px-4 py-2 bg-red-800 rounded-lg">
-                    <div class="flex items-center space-x-3">
-                        <span>Mensajes</span>
-                    </div>
-                </a>
-            </div>
+    </button>
+      <!-- Contenido dinámico -->
+      <div id="sidebar-container"></div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <header class="bg-white shadow-sm">
+        <div class="flex items-center justify-between px-6 py-4">
+          <h1 class="text-xl font-semibold text-gray-800">Moderación de Reseñas</h1>
         </div>
-        
-        <!-- Main content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="bg-white shadow-sm">
-                <div class="flex items-center justify-between px-6 py-4">
-                    <h1 class="text-xl font-semibold text-gray-800">Moderación de Reseñas</h1>
-                </div>
-            </header>
-            
-            <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
-                <div class="mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Panel de Moderación</h2>
-                    <p class="text-gray-600">Administra y filtra las reseñas de los clientes</p>
-                    <div class="flex space-x-4 mt-4">
-                        <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">
-                            Actualizar Lista
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 gap-6">
-                    <!-- Filtros -->
-                    <div class="bg-white rounded-lg shadow p-4">
-                        <div class="flex space-x-4 mb-4">
-                            <select class="border rounded-md p-2">
-                                <option>Todas las reseñas</option>
-                                <option>Pendientes</option>
-                                <option>Aprobadas</option>
-                                <option>Rechazadas</option>
-                            </select>
-                            <select class="border rounded-md p-2">
-                                <option>Todas las calificaciones</option>
-                                <option>1 estrella</option>
-                                <option>2 estrellas</option>
-                                <option>3 estrellas</option>
-                                <option>4 estrellas</option>
-                                <option>5 estrellas</option>
-                            </select>
-                        </div>
-                    </div>
-                        <div class="divide-y divide-gray-200 max-h-96 overflow-y-auto">
-                            <div class="px-4 py-3 hover:bg-gray-50 cursor-pointer">
-                                <div class="text-sm font-medium">Administración</div>
-                                <div class="text-xs text-gray-500">05/11/2023</div>
-                                <p class="text-sm mt-1 truncate">Re: Consulta sobre materiales...</p>
-                            </div>
-                            <!-- More messages -->
-                        </div>
-                    </div>
-                    
-                    <!-- Mensaje Detalle -->
-                    <div class="bg-white rounded-lg shadow col-span-2">
-                        <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-medium text-gray-800">Detalle de Reseña</h3>
-                        </div>
-                        <div class="p-4">
-                            <div class="flex items-center justify-between mb-4">
-                                <h4 class="font-medium">Cliente: Juan Pérez</h4>
-                                <span class="text-yellow-500">★★★★★</span>
-                            </div>
-                            <p class="mb-4">"Excelente trabajo, muy profesionales"</p>
-                            <div>
-                                <h5 class="font-medium mb-2">Proyecto Relacionado:</h5>
-                                <p>Casa Residencial Las Lomas</p>
-                                <div class="mt-4 flex space-x-3">
-                                    <button class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
-                                        Aprobar Reseña
-                                    </button>
-                                    <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">
-                                        Rechazar Reseña
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </main>
+      </header>
+
+      <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
+        <div class="mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800">Panel de Moderación</h2>
+          <p class="text-gray-600">Administra y filtra las reseñas de los clientes</p>
+          <div class="flex space-x-4 mt-4">
+            <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">
+              Actualizar Lista
+            </button>
+          </div>
         </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Lista de reseñas -->
+          <div class="bg-white rounded-lg shadow p-4 col-span-1">
+            <div class="flex space-x-4 mb-4">
+              <select class="border rounded-md p-2">
+                <option>Todas las reseñas</option>
+                <option>Pendientes</option>
+                <option>Aprobadas</option>
+                <option>Rechazadas</option>
+              </select>
+              <select class="border rounded-md p-2">
+                <option>Todas las calificaciones</option>
+                <option>1 estrella</option>
+                <option>2 estrellas</option>
+                <option>3 estrellas</option>
+                <option>4 estrellas</option>
+                <option>5 estrellas</option>
+              </select>
+            </div>
+
+            <div class="divide-y divide-gray-200 max-h-96 overflow-y-auto">
+              <div class="px-4 py-3 hover:bg-gray-50 cursor-pointer">
+                <div class="text-sm font-medium">Administración</div>
+                <div class="text-xs text-gray-500">05/11/2023</div>
+                <p class="text-sm mt-1 truncate">Re: Consulta sobre materiales...</p>
+              </div>
+              <!-- Más reseñas -->
+            </div>
+          </div>
+
+          <!-- Detalle de reseña -->
+          <div class="bg-white rounded-lg shadow col-span-2">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h3 class="text-lg font-medium text-gray-800">Detalle de Reseña</h3>
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="font-medium">Cliente: Juan Pérez</h4>
+                <span class="text-yellow-500">★★★★★</span>
+              </div>
+              <p class="mb-4">"Excelente trabajo, muy profesionales"</p>
+              <div>
+                <h5 class="font-medium mb-2">Proyecto Relacionado:</h5>
+                <p>Casa Residencial Las Lomas</p>
+                <div class="mt-4 flex space-x-3">
+                  <button class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+                    Aprobar Reseña
+                  </button>
+                  <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">
+                    Rechazar Reseña
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-    <script src="Scripts/main.js"></script>
+  </div>
+
+  <script src="../Scripts/main.js"></script>
 </body>
 </html>

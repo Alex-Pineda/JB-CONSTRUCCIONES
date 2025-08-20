@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es"></html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mensajes</title>
+    <title>Mensajes - JB Constructores</title>
     <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -12,67 +12,89 @@
         body {
             font-family: 'Roboto', sans-serif;
         }
+        /* Scroll personalizado para listas */
+        .scroll-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scroll-list::-webkit-scrollbar-thumb {
+            background-color: rgba(107, 114, 128, 0.5);
+            border-radius: 3px;
+        }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100">
     <div class="flex h-screen">
-<button id="menu-toggle" class="p-2 bg-teal-800 text-white fixed top-4 right-4 z-50 md:hidden">
-  ☰
-</button>
+            <button id="menu-toggle" class="p-2 bg-teal-800 text-white fixed top-4 right-4 z-50 md:hidden">
+      ☰
+  </button>
+        <!-- Sidebar cargado con JS -->
+        <div id="sidebar-container"></div>
 
-    <div id="sidebar-container"></div> <!-- Aquí insertamos el sidebar -->
+        <!-- Contenido principal -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            
+            <!-- Header -->
+            <header class="bg-white shadow-sm px-6 py-4 flex flex-col sm:flex-row items-center justify-between">
+            
+            <!-- Título -->
+            <div class="text-center sm:text-left mb-4 sm:mb-0">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Mensajes JB Constructores</h1>
+                <p class="text-gray-500 text-sm md:text-base">Contacta al equipo administrativo fácilmente</p>
+            </div>
 
-    <div class="max-w-4xl mx-auto py-10 px-4">
-        <!-- Encabezado -->
-        <header class="mb-8 text-center">
-            <h1 class="text-2xl md:text-4xl font-bold text-gray-900 mb-2">Mensajes JB Constructores</h1>
-            <span class="text-gray-500">Contacta al equipo administrativo fácilmente</span>
-        </header>
+            <!-- Botones: hamburguesa y acciones -->
+            <div class="flex flex-row items-center space-x-2">
+                <!-- Botón hamburguesa visible solo en móviles -->
+            </header>
 
-        <main class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <!-- Lista de Mensajes -->
-            <section class="bg-white rounded-lg shadow p-4">
-                <h2 class="text-lg font-semibold text-gray-800 mb-4">Recibidos</h2>
-                <ul class="divide-y divide-gray-200 max-h-80 overflow-y-auto">
-                    <li class="py-3 px-2 hover:bg-gray-50 cursor-pointer transition">
-                        <div class="flex justify-between items-center">
-                            <span class="font-medium">Administración</span>
-                            <span class="text-xs text-gray-400">05/11/2023</span>
+            <!-- Área principal -->
+            <main class="px-6 py-6 max-w-6xl mx-auto w-full">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <!-- Lista de Mensajes -->
+                    <section class="bg-white rounded-lg shadow p-4">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Recibidos</h2>
+                        <ul class="divide-y divide-gray-200 max-h-80 overflow-y-auto scroll-list">
+                            <li class="py-3 px-2 hover:bg-gray-50 cursor-pointer transition">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">Administración</span>
+                                    <span class="text-xs text-gray-400">05/11/2023</span>
+                                </div>
+                                <div class="text-sm text-gray-600 truncate">Re: Consulta sobre materiales...</div>
+                            </li>
+                            <!-- Otros mensajes -->
+                        </ul>
+                    </section>
+
+                    <!-- Detalle del Mensaje -->
+                    <section class="bg-white rounded-lg shadow p-4 flex flex-col">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">Detalle</h2>
+                        <div class="flex-1 flex items-center justify-center text-gray-400 italic">
+                            Selecciona un mensaje para ver el detalle.
                         </div>
-                        <div class="text-sm text-gray-600 truncate">Re: Consulta sobre materiales...</div>
-                    </li>
-                    <!-- Otros mensajes -->
-                </ul>
-            </section>
+                    </section>
+                </div>
 
-            <!-- Detalle del Mensaje -->
-            <section class="bg-white rounded-lg shadow p-4 flex flex-col">
-                <h2 class="text-lg font-semibold text-gray-800 mb-4">Detalle</h2>
-                <div class="flex-1 flex items-center justify-center text-gray-400 italic">
-                    Selecciona un mensaje para ver el detalle.
-                </div>
-            </section>
-        </main>
+                <!-- Formulario de Nuevo Mensaje -->
+                <section class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Nuevo Mensaje</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-1 font-medium">Asunto</label>
+                            <input type="text" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-1 font-medium">Mensaje</label>
+                            <textarea rows="4" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition"></textarea>
+                        </div>
+                        <button type="submit" class="bg-red-600 text-white py-2 px-5 rounded font-semibold hover:bg-red-700 transition">
+                            Enviar
+                        </button>
+                    </form>
+                </section>
+            </main>
+        </div>
+    </div>
 
-        <!-- Formulario de Nuevo Mensaje -->
-        <section class="bg-white rounded-lg shadow p-6 mt-8">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Nuevo Mensaje</h2>
-            <form>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-1 font-medium">Asunto</label>
-                    <input type="text" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-1 font-medium">Mensaje</label>
-                    <textarea rows="4" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition"></textarea>
-                </div>
-                <button type="submit" class="bg-red-600 text-white py-2 px-5 rounded font-semibold hover:bg-red-700 transition">
-                    Enviar
-                </button>
-            </form>
-        </section>
-    </div>
-    </div>
-<script src="../Scripts/main.js"></script>
+    <script src="../Scripts/main.js"></script>
 </body>
 </html>
