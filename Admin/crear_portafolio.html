@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuevo Proyecto - Portafolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6 text-blue-900">Crear Nuevo Proyecto</h1>
+
+    <form class="bg-white p-6 rounded-lg shadow space-y-4">
+      <div>
+        <label class="block font-semibold">Título del Proyecto</label>
+        <input type="text" class="w-full border border-gray-300 p-2 rounded" placeholder="Ej: Remodelación Oficina">
+      </div>
+
+      <div>
+        <label class="block font-semibold">Descripción</label>
+        <textarea class="w-full border border-gray-300 p-2 rounded" rows="4"></textarea>
+      </div>
+
+      <div>
+        <label class="block font-semibold">Categoría</label>
+        <select class="w-full border border-gray-300 p-2 rounded">
+          <option>Obra Blanca</option>
+          <option>Obra Negra</option>
+          <option>Mantenimiento</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-semibold">Estado</label>
+        <select class="w-full border border-gray-300 p-2 rounded">
+          <option>Borrador</option>
+          <option>Publicado</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-semibold">Imagen Principal</label>
+        <input type="file" class="w-full border border-gray-300 p-2 rounded">
+      </div>
+
+      <div class="flex justify-end">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700">Guardar</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Portafolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-900 text-white h-screen p-4 flex flex-col">
+    <h1 class="text-2xl font-bold mb-8">JB-CONSTRUCCIONES</h1>
+    <nav class="flex-1">
+      <ul class="space-y-3">
+        <li><a href="index.html" class="block p-2 rounded hover:bg-gray-700">📊 Dashboard</a></li>
+        <li><a href="proyectos.html" class="block p-2 rounded hover:bg-gray-700">🏗️ Proyectos</a></li>
+        <li><a href="reseñas.html" class="block p-2 rounded hover:bg-gray-700">📝 Reseñas</a></li>
+        <li><a href="portafolio.html" class="block p-2 rounded hover:bg-gray-700">📂 Portafolio</a></li>
+        <li><a href="blogs.html" class="block p-2 rounded hover:bg-gray-700">📰 Blogs</a></li>
+        <li><a href="mensajes.html" class="block p-2 rounded hover:bg-gray-700">📨 Mensajes</a></li>
+        <li><a href="usuarios.html" class="block p-2 rounded hover:bg-gray-700">👥 Usuarios</a></li>
+        <li><a href="facturacion.html" class="block p-2 rounded hover:bg-gray-700">💰 Facturación</a></li>
+        <li><a href="config.html" class="block p-2 rounded hover:bg-gray-700">⚙️ Configuración</a></li>
+      </ul>
+    </nav>
+    <div>
+      <button class="w-full bg-red-600 py-2 rounded">Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 p-6">
+    <h1 class="text-2xl font-bold mb-6">Gestión de Portafolio</h1>
+
+    <!-- Botón agregar nuevo proyecto -->
+    <div class="mb-4">
+      <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"onclick="window.location.href='crear_portafolio.html'">
+        + Agregar Proyecto
+      </button>
+    </div>
+
+    <!-- Tabla de proyectos -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="p-3">ID</th>
+            <th class="p-3">Nombre Proyecto</th>
+            <th class="p-3">Descripción</th>
+            <th class="p-3">Imagen</th>
+            <th class="p-3">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Ejemplo de fila -->
+          <tr class="border-t">
+            <td class="p-3">1</td>
+            <td class="p-3">Construcción Casa Campestre</td>
+            <td class="p-3">Proyecto de obra blanca finalizado</td>
+            <td class="p-3">
+              <img src="../img/proyecto1.jpg" alt="Proyecto" class="w-16 rounded">
+            </td>
+            <td class="p-3 space-x-2">
+              <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"onclick="window.location.href='editar_portafolio.html'">Editar</button>
+              <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
+            </td>
+          </tr>
+          <tr class="border-t">
+            <td class="p-3">2</td>
+            <td class="p-3">Remodelación Oficina</td>
+            <td class="p-3">Diseño y adecuación de espacios</td>
+            <td class="p-3">
+              <img src="../img/proyecto2.jpg" alt="Proyecto" class="w-16 rounded">
+            </td>
+            <td class="p-3 space-x-2">
+              <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Editar</button>
+              <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Eliminar</button>
+            </td>
+          </tr>
+          <!-- Aquí se agregarán más proyectos dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>
+

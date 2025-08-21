@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | JB-CONSTRUCCIONES</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-900 text-white h-screen p-4 flex flex-col">
+    <h1 class="text-2xl font-bold mb-8">JB-CONSTRUCCIONES</h1>
+    <nav class="flex-1">
+      <ul class="space-y-3">
+        <li><a href="index.html" class="block p-2 rounded hover:bg-gray-700">📊 Dashboard</a></li>
+        <li><a href="proyectos.html" class="block p-2 rounded hover:bg-gray-700">🏗️ Proyectos</a></li>
+        <li><a href="reseñas.html" class="block p-2 rounded hover:bg-gray-700">📝 Reseñas</a></li>
+        <li><a href="/Admin/admin_portafolio.html" class="block p-2 rounded hover:bg-gray-700">📂 Portafolio</a></li>
+        <li><a href="blogs.html" class="block p-2 rounded hover:bg-gray-700">📰 Blogs</a></li>
+        <li><a href="mensajes.html" class="block p-2 rounded hover:bg-gray-700">📨 Mensajes</a></li>
+        <li><a href="usuarios.html" class="block p-2 rounded hover:bg-gray-700">👥 Usuarios</a></li>
+        <li><a href="facturacion.html" class="block p-2 rounded hover:bg-gray-700">💰 Facturación</a></li>
+        <li><a href="config.html" class="block p-2 rounded hover:bg-gray-700">⚙️ Configuración</a></li>
+      </ul>
+    </nav>
+    <div>
+      <button class="w-full bg-red-600 py-2 rounded">Cerrar sesión</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 p-8">
+    <h2 class="text-3xl font-bold mb-6">📊 Dashboard</h2>
+
+    <!-- Estadísticas rápidas -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="text-gray-500">Usuarios Registrados</h3>
+        <p class="text-2xl font-bold">120</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="text-gray-500">Proyectos Activos</h3>
+        <p class="text-2xl font-bold">18</p>
+      </div>
+      <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="text-gray-500">Ingresos (mes)</h3>
+        <p class="text-2xl font-bold">$45.000.000</p>
+      </div>
+    </div>
+
+    <!-- Gráfico / Placeholder -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <h3 class="text-lg font-semibold mb-4">Actividad Reciente</h3>
+      <div class="h-48 flex items-center justify-center text-gray-400">
+        [Aquí iría un gráfico con Chart.js o similar]
+      </div>
+    </div>
+  </main>
+</body>
+</html>
