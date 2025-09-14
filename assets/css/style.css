@@ -10,18 +10,20 @@ html, body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* Ajustar main para que tome toda la altura disponible */
 main {
   flex-grow: 1;      /* que ocupe el espacio restante */
-  height: auto;      /* quitar height fija si la tienes */
+  height:100%;      /* para que tome toda la altura del contenedor padre */
   min-height: 0;     /* importante para que flex funcione bien */
-  padding-top: 2rem;
+  padding-top: 1rem;
   max-width: 1200px;
   margin: 0 auto;
   overflow-y: auto;
-  background-color: rgba(34, 104, 77, 0.1);  /* para scroll vertical si hay contenido extra */
+  background-color: rgba(34, 104, 77, 0.241);  /* para scroll vertical si hay contenido extra */
 }
 
 body {
@@ -31,6 +33,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 
 /* Header */
 header {
@@ -94,9 +97,8 @@ nav button.active-category {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: #eef4f4;
+  background-color: #fcfcfc8b;
   border-radius: 0.75rem;
-  border: 1.5px solid #1f553c; /* borde visible verde oscuro */
   box-shadow: 0 2px 5px rgba(31, 85, 60, 0.1); /* sombra más ligera */
   overflow: hidden;
   cursor: pointer;
@@ -107,7 +109,7 @@ nav button.active-category {
 
 .service-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 15px rgba(31, 85, 60, 0.25);
+  box-shadow: 0 10px 20px rgba(34, 58, 47, 0.611);
   border-color: #761f26; /* borde rojo al hover */
 }
 
@@ -125,14 +127,16 @@ nav button.active-category {
 
 .service-card h3 {
   color: #191a19;
-  font-weight: 700;
-  font-size: 1.25rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
   margin: 1rem 1rem 0.5rem 1rem;
   flex-shrink: 0;
 }
 
 .service-card p {
   font-size: 0.9rem;
+  text-align: center;
   color: #555d50;
   line-height: 1.4;
   margin: 0 1rem 1.5rem 1rem;
@@ -195,6 +199,7 @@ a:hover {
   color: #f8ffd8;
   text-decoration: underline;
 }
+
 
 /* Responsividad para navbar */
 @media (max-width: 640px) {

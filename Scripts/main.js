@@ -338,16 +338,25 @@ document.addEventListener('DOMContentLoaded', () => {
 ];
 
   // Función para crear tarjeta con imagen, título y descripción
-  function createCard({ title, link, img, description }) {
-    const cursor = link ? "cursor-pointer" : "";
-    const onclick = link ? `onclick="window.location.href='${link}'"` : "";
-    return `
-      <div class="service-card ${cursor}" ${onclick}>
-        <img src="${img || 'imagenes/default.jpg'}" alt="${title}">
-        <h3>${title}</h3>
-        <p>${description || ''}</p>
-      </div>
-    `;
+function createCard({ title, img, description }) {
+  return `
+    <div class="service-card cursor-pointer" onclick="window.location.href='Paginas/simulador.html?title=${encodeURIComponent(title)}'">
+      <img src="${img || 'imagenes/default.jpg'}" alt="${title}">
+      <h3>${title}</h3>
+      <p>${description || ''}</p>
+    </div>
+  `;
+}
+  // Mostrar el título en simulador.html
+  if (window.location.pathname.includes('simulador.html')) {
+    const params = new URLSearchParams(window.location.search);
+    const title = params.get('title');
+    if (title) {
+      const tituloElem = document.getElementById('simulador-titulo');
+      if (tituloElem) {
+        tituloElem.textContent = title;
+      }
+    }
   }
 
   // Renderizar tarjetas en el contenedor con grid definido en HTML
@@ -357,7 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
       container.innerHTML = items.map(createCard).join('');
     }
   }
-
   // Pintar las tarjetas para cada sección
   renderCards('obra-negra-section', obraNegraItems);
   renderCards('obra-blanca-section', obraBlancaItems);

@@ -28,23 +28,22 @@
   ☰
 </button>
 
-        <div id="sidebar-container"></div> <!-- Aquí insertamos el sidebar -->
-        
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="bg-white shadow-sm">
                 <div class="flex items-center justify-between px-6 py-4">
                     <h1 class="text-xl font-semibold text-gray-800">Blogs de JB Constructores</h1>
+                    <button onclick="window.location.href='../index.html'" class="px-3 py-1 bg-yellow-600 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">Volver al inicio</button>
                 </div>
             </header>
             
-            <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-100" style= "min-width: 100%;">
                 <div class="mb-6">
                     <h2 class="text-2xl font-semibold text-gray-800">Últimos Artículos</h2>
                     <p class="text-gray-600">Mantente informado sobre las últimas tendencias y consejos en construcción.</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style= "min-width: 100%;">
                     <div class="bg-white rounded-lg shadow overflow-hidden">
                         <img src="https://example.com/blog1.jpg" alt="Blog 1" class="w-full h-48 object-cover">
                         <div class="p-4">

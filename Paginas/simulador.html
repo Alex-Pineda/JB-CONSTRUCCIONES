@@ -22,18 +22,17 @@
   ☰
 </button>
 
-        <div id="sidebar-container"></div> <!-- Aquí insertamos el sidebar -->
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="bg-white shadow-sm">
             <div class="flex items-center justify-between px-6 py-4">
                 <h1 class="text-xl font-semibold text-gray-800">SIMULA TU COTIZACIÓN</h1>
+            <button onclick="window.location.href='../index.html'" class="px-3 py-1 bg-yellow-600 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">Volver al inicio</button>
             </div>
             </header>
-            <main class="flex-1 overflow-y-auto p-6 bg-gray-100">
+            <main class="flex-1 overflow-y-auto p-6 bg-gray-100" style= "min-width: 100%;">
             <div class="mb-6">
-                <p class="text-gray-600">Elaboracion y definicion de medidas sobre planos</p>
-            </div>
+            <p class="text-gray-600 text-2xl font-bold text-center my-4" id="simulador-titulo"></p>            </div>
             <form class="bg-white rounded-lg shadow p-8 max-w-3xl mx-auto">
                 <!-- Datos generales -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
