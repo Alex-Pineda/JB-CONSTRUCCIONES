@@ -1,116 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Cotizaciones</title>
-    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="Complementos/favicon.ico" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <data value="JB-CONSTRUCCIONES"></data>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
-    <div class="flex h-screen">
-        <button id="menu-toggle" class="p-2 bg-teal-800 text-white fixed top-4 right-4 z-50 md:hidden">
-  ☰
-</button>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Cotizaciones</title>
 
-        <!-- Main content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="bg-white shadow-sm">
-            <div class="flex items-center justify-between px-6 py-4">
-                <h1 class="text-xl font-semibold text-gray-800">SIMULA TU COTIZACIÓN</h1>
-            <button onclick="window.location.href='../index.html'" class="px-3 py-1 bg-yellow-600 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">Volver al inicio</button>
+  <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>body { font-family:'Roboto',sans-serif; }</style>
+</head>
+
+<body class="bg-gray-50">
+
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- HEADER -->
+    <header class="bg-white shadow-sm">
+      <div class="flex items-center justify-between px-6 py-4">
+        <h1 class="text-xl font-semibold text-gray-800">SIMULA TU COTIZACIÓN</h1>
+        <button onclick="window.location.href='../index.html'" class="px-3 py-1 bg-yellow-600 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
+          Volver al inicio
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="flex-1 overflow-y-auto p-6 bg-gray-100 min-w-full">
+      <p class="text-gray-600 text-2xl font-bold text-center my-6" id="simulador-titulo"></p>
+
+      <form id="formCotizacion" class="bg-white rounded-lg shadow p-8 max-w-4xl mx-auto space-y-8">
+
+        <!-- DATOS GENERALES -->
+        <section>
+          <h2 class="text-lg font-semibold text-gray-800 mb-4">Datos Generales</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="nombre" class="block text-gray-700 font-medium mb-1">Cliente</label>
+              <input type="text" id="nombre" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Ingresa tu nombre">
             </div>
-            </header>
-            <main class="flex-1 overflow-y-auto p-6 bg-gray-100" style= "min-width: 100%;">
-            <div class="mb-6">
-            <p class="text-gray-600 text-2xl font-bold text-center my-4" id="simulador-titulo"></p>            </div>
-            <form class="bg-white rounded-lg shadow p-8 max-w-3xl mx-auto">
-                <!-- Datos generales -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <label for="nombre" class="block text-gray-700 font-medium mb-1">Cliente</label>
-                    <input type="text" id="nombre" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Ingresa tu nombre">
-                </div>
-                <div>
-                    <label for="ubicacion" class="block text-gray-700 font-medium mb-1">Ubicación del Proyecto</label>
-                    <input type="text" id="ubicacion" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Ciudad o dirección">
-                </div>
-                <div>
-                    <label for="presupuesto" class="block text-gray-700 font-medium mb-1">Metros Cuadrados</label>
-                    <input type="number" id="presupuesto" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Ingresa la cantidad">
-                </div>
-                <div>
-                    <label for="fechaInicio" class="block text-gray-700 font-medium mb-1">Fecha Estimada de Inicio</label>
-                    <input type="date" id="fechaInicio" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                </div>
-                <div class="md:col-span-2">
-                    <label for="descripcion" class="block text-gray-700 font-medium mb-1">Descripción</label>
-                    <textarea id="descripcion" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" rows="3" placeholder="Descripción del trabajo a realizar"></textarea>
-                </div>
-                </div>
-                <!-- Servicios -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <!-- Obra negra -->
-                <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
-                    <label class="block text-gray-700 font-semibold mb-2">Obra Negra</label>
-                    <select class="block w-full border-gray-300 rounded-md shadow-sm mb-2" id="obraNegraTipo">
-                    <option value="">Tipo de obra negra</option>
-                    <option value="estructura">Estructura</option>
-                    <option value="cimientos">Cimientos</option>
-                    <option value="muros">Muros</option>
-                    <option value="cubierta">Cubierta</option>
-                    </select>
-                    <input type="number" min="1" class="block w-full border-gray-300 rounded-md shadow-sm" id="obraNegraM2" placeholder="Cantidad de m²">
-                </div>
-                <!-- Obra blanca -->
-                <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
-                    <label class="block text-gray-700 font-semibold mb-2">Obra Blanca</label>
-                    <select class="block w-full border-gray-300 rounded-md shadow-sm mb-2" id="obraBlancaTipo">
-                    <option value="">Tipo de obra blanca</option>
-                    <option value="acabados">Acabados</option>
-                    <option value="pintura">Pintura</option>
-                    <option value="pisos">Pisos</option>
-                    <option value="carpinteria">Carpintería</option>
-                    </select>
-                    <input type="number" min="1" class="block w-full border-gray-300 rounded-md shadow-sm" id="obraBlancaM2" placeholder="Cantidad de m²">
-                </div>
-                <!-- Mantenimiento -->
-                <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
-                    <label class="block text-gray-700 font-semibold mb-2">Mantenimiento</label>
-                    <select class="block w-full border-gray-300 rounded-md shadow-sm mb-2" id="mantenimientoTipo">
-                    <option value="">Tipo de mantenimiento</option>
-                    <option value="electrico">Eléctrico</option>
-                    <option value="hidraulico">Hidráulico</option>
-                    <option value="limpieza">Limpieza</option>
-                    <option value="impermeabilizacion">Impermeabilización</option>
-                    </select>
-                    <input type="number" min="1" class="block w-full border-gray-300 rounded-md shadow-sm" id="mantenimientoM2" placeholder="Cantidad de m²">
-                </div>
-                </div>
-                <!-- Urgencia -->
-                <div class="mb-6">
-                <label for="urgencia" class="block text-gray-700 font-medium mb-1">Nivel de Urgencia</label>
-                <select id="urgencia" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                    <option value="">Selecciona una opción</option>
-                    <option value="baja">Baja</option>
-                    <option value="media">Media</option>
-                    <option value="alta">Alta</option>
-                </select>
-                </div>
-                <button type="submit" class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 text-lg font-semibold transition">Calcular Cotización</button>
-            </form>
-            </main>
-        </div>
-    <script src="../Scripts/main.js"></script>
-    
+
+            <div>
+              <label for="ubicacion" class="block text-gray-700 font-medium mb-1">Ubicación del Proyecto</label>
+              <input type="text" id="ubicacion" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Ciudad o dirección">
+            </div>
+
+            <div>
+              <label for="presupuesto" class="block text-gray-700 font-medium mb-1">Metros Cuadrados Totales (opcional)</label>
+              <input type="number" id="presupuesto" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Ingresa la cantidad">
+            </div>
+
+            <div>
+              <label for="fechaInicio" class="block text-gray-700 font-medium mb-1">Fecha Estimada de Inicio</label>
+              <input type="date" id="fechaInicio" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+
+            <div class="md:col-span-2">
+              <label for="descripcion" class="block text-gray-700 font-medium mb-1">Descripción</label>
+              <textarea id="descripcion" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" rows="3" placeholder="Descripción del trabajo a realizar"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICIOS -->
+        <section>
+          <h2 class="text-lg font-semibold text-gray-800 mb-4">Selecciona los Servicios y sus m²</h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Obra Negra -->
+            <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
+              <h3 class="block text-gray-700 font-semibold mb-2">Obra Negra</h3>
+              <div id="obraNegraOpciones" class="space-y-2">
+                <!-- JS inyecta: checkbox + input m² -->
+              </div>
+            </div>
+
+            <!-- Obra Blanca -->
+            <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
+              <h3 class="block text-gray-700 font-semibold mb-2">Obra Blanca</h3>
+              <div id="obraBlancaOpciones" class="space-y-2"></div>
+            </div>
+
+            <!-- Mantenimiento -->
+            <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
+              <h3 class="block text-gray-700 font-semibold mb-2">Mantenimiento</h3>
+              <div id="mantenimientoOpciones" class="space-y-2"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- URGENCIA -->
+        <section>
+          <h2 class="text-lg font-semibold text-gray-800 mb-4">Nivel de Urgencia</h2>
+          <select id="urgencia" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            <option value="">Selecciona una opción</option>
+            <option value="baja">Baja</option>
+            <option value="media">Media</option>
+            <option value="alta">Alta</option>
+          </select>
+        </section>
+
+        <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700 text-lg font-semibold transition">
+          Calcular Cotización
+        </button>
+
+      </form>
+    </main>
+  </div>
+
+  <script src="../Scripts/main.js"></script>
 </body>
 </html>
+
