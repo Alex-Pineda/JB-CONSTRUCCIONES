@@ -19,15 +19,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarContainer = document.getElementById('sidebar-container');
     if (!sidebarContainer) return; // si no existe en esta página, saltar
 
+    // Determinar la ruta correcta al sidebar según la ubicación actual
     let sidebarPath = "Encabezado_Pie/sidebar.html";
-    if (window.location.pathname.includes("/Paginas/")) {
-      sidebarPath = "../" + sidebarPath;
+    if (window.location.pathname.includes("/Paginas/") || window.location.pathname.includes("/Admin/")) {
+      sidebarPath = "../Encabezado_Pie/sidebar.html";
     }
 
     fetch(sidebarPath)
       .then(response => response.text())
       .then(html => {
-        sidebarContainer.innerHTML = html;
+        // Ajustar rutas de los enlaces según la ubicación actual
+        let adjustedHtml = html;
+        if (
+          window.location.pathname.endsWith('/index.html') ||
+          window.location.pathname === '/' ||
+          window.location.pathname === '/index.html'
+        ) {
+          // Si estamos en la raíz, no modificar rutas
+        } else {
+          // Si estamos en /Paginas o /Admin, ajustar las rutas relativas
+          adjustedHtml = adjustedHtml.replace(/href="(Paginas\/)/g, 'href="../Paginas/');
+          adjustedHtml = adjustedHtml.replace(/href="(Admin\/)/g, 'href="../Admin/');
+          adjustedHtml = adjustedHtml.replace(/href="index.html"/g, 'href="../index.html"');
+        }
+        sidebarContainer.innerHTML = adjustedHtml;
 
         const sidebar = document.getElementById('sidebar');
         const menuToggle = document.getElementById('menu-toggle');
@@ -102,12 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(error => console.error("No se pudo cargar el sidebar:", error));
   })();
 
-
   /* ============================
      2) DATOS DE SERVICIOS (arrays)
-     (aquí mantuve tus arrays; modifica/añade si quieres)
      ============================ */
-  const obraNegraItems = [
+  // ... (sin cambios, tus arrays)
+
+   const obraNegraItems = [
     { title: "Preparación y limpieza del terreno", img: "assets/img/obra_negra/preparacion_limpieza.jpg", description: "Despejamos y nivelamos el terreno para iniciar la construcción." },
     { title: "Verificación topográfica y marcación de ejes", img: "assets/img/obra_negra/verificacion_topografica_marcacion.jpg", description: "Comprobamos medidas y niveles, y trazamos los ejes para la cimentación." },
     { title: "Excavación y manejo de tierras", img: "assets/img/obra_negra/excavacion.jpg", description: "Realizamos excavaciones y gestionamos el material sobrante." },
@@ -164,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: "Reparaciones Urgentes", img: "imagenes/mantenimiento/reparaciones_urgentes.jpg", description: "Atendemos daños imprevistos como filtraciones, cortos o desprendimientos." }
   ];
 
-
   /* ============================
      3) RENDER DE TARJETAS (index u otras páginas)
      ============================ */
@@ -188,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCards('obra-blanca-section', obraBlancaItems);
   renderCards('mantenimiento-section', mantenimientoItems);
 
-
   /* ============================
      4) SIMULADOR (solo si estamos en simulador.html)
      ============================ */
@@ -206,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Arrays que guardan selección con m2
     const seleccion = {
-      obraNegra: [], // { servicio, m2 }
+      obraNegra: [],
       obraBlanca: [],
       mantenimiento: []
     };
@@ -216,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const contenedor = document.getElementById(contenedorId);
       if (!contenedor) return;
 
-      contenedor.innerHTML = ''; // limpiar
+      contenedor.innerHTML = '';
 
       items.forEach(item => {
         const idSafe = sanitizeId(item.title);
@@ -255,15 +268,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const idx = seleccion[categoria].findIndex(s => s.servicio === item.title);
             if (idx !== -1) seleccion[categoria].splice(idx, 1);
           }
-          // debug
-          // console.log('seleccion', categoria, seleccion[categoria]);
         });
 
         m2input.addEventListener('input', (e) => {
           const val = parseFloat(e.target.value) || 0;
           const obj = seleccion[categoria].find(s => s.servicio === item.title);
           if (obj) obj.m2 = val;
-          // console.log('m2 actualizado', categoria, obj);
         });
 
         contenedor.appendChild(wrapper);
@@ -360,7 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (detalle.length === 0) {
-          // mensaje sencillo si no seleccionó nada
           alert('Por favor seleccione al menos un servicio y registre los m² correspondientes.');
           return;
         }

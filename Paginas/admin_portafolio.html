@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Portafolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  <!-- Main content -->
+  <main class="flex-1 p-6">
+    <h1 class="text-2xl font-bold mb-6">Gestión de Portafolio</h1>
+
+    <!-- Barra superior con botones -->
+    <div class="flex items-center justify-between mb-6">
+      <!-- Botón agregar nuevo proyecto -->
+      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition" onclick="window.location.href='crear_portafolio.html'">+ Agregar Proyecto</button>
+
+      <!-- Botones de administración -->
+      <div class="flex space-x-3">
+        <button class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition"
+          onclick="window.location.href='admin.html'">
+          Panel Administrativo
+        </button>
+        <button class="bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition"onclick="window.location.href='../index.html'">
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabla de proyectos -->
+    <div class="bg-white shadow-lg rounded-xl overflow-hidden">
+      <table class="w-full text-left border-collapse">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="p-4 font-semibold">ID</th>
+            <th class="p-4 font-semibold">Nombre Proyecto</th>
+            <th class="p-4 font-semibold">Descripción</th>
+            <th class="p-4 font-semibold">Imagen</th>
+            <th class="p-4 font-semibold">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Ejemplo de fila -->
+          <tr class="border-t hover:bg-gray-50 transition">
+            <td class="p-4">1</td>
+            <td class="p-4">Construcción Casa Campestre</td>
+            <td class="p-4">Proyecto de obra blanca finalizado</td>
+            <td class="p-4">
+              <img src="../img/proyecto1.jpg" alt="Proyecto" class="w-20 h-16 object-cover rounded-lg shadow">
+            </td>
+            <td class="p-4 space-x-2">
+              <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
+              <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
+            </td>
+          </tr>
+          <tr class="border-t hover:bg-gray-50 transition">
+            <td class="p-4">2</td>
+            <td class="p-4">Remodelación Oficina</td>
+            <td class="p-4">Diseño y adecuación de espacios</td>
+            <td class="p-4">
+              <img src="../img/proyecto2.jpg" alt="Proyecto" class="w-20 h-16 object-cover rounded-lg shadow">
+            </td>
+            <td class="p-4 space-x-2">
+              <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition">Editar</button>
+              <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition">Eliminar</button>
+            </td>
+          </tr>
+          <!-- Aquí se agregarán más proyectos dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>
+
