@@ -122,33 +122,33 @@ document.addEventListener('DOMContentLoaded', () => {
      ============================ */
   // ... (sin cambios, tus arrays)
 
-   const obraNegraItems = [
-    { title: "Preparación y limpieza del terreno", img: "assets/img/obra_negra/preparacion_limpieza.jpg", description: "Despejamos y nivelamos el terreno para iniciar la construcción." },
-    { title: "Verificación topográfica y marcación de ejes", img: "assets/img/obra_negra/verificacion_topografica_marcacion.jpg", description: "Comprobamos medidas y niveles, y trazamos los ejes para la cimentación." },
-    { title: "Excavación y manejo de tierras", img: "assets/img/obra_negra/excavacion.jpg", description: "Realizamos excavaciones y gestionamos el material sobrante." },
-    { title: "Relleno y compactación", img: "assets/img/obra_negra/relleno_compactacion.jpg", description: "Compactamos el terreno para garantizar la estabilidad de la cimentación." },
-    { title: "Cimentación", img: "assets/img/obra_negra/cimentacion.jpg", description: "Construimos zapatas, pilotes o losa de cimentación según el diseño estructural." },
-    { title: "Elaboración y armado de acero", img: "assets/img/obra_negra/estructura_metalica.jpg", description: "Cortamos, doblamos y ensamblamos el acero de refuerzo para la estructura." },
-    { title: "Encofrado y vaciado de concreto", img: "assets/img/obra_negra/encofrados_vaciados.jpg", description: "Colocamos encofrados y vaciamos concreto para elementos estructurales." },
-    { title: "Armado de losa", img: "assets/img/obra_negra/losas.jpg", description: "Preparamos y fundimos las losas de entrepiso o cubierta." },
-    { title: "Curado y control de calidad", img: "assets/img/obra_negra/Curado.jpg", description: "Aplicamos curado y realizamos ensayos para garantizar la resistencia del concreto." },
-    { title: "Replanteo de mampostería", img: "assets/img/obra_negra/replanteo_mamposteria.jpg", description: "Marcamos muros y aberturas antes de levantar mampostería." },
-    { title: "Mampostería primer - segundo nivel", img: "assets/img/obra_negra/mamposteria.jpeg", description: "Levantamos muros y paredes en primer, segundo nivel." },
-    { title: "Instalaciones hidrosanitarias", img: "assets/img/obra_negra/instalaciones_hidrosanitarias.jpg", description: "Instalamos tuberías de agua potable, aguas negras y pluviales." },
-    { title: "Instalación eléctrica", img: "assets/img/obra_negra/instalacion_electrica.jpg", description: "Realizamos el tendido de conduits y puntos eléctricos." },
-    { title: "Impermeabilización", img: "assets/img/obra_negra/impermeabilizacion.jpg", description: "Protegemos cubiertas y muros contra filtraciones de agua." },
-    { title: "Revoque", img: "assets/img/obra_negra/revoque.jpg", description: "Aplicamos revoque en muros interiores y exteriores." },
-    { title: "Morteros", img: "assets/img/obra_negra/morteros.jpg", description: "Preparamos y aplicamos morteros para nivelación y asiento." },
-    { title: "Enchapes interiores", img: "assets/img/obra_negra/enchapes.jpg", description: "Colocamos cerámica o porcelanato en pisos y paredes." },
-    { title: "Instalación de baños", img: "assets/img/obra_negra/instalacion_banos.jpg", description: "Montamos inodoros, lavamanos, duchas y grifería." },
-    { title: "Enchape fachada", img: "assets/img/obra_negra/fachada.jpeg", description: "Revestimos la fachada con piedra, cerámica o materiales decorativos." },
-    { title: "Lechada y fragüe", img: "assets/img/obra_negra/lechada.jpg", description: "Sellamos juntas y realizamos la limpieza final de los enchapes." },
-    { title: "Pruebas y limpieza final", img: "assets/img/obra_negra/limpieza.jpg", description: "Realizamos pruebas de funcionamiento y limpieza general de obra." },
-    { title: "Control de calidad y recepción", img: "assets/img/obra_negra/control_calidad.jpg", description: "Verificamos que la obra cumpla con las especificaciones antes de su entrega." }
+  const obraNegraItems = [
+    { title: "Preparación y limpieza del terreno", img: "assets/img/obra_negra/preparacion_limpieza.jpg", description: "Despejamos y nivelamos el terreno para iniciar la construcción.", link: "https://www.youtube.com/watch?v=Mdm1iivGiTs" },
+    { title: "Verificación topográfica y marcación de ejes", img: "assets/img/obra_negra/verificacion_topografica_marcacion.jpg", description: "Comprobamos medidas y niveles, y trazamos los ejes para la cimentación.", link: "https://www.youtube.com/watch?v=VIDEO_ID2" },
+    { title: "Excavación y manejo de tierras", img: "assets/img/obra_negra/excavacion.jpg", description: "Realizamos excavaciones y gestionamos el material sobrante.", link: "https://www.youtube.com/watch?v=VIDEO_ID3" },
+    { title: "Relleno y compactación", img: "assets/img/obra_negra/relleno_compactacion.jpg", description: "Compactamos el terreno para garantizar la estabilidad de la cimentación.", link: "https://www.youtube.com/watch?v=VIDEO_ID4" },
+    { title: "Cimentación", img: "assets/img/obra_negra/cimentacion.jpg", description: "Construimos zapatas, pilotes o losa de cimentación según el diseño estructural.", link: "https://www.youtube.com/watch?v=VIDEO_ID5" },
+    { title: "Elaboración y armado de acero", img: "assets/img/obra_negra/estructura_metalica.jpg", description: "Cortamos, doblamos y ensamblamos el acero de refuerzo para la estructura.", link: "https://www.youtube.com/watch?v=VIDEO_ID6" },
+    { title: "Encofrado y vaciado de concreto", img: "assets/img/obra_negra/encofrados_vaciados.jpg", description: "Colocamos encofrados y vaciamos concreto para elementos estructurales.", link: "https://www.youtube.com/watch?v=VIDEO_ID7" },
+    { title: "Armado de losa", img: "assets/img/obra_negra/losas.jpg", description: "Preparamos y fundimos las losas de entrepiso o cubierta.", link: "https://www.youtube.com/watch?v=VIDEO_ID8" },
+    { title: "Curado y control de calidad", img: "assets/img/obra_negra/Curado.jpg", description: "Aplicamos curado y realizamos ensayos para garantizar la resistencia del concreto.", link: "https://www.youtube.com/watch?v=VIDEO_ID9" },
+    { title: "Replanteo de mampostería", img: "assets/img/obra_negra/replanteo_mamposteria.jpg", description: "Marcamos muros y aberturas antes de levantar mampostería.", link: "https://www.youtube.com/watch?v=VIDEO_ID10" },
+    { title: "Mampostería primer - segundo nivel", img: "assets/img/obra_negra/mamposteria.jpeg", description: "Levantamos muros y paredes en primer, segundo nivel.", link: "https://www.youtube.com/watch?v=VIDEO_ID11" },
+    { title: "Instalaciones hidrosanitarias", img: "assets/img/obra_negra/instalaciones_hidrosanitarias.jpg", description: "Instalamos tuberías de agua potable, aguas negras y pluviales.", link: "https://www.youtube.com/watch?v=VIDEO_ID12" },
+    { title: "Instalación eléctrica", img: "assets/img/obra_negra/instalacion_electrica.jpg", description: "Realizamos el tendido de conduits y puntos eléctricos.", link: "https://www.youtube.com/watch?v=VIDEO_ID13" },
+    { title: "Impermeabilización", img: "assets/img/obra_negra/impermeabilizacion.jpg", description: "Protegemos cubiertas y muros contra filtraciones de agua.", link: "https://www.youtube.com/watch?v=VIDEO_ID14" },
+    { title: "Revoque", img: "assets/img/obra_negra/revoque.jpg", description: "Aplicamos revoque en muros interiores y exteriores.", link: "https://www.youtube.com/watch?v=VIDEO_ID15" },
+    { title: "Morteros", img: "assets/img/obra_negra/morteros.jpg", description: "Preparamos y aplicamos morteros para nivelación y asiento.", link: "https://www.youtube.com/watch?v=VIDEO_ID16" },
+    { title: "Enchapes interiores", img: "assets/img/obra_negra/enchapes.jpg", description: "Colocamos cerámica o porcelanato en pisos y paredes.", link: "https://www.youtube.com/watch?v=VIDEO_ID17" },
+    { title: "Instalación de baños", img: "assets/img/obra_negra/instalacion_banos.jpg", description: "Montamos inodoros, lavamanos, duchas y grifería.", link: "https://www.youtube.com/watch?v=VIDEO_ID18" },
+    { title: "Enchape fachada", img: "assets/img/obra_negra/fachada.jpeg", description: "Revestimos la fachada con piedra, cerámica o materiales decorativos.", link: "https://www.youtube.com/watch?v=VIDEO_ID19" },
+    { title: "Lechada y fragüe", img: "assets/img/obra_negra/lechada.jpg", description: "Sellamos juntas y realizamos la limpieza final de los enchapes.", link: "https://www.youtube.com/watch?v=VIDEO_ID20" },
+    { title: "Pruebas y limpieza final", img: "assets/img/obra_negra/limpieza.jpg", description: "Realizamos pruebas de funcionamiento y limpieza general de obra.", link: "https://www.youtube.com/watch?v=VIDEO_ID21" },
+    { title: "Control de calidad y recepción", img: "assets/img/obra_negra/control_calidad.jpg", description: "Verificamos que la obra cumpla con las especificaciones antes de su entrega.", link: "https://www.youtube.com/watch?v=VIDEO_ID22" }
   ];
 
   const obraBlancaItems = [
-    { title: "Revoque fino y estuco", img: "assets/img/obra_blanca/estuco.jpg", description: "Aplicamos revoque fino y estuco para alisar muros y dejarlos listos para pintura." },
+    { title: "Revoque fino y estuco", img: "assets/img/obra_blanca/estuco.jpg", description: "Aplicamos revoque fino y estuco para alisar muros y dejarlos listos para pintura.", link: "https://www.youtube.com/watch?v=Mdm1iivGiTs" },
     { title: "Pintura interior", img: "assets/img/obra_blanca/pintura.jpg", description: "Pintamos muros y cielos rasos con acabados decorativos y de protección." },
     { title: "Pintura exterior", img: "assets/img/obra_blanca/pintura_exterior.jpeg", description: "Aplicamos pintura y selladores especiales para proteger fachadas." },
     { title: "Instalación de pisos interiores", img: "assets/img/obra_blanca/piso_interior.jpg", description: "Colocamos pisos en cerámica, porcelanato, madera o laminados." },
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const mantenimientoItems = [
-    { title: "Reparación de Fisuras", img: "imagenes/mantenimiento/reparacion_fisuras.jpg", description: "Sellamos y reforzamos fisuras en muros, losas y elementos estructurales." },
+    { title: "Reparación de Fisuras", img: "imagenes/mantenimiento/reparacion_fisuras.jpg", description: "Sellamos y reforzamos fisuras en muros, losas y elementos estructurales.", link: "https://www.youtube.com/watch?v=Mdm1iivGiTs" },
     { title: "Refuerzo Estructural", img: "imagenes/mantenimiento/refuerzo_estructural.jpg", description: "Fortalecemos vigas, columnas y cimentaciones para prolongar la vida útil." },
     { title: "Pintura Interior y Exterior", img: "imagenes/mantenimiento/pintura.jpg", description: "Aplicamos pintura de alta calidad para renovar y proteger superficies." },
     { title: "Reparación de Enchapes", img: "imagenes/mantenimiento/reparacion_enchapes.jpg", description: "Restauramos y reemplazamos enchapes y cerámicas dañadas." },
@@ -182,9 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ============================
      3) RENDER DE TARJETAS (index u otras páginas)
      ============================ */
-  function createCard({ title, img, description }) {
+  function createCard({ title, img, description, link }) {
     return `
-      <div class="service-card cursor-pointer p-3 border rounded hover:shadow-md" title="${title}">
+      <div class="service-card cursor-pointer p-3 border rounded hover:shadow-md" title="${title}" data-link="${link || ''}">
         <img src="${img || 'imagenes/default.jpg'}" alt="${title}" class="w-full h-36 object-cover rounded">
         <h3 class="mt-2 font-semibold text-sm">${title}</h3>
         <p class="text-xs text-gray-600 mt-1">${description || ''}</p>
@@ -196,6 +196,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.innerHTML = items.map(createCard).join('');
+
+    // Añadir evento click a cada tarjeta para redirigir a YouTube si tiene link
+    container.querySelectorAll('.service-card').forEach(card => {
+      const link = card.getAttribute('data-link');
+      if (link) {
+        card.addEventListener('click', () => {
+          window.open(link, '_blank');
+        });
+      }
+    });
   }
 
   renderCards('obra-negra-section', obraNegraItems);
@@ -381,4 +391,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // fin DOMContentLoaded
 });
-
