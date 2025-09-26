@@ -7,44 +7,49 @@
 
   <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css" />
   <style>body { font-family:'Roboto',sans-serif; }</style>
 </head>
 
-<body class="bg-gradient-to-br from-green-50 via-blue-50 to-gray-100">
+<body class="bg-teal-50">
 
   <div class="min-h-screen flex flex-col">
     <!-- HEADER -->
-    <header class="bg-gradient-to-r from-green-400 via-blue-400 to-teal-400 shadow-sm">
+    <header class="bg-white">
       <div class="flex flex-col md:flex-row items-center justify-between px-6 py-4 gap-4">
-        <h1 class="text-2xl font-bold text-white text-center md:text-left drop-shadow">SIMULA TU COTIZACIÓN</h1>
-        <button onclick="window.location.href='../index.html'" class="px-4 py-2 bg-white text-green-700 rounded-lg text-base font-semibold hover:bg-green-100 transition duration-200 shadow">
+        <h1 class="text-2xl font-bold text-teal-700 text-center md:text-left">SIMULA TU COTIZACIÓN</h1>
+        <button onclick="window.location.href='../index.html'" class="px-4 py-2 bg-teal-600 text-white rounded-lg text-base font-semibold hover:bg-teal-700 transition duration-200">
           Volver al inicio
         </button>
       </div>
     </header>
 
     <!-- MAIN -->
-    <main class="flex-1 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-green-100 via-blue-100 to-teal-100">
-      <div class="w-full max-w-5xl">
+    <main class="flex-1 flex flex-col items-center justify-center p-4 bg-teal-50">
+      <div class="w-full max-w-5xl" style="margin-top: -1.9rem;">
         <p class="text-teal-700 text-2xl font-bold text-center my-8" id="simulador-titulo"></p>
 
-        <form id="formCotizacion" class="bg-white rounded-xl shadow-lg p-10 space-y-10">
+        <form id="formCotizacion" class="bg-teal-50 rounded-xl p-4 space-y-10 w-full max-w-5xl">
 
           <!-- SECCIÓN DATOS Y SERVICIOS CON BORDE -->
-          <div class="border-2 border-teal-400 rounded-xl p-8 space-y-10 bg-white/70">
+          <div class="border-2 border-teal-400 rounded-xl p-4 space-y-10 bg-white/70">
+
             <!-- DATOS GENERALES -->
             <section>
-              <h2 class="text-xl font-semibold text-teal-700 mb-6">Datos Generales</h2>
+              <h2 class="text-center font-medium text-teal-700 mb-6 text-2xl">Datos Generales</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
                 <div>
                   <label for="nombre" class="block text-teal-800 font-medium mb-2">Cliente</label>
-                  <input type="text" id="nombre" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="Ingresa tu nombre">
+                  <input type="text" id="nombre" class="mt-1 block w-full border-teal-200 rounded-md h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="Ingresa tu nombre">
                 </div>
+
                 <div>
                   <label for="tipoDocumento" class="block text-teal-800 font-medium mb-2">Tipo de Documento</label>
-                  <select id="tipoDocumento" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 text-teal-800">
+                  <select id="tipoDocumento" class="mt-1 block w-full border-teal-200 rounded-md h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 text-teal-800">
                     <option value="">Selecciona una opción</option>
                     <option value="dni">DNI</option>
                     <option value="cedula">Cédula</option>
@@ -52,25 +57,30 @@
                     <option value="otro">Otro</option>
                   </select>
                 </div>
+
                 <div>
                   <label for="correo" class="block text-teal-800 font-medium mb-2">Correo Electrónico</label>
-                  <input type="email" id="correo" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="ejemplo@correo.com">
+                  <input type="email" id="correo" class="mt-1 block w-full border-teal-200 rounded-md h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="ejemplo@correo.com">
                 </div>
+
                 <div>
                   <label for="numeroDocumento" class="block text-teal-800 font-medium mb-2">Número de Documento</label>
-                  <input type="text" id="numeroDocumento" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="Ingresa tu número de documento">
+                  <input type="text" id="numeroDocumento" class="mt-1 block w-full border-teal-200 rounded-md h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="Ingresa tu número de documento">
                 </div>
+
                 <div>
                   <label for="ubicacion" class="block text-teal-800 font-medium mb-2">Departamento - Ciudad</label>
-                  <input type="text" id="ubicacion" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="Departamento - Ciudad">
+                  <input type="text" id="ubicacion" class="mt-1 block w-full border-teal-200 rounded-md h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="Departamento - Ciudad">
                 </div>
+
                 <div>
-                  <label for="ubicacion" class="block text-teal-800 font-medium mb-2">Ubicación del Proyecto</label>
-                  <input type="text" id="ubicacion" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="Dirección">
+                  <label for="ubicacion2" class="block text-teal-800 font-medium mb-2">Ubicación del Proyecto</label>
+                  <input type="text" id="ubicacion2" class="mt-1 block w-full border-teal-200 rounded-md h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 placeholder-teal-400" placeholder="Dirección">
                 </div>
+
                 <div>
                   <label for="tipoProyecto" class="block text-teal-800 font-medium mb-2">Tipo de Proyecto</label>
-                  <select id="tipoProyecto" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 text-teal-800">
+                  <select id="tipoProyecto" class="mt-1 block w-full border-teal-200 rounded-md h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 text-teal-800">
                     <option value="">Selecciona una opción</option>
                     <option value="residencial">Residencial</option>
                     <option value="comercial">Comercial</option>
@@ -78,16 +88,20 @@
                     <option value="otros">Otros</option>
                   </select>
                 </div>
+
                 <div>
                   <label for="fechaInicio" class="block text-teal-800 font-medium mb-2">Fecha Estimada de Inicio</label>
-                  <input type="date" id="fechaInicio" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 text-teal-800">
+                  <input type="date" id="fechaInicio" class="mt-1 block w-full border-teal-200 rounded-md h-12 focus:ring-teal-300 focus:border-teal-300 bg-teal-50 text-teal-800">
                 </div>
+
                 <div class="md:col-span-2">
                   <label for="descripcion" class="block text-teal-800 font-medium mb-2">Descripción</label>
-                  <textarea id="descripcion" class="mt-1 block w-full border-teal-200 rounded-md shadow-sm focus:ring-teal-400 focus:border-teal-400 bg-teal-50 placeholder-teal-400" rows="3" placeholder="Descripción del trabajo a realizar"></textarea>
+                  <textarea id="descripcion" class="mt-1 block w-full border-teal-200 rounded-md focus:ring-teal-400 focus:border-teal-400 bg-teal-50 placeholder-teal-400" rows="3" placeholder="Descripción del trabajo a realizar"></textarea>
                 </div>
+
               </div>
             </section>
+
             <!-- CONTACTO PERSONALIZADO -->
             <div class="flex flex-col md:flex-row items-center gap-4 bg-teal-50 border border-teal-200 rounded-lg p-6 mt-6">
               <label for="contactoPersonalizado" class="text-teal-800 font-medium flex-1">
@@ -99,40 +113,39 @@
               </div>
               <button type="button" id="btnAtencionPersonalizada" class="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition">Solicitar Atención</button>
             </div>
+
             <!-- SERVICIOS -->
             <section>
-              <h2 class="text-xl font-semibold text-teal-700 mb-6">Selecciona los Servicios y sus m²</h2>
+              <h2 class="text-center font-medium text-teal-700 mb-6 text-2xl">Selecciona los Servicios y sus m²</h2>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Obra Negra -->
-                <div class="bg-teal-100 rounded-lg p-6 shadow-sm flex flex-col border-2 border-teal-400">
+                <div class="bg-teal-100 rounded-lg p-6 flex flex-col border-2 border-teal-400">
                   <h3 class="text-teal-700 font-semibold mb-4 text-center">Obra Negra</h3>
                   <div id="obraNegraOpciones" class="space-y-3 flex-1"></div>
                 </div>
-                <!-- Obra Blanca -->
-                <div class="bg-teal-100 rounded-lg p-6 shadow-sm flex flex-col border-2 border-teal-400">
+
+                <div class="bg-teal-100 rounded-lg p-6 flex flex-col border-2 border-teal-400">
                   <h3 class="text-teal-700 font-semibold mb-4 text-center">Obra Blanca</h3>
                   <div id="obraBlancaOpciones" class="space-y-3 flex-1"></div>
                 </div>
-                <!-- Mantenimiento -->
-                <div class="bg-teal-100 rounded-lg p-6 shadow-sm flex flex-col border-2 border-teal-400">
+
+                <div class="bg-teal-100 rounded-lg p-6 flex flex-col border-2 border-teal-400">
                   <h3 class="text-teal-700 font-semibold mb-4 text-center">Mantenimiento</h3>
                   <div id="mantenimientoOpciones" class="space-y-3 flex-1"></div>
                 </div>
               </div>
             </section>
+
             <div class="flex justify-center">
-              <button type="submit" class="w-full max-w-lg bg-teal-600 text-white px-6 py-3 rounded-md hover:bg-teal-700 transition text-lg font-semibold shadow flex items-center justify-center h-14">
-              Calcular Cotización
+              <button type="submit" class="w-full max-w-lg bg-teal-600 text-white px-6 py-3 rounded-md hover:bg-teal-700 transition text-lg font-semibold flex items-center justify-center h-14">
+                Calcular Cotización
               </button>
             </div>
           </div>
           <!-- FIN SECCIÓN CON BORDE -->
-          <!-- RESULTADOS -->
         </form>
       </div>
     </main>
   </div>
-
   <script src="../Scripts/main.js"></script>
 </body>
 </html>

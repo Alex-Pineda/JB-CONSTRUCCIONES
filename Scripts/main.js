@@ -328,30 +328,154 @@ document.addEventListener('DOMContentLoaded', () => {
         box.className = 'max-w-4xl mx-auto mt-6';
         form.after(box);
       }
+
+      // --- Capturar datos del formulario ---
+    const datosUsuario = {
+      nombre: document.getElementById('nombre').value || 'Cliente',
+      tipoDocumento: document.getElementById('tipoDocumento').value || 'No especificado',
+      numeroDocumento: document.getElementById('numeroDocumento').value || 'No especificado',
+      correo: document.getElementById('correo').value || 'No especificado',
+      ubicacion: document.getElementById('ubicacion').value || 'No especificado',
+      tipoProyecto: document.getElementById('tipoProyecto').value || 'No especificado',
+      fechaInicio: document.getElementById('fechaInicio').value || 'No especificada',
+      descripcion: document.getElementById('descripcion').value || 'Sin descripción'
+    };
+
       // construir HTML del resumen
       box.innerHTML = `
-        <div class="bg-white p-6 rounded-lg shadow">
-          <h3 class="text-lg font-semibold mb-3">Resumen de la cotización</h3>
-          <div class="space-y-2 mb-4">
-            ${detalle.map(d => `
-              <div class="flex justify-between text-sm">
-                <div><strong>${d.servicio}</strong> <span class="text-gray-500">(${d.categoria})</span><br><span class="text-gray-600 text-xs">m²: ${d.m2}</span></div>
-                <div class="text-right">
-                  <div>${formatearCOP(d.precioUnitario)}/m²</div>
-                  <div class="font-semibold">${formatearCOP(d.subtotal)}</div>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-          <div class="flex justify-between items-center pt-3 border-t">
-            <div class="text-gray-700 font-medium">Total estimado</div>
-            <div class="text-2xl font-bold text-red-600">${formatearCOP(total)}</div>
-          </div>
-          <div class="mt-4 text-sm text-gray-600">
-            Nota: precios mostrados son estimados de ejemplo. Conecta la función obtenerPrecioSimulado a tu base de datos para precios reales.
-          </div>
-        </div>
-      `;
+  <div class="bg-white rounded-2xl shadow-2xl p-10 border border-gray-200 max-w-3xl mx-auto font-sans">
+    <!-- ENCABEZADO -->
+    <div class="flex justify-between items-center border-b-2 border-teal-500 pb-4 mb-6">
+      <div>
+        <h1 class="text-3xl font-bold text-teal-700">JB Constructores</h1>
+        <p class="text-gray-500">Factura de Cotización</p>
+      </div>
+      <div class="text-right">
+        <p class="text-sm text-gray-500">Fecha: ${new Date().toLocaleDateString()}</p>
+        <p class="text-sm text-gray-500">Cotización #${Math.floor(Math.random()*100000)}</p>
+      </div>
+    </div>
+
+    <div id="factura-container">
+    <!-- DATOS DEL CLIENTE -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-sm">
+        <p><strong>Nombre:</strong> ${datosUsuario.nombre}</p>
+        <p><strong>Tipo Documento:</strong> ${datosUsuario.tipoDocumento}</p>
+        <p><strong>Número Documento:</strong> ${datosUsuario.numeroDocumento}</p>
+        <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
+        <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
+        <p><strong>Tipo Proyecto:</strong> ${datosUsuario.tipoProyecto}</p>
+        <p><strong>Fecha Inicio:</strong> ${datosUsuario.fechaInicio}</p>
+      </div>
+      <p class="mt-4 text-gray-700 text-sm"><strong>Descripción:</strong> ${datosUsuario.descripcion}</p>
+    </div>
+
+    <!-- DETALLE DE SERVICIOS -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr class="bg-teal-100 text-teal-800">
+            <th class="border p-2 text-left">Servicio</th>
+            <th class="border p-2 text-left">Categoría</th>
+            <th class="border p-2 text-right">m²</th>
+            <th class="border p-2 text-right">Precio/m²</th>
+            <th class="border p-2 text-right">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${detalle.map(d => `
+            <tr>
+              <td class="border p-2">${d.servicio}</td>
+              <td class="border p-2">${d.categoria}</td>
+              <td class="border p-2 text-right">${d.m2}</td>
+              <td class="border p-2 text-right">${formatearCOP(d.precioUnitario)}</td>
+              <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+        <tfoot>
+          <tr class="bg-gray-100">
+            <td colspan="4" class="border p-2 text-right font-bold">Total Estimado</td>
+            <td class="border p-2 text-right text-2xl font-bold text-red-600">${formatearCOP(total)}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- NOTA -->
+    <p class="text-gray-600 text-sm italic">
+      * Los valores son estimados. Los precios finales pueden variar tras la visita técnica.
+    </p>
+
+    <!-- BOTONES DE EXPORTACIÓN -->
+    <div class="mt-6 flex flex-wrap gap-4 justify-center">
+      <button id="btnExportPDF" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Exportar PDF</button>
+      <button id="btnExportCSV" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Exportar CSV</button>
+      <button id="btnExportExcel" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Exportar Excel</button>
+    </div>
+  </div>
+  </div>
+`;
+
+document.getElementById('btnExportPDF').addEventListener('click', () => {
+  const factura = document.querySelector('#factura-container'); // div de la factura
+  const opciones = {
+    margin: 0.5,
+    filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+  html2pdf().from(factura).set(opciones).save();
+});
+
+
+      // --- Exportar a CSV ---
+      document.getElementById('btnExportCSV').addEventListener('click', () => {
+        let csv = "Servicio,Categoría,m²,Precio/m²,Subtotal\n";
+        detalle.forEach(d => {
+          csv += `"${d.servicio}","${d.categoria}",${d.m2},${d.precioUnitario},${d.subtotal}\n`;
+        });
+        csv += `\nTotal,, , ,${total}\n`;
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "cotizacion.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+
+      // --- Exportar a Excel (XLSX simple) ---
+      document.getElementById('btnExportExcel').addEventListener('click', () => {
+        // Generar un archivo Excel básico usando CSV con extensión .xls
+        let excel = "<table><tr><th>Servicio</th><th>Categoría</th><th>m²</th><th>Precio/m²</th><th>Subtotal</th></tr>";
+        detalle.forEach(d => {
+          excel += `<tr>
+            <td>${d.servicio}</td>
+            <td>${d.categoria}</td>
+            <td>${d.m2}</td>
+            <td>${d.precioUnitario}</td>
+            <td>${d.subtotal}</td>
+          </tr>`;
+        });
+        excel += `<tr><td colspan="4"><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
+
+        const blob = new Blob([excel], { type: "application/vnd.ms-excel" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "cotizacion.xls";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      });
+
       // hacer scroll hasta el resultado
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
