@@ -14,11 +14,11 @@
   <style>body { font-family:'Roboto',sans-serif; }</style>
 </head>
 
-<body class="bg-teal-50">
-
-  <div class="min-h-screen flex flex-col">
+<body class="bg-teal-50 w-fit mx-auto">
+  <div id="app-container" class="origin-top w-full">
     <!-- HEADER -->
-    <header class="bg-white">
+<header class="bg-[rgb(240_253_250_/_var(--tw-bg-opacity,1))]">
+
       <div class="flex flex-col md:flex-row items-center justify-between px-6 py-4 gap-4">
         <h1 class="text-2xl font-bold text-teal-700 text-center md:text-left">SIMULA TU COTIZACIÓN</h1>
         <button onclick="window.location.href='../index.html'" class="px-4 py-2 bg-teal-600 text-white rounded-lg text-base font-semibold hover:bg-teal-700 transition duration-200">
@@ -32,7 +32,8 @@
       <div class="w-full max-w-5xl" style="margin-top: -1.9rem;">
         <p class="text-teal-700 text-2xl font-bold text-center my-8" id="simulador-titulo"></p>
 
-        <form id="formCotizacion" class="bg-teal-50 rounded-xl p-4 space-y-10 w-full max-w-5xl">
+      <form id="formCotizacion"
+          class="bg-teal-50 rounded-xl p-4 sm:p-4 w-[99%] sm:w-[95%] lg:max-w-5xl mx-auto">
 
           <!-- SECCIÓN DATOS Y SERVICIOS CON BORDE -->
           <div class="border-2 border-teal-400 rounded-xl p-4 space-y-10 bg-white/70">

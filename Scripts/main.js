@@ -318,9 +318,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return `$ ${Math.round(valor).toLocaleString()}`;
       }
     }
+     function mostrarResultado(total, detalle) {
+      // ─── Capturar datos del formulario ───────────────────────────────
+      const datosUsuario = {
+        nombre: document.getElementById('nombre').value || 'Cliente',
+        tipoDocumento: document.getElementById('tipoDocumento').value || 'No especificado',
+        numeroDocumento: document.getElementById('numeroDocumento').value || 'No especificado',
+        correo: document.getElementById('correo').value || 'No especificado',
+        ubicacion: document.getElementById('ubicacion').value || 'No especificado',
+        tipoProyecto: document.getElementById('tipoProyecto').value || 'No especificado',
+        fechaInicio: document.getElementById('fechaInicio').value || 'No especificada',
+        descripcion: document.getElementById('descripcion').value || 'Sin descripción'
+      };
 
-    function mostrarResultado(total, detalle) {
-      // eliminar antiguo resultado si existe
+      // ─── Crear contenedor si no existe ──────────────────────────────
       let box = document.getElementById('resultado-cotizacion');
       if (!box) {
         box = document.createElement('div');
@@ -329,118 +340,152 @@ document.addEventListener('DOMContentLoaded', () => {
         form.after(box);
       }
 
-      // --- Capturar datos del formulario ---
-    const datosUsuario = {
-      nombre: document.getElementById('nombre').value || 'Cliente',
-      tipoDocumento: document.getElementById('tipoDocumento').value || 'No especificado',
-      numeroDocumento: document.getElementById('numeroDocumento').value || 'No especificado',
-      correo: document.getElementById('correo').value || 'No especificado',
-      ubicacion: document.getElementById('ubicacion').value || 'No especificado',
-      tipoProyecto: document.getElementById('tipoProyecto').value || 'No especificado',
-      fechaInicio: document.getElementById('fechaInicio').value || 'No especificada',
-      descripcion: document.getElementById('descripcion').value || 'Sin descripción'
-    };
-
-      // construir HTML del resumen
+      // ─── Construir HTML de la factura ───────────────────────────────
       box.innerHTML = `
-  <div class="bg-white rounded-2xl shadow-2xl p-10 border border-gray-200 max-w-3xl mx-auto font-sans">
-    <!-- ENCABEZADO -->
-    <div class="flex justify-between items-center border-b-2 border-teal-500 pb-4 mb-6">
-      <div>
-        <h1 class="text-3xl font-bold text-teal-700">JB Constructores</h1>
-        <p class="text-gray-500">Factura de Cotización</p>
+      
+      <div id="factura-container">
+      <div class="bg-white rounded-2xl shadow-2xl p-10 border border-gray-200 max-w-3xl mx-auto font-sans">
+              
+      <!-- ENCABEZADO -->
+      <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
+
+        <!-- Lado izquierdo: Logo + nombre -->
+        <div class="flex items-center gap-6">
+          <img src="../assets/img/JB-CONSTRUCTORES.png"
+              alt="Logo JJB-CONSTRUCTORES"
+              class="h-[90px] w-[90px] object-cover rounded-full border-2 border-teal-500">
+          <div>
+            <h1 class="text-3xl font-extrabold text-teal-700 leading-tight">JB-CONSTRUCTORES</h1>
+            <p class="text-lg text-gray-500 mt-1">Factura de Cotización</p>
+          </div>
+        </div>
+
+        <!-- Lado derecho: Fecha y número de cotización -->
+        <div class="text-right space-y-1">
+          <p class="text-base text-gray-600">
+            Fecha: ${new Date().toLocaleDateString()}
+          </p>
+          <p class="text-base text-gray-600">
+            Cotización #${Math.floor(Math.random()*100000)}
+          </p>
+        </div>
       </div>
-      <div class="text-right">
-        <p class="text-sm text-gray-500">Fecha: ${new Date().toLocaleDateString()}</p>
-        <p class="text-sm text-gray-500">Cotización #${Math.floor(Math.random()*100000)}</p>
+
+
+
+          <!-- DATOS DEL CLIENTE -->
+          <div class="mb-8">
+            <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-sm">
+              <p><strong>Nombre:</strong> ${datosUsuario.nombre}</p>
+              <p><strong>Tipo Documento:</strong> ${datosUsuario.tipoDocumento}</p>
+              <p><strong>Número Documento:</strong> ${datosUsuario.numeroDocumento}</p>
+              <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
+              <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
+              <p><strong>Tipo Proyecto:</strong> ${datosUsuario.tipoProyecto}</p>
+              <p><strong>Fecha Inicio:</strong> ${datosUsuario.fechaInicio}</p>
+            </div>
+            <p class="mt-4 text-gray-700 text-sm"><strong>Descripción:</strong> ${datosUsuario.descripcion}</p>
+          </div>
+
+          <!-- DETALLE DE SERVICIOS -->
+          <div class="mb-8">
+            <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
+            <table class="w-full border-collapse text-sm">
+              <thead>
+                <tr class="bg-teal-100 text-teal-800">
+                  <th class="border p-2 text-left">Servicio</th>
+                  <th class="border p-2 text-left">Categoría</th>
+                  <th class="border p-2 text-right">m²</th>
+                  <th class="border p-2 text-right">Precio/m²</th>
+                  <th class="border p-2 text-right">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${detalle.map(d => `
+                  <tr>
+                    <td class="border p-2">${d.servicio}</td>
+                    <td class="border p-2">${d.categoria}</td>
+                    <td class="border p-2 text-right">${d.m2}</td>
+                    <td class="border p-2 text-right">${formatearCOP(d.precioUnitario)}</td>
+                    <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+              <tfoot>
+                <tr class="bg-gray-100">
+                  <td colspan="4" class="border p-2 text-right font-bold">Total Estimado</td>
+                  <td class="border p-2 text-right text-2xl font-bold text-red-600">${formatearCOP(total)}</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <!-- NOTA -->
+          <p class="text-gray-600 text-sm italic">
+            * Los valores son estimados. Los precios finales pueden variar tras la visita técnica.
+          </p>
+
+          <!-- BOTONES DE EXPORTACIÓN -->
+          <div class="mt-6 flex flex-wrap gap-4 justify-center">
+            <button id="btnExportPDF" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Exportar PDF</button>
+            <button id="btnExportCSV" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Exportar CSV</button>
+            <button id="btnExportExcel" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Exportar Excel</button>
+          </div>
+        </div>
       </div>
-    </div>
+      `;
+    // ─── Ajustes de visualización para que quepa sin scroll ──────────
+    document.documentElement.style.overflowX = 'hidden'; // evita scroll horizontal en <html>
+    document.body.style.overflowX = 'hidden';
 
-    <div id="factura-container">
-    <!-- DATOS DEL CLIENTE -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-sm">
-        <p><strong>Nombre:</strong> ${datosUsuario.nombre}</p>
-        <p><strong>Tipo Documento:</strong> ${datosUsuario.tipoDocumento}</p>
-        <p><strong>Número Documento:</strong> ${datosUsuario.numeroDocumento}</p>
-        <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
-        <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
-        <p><strong>Tipo Proyecto:</strong> ${datosUsuario.tipoProyecto}</p>
-        <p><strong>Fecha Inicio:</strong> ${datosUsuario.fechaInicio}</p>
-      </div>
-      <p class="mt-4 text-gray-700 text-sm"><strong>Descripción:</strong> ${datosUsuario.descripcion}</p>
-    </div>
+    // reduce el ancho máximo para centrar
+    box.style.width = '95%';
+    box.style.maxWidth = '1200px';
+    box.style.margin = '1rem auto';
+    box.style.padding = '0 0.5rem';
+    box.style.boxSizing = 'border-box';
 
-    <!-- DETALLE DE SERVICIOS -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
-      <table class="w-full border-collapse text-sm">
-        <thead>
-          <tr class="bg-teal-100 text-teal-800">
-            <th class="border p-2 text-left">Servicio</th>
-            <th class="border p-2 text-left">Categoría</th>
-            <th class="border p-2 text-right">m²</th>
-            <th class="border p-2 text-right">Precio/m²</th>
-            <th class="border p-2 text-right">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${detalle.map(d => `
-            <tr>
-              <td class="border p-2">${d.servicio}</td>
-              <td class="border p-2">${d.categoria}</td>
-              <td class="border p-2 text-right">${d.m2}</td>
-              <td class="border p-2 text-right">${formatearCOP(d.precioUnitario)}</td>
-              <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-        <tfoot>
-          <tr class="bg-gray-100">
-            <td colspan="4" class="border p-2 text-right font-bold">Total Estimado</td>
-            <td class="border p-2 text-right text-2xl font-bold text-red-600">${formatearCOP(total)}</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+    // Escalar la página **solo en móviles / tablets pequeñas**
+    const root = document.documentElement; // <html>
+    root.style.transition = 'transform 0.25s ease';
+    root.style.transformOrigin = 'top center';
 
-    <!-- NOTA -->
-    <p class="text-gray-600 text-sm italic">
-      * Los valores son estimados. Los precios finales pueden variar tras la visita técnica.
-    </p>
+    if (window.innerWidth <= 768) {   // aplica solo si el ancho es <= 768 px
+      root.style.transform = 'scale(0.7)';   // ajusta 0.85–0.95 según necesidad
+    } else {
+      root.style.transform = 'scale(1)';     // en pantallas grandes no se escala
+    }
 
-    <!-- BOTONES DE EXPORTACIÓN -->
-    <div class="mt-6 flex flex-wrap gap-4 justify-center">
-      <button id="btnExportPDF" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Exportar PDF</button>
-      <button id="btnExportCSV" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Exportar CSV</button>
-      <button id="btnExportExcel" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Exportar Excel</button>
-    </div>
-  </div>
-  </div>
-`;
+      // ─── Exportar a PDF ──────────────────────────────────────────────
+      document.getElementById('btnExportPDF').addEventListener('click', () => {
+        const factura = document.querySelector('#factura-container');
 
-document.getElementById('btnExportPDF').addEventListener('click', () => {
-  const factura = document.querySelector('#factura-container'); // div de la factura
-  const opciones = {
-    margin: 0.5,
-    filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-  };
-  html2pdf().from(factura).set(opciones).save();
-});
+        // 1️⃣ Ocultar los botones de exportación antes de generar el PDF
+        const exportButtons = factura.querySelector('.mt-6');  // el div que contiene los botones
+        if (exportButtons) exportButtons.style.display = 'none';
+
+        // 2️⃣ Generar el PDF
+        html2pdf().from(factura).set({
+          margin: 0.5,
+          filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true },
+          jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        }).save().then(() => {
+          // 3️⃣ Restaurar visibilidad de los botones después de guardar el PDF
+          if (exportButtons) exportButtons.style.display = '';
+        });
+      });
 
 
-      // --- Exportar a CSV ---
+      // ─── Exportar a CSV ──────────────────────────────────────────────
       document.getElementById('btnExportCSV').addEventListener('click', () => {
         let csv = "Servicio,Categoría,m²,Precio/m²,Subtotal\n";
         detalle.forEach(d => {
           csv += `"${d.servicio}","${d.categoria}",${d.m2},${d.precioUnitario},${d.subtotal}\n`;
         });
-        csv += `\nTotal,, , ,${total}\n`;
-
+        csv += `\nTotal,,, ,${total}\n`;
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -451,9 +496,8 @@ document.getElementById('btnExportPDF').addEventListener('click', () => {
         document.body.removeChild(link);
       });
 
-      // --- Exportar a Excel (XLSX simple) ---
+      // ─── Exportar a Excel (XLS) ──────────────────────────────────────
       document.getElementById('btnExportExcel').addEventListener('click', () => {
-        // Generar un archivo Excel básico usando CSV con extensión .xls
         let excel = "<table><tr><th>Servicio</th><th>Categoría</th><th>m²</th><th>Precio/m²</th><th>Subtotal</th></tr>";
         detalle.forEach(d => {
           excel += `<tr>
@@ -465,7 +509,6 @@ document.getElementById('btnExportPDF').addEventListener('click', () => {
           </tr>`;
         });
         excel += `<tr><td colspan="4"><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
-
         const blob = new Blob([excel], { type: "application/vnd.ms-excel" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -476,7 +519,7 @@ document.getElementById('btnExportPDF').addEventListener('click', () => {
         document.body.removeChild(a);
       });
 
-      // hacer scroll hasta el resultado
+      // ─── Scroll al resultado ────────────────────────────────────────
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
@@ -484,21 +527,13 @@ document.getElementById('btnExportPDF').addEventListener('click', () => {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // recolectar todos los items seleccionados y sus m2
         const detalle = [];
         let total = 0;
-
         ['obraNegra', 'obraBlanca', 'mantenimiento'].forEach(categoria => {
           seleccion[categoria].forEach(item => {
             const precioUnitario = obtenerPrecioSimulado(item.servicio, categoria);
             const subtotal = (item.m2 || 0) * precioUnitario;
-            detalle.push({
-              categoria,
-              servicio: item.servicio,
-              m2: item.m2 || 0,
-              precioUnitario,
-              subtotal
-            });
+            detalle.push({ categoria, servicio: item.servicio, m2: item.m2 || 0, precioUnitario, subtotal });
             total += subtotal;
           });
         });
@@ -511,7 +546,6 @@ document.getElementById('btnExportPDF').addEventListener('click', () => {
         mostrarResultado(total, detalle);
       });
     }
-  } // fin if simulador.html
+  }
 
-  // fin DOMContentLoaded
 });
