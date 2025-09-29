@@ -352,10 +352,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <!-- Lado izquierdo: Logo + nombre -->
         <div class="flex items-center gap-6">
           <img src="../assets/img/JB-CONSTRUCTORES.png"
-              alt="Logo JJB-CONSTRUCTORES"
-              class="h-[90px] w-[90px] object-cover rounded-full border-2 border-teal-500">
+              alt="Logo JB-CONSTRUCTORES"
+              class="h-[60px] w-[60px] object-cover rounded-full border-2 border-teal-500">
           <div>
-            <h1 class="text-3xl font-extrabold text-teal-700 leading-tight">JB-CONSTRUCTORES</h1>
+            <h1 class="text-1xl font-extrabold text-teal-700 leading-tight">JB-CONSTRUCTORES</h1>
             <p class="text-lg text-gray-500 mt-1">Factura de Cotización</p>
           </div>
         </div>
@@ -370,8 +370,6 @@ document.addEventListener('DOMContentLoaded', () => {
           </p>
         </div>
       </div>
-
-
 
           <!-- DATOS DEL CLIENTE -->
           <div class="mb-8">
@@ -429,95 +427,42 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- BOTONES DE EXPORTACIÓN -->
           <div class="mt-6 flex flex-wrap gap-4 justify-center">
             <button id="btnExportPDF" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Exportar PDF</button>
-            <button id="btnExportCSV" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Exportar CSV</button>
-            <button id="btnExportExcel" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">Exportar Excel</button>
           </div>
         </div>
       </div>
       `;
-    // ─── Ajustes de visualización para que quepa sin scroll ──────────
+    // ─── Ajustes de visualización en navegador ──────────
     document.documentElement.style.overflowX = 'hidden'; // evita scroll horizontal en <html>
     document.body.style.overflowX = 'hidden';
 
-    // reduce el ancho máximo para centrar
     box.style.width = '95%';
     box.style.maxWidth = '1200px';
     box.style.margin = '1rem auto';
     box.style.padding = '0 0.5rem';
     box.style.boxSizing = 'border-box';
 
-    // Escalar la página **solo en móviles / tablets pequeñas**
-    const root = document.documentElement; // <html>
-    root.style.transition = 'transform 0.25s ease';
-    root.style.transformOrigin = 'top center';
 
-    if (window.innerWidth <= 768) {   // aplica solo si el ancho es <= 768 px
-      root.style.transform = 'scale(0.7)';   // ajusta 0.85–0.95 según necesidad
-    } else {
-      root.style.transform = 'scale(1)';     // en pantallas grandes no se escala
-    }
+    // ─── Exportar a PDF ──────────────────────────────────────────────
+    document.getElementById('btnExportPDF').addEventListener('click', () => {
+      const factura = document.querySelector('#factura-container');
 
-      // ─── Exportar a PDF ──────────────────────────────────────────────
-      document.getElementById('btnExportPDF').addEventListener('click', () => {
-        const factura = document.querySelector('#factura-container');
+      // 1️⃣ Ocultar los botones de exportación antes de generar el PDF
+      const exportButtons = factura.querySelector('.mt-6');  // el div que contiene los botones
+      if (exportButtons) exportButtons.style.display = 'none';
 
-        // 1️⃣ Ocultar los botones de exportación antes de generar el PDF
-        const exportButtons = factura.querySelector('.mt-6');  // el div que contiene los botones
-        if (exportButtons) exportButtons.style.display = 'none';
-
-        // 2️⃣ Generar el PDF
-        html2pdf().from(factura).set({
-          margin: 0.5,
-          filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true },
-          jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-        }).save().then(() => {
-          // 3️⃣ Restaurar visibilidad de los botones después de guardar el PDF
-          if (exportButtons) exportButtons.style.display = '';
-        });
+      // 2️⃣ Generar el PDF con escala reducida
+ html2pdf().from(factura).set({
+    // [top, left, bottom, right]
+    margin: [0.2, 0.2, 0.2, 0.2],   // ← todos iguales (en pulgadas)
+    filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { scale: 1, useCORS: true },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  }).save().then(() => {
+        // 3️⃣ Restaurar visibilidad de los botones después de guardar el PDF
+        if (exportButtons) exportButtons.style.display = '';
       });
-
-
-      // ─── Exportar a CSV ──────────────────────────────────────────────
-      document.getElementById('btnExportCSV').addEventListener('click', () => {
-        let csv = "Servicio,Categoría,m²,Precio/m²,Subtotal\n";
-        detalle.forEach(d => {
-          csv += `"${d.servicio}","${d.categoria}",${d.m2},${d.precioUnitario},${d.subtotal}\n`;
-        });
-        csv += `\nTotal,,, ,${total}\n`;
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "cotizacion.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-
-      // ─── Exportar a Excel (XLS) ──────────────────────────────────────
-      document.getElementById('btnExportExcel').addEventListener('click', () => {
-        let excel = "<table><tr><th>Servicio</th><th>Categoría</th><th>m²</th><th>Precio/m²</th><th>Subtotal</th></tr>";
-        detalle.forEach(d => {
-          excel += `<tr>
-            <td>${d.servicio}</td>
-            <td>${d.categoria}</td>
-            <td>${d.m2}</td>
-            <td>${d.precioUnitario}</td>
-            <td>${d.subtotal}</td>
-          </tr>`;
-        });
-        excel += `<tr><td colspan="4"><strong>Total</strong></td><td><strong>${total}</strong></td></tr></table>`;
-        const blob = new Blob([excel], { type: "application/vnd.ms-excel" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "cotizacion.xls";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      });
+    });
 
       // ─── Scroll al resultado ────────────────────────────────────────
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });

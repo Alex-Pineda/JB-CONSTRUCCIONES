@@ -200,7 +200,6 @@ a:hover {
   text-decoration: underline;
 }
 
-
 /* Responsividad para navbar */
 @media (max-width: 640px) {
   nav {
