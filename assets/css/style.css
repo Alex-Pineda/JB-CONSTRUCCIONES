@@ -13,7 +13,20 @@ html, body {
   margin-bottom: 0;
   padding-bottom: 0;
 }
+/* 🔧 Ajuste para móviles (cuando usas transform) */
+@media (max-width: 640px) {
+  #factura-container {
+    transform: scale(0.85);
+    transform-origin: top center;
+    margin-bottom: 0;   /* elimina espacio bajo */
+  }
+}
 
+/* 🔧 Elimina márgenes de los últimos elementos dentro de factura */
+#factura-container > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
 /* Ajustar main para que tome toda la altura disponible */
 main {
   flex-grow: 1;      /* que ocupe el espacio restante */
@@ -199,6 +212,16 @@ a:hover {
   color: #f8ffd8;
   text-decoration: underline;
 }
+
+/* Contenedor de la factura */
+@media (max-width: 640px) {
+  #factura-container {
+    transform: scale(0.85);
+    transform-origin: top center;
+    margin: 0 auto;   /* sigue centrado */
+  }
+}
+
 
 /* Responsividad para navbar */
 @media (max-width: 640px) {

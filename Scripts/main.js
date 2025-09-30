@@ -343,8 +343,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // ─── Construir HTML de la factura ───────────────────────────────
       box.innerHTML = `
       
-      <div id="factura-container">
-      <div class="bg-white rounded-2xl shadow-2xl p-10 border border-gray-200 max-w-3xl mx-auto font-sans">
+     <div id="factura-container" 
+     class="w-full max-w-4xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
               
       <!-- ENCABEZADO -->
       <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- DATOS DEL CLIENTE -->
           <div class="mb-8">
             <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 text-gray-700 text-sm">
               <p><strong>Nombre:</strong> ${datosUsuario.nombre}</p>
               <p><strong>Tipo Documento:</strong> ${datosUsuario.tipoDocumento}</p>
               <p><strong>Número Documento:</strong> ${datosUsuario.numeroDocumento}</p>
@@ -431,38 +431,112 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
       `;
-    // ─── Ajustes de visualización en navegador ──────────
-    document.documentElement.style.overflowX = 'hidden'; // evita scroll horizontal en <html>
-    document.body.style.overflowX = 'hidden';
-
-    box.style.width = '95%';
-    box.style.maxWidth = '1200px';
-    box.style.margin = '1rem auto';
-    box.style.padding = '0 0.5rem';
-    box.style.boxSizing = 'border-box';
+          // ─── Ajustes de visualización en navegador ──────────
+      document.documentElement.style.overflowX = 'hidden'; // evita scroll horizontal en <html>
+      document.body.style.overflowX = 'hidden';
 
 
-    // ─── Exportar a PDF ──────────────────────────────────────────────
-    document.getElementById('btnExportPDF').addEventListener('click', () => {
+      // ─── Función para escalar según pantalla ──────────
+      function ajustarEscala() {
+        const root = document.documentElement;
+        root.style.transition = 'transform 0.25s ease';
+        root.style.transformOrigin = 'top center';
+
+        if (window.innerWidth <= 480) {
+          // móviles pequeños
+          root.style.transform = 'scale(0.75)';
+        } else if (window.innerWidth <= 768) {
+          // tablets o móviles grandes
+          root.style.transform = 'scale(0.9)';
+        } else {
+          // pantallas grandes (PC, laptops)
+          root.style.transform = 'scale(1)';
+        }
+      }
+
+      // Ejecutar al cargar y al redimensionar
+      ajustarEscala();
+      window.addEventListener('resize', ajustarEscala);
+      window.addEventListener('orientationchange', ajustarEscala);
+
+
+      document.getElementById('btnExportPDF').addEventListener('click', () => {
       const factura = document.querySelector('#factura-container');
+      if (!factura) return;
 
-      // 1️⃣ Ocultar los botones de exportación antes de generar el PDF
-      const exportButtons = factura.querySelector('.mt-6');  // el div que contiene los botones
-      if (exportButtons) exportButtons.style.display = 'none';
+      // 1) localizar el contenedor de "Datos del Cliente" (soporta varias estructuras)
+      let clienteGrid = factura.querySelector('#datos-cliente'); // si tienes id
+      if (!clienteGrid) {
+        const h2s = factura.querySelectorAll('h2');
+        for (const h of h2s) {
+          if (h.textContent.trim().toLowerCase().includes('datos del cliente')) {
+            // puede estar inmediatamente dentro del mismo bloque (parent) o ser el siguiente elemento
+            clienteGrid = h.parentElement.querySelector('.grid') || h.nextElementSibling;
+            break;
+          }
+        }
+      }
 
-      // 2️⃣ Generar el PDF con escala reducida
- html2pdf().from(factura).set({
-    // [top, left, bottom, right]
-    margin: [0.2, 0.2, 0.2, 0.2],   // ← todos iguales (en pulgadas)
-    filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
-    image: { type: 'jpeg', quality: 1 },
-    html2canvas: { scale: 1, useCORS: true },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-  }).save().then(() => {
-        // 3️⃣ Restaurar visibilidad de los botones después de guardar el PDF
-        if (exportButtons) exportButtons.style.display = '';
-      });
+      // Guardar estado original para restaurar después
+      const oldClienteStyle = clienteGrid ? clienteGrid.getAttribute('style') || '' : null;
+      const oldClienteClass = clienteGrid ? clienteGrid.className : null;
+
+      // 2) Forzar 2 columnas mediante estilos inline (tiene prioridad sobre clases responsivas)
+      if (clienteGrid) {
+        // quitar clases responsivas que puedan forzar 1 columna (opcional)
+        try { clienteGrid.classList.remove('grid-cols-1'); } catch(e){}
+        // estilos inline que garantizarán 2 columnas en el renderizado para PDF
+        clienteGrid.style.display = 'grid';
+        clienteGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        clienteGrid.style.gap = '0.75rem';
+        clienteGrid.style.gridAutoRows = 'min-content';
+        // reducir márgenes internos de cada <p> para que quepa mejor en móviles
+        clienteGrid.querySelectorAll('p').forEach(p => p.style.margin = '0');
+      }
+
+      // 3) quitar sombra para evitar manchas internas en el PDF (si existe)
+      const card = factura.querySelector('.shadow-2xl');
+      const hadShadow = !!card;
+      if (card) card.classList.remove('shadow-2xl');
+
+      // 4) quitar botones del flujo reemplazándolos por placeholder (evita margen final)
+      const exportButtons = factura.querySelector('#botones-export') || factura.querySelector('.mt-6');
+      let placeholder = null, parent = null;
+      if (exportButtons) {
+        parent = exportButtons.parentNode;
+        placeholder = document.createComment('export-placeholder');
+        parent.replaceChild(placeholder, exportButtons);
+      }
+
+      // 5) generar PDF (ajusta scale / margin si quieres)
+      html2pdf().from(factura).set({
+        // margen en mm: [top, left, bottom, right]
+        margin: [10, 10, 10, 10],
+        filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 1.6, useCORS: true, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      }).save()
+        .catch(err => {
+          console.error('Error generando PDF:', err);
+          // seguir al finally para restaurar UI
+        })
+        .finally(() => {
+          // Restaurar botones
+          if (exportButtons && parent && placeholder) parent.replaceChild(exportButtons, placeholder);
+
+          // Restaurar grid de cliente
+          if (clienteGrid) {
+            clienteGrid.setAttribute('style', oldClienteStyle);
+            clienteGrid.className = oldClienteClass;
+            clienteGrid.querySelectorAll('p').forEach(p => p.style.margin = '');
+          }
+
+          // Restaurar sombra
+          if (card && hadShadow) card.classList.add('shadow-2xl');
+        });
     });
+
 
       // ─── Scroll al resultado ────────────────────────────────────────
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
