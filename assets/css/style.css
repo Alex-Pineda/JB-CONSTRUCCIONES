@@ -1,8 +1,51 @@
 /* Fuentes y base */
+/* Reset básico para evitar márgenes por defecto */
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow-x: hidden;   /* evita scroll lateral */
+  overflow-y: auto;     /* solo scroll si hace falta */
+  background: #f8f9fa;  /* gris claro opcional */
+}
+
+/* Contenedor principal de la factura */
+#factura-container {
+  margin: 0 auto;                 /* centrado */
+  padding: 0.5rem;
+  box-sizing: border-box;
+  background: #fff;
+  max-width: 1200px;              /* ancho máximo en PC */
+  min-height: auto;
+  border-radius: 12px;
+}
+
+/* Evita espacio extra al final del body */
+#factura-container > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Escala adaptativa para móviles (solo visual, no afecta PDF) */
+@media (max-width: 768px) {
+  #factura-container {
+    transform: scale(0.8);
+    transform-origin: top center;
+  }
+}
+@media (max-width: 480px) {
+  #factura-container {
+    transform: scale(0.6);
+    transform-origin: top center;
+  }
+}
+/* Contenedor de la factura */
+@media (max-width: 640px) {
+  #factura-container {
+    transform: scale(0.8);
+    transform-origin: top center;
+    margin: 0 auto;   /* sigue centrado */
+  }
 }
 
 /* Contenedor padre inmediato que tiene main: debe tener altura completa */
@@ -13,20 +56,8 @@ html, body {
   margin-bottom: 0;
   padding-bottom: 0;
 }
-/* 🔧 Ajuste para móviles (cuando usas transform) */
-@media (max-width: 640px) {
-  #factura-container {
-    transform: scale(0.85);
-    transform-origin: top center;
-    margin-bottom: 0;   /* elimina espacio bajo */
-  }
-}
 
-/* 🔧 Elimina márgenes de los últimos elementos dentro de factura */
-#factura-container > *:last-child {
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
+
 /* Ajustar main para que tome toda la altura disponible */
 main {
   flex-grow: 1;      /* que ocupe el espacio restante */
@@ -211,15 +242,6 @@ a {
 a:hover {
   color: #f8ffd8;
   text-decoration: underline;
-}
-
-/* Contenedor de la factura */
-@media (max-width: 640px) {
-  #factura-container {
-    transform: scale(0.85);
-    transform-origin: top center;
-    margin: 0 auto;   /* sigue centrado */
-  }
 }
 
 

@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
       box.innerHTML = `
       
      <div id="factura-container" 
-     class="w-full max-w-4xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
+     class="w-full max-w-5xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
               
       <!-- ENCABEZADO -->
       <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
@@ -431,26 +431,27 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
       `;
-          // ─── Ajustes de visualización en navegador ──────────
-      document.documentElement.style.overflowX = 'hidden'; // evita scroll horizontal en <html>
+      // ─── Ajustes de visualización en navegador ──────────
+      document.documentElement.style.overflowX = 'hidden'; 
       document.body.style.overflowX = 'hidden';
 
-
-      // ─── Función para escalar según pantalla ──────────
+      // ─── Función para escalar solo el contenedor ──────────
       function ajustarEscala() {
-        const root = document.documentElement;
-        root.style.transition = 'transform 0.25s ease';
-        root.style.transformOrigin = 'top center';
+        const factura = document.querySelector('#factura-container');
+        if (!factura) return;
+
+        factura.style.transition = 'transform 0.25s ease';
+        factura.style.transformOrigin = 'top center';
 
         if (window.innerWidth <= 480) {
           // móviles pequeños
-          root.style.transform = 'scale(0.75)';
+          factura.style.transform = 'scale(0.75)';
         } else if (window.innerWidth <= 768) {
           // tablets o móviles grandes
-          root.style.transform = 'scale(0.9)';
+          factura.style.transform = 'scale(0.9)';
         } else {
           // pantallas grandes (PC, laptops)
-          root.style.transform = 'scale(1)';
+          factura.style.transform = 'scale(1)';
         }
       }
 
@@ -459,83 +460,83 @@ document.addEventListener('DOMContentLoaded', () => {
       window.addEventListener('resize', ajustarEscala);
       window.addEventListener('orientationchange', ajustarEscala);
 
-
+      // ─── Exportar PDF ──────────
       document.getElementById('btnExportPDF').addEventListener('click', () => {
-      const factura = document.querySelector('#factura-container');
-      if (!factura) return;
+        const factura = document.querySelector('#factura-container');
+        if (!factura) return;
 
-      // 1) localizar el contenedor de "Datos del Cliente" (soporta varias estructuras)
-      let clienteGrid = factura.querySelector('#datos-cliente'); // si tienes id
-      if (!clienteGrid) {
-        const h2s = factura.querySelectorAll('h2');
-        for (const h of h2s) {
-          if (h.textContent.trim().toLowerCase().includes('datos del cliente')) {
-            // puede estar inmediatamente dentro del mismo bloque (parent) o ser el siguiente elemento
-            clienteGrid = h.parentElement.querySelector('.grid') || h.nextElementSibling;
-            break;
+        // 1) localizar el contenedor de "Datos del Cliente"
+        let clienteGrid = factura.querySelector('#datos-cliente'); 
+        if (!clienteGrid) {
+          const h2s = factura.querySelectorAll('h2');
+          for (const h of h2s) {
+            if (h.textContent.trim().toLowerCase().includes('datos del cliente')) {
+              clienteGrid = h.parentElement.querySelector('.grid') || h.nextElementSibling;
+              break;
+            }
           }
         }
-      }
 
-      // Guardar estado original para restaurar después
-      const oldClienteStyle = clienteGrid ? clienteGrid.getAttribute('style') || '' : null;
-      const oldClienteClass = clienteGrid ? clienteGrid.className : null;
+        // Guardar estado original
+        const oldClienteStyle = clienteGrid ? clienteGrid.getAttribute('style') || '' : null;
+        const oldClienteClass = clienteGrid ? clienteGrid.className : null;
 
-      // 2) Forzar 2 columnas mediante estilos inline (tiene prioridad sobre clases responsivas)
-      if (clienteGrid) {
-        // quitar clases responsivas que puedan forzar 1 columna (opcional)
-        try { clienteGrid.classList.remove('grid-cols-1'); } catch(e){}
-        // estilos inline que garantizarán 2 columnas en el renderizado para PDF
-        clienteGrid.style.display = 'grid';
-        clienteGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-        clienteGrid.style.gap = '0.75rem';
-        clienteGrid.style.gridAutoRows = 'min-content';
-        // reducir márgenes internos de cada <p> para que quepa mejor en móviles
-        clienteGrid.querySelectorAll('p').forEach(p => p.style.margin = '0');
-      }
+        // Forzar 2 columnas en exportación
+        if (clienteGrid) {
+          try { clienteGrid.classList.remove('grid-cols-1'); } catch(e){}
+          clienteGrid.style.display = 'grid';
+          clienteGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+          clienteGrid.style.gap = '0.75rem';
+          clienteGrid.style.gridAutoRows = 'min-content';
+          clienteGrid.querySelectorAll('p').forEach(p => p.style.margin = '0');
+        }
 
-      // 3) quitar sombra para evitar manchas internas en el PDF (si existe)
-      const card = factura.querySelector('.shadow-2xl');
-      const hadShadow = !!card;
-      if (card) card.classList.remove('shadow-2xl');
+        // Quitar sombra para evitar manchas
+        const card = factura.querySelector('.shadow-2xl');
+        const hadShadow = !!card;
+        if (card) card.classList.remove('shadow-2xl');
 
-      // 4) quitar botones del flujo reemplazándolos por placeholder (evita margen final)
-      const exportButtons = factura.querySelector('#botones-export') || factura.querySelector('.mt-6');
-      let placeholder = null, parent = null;
-      if (exportButtons) {
-        parent = exportButtons.parentNode;
-        placeholder = document.createComment('export-placeholder');
-        parent.replaceChild(placeholder, exportButtons);
-      }
+        // Quitar botones al exportar
+        const exportButtons = factura.querySelector('#botones-export') || factura.querySelector('.mt-6');
+        let placeholder = null, parent = null;
+        if (exportButtons) {
+          parent = exportButtons.parentNode;
+          placeholder = document.createComment('export-placeholder');
+          parent.replaceChild(placeholder, exportButtons);
+        }
 
-      // 5) generar PDF (ajusta scale / margin si quieres)
-      html2pdf().from(factura).set({
-        // margen en mm: [top, left, bottom, right]
-        margin: [10, 10, 10, 10],
-        filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 1.6, useCORS: true, letterRendering: true },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      }).save()
-        .catch(err => {
-          console.error('Error generando PDF:', err);
-          // seguir al finally para restaurar UI
-        })
-        .finally(() => {
-          // Restaurar botones
-          if (exportButtons && parent && placeholder) parent.replaceChild(exportButtons, placeholder);
+        // ✅ Guardar y quitar el transform para que no monte el texto en PDF
+        const oldTransform = factura.style.transform;
+        factura.style.transform = 'scale(1)';
 
-          // Restaurar grid de cliente
-          if (clienteGrid) {
-            clienteGrid.setAttribute('style', oldClienteStyle);
-            clienteGrid.className = oldClienteClass;
-            clienteGrid.querySelectorAll('p').forEach(p => p.style.margin = '');
-          }
+        // Generar PDF
+        html2pdf().from(factura).set({
+          margin: [10, 10, 10, 10],
+          filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).save()
+          .catch(err => console.error('Error generando PDF:', err))
+          .finally(() => {
+            // Restaurar botones
+            if (exportButtons && parent && placeholder) parent.replaceChild(exportButtons, placeholder);
 
-          // Restaurar sombra
-          if (card && hadShadow) card.classList.add('shadow-2xl');
-        });
-    });
+            // Restaurar grid
+            if (clienteGrid) {
+              clienteGrid.setAttribute('style', oldClienteStyle);
+              clienteGrid.className = oldClienteClass;
+              clienteGrid.querySelectorAll('p').forEach(p => p.style.margin = '');
+            }
+
+            // Restaurar sombra
+            if (card && hadShadow) card.classList.add('shadow-2xl');
+
+            // Restaurar transform de pantalla
+            factura.style.transform = oldTransform;
+          });
+      });
+
 
 
       // ─── Scroll al resultado ────────────────────────────────────────
