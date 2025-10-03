@@ -343,9 +343,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // ─── Construir HTML de la factura ───────────────────────────────
       box.innerHTML = `
       
-     <div id="factura-container" 
-     class="w-full max-w-5xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
-              
+      <div id="factura-container" class="w-full mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
+ 
       <!-- ENCABEZADO -->
       <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
 
@@ -389,35 +388,40 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- DETALLE DE SERVICIOS -->
           <div class="mb-8">
             <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
-            <table class="w-full border-collapse text-sm">
-              <thead>
-                <tr class="bg-teal-100 text-teal-800">
-                  <th class="border p-2 text-left">Servicio</th>
-                  <th class="border p-2 text-left">Categoría</th>
-                  <th class="border p-2 text-right">m²</th>
-                  <th class="border p-2 text-right">Precio/m²</th>
-                  <th class="border p-2 text-right">Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${detalle.map(d => `
-                  <tr>
-                    <td class="border p-2">${d.servicio}</td>
-                    <td class="border p-2">${d.categoria}</td>
-                    <td class="border p-2 text-right">${d.m2}</td>
-                    <td class="border p-2 text-right">${formatearCOP(d.precioUnitario)}</td>
-                    <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
+
+            <!-- Contenedor responsivo con scroll si es necesario -->
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse text-sm">
+                <thead>
+                  <tr class="bg-teal-100 text-teal-800">
+                    <th class="border p-2 text-left">Servicio</th>
+                    <th class="border p-2 text-left">Categoría</th>
+                    <th class="border p-2 text-right">m²</th>
+                    <th class="border p-2 text-right">Precio/m²</th>
+                    <th class="border p-2 text-right">Subtotal</th>
                   </tr>
-                `).join('')}
-              </tbody>
-              <tfoot>
-                <tr class="bg-gray-100">
-                  <td colspan="4" class="border p-2 text-right font-bold">Total Estimado</td>
-                  <td class="border p-2 text-right text-2xl font-bold text-red-600">${formatearCOP(total)}</td>
-                </tr>
-              </tfoot>
-            </table>
+                </thead>
+                <tbody>
+                  ${detalle.map(d => `
+                    <tr>
+                      <td class="border p-2">${d.servicio}</td>
+                      <td class="border p-2">${d.categoria}</td>
+                      <td class="border p-2 text-right">${d.m2}</td>
+                      <td class="border p-2 text-right">${formatearCOP(d.precioUnitario)}</td>
+                      <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+                <tfoot>
+                  <tr class="bg-gray-100">
+                    <td colspan="4" class="border p-2 text-right font-bold">Total Estimado</td>
+                    <td class="border p-2 text-right text-2xl font-bold text-red-600">${formatearCOP(total)}</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
+
 
           <!-- NOTA -->
           <p class="text-gray-600 text-sm italic">
@@ -440,19 +444,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const factura = document.querySelector('#factura-container');
         if (!factura) return;
 
-        factura.style.transition = 'transform 0.25s ease';
-        factura.style.transformOrigin = 'top center';
-
-        if (window.innerWidth <= 480) {
-          // móviles pequeños
-          factura.style.transform = 'scale(0.75)';
-        } else if (window.innerWidth <= 768) {
-          // tablets o móviles grandes
-          factura.style.transform = 'scale(0.9)';
-        } else {
-          // pantallas grandes (PC, laptops)
-          factura.style.transform = 'scale(1)';
-        }
       }
 
       // Ejecutar al cargar y al redimensionar
@@ -504,10 +495,6 @@ document.addEventListener('DOMContentLoaded', () => {
           placeholder = document.createComment('export-placeholder');
           parent.replaceChild(placeholder, exportButtons);
         }
-
-        // ✅ Guardar y quitar el transform para que no monte el texto en PDF
-        const oldTransform = factura.style.transform;
-        factura.style.transform = 'scale(1)';
 
         // Generar PDF
         html2pdf().from(factura).set({

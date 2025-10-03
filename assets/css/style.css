@@ -19,6 +19,17 @@ html, body {
   min-height: auto;
   border-radius: 12px;
 }
+.contenedor-principal {
+  width: 98%;              /* casi todo el ancho */
+  max-width: 1600px;       /* limite para pantallas grandes */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;           /* padding general */
+  background: white;
+  border-radius: 0.75rem;  /* esquinas redondeadas */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* sombra suave */
+  overflow: hidden;
+}
 
 /* Evita espacio extra al final del body */
 #factura-container > *:last-child {
@@ -26,27 +37,6 @@ html, body {
   padding-bottom: 0 !important;
 }
 
-/* Escala adaptativa para móviles (solo visual, no afecta PDF) */
-@media (max-width: 768px) {
-  #factura-container {
-    transform: scale(0.8);
-    transform-origin: top center;
-  }
-}
-@media (max-width: 480px) {
-  #factura-container {
-    transform: scale(0.6);
-    transform-origin: top center;
-  }
-}
-/* Contenedor de la factura */
-@media (max-width: 640px) {
-  #factura-container {
-    transform: scale(0.8);
-    transform-origin: top center;
-    margin: 0 auto;   /* sigue centrado */
-  }
-}
 
 /* Contenedor padre inmediato que tiene main: debe tener altura completa */
 .flex-1 {
