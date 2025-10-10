@@ -249,15 +249,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrapper = document.createElement('div');
         wrapper.className = 'flex items-center space-x-3';
 
-        wrapper.innerHTML = `
-          <div class="flex items-center space-x-2">
-            <input type="checkbox" id="${chkId}" class="form-checkbox h-4 w-4 text-red-600">
-            <label for="${chkId}" class="text-gray-700 text-sm">${item.title}</label>
-          </div>
-          <input type="number" min="0" step="1" id="${m2Id}" placeholder="m²"
-                 class="ml-auto w-20 border border-gray-300 rounded-md px-2 py-1 text-sm hidden"
-                 aria-label="metros cuadrados para ${item.title}">
-        `;
+       wrapper.innerHTML = `
+  <div class="flex items-center space-x-2">
+    <input type="checkbox" id="${chkId}" class="form-checkbox h-4 w-4 text-red-600">
+    <label for="${chkId}" class="text-gray-700 text-sm">${item.title}</label>
+  </div>
+  <input type="number" min="0" step="1" id="${m2Id}" placeholder="m²"
+      class="ml-auto w-[4.5rem] sm:w-[5rem] md:w-[5.5rem] lg:w-[6rem] xl:w-[6.5rem]
+             border border-gray-300 rounded-md px-2 py-1
+             text-xs sm:text-sm text-center hidden
+             [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      aria-label="metros cuadrados para ${item.title}">
+`;
 
         // listeners
         const checkbox = wrapper.querySelector(`#${chkId}`);
@@ -320,65 +323,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }
      function mostrarResultado(total, detalle) {
       // ─── Capturar datos del formulario ───────────────────────────────
-      const datosUsuario = {
-        nombre: document.getElementById('nombre').value || 'Cliente',
-        tipoDocumento: document.getElementById('tipoDocumento').value || 'No especificado',
-        numeroDocumento: document.getElementById('numeroDocumento').value || 'No especificado',
-        correo: document.getElementById('correo').value || 'No especificado',
-        ubicacion: document.getElementById('ubicacion').value || 'No especificado',
-        tipoProyecto: document.getElementById('tipoProyecto').value || 'No especificado',
-        fechaInicio: document.getElementById('fechaInicio').value || 'No especificada',
-        descripcion: document.getElementById('descripcion').value || 'Sin descripción'
-      };
+    const datosUsuario = {
+      nombreCompleto: `${document.getElementById("nombre").value} ${document.getElementById("apellido").value || 'Cliente'}`.trim(),
+      numeroDocumento: document.getElementById("numeroDocumento").value || 'No especificado',
+      correo: document.getElementById("correo").value || 'No especificado',
+      contacto: document.getElementById("contacto").value || 'No especificado',
+      ubicacion: document.getElementById("ubicacion").value || 'No especificada',
+      direccion: document.getElementById("direccion").value || 'No especificada',
+      tipoProyecto: document.getElementById("tipoProyecto").value || 'No especificado',
+      fechaInicio: document.getElementById("fechaInicio").value || 'No especificada',
+      descripcion: document.getElementById("descripcion").value || 'Sin descripción',
+    };
 
-      // ─── Crear contenedor si no existe ──────────────────────────────
-      let box = document.getElementById('resultado-cotizacion');
-      if (!box) {
-        box = document.createElement('div');
-        box.id = 'resultado-cotizacion';
-        box.className = 'max-w-4xl mx-auto mt-6';
-        form.after(box);
+    // ─── Crear contenedor si no existe ──────────────────────────────
+    let box = document.getElementById('resultado-cotizacion');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'resultado-cotizacion';
+      box.className = 'max-w-4xl mx-auto mt-6';
+      form.after(box);
+    }
+    // ─── Normalizar nombres de categoría ───────────────────────────────
+    detalle = detalle.map(d => {
+      let categoriaLegible = d.categoria;
+
+      switch (d.categoria) {
+        case 'obraNegra':
+          categoriaLegible = 'Obra Negra';
+          break;
+        case 'obraBlanca':
+          categoriaLegible = 'Obra Blanca';
+          break;
+        case 'mantenimiento':
+          categoriaLegible = 'Mantenimiento';
+          break;
       }
+
+      return { ...d, categoria: categoriaLegible };
+    });
+
 
       // ─── Construir HTML de la factura ───────────────────────────────
       box.innerHTML = `
-      
-      <div id="factura-container" class="w-full mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
- 
-      <!-- ENCABEZADO -->
-      <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
+        <div id="factura-container" class="w-full mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
 
-        <!-- Lado izquierdo: Logo + nombre -->
-        <div class="flex items-center gap-6">
-          <img src="../assets/img/JB-CONSTRUCTORES.png"
-              alt="Logo JB-CONSTRUCTORES"
-              class="h-[60px] w-[60px] object-cover rounded-full border-2 border-teal-500">
-          <div>
-            <h1 class="text-1xl font-extrabold text-teal-700 leading-tight">JB-CONSTRUCTORES</h1>
-            <p class="text-lg text-gray-500 mt-1">Factura de Cotización</p>
+          <!-- ENCABEZADO -->
+          <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
+            <div class="flex items-center gap-6">
+              <img src="../assets/img/JB-CONSTRUCTORES.png"
+                alt="Logo JB-CONSTRUCTORES"
+                class="h-[60px] w-[60px] object-cover rounded-full border-2 border-teal-500">
+              <div>
+                <h1 class="text-1xl font-extrabold text-teal-700 leading-tight">JB-CONSTRUCTORES</h1>
+                <p class="text-lg text-gray-500 mt-1">Factura de Cotización</p>
+              </div>
+            </div>
+            <div class="text-right space-y-1">
+              <p class="text-base text-gray-600">Fecha: ${new Date().toLocaleDateString()}</p>
+              <p class="text-base text-gray-600">Cotización #${Math.floor(Math.random() * 100000)}</p>
+            </div>
           </div>
-        </div>
-
-        <!-- Lado derecho: Fecha y número de cotización -->
-        <div class="text-right space-y-1">
-          <p class="text-base text-gray-600">
-            Fecha: ${new Date().toLocaleDateString()}
-          </p>
-          <p class="text-base text-gray-600">
-            Cotización #${Math.floor(Math.random()*100000)}
-          </p>
-        </div>
-      </div>
 
           <!-- DATOS DEL CLIENTE -->
           <div class="mb-8">
             <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 text-gray-700 text-sm">
-              <p><strong>Nombre:</strong> ${datosUsuario.nombre}</p>
-              <p><strong>Tipo Documento:</strong> ${datosUsuario.tipoDocumento}</p>
+              <p><strong>Nombre:</strong> ${datosUsuario.nombreCompleto}</p>
               <p><strong>Número Documento:</strong> ${datosUsuario.numeroDocumento}</p>
               <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
+              <p><strong>Contacto:</strong> ${datosUsuario.contacto}</p>
               <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
+              <p><strong>Dirección:</strong> ${datosUsuario.direccion}</p>
               <p><strong>Tipo Proyecto:</strong> ${datosUsuario.tipoProyecto}</p>
               <p><strong>Fecha Inicio:</strong> ${datosUsuario.fechaInicio}</p>
             </div>
@@ -430,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <!-- BOTONES DE EXPORTACIÓN -->
           <div class="mt-6 flex flex-wrap gap-4 justify-center">
-            <button id="btnExportPDF" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Exportar PDF</button>
+            <button id="btnExportPDF" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Descargar Cotización</button>
           </div>
         </div>
       </div>

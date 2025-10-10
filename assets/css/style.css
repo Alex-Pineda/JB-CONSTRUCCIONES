@@ -28,7 +28,11 @@ html, body {
   background: white;
   border-radius: 0.75rem;  /* esquinas redondeadas */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* sombra suave */
-  overflow: hidden;
+  overflow: visible;
+}
+.cards-grid, .services-grid {
+  gap: 1rem;
+  margin: 0;
 }
 
 /* Evita espacio extra al final del body */
@@ -50,19 +54,26 @@ html, body {
 
 /* Ajustar main para que tome toda la altura disponible */
 main {
+  background: transparent !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding-left: 1rem;   /* conserva padding interior */
+  padding-right: 1rem;
+  box-shadow: none !important;
   flex-grow: 1;      /* que ocupe el espacio restante */
   height:100%;      /* para que tome toda la altura del contenedor padre */
   min-height: 0;     /* importante para que flex funcione bien */
-  padding-top: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
   overflow-y: auto;
-  background-color: rgba(34, 104, 77, 0.241);  /* para scroll vertical si hay contenido extra */
-}
+  border-radius: 1.5rem;
+  }
 
 body {
+  display: flex;
+  flex-direction: column;
   font-family: 'Roboto', sans-serif;
-  background-color: #f9fafb;
+  background: linear-gradient(to bottom, #979a9c 0%, #98ddb3 50%, #679ed4 100%) !important;
+  min-height: 100vh !important;
   color: #1f2937; /* texto gris oscuro */
   margin: 0;
   padding: 0;
@@ -71,8 +82,8 @@ body {
 
 /* Header */
 header {
-  background-color: #1f553c; /* Verde oscuro */
-  color: #e7f0e7;
+  background: white !important;
+  color: #0f172a !important;
 }
 
 header .text-xl {
@@ -131,50 +142,54 @@ nav button.active-category {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: #fcfcfc8b;
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 5px rgba(31, 85, 60, 0.1); /* sombra más ligera */
-  overflow: hidden;
+  background-color: rgba(241, 234, 234, 0.777); /* ligero translúcido */
+  border-radius: 1rem;                      /* más redondeado */
+  border: 1px solid rgba(16, 37, 28, 0.06);    /* borde muy suave */
+  box-shadow: 0 10px 28px rgba(9, 29, 19, 0.1);/* sombra más clara y elevada */
+  overflow: hidden;                         /* mantiene la imagen dentro */
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  min-height: 270px;
-  padding: 0;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  padding: 0.75rem;                         /* espacio interno */
+  min-height: 250px; /* opcional: ajusta según necesidad */
 }
 
 .service-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(34, 58, 47, 0.611);
-  border-color: #761f26; /* borde rojo al hover */
+  transform: translateY(-8px);
+  box-shadow: 0 22px 48px rgba(31,85,60,0.18);
+  border-color: rgba(31,85,60,0.14); /* sutil intensificación del borde */
 }
 
 .service-card img {
   width: 100%;
-  height: 130px; /* altura reducida */
+  height: 150px;       /* ajustable */
   object-fit: cover;
-  border-bottom: 2px solid #1f553c;
+  display: block;
+  /* asegurar que la imagen respete las esquinas redondeadas superiores */
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom: none; /* elimina borde inferior si no quieres linea */
   transition: transform 0.3s ease;
 }
 
 .service-card:hover img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .service-card h3 {
-  color: #191a19;
+  margin: 0.75rem 0 0.5rem 0;
+  font-size: 1.03rem;
   text-align: center;
-  font-weight: 600;
-  font-size: 1rem;
-  margin: 1rem 1rem 0.5rem 1rem;
-  flex-shrink: 0;
 }
 
 .service-card p {
-  font-size: 0.9rem;
+  margin: 0 0 0.75rem 0;
   text-align: center;
-  color: #555d50;
+  color: #475047;
   line-height: 1.4;
-  margin: 0 1rem 1.5rem 1rem;
-  flex-grow: 1;
+}
+
+.service-card, .service-card * {
+  box-shadow: none; /* removemos sombras en elementos internos para evitar duplicados */
 }
 
 /* Botones */
