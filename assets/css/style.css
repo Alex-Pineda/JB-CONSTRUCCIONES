@@ -66,6 +66,7 @@ main {
   min-height: 0;     /* importante para que flex funcione bien */
   overflow-y: auto;
   border-radius: 1.5rem;
+  position:static;
   }
 
 body {
@@ -82,7 +83,6 @@ body {
 
 /* Header */
 header {
-  background: white !important;
   color: #0f172a !important;
 }
 
