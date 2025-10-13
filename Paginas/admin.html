@@ -17,8 +17,8 @@
 
     <!-- Main -->
     <main class="flex-1 p-8">
-      
-      <!-- Encabezado: Icono hamburguesa + Título -->
+
+      <!-- Encabezado -->
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-3xl font-bold">📊 Dashboard</h2>
         <button id="menu-toggle" class="md:hidden p-2 text-white bg-gray-800 rounded">
@@ -26,52 +26,193 @@
         </button>
       </div>
 
-      <!-- Estadísticas rápidas -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
-        <!-- Usuarios -->
-        <a href="../Paginas/usuarios.html" class="bg-white rounded-lg shadow p-6">
-          <div>
-            <h3 class="text-gray-500">👥 Usuarios Registrados</h3>
-            <p class="text-2xl font-bold">120</p>
-          </div>
-        </a>
-
-        <!-- Proyectos -->
-        <a href="../Paginas/gestionProyectos.html" class="bg-white rounded-lg shadow p-6">
-          <div>
-            <h3 class="text-gray-500">🏗️ Proyectos Activos</h3>
-            <p class="text-2xl font-bold">18</p>
-          </div>
-        </a>
-
-        <!-- Cotizaciones -->
-        <a href="../Paginas/facturacion" class="bg-white rounded-lg shadow p-6">
-          <div>
-            <h3 class="text-gray-500">💰 Cotizaciones</h3>
-            <p class="text-2xl font-bold">40</p>
-          </div>
-        </a>
-
-        <!-- Nueva tarjeta: Reseñas -->
-        <a href="../Paginas/moderacionResenas.html" class="bg-white rounded-lg shadow p-6">
-          <div>
-            <h3 class="text-gray-500">⭐ Reseñas</h3>
-            <p class="text-2xl font-bold">25</p>
-          </div>
-        </a>
+      <!-- Panel de estadísticas rápidas -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8" id="tarjetas-estadisticas">
+        <!-- Tarjetas generadas dinámicamente -->
       </div>
 
-      <!-- Gráfico / Placeholder -->
+      <!-- Listado de visitas especializadas pendientes -->
       <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold mb-4">Actividad Reciente</h3>
-        <div class="h-48 flex items-center justify-center text-gray-400">
-          [Aquí iría un gráfico con Chart.js o similar]
+        <h3 class="text-lg font-semibold mb-4">Visitas Pendientes</h3>
+
+        <div id="lista-visitas" class="overflow-x-auto">
+          <!-- Tabla generada dinámicamente -->
+        </div>
+
+        <div id="mensaje-vacio" class="text-gray-500 text-center py-4 hidden">
+          No hay visitas pendientes por ahora.
         </div>
       </div>
 
-    </main>
-  </div>
+      <!-- Toast de acción -->
+      <div id="toast" class="fixed bottom-6 right-6 bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden transition duration-300"></div>
 
-  <script src="../Scripts/main.js"></script>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+      const estadisticas = [
+        { titulo: "Gestión de Usuarios", cantidad: 120, icono: "👥", url: "../Paginas/usuarios.html" },
+        { titulo: "Gestión de Proyectos", cantidad: 18, icono: "🏗️", url: "../Paginas/gestionProyectos.html" },
+        { titulo: "Cotizaciones Generadas", cantidad: 40, icono: "💰", url: "../Paginas/admin_cotizaciones" },
+        { titulo: "Estado de Pagos", cantidad: 25, icono: "💳", url: "../Paginas/admin_pagos.html" },
+        { titulo: "Facturación Emitida", cantidad: 25, icono: "🧾", url: "../Paginas/admin_facturacion.html" },
+        { titulo: "Administrar Portafolios", cantidad: 25, icono: "📁", url: "../Paginas/admin_portafolio.html" },
+        { titulo: "Moderación de Reseñas", cantidad: 25, icono: "⭐", url: "../Paginas/moderacionResenas.html" },
+        { titulo: "Gestión de Contenido", cantidad: 25, icono: "📝", url: "../Paginas/admin_blogs.html" }
+      ];
+
+      const visitasPendientes = [
+        {
+          nombre: "Juan Pérez",
+          documento: "123456789",
+          correo: "juan.perez@example.com",
+          contacto: "3001234567",
+          ubicacion: "Antioquia - Medellín",
+          direccion: "Cra 45 # 12-34",
+          fechaVisita: "2025-10-20"
+        },
+        {
+          nombre: "María Gómez",
+          documento: "987654321",
+          correo: "maria.gomez@example.com",
+          contacto: "3109876543",
+          ubicacion: "Cundinamarca - Bogotá",
+          direccion: "Cl 80 # 45-12",
+          fechaVisita: "2025-10-21"
+        },
+        {
+          nombre: "Carlos López",
+          documento: "456789123",
+          correo: "carlos.lopez@example.com",
+          contacto: "3016547890",
+          ubicacion: "Valle del Cauca - Cali",
+          direccion: "Av 3N # 55-67",
+          fechaVisita: "2025-10-22"
+        }
+      ];
+
+      const contenedorTarjetas = document.getElementById("tarjetas-estadisticas");
+
+      estadisticas.forEach(item => {
+        const tarjeta = document.createElement("a");
+        tarjeta.href = item.url;
+        tarjeta.className = `
+          bg-white rounded-lg shadow p-6 border border-gray-200
+          hover:bg-indigo-100 hover:ring-2 hover:ring-indigo-400 transition
+          flex flex-col items-center text-center
+        `;
+
+        tarjeta.innerHTML = `
+          <div class="text-3xl mb-2">${item.icono}</div>
+          <h3 class="text-gray-600 font-semibold mb-1">${item.titulo}</h3>
+          <p class="text-3xl font-bold text-gray-800">${item.cantidad}</p>
+        `;
+
+        contenedorTarjetas.appendChild(tarjeta);
+      });
+
+      const listaContainer = document.getElementById('lista-visitas');
+      const mensajeVacio = document.getElementById('mensaje-vacio');
+
+      function cargarVisitas(data) {
+        listaContainer.innerHTML = '';
+
+        if (!data.length) {
+          mensajeVacio.classList.remove('hidden');
+          return;
+        }
+
+        mensajeVacio.classList.add('hidden');
+
+        const tabla = document.createElement('table');
+        tabla.className = 'min-w-full text-sm divide-y divide-gray-200';
+
+        tabla.innerHTML = `
+          <thead class="bg-gray-100 text-gray-700 text-left">
+            <tr>
+              <th class="px-4 py-2">Nombre</th>
+              <th class="px-4 py-2">Documento</th>
+              <th class="px-4 py-2">Correo</th>
+              <th class="px-4 py-2">Contacto</th>
+              <th class="px-4 py-2">Ubicación</th>
+              <th class="px-4 py-2">Dirección</th>
+              <th class="px-4 py-2">Fecha Visita</th>
+              <th class="px-4 py-2 text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-visitas" class="divide-y divide-gray-200"></tbody>
+        `;
+
+        listaContainer.appendChild(tabla);
+
+        const tbody = tabla.querySelector('#tbody-visitas');
+
+        data.forEach((cliente, index) => {
+          const fila = document.createElement('tr');
+
+          fila.innerHTML = `
+            <td class="px-4 py-2 text-gray-800">${cliente.nombre}</td>
+            <td class="px-4 py-2">${cliente.documento}</td>
+            <td class="px-4 py-2">${cliente.correo}</td>
+            <td class="px-4 py-2">${cliente.contacto}</td>
+            <td class="px-4 py-2">${cliente.ubicacion}</td>
+            <td class="px-4 py-2">${cliente.direccion}</td>
+            <td class="px-4 py-2">${cliente.fechaVisita}</td>
+            <td class="px-4 py-2 text-center">
+              <div class="flex justify-center gap-2">
+                <button onclick="marcarResuelto(${index})"
+                  class="bg-green-500 hover:bg-green-600 text-white text-xs px-3 py-1 rounded">
+                  Resuelto
+                </button>
+                <button onclick="descartar(${index})"
+                  class="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 rounded">
+                  Descartar
+                </button>
+              </div>
+            </td>
+          `;
+
+          tbody.appendChild(fila);
+        });
+      }
+
+      function mostrarToast(mensaje) {
+        const toast = document.getElementById('toast');
+        toast.textContent = mensaje;
+        toast.classList.remove('hidden');
+
+        setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 2500);
+      }
+
+      function marcarResuelto(index) {
+        const nombre = visitasPendientes[index].nombre;
+        visitasPendientes.splice(index, 1);
+        cargarVisitas(visitasPendientes);
+        mostrarToast(`✅ Visita de ${nombre} marcada como resuelta`);
+      }
+
+      function descartar(index) {
+        const nombre = visitasPendientes[index].nombre;
+        visitasPendientes.splice(index, 1);
+        cargarVisitas(visitasPendientes);
+        mostrarToast(`❌ Visita de ${nombre} descartada`);
+      }
+
+      // Inicializar
+      cargarVisitas(visitasPendientes);
+
+      // Ejemplo futuro de integración con API
+      /*
+      fetch('/api/visitas_pendientes')
+        .then(res => res.json())
+        .then(data => cargarVisitas(data));
+      */
+    </script>
+
+    <script src="../Scripts/main.js"></script>
+  </div>
 </body>
 </html>

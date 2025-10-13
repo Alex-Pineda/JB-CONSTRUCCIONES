@@ -332,13 +332,14 @@ document.addEventListener('DOMContentLoaded', () => {
       // ─── Capturar datos del formulario ───────────────────────────────
     const datosUsuario = {
       nombreCompleto: `${document.getElementById("nombre").value} ${document.getElementById("apellido").value || 'Cliente'}`.trim(),
+      tipoDocumento: document.getElementById("tipoDocumento").value || 'No especificado',
       numeroDocumento: document.getElementById("numeroDocumento").value || 'No especificado',
       correo: document.getElementById("correo").value || 'No especificado',
       contacto: document.getElementById("contacto").value || 'No especificado',
       ubicacion: document.getElementById("ubicacion").value || 'No especificada',
       direccion: document.getElementById("direccion").value || 'No especificada',
-      tipoProyecto: document.getElementById("tipoProyecto").value || 'No especificado',
-      fechaInicio: document.getElementById("fechaInicio").value || 'No especificada',
+      contactoPersonalizado: document.getElementById("contactoPersonalizado").checked ? "Sí" : "No",
+      fechaVisita: document.getElementById("contactoPersonalizado").checked ? (document.getElementById("fechaVisita").value || 'No especificada') : 'No solicitada',
       descripcion: document.getElementById("descripcion").value || 'Sin descripción',
     };
 
@@ -570,5 +571,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+  const contactoCheckbox = document.getElementById('contactoPersonalizado');
+const campoFechaVisita = document.getElementById('campoFechaVisita');
+
+if (contactoCheckbox && campoFechaVisita) {
+  contactoCheckbox.addEventListener('change', () => {
+    if (contactoCheckbox.checked) {
+      campoFechaVisita.classList.remove('hidden');
+    } else {
+      campoFechaVisita.classList.add('hidden');
+      // Opcional: limpiar fecha al ocultar
+      document.getElementById('fechaVisita').value = '';
+    }
+  });
+}
 
 });

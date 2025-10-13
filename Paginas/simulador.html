@@ -50,7 +50,7 @@
     <!-- HEADER -->
     <header class="bg-transparent border-b-[3px] border-[#161a7e] shadow-none">
       <div class="w-full max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-6 gap-4">
-        <h1 class="text-3xl font-bold text-teal-700 text-center md:text-left">
+        <h1 class="text-2xl font-bold text-teal-700 text-center md:text-left">
           SIMULADOR DE COTIZACIÓN
         </h1>
         <button 
@@ -95,23 +95,13 @@
                 <input type="text" id="ubicacion" class="input-estilo" placeholder="Departamento - Ciudad">
                 <input type="text" id="direccion" class="input-estilo" placeholder="Dirección del Proyecto">
 
-                <select id="tipoProyecto" class="input-estilo">
-                  <option value="">Tipo de Proyecto</option>
-                  <option value="residencial">Residencial</option>
-                  <option value="comercial">Comercial</option>
-                  <option value="industrial">Industrial</option>
-                  <option value="otros">Otros</option>
-                </select>
-
-                <input type="date" id="fechaInicio" class="input-estilo">
-
                 <div class="md:col-span-2">
                   <textarea id="descripcion" rows="3" class="input-estilo resize-none" placeholder="Descripción del trabajo a realizar"></textarea>
                 </div>
               </div>
             </section>
 
-            <!-- CONTACTO PERSONALIZADO -->
+            <!-- Contacto personalizado -->
             <div class="flex flex-col md:flex-row items-center gap-4 bg-teal-50 border border-teal-200 rounded-lg p-6 mt-6">
               <label for="contactoPersonalizado" class="text-teal-800 font-medium flex-1">
                 ¿Deseas que te contactemos para una valoración personalizada del servicio?
@@ -122,6 +112,16 @@
                 <span class="text-teal-700">Sí, deseo ser contactado</span>
               </div>
             </div>
+
+            <!-- Fecha estimada visita, oculta por defecto -->
+            <div id="campoFechaVisita" class="hidden flex flex-col items-center mt-4">
+              <label for="fechaVisita" class="block text-teal-800 font-semibold mb-2 text-center">
+                Por favor, indique la fecha estimada para la visita especializada:
+              </label>
+              <input type="date" id="fechaVisita" name="fechaVisita"
+                class="w-full md:w-1/3 px-4 py-2 border border-teal-300 rounded-md focus:ring-2 focus:ring-teal-400 focus:outline-none">
+            </div>
+
 
             <!-- SERVICIOS -->
             <section>
