@@ -41,7 +41,6 @@ html, body {
   padding-bottom: 0 !important;
 }
 
-
 /* Contenedor padre inmediato que tiene main: debe tener altura completa */
 .flex-1 {
   height: 100%;
@@ -50,7 +49,6 @@ html, body {
   margin-bottom: 0;
   padding-bottom: 0;
 }
-
 
 /* Ajustar main para que tome toda la altura disponible */
 main {
@@ -80,6 +78,10 @@ body {
   padding: 0;
 }
 
+.header-border {
+  background-color: transparent; /* Fondo transparente */
+  border-bottom: 3px solid #161a7e; /* Borde inferior */
+}
 
 /* Header */
 header {
@@ -145,23 +147,22 @@ nav button.active-category {
   background-color: rgba(241, 234, 234, 0.777); /* ligero translúcido */
   border-radius: 1rem;                      /* más redondeado */
   border: 1px solid rgba(16, 37, 28, 0.06);    /* borde muy suave */
-  box-shadow: 0 10px 28px rgba(9, 29, 19, 0.1);/* sombra más clara y elevada */
   overflow: hidden;                         /* mantiene la imagen dentro */
   cursor: pointer;
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
-  padding: 0.75rem;                         /* espacio interno */
-  min-height: 250px; /* opcional: ajusta según necesidad */
+  padding: 0.3rem;                         /* espacio interno */
+  min-height: 150px; /* opcional: ajusta según necesidad */
 }
 
 .service-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 22px 48px rgba(31,85,60,0.18);
+  box-shadow: 0 5px 30px rgba(181, 57, 57, 0.798);
   border-color: rgba(31,85,60,0.14); /* sutil intensificación del borde */
 }
 
 .service-card img {
   width: 100%;
-  height: 150px;       /* ajustable */
+  height: 120px;       /* ajustable */
   object-fit: cover;
   display: block;
   /* asegurar que la imagen respete las esquinas redondeadas superiores */
@@ -188,8 +189,15 @@ nav button.active-category {
   line-height: 1.4;
 }
 
-.service-card, .service-card * {
-  box-shadow: none; /* removemos sombras en elementos internos para evitar duplicados */
+
+#obra-negra-section > div {
+  border-radius: 1rem;
+}
+#obra-blanca-section > div {
+  border-radius: 1rem;
+}
+#mantenimiento-section > div {
+  border-radius: 1rem;
 }
 
 /* Botones */
@@ -203,12 +211,6 @@ button[type='submit'] {
   border: none;
   cursor: pointer;
   transition: background-color 0.25s ease;
-}
-
-button:hover,
-button[type='submit']:hover {
-  background-color: #d1c18ceb;
-  border-radius: 30px;
 }
 
 /* Formularios */

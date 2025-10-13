@@ -1,82 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin | JB-CONSTRUCCIONES</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="../assets/css/style.css"/>
-  <style>
-
-      body {
-        font-family: "Roboto", sans-serif;
-      }
-      .sidebar {
-        transition: all 0.3s;
-        height: fit-content;
-      }
-      /* Estilo pestañas nav */
-      .tabs {
-        display: flex;
-        gap: 1rem;
-        border-bottom: 3px solid #161a7e;
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        border-top:3px solid #161a7e;
-      }
-      .tabs button {
-        padding: 0.2rem 1rem;
-        font-weight: 500;
-        color: #4a4a4a;
-        background: transparent;
-        border: none;
-        border-bottom: 3px solid transparent;
-        cursor: pointer;
-        transition: border-color 0.3s ease, color 0.3s ease;
-      }
-      .tabs button:hover {
-        color: #761f26;
-      }
-      .tabs button.active {
-        border-bottom-color: #761f26;
-        color: #761f26;
-        font-weight: 700;
-      }
-    </style>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 font-['Roboto']">
   <div class="flex min-h-screen">
+    
     <!-- Sidebar cargado con JS -->
     <div id="sidebar-container"></div>
 
     <!-- Main -->
     <main class="flex-1 p-8">
-      <h2 class="text-3xl font-bold mb-6">📊 Dashboard</h2>
-    
-      <!-- Botón hamburguesa visible solo en móviles -->
-      <button id="menu-toggle" class="md:hidden p-2 text-white bg-gray-800">
-        &#9776; <!-- Icono hamburguesa -->
-      </button>
+      
+      <!-- Encabezado: Icono hamburguesa + Título -->
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-3xl font-bold">📊 Dashboard</h2>
+        <button id="menu-toggle" class="md:hidden p-2 text-white bg-gray-800 rounded">
+          &#9776;
+        </button>
+      </div>
 
       <!-- Estadísticas rápidas -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="text-gray-500">Usuarios Registrados</h3>
-          <p class="text-2xl font-bold">120</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="text-gray-500">Proyectos Activos</h3>
-          <p class="text-2xl font-bold">18</p>
-        </div>
-        <div class="bg-white rounded-lg shadow p-6">
-          <h3 class="text-gray-500">Ingresos (mes)</h3>
-          <p class="text-2xl font-bold">$45.000.000</p>
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Usuarios -->
+        <a href="../Paginas/usuarios.html" class="bg-white rounded-lg shadow p-6">
+          <div>
+            <h3 class="text-gray-500">👥 Usuarios Registrados</h3>
+            <p class="text-2xl font-bold">120</p>
+          </div>
+        </a>
+
+        <!-- Proyectos -->
+        <a href="../Paginas/gestionProyectos.html" class="bg-white rounded-lg shadow p-6">
+          <div>
+            <h3 class="text-gray-500">🏗️ Proyectos Activos</h3>
+            <p class="text-2xl font-bold">18</p>
+          </div>
+        </a>
+
+        <!-- Cotizaciones -->
+        <a href="../Paginas/facturacion" class="bg-white rounded-lg shadow p-6">
+          <div>
+            <h3 class="text-gray-500">💰 Cotizaciones</h3>
+            <p class="text-2xl font-bold">40</p>
+          </div>
+        </a>
+
+        <!-- Nueva tarjeta: Reseñas -->
+        <a href="../Paginas/moderacionResenas.html" class="bg-white rounded-lg shadow p-6">
+          <div>
+            <h3 class="text-gray-500">⭐ Reseñas</h3>
+            <p class="text-2xl font-bold">25</p>
+          </div>
+        </a>
       </div>
 
       <!-- Gráfico / Placeholder -->
@@ -86,8 +68,10 @@
           [Aquí iría un gráfico con Chart.js o similar]
         </div>
       </div>
+
     </main>
   </div>
+
   <script src="../Scripts/main.js"></script>
 </body>
 </html>

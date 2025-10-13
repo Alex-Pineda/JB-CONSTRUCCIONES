@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function closeSidebar() {
           if (!sidebar) return;
+          
           if (window.innerWidth < 1024) {
             sidebar.classList.add("-translate-x-full");
             sidebar.classList.remove("translate-x-0");
@@ -79,11 +80,17 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(autoCloseTimer);
             setTimeout(() => overlay.classList.add("hidden"), 300);
           }
-        }
+
+          // ✅ Restaurar color del botón incluso si no se hace animación
+          if (menuToggle) {
+            menuToggle.classList.remove("bg-white", "text-gray-800");
+            menuToggle.classList.add("bg-gray-800", "text-white");
+          }
+          }
 
         function resetAutoCloseTimer() {
           clearTimeout(autoCloseTimer);
-          autoCloseTimer = setTimeout(closeSidebar, 4000);
+          autoCloseTimer = setTimeout(closeSidebar, 5000);
         }
 
         if (menuToggle) {
@@ -184,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ============================ */
   function createCard({ title, img, description, link }) {
     return `
-      <div class="service-card cursor-pointer p-3 border rounded hover:shadow-md" title="${title}" data-link="${link || ''}">
+      <div class="service-card cursor-pointer p-3 border rounded" title="${title}" data-link="${link || ''}">
         <img src="${img || 'imagenes/default.jpg'}" alt="${title}" class="w-full h-36 object-cover rounded">
         <h3 class="mt-2 font-semibold text-sm">${title}</h3>
         <p class="text-xs text-gray-600 mt-1">${description || ''}</p>
@@ -367,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
       box.innerHTML = `
         <div id="factura-container" class="w-full mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
 
-          <!-- ENCABEZADO -->
+          <!-- ENCABEZADO --><br>
           <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
             <div class="flex items-center gap-6">
               <img src="../assets/img/JB-CONSTRUCTORES.png"
@@ -394,14 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
               <p><strong>Contacto:</strong> ${datosUsuario.contacto}</p>
               <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
               <p><strong>Dirección:</strong> ${datosUsuario.direccion}</p>
-              <p><strong>Tipo Proyecto:</strong> ${datosUsuario.tipoProyecto}</p>
-              <p><strong>Fecha Inicio:</strong> ${datosUsuario.fechaInicio}</p>
-            </div>
-            <p class="mt-4 text-gray-700 text-sm"><strong>Descripción:</strong> ${datosUsuario.descripcion}</p>
           </div>
 
           <!-- DETALLE DE SERVICIOS -->
-          <div class="mb-8">
+          <div class="mb-8"><br>
             <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
 
             <!-- Contenedor responsivo con scroll si es necesario -->
@@ -538,8 +541,6 @@ document.addEventListener('DOMContentLoaded', () => {
             factura.style.transform = oldTransform;
           });
       });
-
-
 
       // ─── Scroll al resultado ────────────────────────────────────────
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
