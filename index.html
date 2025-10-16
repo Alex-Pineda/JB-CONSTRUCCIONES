@@ -57,7 +57,7 @@
     <div class="flex-1 flex flex-col h-full">
       <!-- Header -->
       <header class="bg-transparent shadow-none">
-  <div class="px-6 pt-4 pb-0">
+  <div class="px-2 pt-4 pb-0">
     <!-- Encabezado -->
     <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between mb-2 text-center sm:text-left">
       <!-- Texto -->
@@ -103,25 +103,27 @@
       class="flex-1 w-full flex flex-col items-center justify-start overflow-y-auto pl-[0.4rem] pr-[0.4rem] pb-6 rounded-2xl shadow-lg" 
       style="background-color: #e0f2f1; border-radius: 1.5rem;">
 
-      <!-- Secciones ocultas/visibles según pestaña -->
-      <section id="obra-negra" class="tab-content w-full">
-        <div id="obra-negra-section"
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 max-w-7xl mt-4">
-        </div>
-      </section>
-
-      <section id="obra-blanca" class="tab-content hidden w-full">
-        <div id="obra-blanca-section" 
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 max-w-7xl mt-4">
-      </section>
-
-      <section id="mantenimiento" class="tab-content hidden w-full">
-        <div id="mantenimiento-section" 
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 max-w-7xl mt-4">
-      </section>
-      </main>
-    </div>
+     <!-- Secciones ocultas/visibles según pestaña -->
+<section id="obra-negra" class="tab-content w-full">
+  <div id="obra-negra-section"
+       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-4 w-full mt-4">
+    <!-- Tarjetas aquí -->
   </div>
+</section>
+
+<section id="obra-blanca" class="tab-content hidden w-full">
+  <div id="obra-blanca-section"
+       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-4 w-full mt-4">
+    <!-- Tarjetas aquí -->
+  </div>
+</section>
+
+<section id="mantenimiento" class="tab-content hidden w-full">
+  <div id="mantenimiento-section"
+       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-4 w-full mt-4">
+    <!-- Tarjetas aquí -->
+  </div>
+</section>
 
   <script src="Scripts/main.js"></script>
   <script>

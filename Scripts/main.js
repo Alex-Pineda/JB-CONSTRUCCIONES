@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ============================ */
   function createCard({ title, img, description, link }) {
     return `
-      <div class="service-card cursor-pointer p-3 border rounded" title="${title}" data-link="${link || ''}">
+      <div class="service-card cursor-pointer p-1 border rounded" title="${title}" data-link="${link || ''}">
         <img src="${img || 'imagenes/default.jpg'}" alt="${title}" class="w-full h-36 object-cover rounded">
         <h3 class="mt-2 font-semibold text-sm">${title}</h3>
         <p class="text-xs text-gray-600 mt-1">${description || ''}</p>
