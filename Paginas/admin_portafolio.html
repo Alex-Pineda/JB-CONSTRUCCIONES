@@ -1,77 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin - Portafolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-  <!-- Main content -->
   <main class="flex-1 p-6">
-    <h1 class="text-2xl font-bold mb-6">Gestión de Portafolio</h1>
-
-    <!-- Barra superior con botones -->
-    <div class="flex items-center justify-between mb-6">
-      <!-- Botón agregar nuevo proyecto -->
-      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition" onclick="window.location.href='crear_portafolio.html'">+ Agregar Proyecto</button>
-
-      <!-- Botones de administración -->
+    <!-- Encabezado -->
+    <div class="mb-6 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">Gestión de Portafolio</h1>
+        <p class="text-gray-600">Administra los proyectos y sus imágenes destacadas.</p>
+      </div>
+      <!-- Botones -->
       <div class="flex space-x-3">
-        <button class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition"
-          onclick="window.location.href='admin.html'">
-          Panel Administrativo
-        </button>
-        <button class="bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition"onclick="window.location.href='../index.html'">
-          Cerrar sesión
-        </button>
+        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition" onclick="window.location.href='crear_portafolio.html'">+ Agregar Proyecto</button>
+        <button class="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition" onclick="window.location.href='admin.html'">Panel Administrativo</button>
+        <button class="bg-gray-800 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-900 transition" onclick="window.location.href='../index.html'">Cerrar sesión</button>
       </div>
     </div>
 
-    <!-- Tabla de proyectos -->
-    <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-      <table class="w-full text-left border-collapse">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="p-4 font-semibold">ID</th>
-            <th class="p-4 font-semibold">Nombre Proyecto</th>
-            <th class="p-4 font-semibold">Descripción</th>
-            <th class="p-4 font-semibold">Imagen</th>
-            <th class="p-4 font-semibold">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Ejemplo de fila -->
-          <tr class="border-t hover:bg-gray-50 transition">
-            <td class="p-4">1</td>
-            <td class="p-4">Construcción Casa Campestre</td>
-            <td class="p-4">Proyecto de obra blanca finalizado</td>
-            <td class="p-4">
-              <img src="../img/proyecto1.jpg" alt="Proyecto" class="w-20 h-16 object-cover rounded-lg shadow">
-            </td>
-            <td class="p-4 space-x-2">
-              <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </td>
-          </tr>
-          <tr class="border-t hover:bg-gray-50 transition">
-            <td class="p-4">2</td>
-            <td class="p-4">Remodelación Oficina</td>
-            <td class="p-4">Diseño y adecuación de espacios</td>
-            <td class="p-4">
-              <img src="../img/proyecto2.jpg" alt="Proyecto" class="w-20 h-16 object-cover rounded-lg shadow">
-            </td>
-            <td class="p-4 space-x-2">
-              <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition">Editar</button>
-              <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition">Eliminar</button>
-            </td>
-          </tr>
-          <!-- Aquí se agregarán más proyectos dinámicamente -->
-        </tbody>
-      </table>
+    <!-- Grid de proyectos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
+      <!-- Tarjeta ejemplo con múltiples imágenes -->
+      <div class="bg-white rounded-lg shadow overflow-hidden group">
+        <div class="relative overflow-hidden h-48">
+          <!-- Carrusel dinámico (imágenes en data-images) -->
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-1 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-1 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
+        </div>
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-800">Construcción Casa Campestre</h3>
+          <p class="text-gray-600">Proyecto de obra blanca finalizado.</p>
+          <p class="text-sm text-gray-500 mt-1">Fecha: Julio 2023</p>
+
+          <!-- Acciones -->
+          <div class="mt-4 flex justify-between space-x-2">
+            <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm" onclick="window.location.href='editar_portafolio.html'">Editar</button>
+            <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition text-sm" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aquí se agregarán dinámicamente más proyectos -->
+
     </div>
   </main>
+
+  <script>
+    // Simulación de datos dinámicos (ejemplo)
+    const proyectos = [
+      {
+        nombre: "Construcción Casa Campestre",
+        descripcion: "Proyecto de obra blanca finalizado.",
+        fecha: "Julio 2023",
+        imagenes: [
+          "../img/proyecto1.jpg",
+          "https://picsum.photos/id/1051/600/400",
+          "https://picsum.photos/id/1052/600/400"
+        ]
+      },
+      {
+        nombre: "Remodelación Oficina",
+        descripcion: "Diseño y adecuación de espacios.",
+        fecha: "Marzo 2022",
+        imagenes: [
+          "../img/proyecto2.jpg",
+          "https://picsum.photos/id/1061/600/400",
+          "https://picsum.photos/id/1062/600/400"
+        ]
+      }
+    ];
+
+    // Inyectar tarjetas con carrusel
+    const grid = document.querySelector('.grid');
+    proyectos.forEach(proyecto => {
+      const tarjeta = document.createElement('div');
+      tarjeta.className = "bg-white rounded-lg shadow overflow-hidden group";
+
+      // Construir carrusel
+      const carruselHTML = `
+        <div class="relative overflow-hidden h-48">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out">
+            ${proyecto.imagenes.map(img => `<img src="${img}" class="w-full h-48 object-cover flex-shrink-0" />`).join("")}
+          </div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-1 shadow hover:bg-opacity-100 transition">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-1 shadow hover:bg-opacity-100 transition">&#10095;</button>
+        </div>
+      `;
+
+      const contenido = `
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-800">${proyecto.nombre}</h3>
+          <p class="text-gray-600">${proyecto.descripcion}</p>
+          <p class="text-sm text-gray-500 mt-1">Fecha: ${proyecto.fecha}</p>
+          <div class="mt-4 flex justify-between space-x-2">
+            <button class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition text-sm">Editar</button>
+            <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition text-sm">Eliminar</button>
+          </div>
+        </div>
+      `;
+
+      tarjeta.innerHTML = carruselHTML + contenido;
+      grid.appendChild(tarjeta);
+    });
+
+    // Funcionalidad de carrusel
+    document.querySelectorAll('.carousel-track').forEach(track => {
+      let index = 0;
+      const images = track.children;
+
+      const updateTransform = () => {
+        track.style.transform = `translateX(-${index * 100}%)`;
+      };
+
+      const prevBtn = track.parentElement.querySelector('.carousel-prev');
+      const nextBtn = track.parentElement.querySelector('.carousel-next');
+
+      prevBtn.addEventListener('click', () => {
+        index = (index - 1 + images.length) % images.length;
+        updateTransform();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        index = (index + 1) % images.length;
+        updateTransform();
+      });
+    });
+  </script>
 </body>
 </html>
 
