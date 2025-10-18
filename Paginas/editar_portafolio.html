@@ -25,78 +25,121 @@
   </div>
 </header>
 
-<!-- Contenido principal -->
-<form id="editForm" class="flex flex-col gap-6 items-stretch p-4 justify-evenly h-screen">
-  <!-- Cuerpo del formulario -->
-  <div class="flex flex-col md:flex-row gap-6 items-stretch">
-    <!-- Columna izquierda -->
-    <div class="w-full md:f-[35%] flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
-      <!-- Título -->
-      <div>
-        <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
-        <input type="text"
-               class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"rgb(247 247 247 / 43%)
-               value="Proyecto de Ejemplo">
+<!-- Contenedor general con borde envolvente -->
+<div class="border-[3px] border-[#161a7e] rounded-xl m-6 p-6 bg-[#f7f7f738] shadow-md">
+
+  <!-- Formulario principal -->
+  <form id="editForm" class="flex flex-col gap-6 items-stretch justify-evenly">
+
+    <!-- Cuerpo del formulario -->
+    <div class="flex flex-col md:flex-row gap-6 items-stretch">
+      
+      <!-- Columna izquierda -->
+      <div class="w-full md:w-[35%] flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
+        
+        <!-- Fila con Título y Estado -->
+        <div class="flex flex-col lg:flex-row gap-4">
+          <!-- Título -->
+          <div class="w-full lg:w-2/3">
+            <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
+            <input 
+              type="text" name="titulo"class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"value="Proyecto de Ejemplo"required>
+          </div>
+
+          <!-- Estado -->
+          <div class="w-full lg:w-1/3">
+            <label class="block font-medium text-gray-800 mb-1 text-lg">Estado</label>
+            <select
+              name="estado"
+              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required
+            >
+              <option value="borrador">Borrador</option>
+              <option value="publicado" selected>Publicado</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Descripción -->
+        <div class="flex-1 flex flex-col">
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Descripción</label>
+          <textarea name="descripcion" class="w-full px-2 py-1 min-h-[120px] border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]" required>Descripción del proyecto...</textarea>
+        </div>
+
+        <!-- Fila con 2 selects -->
+        <div class="flex flex-col lg:flex-row gap-4">
+          <!-- Categoría -->
+          <div class="w-full lg:w-1/2">
+            <label class="block font-medium text-gray-800 mb-1 text-lg">Categoría</label>
+            <select
+              name="categoria"
+              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="obra_blanca">Obra Blanca</option>
+              <option value="obra_negra">Obra Negra</option>
+              <option value="mantenimiento">Mantenimiento</option>
+            </select>
+          </div>
+
+          <!-- Tipo de servicio -->
+          <div class="w-full lg:w-1/2">
+            <label class="block font-medium text-gray-800 mb-1 text-lg">Tipo de Servicio</label>
+            <select
+              name="tipo_servicio"
+              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="construccion">Construcción</option>
+              <option value="remodelacion">Remodelación</option>
+              <option value="asesoria">Asesoría</option>
+            </select>
+          </div>
+        </div>
+          <br>
       </div>
 
-      <!-- Descripción -->
-    <div class="flex-1 flex flex-col">
-      <label class="block font-medium text-gray-800 mb-1 text-lg">Descripción</label>
-      <textarea
-        class="w-full px-2 py-1 min-h-[180px] border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e] resize-none"
-      >Descripción del proyecto...</textarea>
-    </div>
+      <!-- Columna derecha -->
+      <div class="w-full md:w-[65%] flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
+        <!-- Imágenes actuales -->
+        <div>
+          <label class="block font-medium text-gray-800 mb-2 text-lg">Imágenes Actuales</label>
+          <div id="currentImages" class="flex flex-wrap gap-3">
+            <!-- Imágenes actuales se cargarán aquí mediante JavaScript --> 
+          </div>
+        </div>
 
-      <!-- Estado -->
-      <div>
-        <label class="block font-medium text-gray-800 mb-1 text-lg">Estado</label>
-        <select
-          class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]">
-          <option value="activo" selected>Activo</option>
-          <option value="inactivo">Inactivo</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Columna derecha -->
-    <div class="w-full md:w-[65%] flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
-      <!-- Imágenes actuales -->
-      <div>
-        <label class="block font-medium text-gray-800 mb-2 text-lg">Imágenes Actuales</label>
-        <div id="currentImages"
-             class="flex flex-wrap gap-3">
-          <!-- Las imágenes se insertan aquí -->
+        <!-- Nuevas imágenes -->
+        <div>
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Agregar Nuevas Imágenes</label>
+          <input 
+            type="file" 
+            id="newImagesInput" 
+            name="imagenes" 
+            multiple 
+            accept="image/*"
+            class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800"
+          >
+          <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 4).</small>
+          <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden"></p>
+          <div id="previewContainer" class="mt-4 flex flex-wrap gap-3"></div>
         </div>
       </div>
-
-      <!-- Nuevas imágenes -->
-      <div>
-        <label class="block font-medium text-gray-800 mb-1 text-lg">Agregar Nuevas Imágenes</label>
-        <input type="file" id="newImagesInput" multiple accept="image/*"
-               class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800">
-        <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 5).</small>
-        <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden"></p>
-        <div id="previewContainer"
-             class="mt-4 flex flex-wrap gap-3">
-          <!-- Preview de imágenes nuevas -->
-        </div>
-      </div>
     </div>
-  </div>
 
-  <div class="flex justify-center gap-6 pt-4">
-    <!-- Botón cancelar como botón visual pero con redirección -->
-    <button type="button" onclick="window.location.href='portafolio.html'" class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
-      Cancelar
-    </button>
-
-    <!-- Botón enviar -->
-    <button type="submit" class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">
-      Actualizar
-    </button>
-  </div>
-
-</form>
+    <!-- Botones centrados -->
+    <div class="flex justify-center gap-6 pt-4">
+      <button type="button" onclick="window.location.href='portafolio.html'" class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
+        Cancelar
+      </button>
+      <button type="submit" class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">
+        Actualizar
+      </button>
+    </div>
+  </form>
+</div>
 
 
   <!-- Scripts -->
@@ -105,7 +148,8 @@
     const imagenesActuales = [
       "https://picsum.photos/id/1011/200/150",
       "https://picsum.photos/id/1012/200/150",
-      "https://picsum.photos/id/1013/200/150"
+      "https://picsum.photos/id/1013/200/150",
+      "https://picsum.photos/id/1015/200/150"
     ];
     const currentImagesContainer = document.getElementById("currentImages");
 
@@ -149,14 +193,14 @@
         imageCount.classList.add("hidden");
       }
 
-      if (files.length > 5) {
-        imageCount.textContent = "⚠️ Solo se permiten hasta 5 imágenes.";
+      if (files.length > 4) {
+        imageCount.textContent = "⚠️ Solo se permiten hasta 4 imágenes.";
         imageCount.classList.add("text-red-600");
       } else {
         imageCount.classList.remove("text-red-600");
       }
 
-      Array.from(files).slice(0, 5).forEach(file => {
+      Array.from(files).slice(0, 4).forEach(file => {
         const reader = new FileReader();
         reader.onload = e => {
           const img = document.createElement("img");
@@ -172,9 +216,9 @@
     document.getElementById("editForm").addEventListener("submit", function (e) {
       const files = newImagesInput.files;
 
-      if (files.length > 5) {
+      if (files.length > 4) {
         e.preventDefault();
-        alert("❌ Solo puedes subir hasta 5 imágenes.");
+        alert("❌ Solo puedes subir hasta 4 imágenes.");
         return;
       }
 

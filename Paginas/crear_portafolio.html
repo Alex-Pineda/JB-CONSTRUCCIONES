@@ -25,101 +25,135 @@
   </div>
 </header>
 
-<!-- Contenido principal -->
-<form id="crearProyectoForm" class="flex flex-col gap-6 items-stretch p-4 justify-evenly min-h-screen">
-  <!-- Cuerpo del formulario -->
-  <div class="flex flex-col md:flex-row gap-6 items-stretch">
-    <!-- Columna izquierda -->
-    <div class="w-full md:w-[35%] flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
-      <!-- Título -->
-      <div>
-        <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
-        <input 
-          type="text" 
-          name="titulo" 
-          class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-          placeholder="Ej: Remodelación Oficina"
-          required
-        >
+<!-- Contenedor general con borde envolvente -->
+<div class="border-[3px] border-[#161a7e] rounded-xl m-6 p-6 bg-[#f7f7f738] shadow-md">
+
+  <!-- Formulario principal -->
+  <form id="crearProyectoForm" class="flex flex-col gap-6 items-stretch justify-evenly">
+
+    <!-- Cuerpo del formulario -->
+    <div class="flex flex-col md:flex-row gap-6 items-stretch">
+
+      <!-- Columna izquierda -->
+      <div class="w-full md:w-full flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
+
+        <!-- Barra de búsqueda -->
+        <div>
+          <div class="relative w-full">
+            <input 
+              type="text" 
+              id="busquedaProyecto"
+              class="w-full pl-10 pr-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              placeholder="Buscar por Documento..."
+            >
+            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#161a7e]">🔍</span>
+          </div>
+        </div>
+
+        <!-- Fila Título + Estado -->
+        <div class="flex flex-col lg:flex-row gap-4">
+          <!-- Título -->
+          <div class="w-full lg:w-2/3">
+            <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
+            <input 
+              type="text" 
+              name="titulo" 
+              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              placeholder="Ej: Remodelación Oficina"
+              required
+            >
+          </div>
+
+          <!-- Estado -->
+          <div class="w-full lg:w-1/3">
+            <label class="block font-medium text-gray-800 mb-1 text-lg">Estado</label>
+            <select
+              name="estado"
+              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required
+            >
+              <option value="borrador" selected>Proceso</option>
+              <option value="publicado">Finalizado</option>
+            </select>
+          </div>
+        </div><br>
+
+        <!-- Descripción -->
+        <div class="flex-1 flex flex-col">
+          <textarea
+            name="descripcion"
+            class="w-full px-2 py-1 min-h-[100px] border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+            placeholder="Descripción del proyecto..."
+            required
+          ></textarea>
+        </div>
+
+        <!-- Fila con 2 selects -->
+        <div class="flex flex-col lg:flex-row gap-4">
+          <!-- Categoría -->
+          <div class="w-full lg:w-1/2">
+            <label class="block font-medium text-gray-800 mb-1 text-lg">Categoría</label>
+            <select
+              name="categoria"
+              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="obra_blanca">Obra Blanca</option>
+              <option value="obra_negra">Obra Negra</option>
+              <option value="mantenimiento">Mantenimiento</option>
+            </select>
+          </div>
+
+          <!-- Tipo de servicio -->
+          <div class="w-full lg:w-1/2">
+            <label class="block font-medium text-gray-800 mb-1 text-lg">Tipo de Servicio</label>
+            <select
+              name="tipo_servicio"
+              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required
+            >
+              <option value="">Seleccionar</option>
+              <option value="construccion">Construcción</option>
+              <option value="remodelacion">Remodelación</option>
+              <option value="asesoria">Asesoría</option>
+            </select>
+          </div>
+        </div>
       </div>
 
-      <!-- Descripción -->
-      <div class="flex-1 flex flex-col">
-        <label class="block font-medium text-gray-800 mb-1 text-lg">Descripción</label>
-        <textarea
-          name="descripcion"
-          class="w-full px-2 py-1 min-h-[180px] border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e] resize-none"
-          placeholder="Descripción del proyecto..."
-          required
-        ></textarea>
-      </div>
-
-  <div class="flex gap-x-6">
-  <!-- Categoría -->
-    <div class="w-1/2">
-      <label class="block font-medium text-gray-800 mb-1 text-lg">Categoría</label>
-      <select
-        name="categoria"
-        class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-        required
-      >
-        <option value="">Seleccionar</option>
-        <option value="obra_blanca">Obra Blanca</option>
-        <option value="obra_negra">Obra Negra</option>
-        <option value="mantenimiento">Mantenimiento</option>
-      </select>
-    </div>
-
-    <!-- Estado -->
-    <div class="w-1/2">
-      <label class="block font-medium text-gray-800 mb-1 text-lg">Estado</label>
-      <select
-        name="estado"
-        class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-        required
-      >
-        <option value="borrador" selected>Borrador</option>
-        <option value="publicado">Publicado</option>
-      </select>
-    </div>
-  </div>
-
-    </div>
-
-    <!-- Columna derecha -->
-    <div class="w-full md:w-[65%] flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
-      <!-- Imágenes -->
-      <div>
-        <label class="block font-medium text-gray-800 mb-1 text-lg">Imágenes del Proyecto</label>
-        <input 
-          type="file" 
-          id="imagenesInput" 
-          name="imagenes" 
-          multiple 
-          accept="image/*"
-          class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800"
-        >
-        <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 5).</small>
-        <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden"></p>
-        <div id="previewContainer" class="mt-4 flex flex-wrap gap-3"></div>
+      <!-- Columna derecha -->
+      <div class="w-full md:w-full flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
+        <!-- Imágenes -->
+        <div class="flex flex-col justify-between h-full">
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Imágenes del Proyecto</label>
+          <input 
+            type="file" 
+            id="imagenesInput" 
+            name="imagenes" 
+            multiple 
+            accept="image/*"
+            class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800"
+          >
+          <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 5).</small>
+          <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden"></p>
+          <div id="previewContainer" class="mt-4 flex flex-wrap gap-3"></div>
+        </div>
       </div>
     </div>
-  </div>
 
     <!-- Botones centrados abajo -->
     <div class="flex justify-center gap-6 pt-4">
-      <!-- Botón Cancelar como botón con redirección -->
       <button type="button" onclick="window.location.href='portafolio.html'" class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
         Cancelar
       </button>
 
-      <!-- Botón Guardar (envía el formulario) -->
       <button type="submit" class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">
         Guardar
       </button>
     </div>
-
-</form>
+  </form>
+</div>
 
 <!-- Scripts -->
 <script>
@@ -127,51 +161,85 @@
   const previewContainer = document.getElementById("previewContainer");
   const imageCount = document.getElementById("imageCount");
 
-  imagenesInput.addEventListener("change", () => {
-    previewContainer.innerHTML = "";
-    const files = imagenesInput.files;
+  // Almacena los archivos seleccionados temporalmente
+  let archivosSeleccionados = [];
 
-    if (files.length > 0) {
-      imageCount.textContent = `Imágenes seleccionadas: ${files.length}`;
+  imagenesInput.addEventListener("change", () => {
+    const files = Array.from(imagenesInput.files);
+    archivosSeleccionados = files.slice(0, 5); // limitar máximo 5
+
+    mostrarPrevisualizacion();
+  });
+
+  function mostrarPrevisualizacion() {
+    previewContainer.innerHTML = "";
+
+    if (archivosSeleccionados.length > 0) {
+      imageCount.textContent = `Imágenes seleccionadas: ${archivosSeleccionados.length}`;
       imageCount.classList.remove("hidden");
     } else {
       imageCount.classList.add("hidden");
     }
 
-    if (files.length > 5) {
+    if (archivosSeleccionados.length > 5) {
       imageCount.textContent = "⚠️ Solo se permiten hasta 5 imágenes.";
       imageCount.classList.add("text-red-600");
     } else {
       imageCount.classList.remove("text-red-600");
     }
 
-    Array.from(files).slice(0, 5).forEach(file => {
+    archivosSeleccionados.forEach((file, index) => {
       if (!file.type.startsWith("image/")) return;
 
       const reader = new FileReader();
       reader.onload = e => {
+        // Contenedor individual de imagen + botón eliminar
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "relative inline-block";
+
         const img = document.createElement("img");
         img.src = e.target.result;
-        img.className = "w-32 h-24 object-cover rounded border";
-        previewContainer.appendChild(img);
+        img.className = "w-32 h-24 object-cover rounded border border-[#161a7e]";
+
+        // Botón eliminar
+        const removeBtn = document.createElement("button");
+        removeBtn.innerHTML = "✖";
+        removeBtn.className =
+          "absolute top-0 right-0 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-700";
+        removeBtn.addEventListener("click", () => eliminarImagen(index));
+
+        imgContainer.appendChild(img);
+        imgContainer.appendChild(removeBtn);
+        previewContainer.appendChild(imgContainer);
       };
       reader.readAsDataURL(file);
     });
-  });
+  }
 
-  document.getElementById("crearProyectoForm").addEventListener("submit", function(e) {
-    const files = imagenesInput.files;
-    if (files.length > 5) {
-      e.preventDefault();
+  // Función para eliminar imagen del arreglo y actualizar vista
+  function eliminarImagen(index) {
+    archivosSeleccionados.splice(index, 1);
+    mostrarPrevisualizacion();
+
+    // Actualizar el input de tipo file con el nuevo conjunto
+    const dataTransfer = new DataTransfer();
+    archivosSeleccionados.forEach(file => dataTransfer.items.add(file));
+    imagenesInput.files = dataTransfer.files;
+  }
+
+  // Validar y enviar formulario
+  document.getElementById("crearProyectoForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (archivosSeleccionados.length > 5) {
       alert("❌ Solo puedes subir hasta 5 imágenes.");
       return;
     }
-    e.preventDefault();
+
     alert("✅ Proyecto creado correctamente (simulado).");
     window.location.href = "portafolio.html";
   });
 </script>
+
 </body>
 </html>
-
-

@@ -55,348 +55,698 @@
         </div>
       </header>
 
-      <!-- Main -->
-      <main class="flex-1 overflow-y-auto p-2 bg-gray-100">
-        <div class="mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800">Nuestros Proyectos</h2>
-          <p class="text-gray-600">Aquí puedes ver algunos de nuestros trabajos más destacados.</p>
-        </div>
+<!-- Main -->
+<main class="flex-1 overflow-y-auto p-4 bg-gray-100">
 
-       <!-- Contenedor Grid de tarjetas -->
-      <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 mx-auto">
+  <!-- Encabezado y Filtros -->
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+    <div>
+      <h2 class="text-2xl font-semibold text-gray-800">Nuestros Proyectos</h2>
+      <p class="text-gray-600">Aquí puedes ver algunos de nuestros trabajos más destacados.</p>
+    </div>
 
-        <!-- EJEMPLO TARJETA -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/1056/600/400",
-          "https://picsum.photos/id/106/600/400",
-          "https://picsum.photos/id/1070/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Casa Familiar</h3>
-            <p class="text-gray-600">Construcción integral de vivienda campestre.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Diciembre 2020</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
+    <!-- Filtros -->
+    <div class="flex flex-col sm:flex-row items-center gap-3">
+      <!-- Barra de búsqueda -->
+      <div class="relative w-full sm:w-64">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar servicio..."
+          class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+        <svg xmlns="http://www.w3.org/2000/svg"
+          class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-4.35-4.35M9.5 17A7.5 7.5 0 109.5 2a7.5 7.5 0 000 15z" />
+        </svg>
+      </div>
 
-        <!-- Tarjeta 2 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/1025/600/400",
-          "https://picsum.photos/id/1031/600/400",
-          "https://picsum.photos/id/1032/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Oficina Modernizada</h3>
-            <p class="text-gray-600">Renovación completa de espacio corporativo.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Marzo 2021</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 3 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/1074/600/400",
-          "https://picsum.photos/id/1084/600/400",
-          "https://picsum.photos/id/112/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Parque Recreativo</h3>
-            <p class="text-gray-600">Diseño y construcción de área verde comunitaria.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Julio 2021</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 4 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/110/600/400",
-          "https://picsum.photos/id/111/600/400",
-          "https://picsum.photos/id/112/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Restauración Histórica</h3>
-            <p class="text-gray-600">Rehabilitación de edificio patrimonial.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Octubre 2021</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 5 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/115/600/400",
-          "https://picsum.photos/id/116/600/400",
-          "https://picsum.photos/id/117/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Centro Comercial</h3>
-            <p class="text-gray-600">Proyecto de construcción y diseño interior.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Enero 2022</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 6 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/120/600/400",
-          "https://picsum.photos/id/121/600/400",
-          "https://picsum.photos/id/122/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Parque Empresarial</h3>
-            <p class="text-gray-600">Diseño y construcción de oficinas corporativas.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Abril 2022</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-
-          <!-- Tarjeta 7 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/130/600/400",
-          "https://picsum.photos/id/131/600/400",
-          "https://picsum.photos/id/132/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Hotel Boutique</h3>
-            <p class="text-gray-600">Diseño interior y remodelación completa.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Junio 2022</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-3 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 8 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/140/600/400",
-          "https://picsum.photos/id/141/600/400",
-          "https://picsum.photos/id/142/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Edificio Residencial</h3>
-            <p class="text-gray-600">Construcción sostenible y diseño moderno.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Agosto 2022</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-3 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 9 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/143/600/400",
-          "https://picsum.photos/id/151/600/400",
-          "https://picsum.photos/id/152/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Museo de Arte</h3>
-            <p class="text-gray-600">Proyecto de restauración y ampliación.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Octubre 2022</p>
-            <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-3 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 10 -->
-        <div class="bg-white rounded-lg shadow overflow-hidden portfolio-card group" data-images='[
-          "https://picsum.photos/id/160/600/400",
-          "https://picsum.photos/id/161/600/400",
-          "https://picsum.photos/id/162/600/400"
-        ]'>
-          <div class="relative overflow-hidden h-48">
-            <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
-            <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10094;</button>
-            <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow hover:bg-opacity-100 transition cursor-pointer">&#10095;</button>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold text-gray-800">Centro Cultural</h3>
-            <p class="text-gray-600">Espacio para eventos y exposiciones artísticas.</p>
-            <p class="text-sm text-gray-500 mt-2">Fecha: Diciembre 2022</p>
-             <div class="mt-3 admin-actions flex justify-center gap-2">
-              <button class="bg-green-600 text-white text-sm px-3 py-1 rounded hover:bg-green-700 transition" onclick="window.location.href='editar_portafolio.html'">Editar</button>
-              <button class="bg-red-600 text-white text-sm px-3 py-1 rounded hover:bg-red-700 transition" onclick="window.location.href='eliminar_portafolio.html'">Eliminar</button>
-            </div>
-          </div>
-        </div>
-
-      </div> <!-- fin portfolio-grid -->
-
-      </main>
+      <!-- Categorías -->
+      <select id="categoryFilter"
+        class="w-full sm:w-48 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <option value="">Todas las categorías</option>
+        <option value="obra-negra">Obra Negra</option>
+        <option value="obra-blanca">Obra Blanca</option>
+        <option value="mantenimiento">Mantenimiento</option>
+      </select>
     </div>
   </div>
 
-  <!-- JS DE CARRUSEL + ADMIN LOGIC -->
-  <script>
-    const isAdmin = true; // Cambiar a false si no es admin (puedes conectarlo a sesión)
+  <!-- Contenedor de tarjetas -->
+    <div id="portfolioGrid" class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3 mx-auto">
 
-    // Mostrar botones solo si el usuario es administrador
-    if (isAdmin) {
-      document.getElementById("addProjectBtn").classList.remove("hidden");
-      document.querySelectorAll(".admin-actions").forEach(el => el.removeAttribute("hidden"));
+      <!-- TARJETA 1 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-negra"
+        data-title="Preparación y limpieza del terreno"
+        data-images='["https://picsum.photos/id/1056/600/400","https://picsum.photos/id/106/600/400","https://picsum.photos/id/1070/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Preparación y limpieza del terreno</h3>
+            <p class="text-gray-600">Alistamiento del área para comenzar la obra con seguridad y precisión.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 2 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-negra"
+        data-title="Cimentación"
+        data-images='["https://picsum.photos/id/1043/600/400","https://picsum.photos/id/1044/600/400","https://picsum.photos/id/1045/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Cimentación</h3>
+            <p class="text-gray-600">Base estructural para garantizar estabilidad y durabilidad.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 3 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-blanca"
+        data-title="Pintura Interior"
+        data-images='["https://picsum.photos/id/1031/600/400","https://picsum.photos/id/1032/600/400","https://picsum.photos/id/1033/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Pintura Interior</h3>
+            <p class="text-gray-600">Aplicación de pintura decorativa en espacios interiores.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 4 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-blanca"
+        data-title="Instalación de pisos interiores"
+        data-images='["https://picsum.photos/id/1027/600/400","https://picsum.photos/id/1028/600/400","https://picsum.photos/id/1029/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Instalación de pisos interiores</h3>
+            <p class="text-gray-600">Colocación profesional de pisos en áreas residenciales y comerciales.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 5 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="mantenimiento"
+        data-title="Reparación de Fisuras"
+        data-images='["https://picsum.photos/id/1040/600/400","https://picsum.photos/id/1041/600/400","https://picsum.photos/id/1042/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Reparación de Fisuras</h3>
+            <p class="text-gray-600">Sellado de grietas para prolongar la vida útil de la estructura.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 6 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="mantenimiento"
+        data-title="Impermeabilización de Cubiertas"
+        data-images='["https://picsum.photos/id/1084/600/400","https://picsum.photos/id/1085/600/400","https://picsum.photos/id/1086/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Impermeabilización de Cubiertas</h3>
+            <p class="text-gray-600">Protección de superficies para evitar filtraciones y humedad.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 7 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-blanca"
+        data-title="Instalación de sanitarios y lavamanos"
+        data-images='["https://picsum.photos/id/1072/600/400","https://picsum.photos/id/1073/600/400","https://picsum.photos/id/1074/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Instalación de sanitarios y lavamanos</h3>
+            <p class="text-gray-600">Montaje de piezas sanitarias con acabados profesionales.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 8 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-negra"
+        data-title="Elaboración y armado de acero"
+        data-images='["https://picsum.photos/id/1004/600/400","https://picsum.photos/id/1005/600/400","https://picsum.photos/id/1006/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Elaboración y armado de acero</h3>
+            <p class="text-gray-600">Fabricación y colocación del refuerzo estructural en acero.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 9 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="mantenimiento"
+        data-title="Mantenimiento Hidrosanitario"
+        data-images='["https://picsum.photos/id/1081/600/400","https://picsum.photos/id/1082/600/400","https://picsum.photos/id/1083/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Mantenimiento Hidrosanitario</h3>
+            <p class="text-gray-600">Corrección de fugas y bloqueos en sistemas hidráulicos.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 10 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-blanca"
+        data-title="Instalación de iluminación"
+        data-images='["https://picsum.photos/id/136/600/400","https://picsum.photos/id/137/600/400","https://picsum.photos/id/129/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Instalación de iluminación</h3>
+            <p class="text-gray-600">Colocación de sistemas de luz funcional y decorativa.</p>
+          </div>
+              <div class="mt-3 admin-actions flex justify-center gap-2">
+                <button
+                  class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+                  onclick="window.location.href='editar_portafolio.html'">
+                  Editar
+                </button>
+                <button
+                  class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+                  onclick="window.location.href='eliminar_portafolio.html'">
+                  Eliminar
+                </button>
+              </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 11 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="mantenimiento"
+        data-title="Revisión eléctrica general"
+        data-images='["https://picsum.photos/id/1011/600/400","https://picsum.photos/id/1012/600/400","https://picsum.photos/id/1013/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Revisión eléctrica general</h3>
+            <p class="text-gray-600">Diagnóstico y mantenimiento preventivo del sistema eléctrico.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 12 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-negra"
+        data-title="Encofrado y vaciado de concreto"
+        data-images='["https://picsum.photos/id/130/600/400","https://picsum.photos/id/131/600/400","https://picsum.photos/id/132/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Encofrado y vaciado de concreto</h3>
+            <p class="text-gray-600">Conformado de estructuras en concreto con precisión técnica.</p>
+          </div>
+            <div class="mt-3 admin-actions flex justify-center gap-2">
+              <button
+                class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+                onclick="window.location.href='editar_portafolio.html'">
+                Editar
+              </button>
+              <button
+                class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+                onclick="window.location.href='eliminar_portafolio.html'">
+                Eliminar
+              </button>
+            </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 13 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-blanca"
+        data-title="Colocación de rodapiés y molduras"
+        data-images='["https://picsum.photos/id/149/600/400","https://picsum.photos/id/147/600/400","https://picsum.photos/id/146/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Colocación de rodapiés y molduras</h3>
+            <p class="text-gray-600">Detalles finales que aportan elegancia y protección a los espacios.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 14 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="mantenimiento"
+        data-title="Limpieza y restauración de fachadas"
+        data-images='["https://picsum.photos/id/143/600/400","https://picsum.photos/id/144/600/400","https://picsum.photos/id/145/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Limpieza y restauración de fachadas</h3>
+            <p class="text-gray-600">Recuperación estética y estructural de superficies exteriores.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TARJETA 15 -->
+      <div class="bg-white rounded-lg shadow overflow-hidden flex flex-col portfolio-card group"
+        data-category="obra-negra"
+        data-title="Mampostería primer y segundo nivel"
+        data-images='["https://picsum.photos/id/140/600/400","https://picsum.photos/id/141/600/400","https://picsum.photos/id/142/600/400"]'>
+        <div class="relative overflow-hidden h-48 flex-shrink-0">
+          <div class="carousel-track flex transition-transform duration-500 ease-in-out"></div>
+          <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10094;</button>
+          <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow">&#10095;</button>
+        </div>
+        <div class="flex flex-col justify-between flex-grow p-4">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Mampostería primer y segundo nivel</h3>
+            <p class="text-gray-600">Levantamiento de muros estructurales y divisiones internas.</p>
+          </div>
+          <div class="mt-3 admin-actions flex justify-center gap-2">
+            <button
+              class="bg-green-600 text-white text-sm px-2 py-1 rounded hover:bg-green-700 transition"
+              onclick="window.location.href='editar_portafolio.html'">
+              Editar
+            </button>
+            <button
+              class="bg-red-600 text-white text-sm px-2 py-1 rounded hover:bg-red-700 transition"
+              onclick="window.location.href='eliminar_portafolio.html'">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    </main>
+    </div>
+  </div>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const categoryFilter = document.getElementById("categoryFilter");
+  const cards = document.querySelectorAll(".portfolio-card");
+
+  // Crear contenedor de sugerencias
+  const suggestionBox = document.createElement("ul");
+  suggestionBox.id = "suggestionBox";
+  suggestionBox.style.position = "absolute";
+  suggestionBox.style.background = "#fff";
+  suggestionBox.style.border = "1px solid #ccc";
+  suggestionBox.style.listStyle = "none";
+  suggestionBox.style.padding = "0";
+  suggestionBox.style.margin = "0";
+  suggestionBox.style.width = searchInput.offsetWidth + "px";
+  suggestionBox.style.maxHeight = "150px";
+  suggestionBox.style.overflowY = "auto";
+  suggestionBox.style.zIndex = "1000";
+  suggestionBox.style.display = "none";
+  searchInput.parentNode.appendChild(suggestionBox);
+
+  // FILTROS
+  function filtrarTarjetas() {
+    const textoBusqueda = searchInput.value.toLowerCase().trim();
+    const categoriaSeleccionada = categoryFilter.value;
+
+    cards.forEach(card => {
+      const titulo = card.dataset.title.toLowerCase();
+      const categoria = card.dataset.category;
+
+      const coincideBusqueda = titulo.includes(textoBusqueda);
+      const coincideCategoria = categoriaSeleccionada === "" || categoria === categoriaSeleccionada;
+
+      if (coincideBusqueda && coincideCategoria) {
+        card.classList.remove("hidden");
+      } else {
+        card.classList.add("hidden");
+      }
+    });
+  }
+
+  // Mostrar sugerencias según lo que escribe el usuario
+  function mostrarSugerencias() {
+    const texto = searchInput.value.toLowerCase().trim();
+    suggestionBox.innerHTML = "";
+
+    if (texto === "") {
+      suggestionBox.style.display = "none";
+      return;
     }
 
-    document.querySelectorAll('.portfolio-card').forEach(card => {
-      const images = JSON.parse(card.getAttribute('data-images'));
-      const track = card.querySelector('.carousel-track');
-      let currentIndex = 0;
+    const sugerencias = Array.from(cards)
+      .map(card => card.dataset.title)
+      .filter(title => title.toLowerCase().includes(texto))
+      .slice(0, 10); // máximo 10 sugerencias
 
-      track.innerHTML = '';
-      images.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.className = 'carousel-image w-full h-48 object-cover flex-shrink-0';
-        track.appendChild(img);
-      });
-
-      function updateCarousel() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      }
-
-      const prevBtn = card.querySelector('.carousel-prev');
-      const nextBtn = card.querySelector('.carousel-next');
-
-      let autoplayInterval = null;
-      let isInteracting = false;
-      let restartTimeout = null;
-
-      function startAutoplay() {
-        if (!isInteracting && !autoplayInterval) {
-          autoplayInterval = setInterval(() => {
-            currentIndex = (currentIndex + 1) % images.length;
-            updateCarousel();
-          }, 2000);
-        }
-      }
-
-      function stopAutoplay() {
-        if (autoplayInterval) {
-          clearInterval(autoplayInterval);
-          autoplayInterval = null;
-        }
-      }
-
-      function resetToFirstImage() {
-        currentIndex = 0;
-        updateCarousel();
-      }
-
-      function pauseAutoplayWithTimeout() {
-        isInteracting = true;
-        stopAutoplay();
-        if (restartTimeout) clearTimeout(restartTimeout);
-        restartTimeout = setTimeout(() => {
-          isInteracting = false;
-          startAutoplay();
-        }, 6000);
-      }
-
-      prevBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateCarousel();
-        pauseAutoplayWithTimeout();
-      });
-
-      nextBtn.addEventListener('click', e => {
-        e.stopPropagation();
-        currentIndex = (currentIndex + 1) % images.length;
-        updateCarousel();
-        pauseAutoplayWithTimeout();
-      });
-
-      card.addEventListener('mouseenter', () => {
-        if (!isInteracting) {
-          startAutoplay();
-        }
-      });
-
-      card.addEventListener('mouseleave', () => {
-        stopAutoplay();
-        isInteracting = false;
-        if (restartTimeout) {
-          clearTimeout(restartTimeout);
-          restartTimeout = null;
-        }
-        resetToFirstImage();
-      });
-
-      updateCarousel();
-    });
-
-    document.addEventListener('mouseout', (event) => {
-      if (!event.relatedTarget && !event.toElement) {
-        document.querySelectorAll('.portfolio-card').forEach(card => {
-          card.dispatchEvent(new Event('mouseleave'));
+    if (sugerencias.length > 0) {
+      sugerencias.forEach(sug => {
+        const li = document.createElement("li");
+        li.textContent = sug;
+        li.style.padding = "8px";
+        li.style.cursor = "pointer";
+        li.addEventListener("mouseover", () => (li.style.background = "#f2f2f2"));
+        li.addEventListener("mouseout", () => (li.style.background = "transparent"));
+        li.addEventListener("click", () => {
+          searchInput.value = sug;
+          suggestionBox.style.display = "none";
+          filtrarTarjetas();
         });
-      }
+        suggestionBox.appendChild(li);
+      });
+      suggestionBox.style.display = "block";
+    } else {
+      suggestionBox.style.display = "none";
+    }
+  }
+
+  // Cerrar sugerencias al hacer clic fuera
+  document.addEventListener("click", e => {
+    if (!suggestionBox.contains(e.target) && e.target !== searchInput) {
+      suggestionBox.style.display = "none";
+    }
+  });
+
+  // Eventos
+  searchInput.addEventListener("input", () => {
+    mostrarSugerencias();
+    filtrarTarjetas();
+  });
+  categoryFilter.addEventListener("change", filtrarTarjetas);
+
+  // Modo admin
+  const isAdmin = true;
+  if (isAdmin) {
+    document.getElementById("addProjectBtn").classList.remove("hidden");
+    document.querySelectorAll(".admin-actions").forEach(el => el.removeAttribute("hidden"));
+  }
+
+  // CARRUSEL
+  document.querySelectorAll('.portfolio-card').forEach(card => {
+    const images = JSON.parse(card.getAttribute('data-images'));
+    const track = card.querySelector('.carousel-track');
+    let currentIndex = 0;
+
+    track.innerHTML = '';
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'carousel-image w-full h-48 object-cover flex-shrink-0';
+      track.appendChild(img);
     });
-  </script>
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    const prevBtn = card.querySelector('.carousel-prev');
+    const nextBtn = card.querySelector('.carousel-next');
+    let autoplayInterval = null;
+    let isInteracting = false;
+    let restartTimeout = null;
+
+    function startAutoplay() {
+      if (!isInteracting && !autoplayInterval) {
+        autoplayInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+          updateCarousel();
+        }, 2000);
+      }
+    }
+
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+    }
+
+    function resetToFirstImage() {
+      currentIndex = 0;
+      updateCarousel();
+    }
+
+    function pauseAutoplayWithTimeout() {
+      isInteracting = true;
+      stopAutoplay();
+      if (restartTimeout) clearTimeout(restartTimeout);
+      restartTimeout = setTimeout(() => {
+        isInteracting = false;
+        startAutoplay();
+      }, 6000);
+    }
+
+    prevBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateCarousel();
+      pauseAutoplayWithTimeout();
+    });
+
+    nextBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % images.length;
+      updateCarousel();
+      pauseAutoplayWithTimeout();
+    });
+
+    card.addEventListener('mouseenter', () => {
+      if (!isInteracting) startAutoplay();
+    });
+
+    card.addEventListener('mouseleave', () => {
+      stopAutoplay();
+      isInteracting = false;
+      if (restartTimeout) {
+        clearTimeout(restartTimeout);
+        restartTimeout = null;
+      }
+      resetToFirstImage();
+    });
+
+    updateCarousel();
+  });
+
+  document.addEventListener('mouseout', (event) => {
+    if (!event.relatedTarget && !event.toElement) {
+      document.querySelectorAll('.portfolio-card').forEach(card => {
+        card.dispatchEvent(new Event('mouseleave'));
+      });
+    }
+  });
+});
+</script>
+
 </body>
 </html>
