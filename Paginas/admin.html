@@ -16,7 +16,7 @@
     <div id="sidebar-container"></div>
 
     <!-- Main -->
-    <main class="flex-1 p-8">
+    <main class="flex-1 p-2">
 
       <!-- Encabezado -->
       <div class="flex items-center justify-between mb-6">
@@ -27,7 +27,7 @@
       </div>
 
       <!-- Panel de estadísticas rápidas -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8" id="tarjetas-estadisticas">
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-4" id="tarjetas-estadisticas">
         <!-- Tarjetas generadas dinámicamente -->
       </div>
 
@@ -55,10 +55,10 @@
         { titulo: "Gestión de Usuarios", cantidad: 120, icono: "👥", url: "../Paginas/usuarios.html" },
         { titulo: "Gestión de Proyectos", cantidad: 18, icono: "🏗️", url: "../Paginas/gestionProyectos.html" },
         { titulo: "Cotizaciones Generadas", cantidad: 40, icono: "💰", url: "../Paginas/admin_cotizaciones" },
-        { titulo: "Estado de Pagos", cantidad: 25, icono: "💳", url: "../Paginas/admin_pagos.html" },
-        { titulo: "Facturación Emitida", cantidad: 25, icono: "🧾", url: "../Paginas/admin_facturacion.html" },
-        { titulo: "Administrar Portafolios", cantidad: 25, icono: "📁", url: "../Paginas/portafolio.html" },
-        { titulo: "Moderación de Reseñas", cantidad: 25, icono: "⭐", url: "../Paginas/moderacionResenas.html" },
+        { titulo: "Estado de Pagos", cantidad: 14, icono: "💳", url: "../Paginas/admin_pagos.html" },
+        { titulo: "Facturación Emitida", cantidad: 26, icono: "🧾", url: "../Paginas/admin_facturacion.html" },
+        { titulo: "Administrar Portafolios", cantidad: 48, icono: "📁", url: "../Paginas/portafolio.html" },
+        { titulo: "Moderación de Reseñas", cantidad: 19, icono: "⭐", url: "../Paginas/moderacionResenas.html" },
         { titulo: "Gestión de Contenido", cantidad: 25, icono: "📝", url: "../Paginas/admin_blogs.html" }
       ];
 
@@ -98,14 +98,14 @@
         const tarjeta = document.createElement("a");
         tarjeta.href = item.url;
         tarjeta.className = `
-          bg-white rounded-lg shadow p-6 border border-gray-200
+          bg-white rounded-lg shadow p-2 border border-gray-200
           hover:bg-indigo-100 hover:ring-2 hover:ring-indigo-400 transition
           flex flex-col items-center text-center
         `;
 
         tarjeta.innerHTML = `
-          <div class="text-3xl mb-2">${item.icono}</div>
-          <h3 class="text-gray-600 font-semibold mb-1">${item.titulo}</h3>
+          <div class="text-3xl">${item.icono}</div>
+          <h3 class="text-gray-600 font-semibold">${item.titulo}</h3>
           <p class="text-3xl font-bold text-gray-800">${item.cantidad}</p>
         `;
 
