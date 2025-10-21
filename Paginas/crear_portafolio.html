@@ -7,285 +7,237 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Roboto', sans-serif;
-        background-color: #f3f4f6;
-        margin: 0;
-        padding: 0;
-      }
 
-      /* 🔹 Imágenes */
-      #currentImages img,
-      #previewContainer img {
-        max-width: 100px;
-        max-height: 100px;
-        object-fit: cover;
-        border-radius: 0.5rem;
-        border: 1px solid #161a7e;
-      }
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
 
-      #currentImages,
-      #previewContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 0.75rem;
-      }
+    /* 🔹 Imágenes */
+    #previewContainer img {
+      max-width: 100px;
+      max-height: 100px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      border: 1px solid #161a7e;
+    }
 
-      /* 🔹 Asegurar que las columnas no generen scroll interno */
-      .no-scroll-column {
-        overflow-y: visible !important;
-        overflow-x: hidden;
-        max-height: none !important;
-      }
+    #previewContainer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.75rem;
+    }
 
-      /* 🔹 Mantiene buena proporción entre columnas */
-      .form-column {
-        flex: 1 1 0%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-      }
-
-      /* 🔹 Ajuste responsivo para pantallas pequeñas */
-      @media (max-width: 768px) {
-        .form-column {
-          width: 100%;
-        }
-
-        .flex-col.md\:flex-row {
-          flex-direction: column !important;
-        }
-
-        .m-6 {
-          margin: 1rem !important;
-        }
-
-        .p-6 {
-          padding: 1rem !important;
-        }
-
-        textarea {
-          min-height: 120px !important;
-        }
-      }
-    </style>
-
+    /* 🔹 Ajuste responsivo */
+    @media (max-width: 768px) {
+      .m-6 { margin: rem !important; }
+      .p-6 { padding: 1rem !important; }
+      textarea { min-height: 120px !important; }
+    }
+  </style>
 </head>
+
 <body class="bg-gray-100 text-gray-800">
 
-<!-- Encabezado -->
-<header class="bg-transparent border-b-[3px] border-[#161a7e] py-4 px-6 shadow-sm">
-  <div class="flex justify-between items-center">
-    <h1 class="text-xl font-semibold text-gray-800">Modificar Proyecto Existente</h1>
-    <button onclick="window.location.href='../index.html'" class="px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
-      🏠 Inicio
-    </button>
-  </div>
-</header>
+  <!-- Encabezado -->
+  <header class="bg-transparent border-b-[3px] border-[#161a7e] py-4 px-6 shadow-sm">
+    <div class="flex justify-between items-center">
+      <h1 class="text-xl font-semibold text-gray-800">Crear Nuevo Proyecto</h1>
+      <button onclick="window.location.href='../index.html'" 
+              class="px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
+        🏠 Inicio
+      </button>
+    </div>
+  </header>
 
-<!-- Contenedor general con borde envolvente -->
-<div class="border-[3px] border-[#161a7e] rounded-xl m-6 p-6 bg-[#f7f7f738] shadow-md">
+  <!-- Contenedor general -->
+  <div class="border-[3px] border-[#161a7e] rounded-xl m-6 p-6 bg-[#f7f7f738] shadow-md">
+    <form id="crearProyectoForm" class="flex flex-col gap-6 items-stretch">
 
-  <form id="editForm" class="flex flex-col gap-6 items-stretch justify-evenly">
-
-    <!-- Cuerpo del formulario -->
-    <div class="flex flex-col md:flex-row gap-6 items-stretch">
-
-      <!-- Columna izquierda -->
-<div class="w-full md:w-full flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 form-column no-scroll-column">
-
-        <!-- Fila título + estado -->
-        <div class="flex flex-col lg:flex-row gap-4">
-          <div class="w-full lg:w-2/3">
-            <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
-            <input 
-              type="text"
-              name="titulo"
-              class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              value="Proyecto de Ejemplo"
-              required>
-          </div>
-
-          <div class="w-full lg:w-1/3">
-            <label class="block font-medium text-gray-800 mb-1 text-lg">Estado</label>
-            <select
-              name="estado"
-              class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              required>
-              <option value="" disabled selected>Elegir estado</option>
-              <option value="borrador">Borrador</option>
-              <option value="publicado">Publicado</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Descripción -->
-        <div class="flex-1 flex flex-col">
-          <label class="block font-medium text-gray-800 mb-1 text-lg">Descripción</label>
-          <textarea
-            name="descripcion"
-            class="w-full px-2 py-1 min-h-[100px] border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-            required>Descripción del proyecto...</textarea>  
-        </div>
-
-        <!-- Fila con 2 selects -->
-        <div class="flex flex-col lg:flex-row gap-4">
-          <div class="w-full lg:w-1/2">
-            <label class="block font-medium text-gray-800 mb-1 text-lg">Categoría</label>
-            <select
-              name="categoria"
-              class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              required>
-              <option value="">Seleccionar Categoría</option>
-              <option value="obra_blanca">Obra Blanca</option>
-              <option value="obra_negra">Obra Negra</option>
-              <option value="mantenimiento">Mantenimiento</option>
-            </select>
-          </div>
-
-          <div class="w-full lg:w-1/2">
-            <label class="block font-medium text-gray-800 mb-1 text-lg">Tipo de Servicio</label>
-            <select
-              name="tipo_servicio"
-              class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              required>
-              <option value="">Seleccionar Servicio</option>
-              <option value="construccion">Construcción</option>
-              <option value="remodelacion">Remodelación</option>
-              <option value="asesoria">Asesoría</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Imágenes actuales -->
+      <!-- 🔹 Título, Estado, Categoría y Tipo de Servicio en una fila -->
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
+        
+        <!-- Título -->
         <div>
-          <label class="block font-medium text-gray-800 mb-1 text-lg">Imágenes Actuales</label>
-          <div id="currentImages" class="flex flex-wrap gap-3 justify-center items-center mt-3"></div>
-        </div>
-      </div>
-
-      <!-- Columna derecha -->
-    <div class="w-full md:w-full flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 form-column no-scroll-column">
-          <label class="block font-medium text-gray-800 mb-1 text-lg">Agregar Nuevas Imágenes</label>
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
           <input 
-            type="file" 
-            id="newImagesInput" 
-            name="imagenes[]" 
-            multiple 
-            accept="image/*"
-            class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800">
-          <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 4).</small>
-          <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden text-center"></p>
+            type="text"
+            name="titulo"
+            class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 
+                   focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+            placeholder="Ejemplo: Remodelación de oficina"
+            required>
+        </div>
 
-          <div id="previewContainer" class="mt-4 flex flex-wrap gap-3 justify-center items-center"></div>
+        <!-- Estado -->
+        <div>
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Estado</label>
+          <select
+            name="estado"
+            class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 
+                   focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+            required>
+            <option value="" disabled selected>Elegir estado</option>
+            <option value="borrador">Borrador</option>
+            <option value="publicado">Publicado</option>
+          </select>
+        </div>
+
+        <!-- Categoría -->
+        <div>
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Categoría</label>
+          <select
+            name="categoria"
+            class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 
+                   focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+            required>
+            <option value="">Seleccionar Categoría</option>
+            <option value="obra_blanca">Obra Blanca</option>
+            <option value="obra_negra">Obra Negra</option>
+            <option value="mantenimiento">Mantenimiento</option>
+          </select>
+        </div>
+
+        <!-- Tipo de Servicio -->
+        <div>
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Tipo de Servicio</label>
+          <select
+            name="tipo_servicio"
+            class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 
+                   focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+            required>
+            <option value="">Seleccionar Servicio</option>
+            <option value="construccion">Construcción</option>
+            <option value="remodelacion">Remodelación</option>
+            <option value="asesoria">Asesoría</option>
+          </select>
         </div>
       </div>
-    </div>
 
-    <!-- Botones centrados -->
-    <div class="flex justify-center gap-6 pt-4">
-      <button type="button" onclick="window.location.href='portafolio.html'" class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
-        Cancelar
-      </button>
+      <!-- Descripción -->
+      <div>
+        <label class="block font-medium text-gray-800 mb-1 text-lg">Descripción</label>
+        <textarea
+          name="descripcion"
+          class="w-full px-2 py-1 min-h-[100px] border border-[#161a7e] rounded-lg bg-[#f7f7f76e] 
+                 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+          placeholder="Describe brevemente el proyecto..."
+          required></textarea>  
+      </div>
 
-      <button type="submit" class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">
-        Actualizar
-      </button>
-    </div>
-  </form>
-</div>
+      <!-- Agregar Imágenes -->
+      <div>
+        <label class="block font-medium text-gray-800 mb-1 text-lg">Agregar Imágenes</label>
+        <input 
+          type="file" 
+          id="imagenesInput" 
+          name="imagenes[]" 
+          multiple 
+          accept="image/*"
+          class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800">
+        <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 5).</small>
+        <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden text-center"></p>
+        <div id="previewContainer" class="mt-4"></div>
+      </div>
 
-</body>
+      <!-- Botones -->
+      <div class="flex justify-center gap-6 pt-4">
+        <button type="button" 
+                onclick="window.location.href='portafolio.html'" 
+                class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
+          Cancelar
+        </button>
 
+        <button type="submit" 
+                class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">
+          Crear Proyecto
+        </button>
+      </div>
+    </form>
+  </div>
 
-<!-- Scripts -->
-<script>
-  const imagenesInput = document.getElementById("imagenesInput");
-  const previewContainer = document.getElementById("previewContainer");
-  const imageCount = document.getElementById("imageCount");
+  <!-- Scripts -->
+  <script>
+    const imagenesInput = document.getElementById("imagenesInput");
+    const previewContainer = document.getElementById("previewContainer");
+    const imageCount = document.getElementById("imageCount");
+    let archivosSeleccionados = [];
 
-  // Almacena los archivos seleccionados temporalmente
-  let archivosSeleccionados = [];
-
-  imagenesInput.addEventListener("change", () => {
-    const files = Array.from(imagenesInput.files);
-    archivosSeleccionados = files.slice(0, 5); // limitar máximo 5
-
-    mostrarPrevisualizacion();
-  });
-
-  function mostrarPrevisualizacion() {
-    previewContainer.innerHTML = "";
-
-    if (archivosSeleccionados.length > 0) {
-      imageCount.textContent = `Imágenes seleccionadas: ${archivosSeleccionados.length}`;
-      imageCount.classList.remove("hidden");
-    } else {
-      imageCount.classList.add("hidden");
-    }
-
-    if (archivosSeleccionados.length > 5) {
-      imageCount.textContent = "⚠️ Solo se permiten hasta 5 imágenes.";
-      imageCount.classList.add("text-red-600");
-    } else {
-      imageCount.classList.remove("text-red-600");
-    }
-
-    archivosSeleccionados.forEach((file, index) => {
-      if (!file.type.startsWith("image/")) return;
-
-      const reader = new FileReader();
-      reader.onload = e => {
-        // Contenedor individual de imagen + botón eliminar
-        const imgContainer = document.createElement("div");
-        imgContainer.className = "relative inline-block";
-
-        const img = document.createElement("img");
-        img.src = e.target.result;
-        img.className = "w-32 h-24 object-cover rounded border border-[#161a7e]";
-
-        // Botón eliminar
-        const removeBtn = document.createElement("button");
-        removeBtn.innerHTML = "✖";
-        removeBtn.className =
-          "absolute top-0 right-0 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-700";
-        removeBtn.addEventListener("click", () => eliminarImagen(index));
-
-        imgContainer.appendChild(img);
-        imgContainer.appendChild(removeBtn);
-        previewContainer.appendChild(imgContainer);
-      };
-      reader.readAsDataURL(file);
+    imagenesInput.addEventListener("change", () => {
+      const files = Array.from(imagenesInput.files);
+      archivosSeleccionados = files.slice(0, 5);
+      mostrarPrevisualizacion();
     });
-  }
 
-  // Función para eliminar imagen del arreglo y actualizar vista
-  function eliminarImagen(index) {
-    archivosSeleccionados.splice(index, 1);
-    mostrarPrevisualizacion();
+    function mostrarPrevisualizacion() {
+      previewContainer.innerHTML = "";
 
-    // Actualizar el input de tipo file con el nuevo conjunto
-    const dataTransfer = new DataTransfer();
-    archivosSeleccionados.forEach(file => dataTransfer.items.add(file));
-    imagenesInput.files = dataTransfer.files;
-  }
+      if (archivosSeleccionados.length > 0) {
+        imageCount.textContent = `Imágenes seleccionadas: ${archivosSeleccionados.length}`;
+        imageCount.classList.remove("hidden");
+      } else {
+        imageCount.classList.add("hidden");
+      }
 
-  // Validar y enviar formulario
-  document.getElementById("crearProyectoForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+      if (archivosSeleccionados.length > 5) {
+        imageCount.textContent = "⚠️ Solo se permiten hasta 5 imágenes.";
+        imageCount.classList.add("text-red-600");
+      } else {
+        imageCount.classList.remove("text-red-600");
+      }
 
-    if (archivosSeleccionados.length > 5) {
-      alert("❌ Solo puedes subir hasta 5 imágenes.");
-      return;
+      archivosSeleccionados.forEach((file, index) => {
+        if (!file.type.startsWith("image/")) return;
+
+        const reader = new FileReader();
+        reader.onload = e => {
+          const imgContainer = document.createElement("div");
+          imgContainer.className = "relative inline-block";
+
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.className = "w-32 h-24 object-cover rounded border border-[#161a7e]";
+
+          const removeBtn = document.createElement("button");
+          removeBtn.innerHTML = "✖";
+          removeBtn.className =
+            "absolute top-0 right-0 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-700";
+          removeBtn.addEventListener("click", () => eliminarImagen(index));
+
+          imgContainer.appendChild(img);
+          imgContainer.appendChild(removeBtn);
+          previewContainer.appendChild(imgContainer);
+        };
+        reader.readAsDataURL(file);
+      });
     }
 
-    alert("✅ Proyecto creado correctamente (simulado).");
-    window.location.href = "portafolio.html";
-  });
-</script>
+    function eliminarImagen(index) {
+      archivosSeleccionados.splice(index, 1);
+      mostrarPrevisualizacion();
 
+      const dataTransfer = new DataTransfer();
+      archivosSeleccionados.forEach(file => dataTransfer.items.add(file));
+      imagenesInput.files = dataTransfer.files;
+    }
+
+    document.getElementById("crearProyectoForm").addEventListener("submit", e => {
+      e.preventDefault();
+
+      if (archivosSeleccionados.length > 5) {
+        alert("❌ Solo puedes subir hasta 5 imágenes.");
+        return;
+      }
+
+      alert("✅ Proyecto creado correctamente (simulado).");
+      window.location.href = "portafolio.html";
+    });
+  </script>
 </body>
 </html>
+
