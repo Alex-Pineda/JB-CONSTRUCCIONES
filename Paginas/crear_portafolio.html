@@ -7,18 +7,79 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-    }
-  </style>
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f3f4f6;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* 🔹 Imágenes */
+      #currentImages img,
+      #previewContainer img {
+        max-width: 100px;
+        max-height: 100px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        border: 1px solid #161a7e;
+      }
+
+      #currentImages,
+      #previewContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      /* 🔹 Asegurar que las columnas no generen scroll interno */
+      .no-scroll-column {
+        overflow-y: visible !important;
+        overflow-x: hidden;
+        max-height: none !important;
+      }
+
+      /* 🔹 Mantiene buena proporción entre columnas */
+      .form-column {
+        flex: 1 1 0%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      /* 🔹 Ajuste responsivo para pantallas pequeñas */
+      @media (max-width: 768px) {
+        .form-column {
+          width: 100%;
+        }
+
+        .flex-col.md\:flex-row {
+          flex-direction: column !important;
+        }
+
+        .m-6 {
+          margin: 1rem !important;
+        }
+
+        .p-6 {
+          padding: 1rem !important;
+        }
+
+        textarea {
+          min-height: 120px !important;
+        }
+      }
+    </style>
+
 </head>
 <body class="bg-gray-100 text-gray-800">
 
 <!-- Encabezado -->
 <header class="bg-transparent border-b-[3px] border-[#161a7e] py-4 px-6 shadow-sm">
   <div class="flex justify-between items-center">
-    <h1 class="text-xl font-semibold text-gray-800">Agregar Proyecto al Portafolio</h1>
+    <h1 class="text-xl font-semibold text-gray-800">Modificar Proyecto Existente</h1>
     <button onclick="window.location.href='../index.html'" class="px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
       🏠 Inicio
     </button>
@@ -28,132 +89,117 @@
 <!-- Contenedor general con borde envolvente -->
 <div class="border-[3px] border-[#161a7e] rounded-xl m-6 p-6 bg-[#f7f7f738] shadow-md">
 
-  <!-- Formulario principal -->
-  <form id="crearProyectoForm" class="flex flex-col gap-6 items-stretch justify-evenly">
+  <form id="editForm" class="flex flex-col gap-6 items-stretch justify-evenly">
 
     <!-- Cuerpo del formulario -->
     <div class="flex flex-col md:flex-row gap-6 items-stretch">
 
       <!-- Columna izquierda -->
-      <div class="w-full md:w-full flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
+<div class="w-full md:w-full flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 form-column no-scroll-column">
 
-        <!-- Barra de búsqueda -->
-        <div>
-          <div class="relative w-full">
-            <input 
-              type="text" 
-              id="busquedaProyecto"
-              class="w-full pl-10 pr-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              placeholder="Buscar por Documento..."
-            >
-            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#161a7e]">🔍</span>
-          </div>
-        </div>
-
-        <!-- Fila Título + Estado -->
+        <!-- Fila título + estado -->
         <div class="flex flex-col lg:flex-row gap-4">
-          <!-- Título -->
           <div class="w-full lg:w-2/3">
             <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
             <input 
-              type="text" 
-              name="titulo" 
-              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              placeholder="Ej: Remodelación Oficina"
-              required
-            >
+              type="text"
+              name="titulo"
+              class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              value="Proyecto de Ejemplo"
+              required>
           </div>
 
-          <!-- Estado -->
           <div class="w-full lg:w-1/3">
             <label class="block font-medium text-gray-800 mb-1 text-lg">Estado</label>
             <select
               name="estado"
-              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              required
-            >
-              <option value="borrador" selected>Proceso</option>
-              <option value="publicado">Finalizado</option>
+              class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required>
+              <option value="" disabled selected>Elegir estado</option>
+              <option value="borrador">Borrador</option>
+              <option value="publicado">Publicado</option>
             </select>
           </div>
-        </div><br>
+        </div>
 
         <!-- Descripción -->
         <div class="flex-1 flex flex-col">
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Descripción</label>
           <textarea
             name="descripcion"
-            class="w-full px-2 py-1 min-h-[100px] border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-            placeholder="Descripción del proyecto..."
-            required
-          ></textarea>
+            class="w-full px-2 py-1 min-h-[100px] border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+            required>Descripción del proyecto...</textarea>  
         </div>
 
         <!-- Fila con 2 selects -->
         <div class="flex flex-col lg:flex-row gap-4">
-          <!-- Categoría -->
           <div class="w-full lg:w-1/2">
             <label class="block font-medium text-gray-800 mb-1 text-lg">Categoría</label>
             <select
               name="categoria"
-              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              required
-            >
-              <option value="">Seleccionar</option>
+              class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required>
+              <option value="">Seleccionar Categoría</option>
               <option value="obra_blanca">Obra Blanca</option>
               <option value="obra_negra">Obra Negra</option>
               <option value="mantenimiento">Mantenimiento</option>
             </select>
           </div>
 
-          <!-- Tipo de servicio -->
           <div class="w-full lg:w-1/2">
             <label class="block font-medium text-gray-800 mb-1 text-lg">Tipo de Servicio</label>
             <select
               name="tipo_servicio"
-              class="w-full px-2 py-1 border-[1px] border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-              required
-            >
-              <option value="">Seleccionar</option>
+              class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+              required>
+              <option value="">Seleccionar Servicio</option>
               <option value="construccion">Construcción</option>
               <option value="remodelacion">Remodelación</option>
               <option value="asesoria">Asesoría</option>
             </select>
           </div>
         </div>
+
+        <!-- Imágenes actuales -->
+        <div>
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Imágenes Actuales</label>
+          <div id="currentImages" class="flex flex-wrap gap-3 justify-center items-center mt-3"></div>
+        </div>
       </div>
 
       <!-- Columna derecha -->
-      <div class="w-full md:w-full flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 flex-1">
-        <!-- Imágenes -->
-        <div class="flex flex-col justify-between h-full">
-          <label class="block font-medium text-gray-800 mb-1 text-lg">Imágenes del Proyecto</label>
+    <div class="w-full md:w-full flex flex-col border-[2px] border-[#161a7e] rounded-lg p-4 space-y-6 form-column no-scroll-column">
+          <label class="block font-medium text-gray-800 mb-1 text-lg">Agregar Nuevas Imágenes</label>
           <input 
             type="file" 
-            id="imagenesInput" 
-            name="imagenes" 
+            id="newImagesInput" 
+            name="imagenes[]" 
             multiple 
             accept="image/*"
-            class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800"
-          >
-          <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 5).</small>
-          <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden"></p>
-          <div id="previewContainer" class="mt-4 flex flex-wrap gap-3"></div>
+            class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800">
+          <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 4).</small>
+          <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden text-center"></p>
+
+          <div id="previewContainer" class="mt-4 flex flex-wrap gap-3 justify-center items-center"></div>
         </div>
       </div>
     </div>
 
-    <!-- Botones centrados abajo -->
+    <!-- Botones centrados -->
     <div class="flex justify-center gap-6 pt-4">
       <button type="button" onclick="window.location.href='portafolio.html'" class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
         Cancelar
       </button>
 
       <button type="submit" class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">
-        Guardar
+        Actualizar
       </button>
     </div>
   </form>
 </div>
+
+</body>
+
 
 <!-- Scripts -->
 <script>
