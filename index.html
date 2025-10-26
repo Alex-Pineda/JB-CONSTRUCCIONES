@@ -22,14 +22,13 @@
       /* Estilo pestañas nav */
       .tabs {
         display: flex;
-        gap: 1rem;
+        gap: 0.5rem;
         border-bottom: 3px solid #161a7e;
         margin-top: 0.5rem;
         margin-bottom: 1rem;
         border-top:3px solid #161a7e;
       }
       .tabs button {
-        padding: 0.2rem 1rem;
         font-weight: 500;
         color: #4a4a4a;
         background: transparent;
@@ -81,7 +80,6 @@
         Registrarse
       </button>
 
-
         <button id="menu-toggle"
           class="md:hidden p-1 sm:p-2 w-[2.3rem] text-white bg-gray-800 transition-colors duration-300">
           &#9776;
@@ -93,7 +91,7 @@
 </header>
 
   <!-- Navegación pestañas -->
-  <nav class="tabs px-6 mt-[0.1rem] mb-[0.1rem] text-base md:text-lg flex flex-col sm:flex-row sm:gap-3 gap-1">
+<nav class="tabs mt-[0.1rem] mb-[0.1rem] text-base md:text-lg flex flex-row sm:gap-1 gap-1 justify-evenly">
     <button class="active" data-tab="obra-negra">Obra Negra</button>
     <button data-tab="obra-blanca">Obra Blanca</button>
     <button data-tab="mantenimiento">Mantenimiento</button>

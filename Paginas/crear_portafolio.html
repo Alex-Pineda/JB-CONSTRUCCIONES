@@ -56,23 +56,28 @@
   </header>
 
   <!-- Contenedor general -->
-  <div class="border-[3px] border-[#161a7e] rounded-xl m-6 p-6 bg-[#f7f7f738] shadow-md">
-    <form id="crearProyectoForm" class="flex flex-col gap-6 items-stretch">
+<div class="border-[3px] border-[#161a7e] rounded-xl m-6 p-6 bg-[#f7f7f738] shadow-md">
 
-      <!-- 🔹 Título, Estado, Categoría y Tipo de Servicio en una fila -->
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
-        
-        <!-- Título -->
-        <div>
-          <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
-          <input 
-            type="text"
-            name="titulo"
-            class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 
-                   focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
-            placeholder="Ejemplo: Remodelación de oficina"
-            required>
-        </div>
+  <!-- 🔹 Barra de búsqueda por número de cotización -->
+  <div class="mb-6 flex items-center gap-2">
+    <input 
+      type="text" id="buscarCotizacion" placeholder="Buscar por número de cotización" 
+      class="flex-1 px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800
+             focus:outline-none focus:ring-2 focus:ring-[#161a7e]">
+    <button type="button" class="px-4 py-1 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1368]">Buscar</button>
+  </div>
+
+  <form id="crearProyectoForm" class="flex flex-col gap-6 items-stretch">
+
+    <!-- 🔹 Título, Estado, Categoría y Tipo de Servicio en una fila -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 w-full">
+
+      <!-- Título -->
+      <div>
+        <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Proyecto</label>
+        <input type="text" name="titulo" class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]"
+        placeholder="Ejemplo: Remodelación de oficina" required>
+      </div>
 
         <!-- Estado -->
         <div>
@@ -133,30 +138,18 @@
       <!-- Agregar Imágenes -->
       <div>
         <label class="block font-medium text-gray-800 mb-1 text-lg">Agregar Imágenes</label>
-        <input 
-          type="file" 
-          id="imagenesInput" 
-          name="imagenes[]" 
-          multiple 
-          accept="image/*"
-          class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800">
-        <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 5).</small>
+        <input type="file" id="imagenesInput" name="imagenes[]" multiple accept="image/*"
+        class="w-full border-[1px] border-[#161a7e] px-2 py-1 rounded-lg bg-[#f0f4ff] text-gray-800">
+        <small class="text-gray-500 block mt-1">Puedes seleccionar varias imágenes (máximo 4).</small>
         <p id="imageCount" class="text-sm text-blue-600 mt-1 hidden text-center"></p>
-        <div id="previewContainer" class="mt-4"></div>
-      </div>
+      <div id="previewContainer" class="mt-4"></div>
+      
+    </div>
 
       <!-- Botones -->
       <div class="flex justify-center gap-6 pt-4">
-        <button type="button" 
-                onclick="window.location.href='portafolio.html'" 
-                class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">
-          Cancelar
-        </button>
-
-        <button type="submit" 
-                class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">
-          Crear Proyecto
-        </button>
+        <button type="button" onclick="window.location.href='portafolio.html'" class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">Cancelar</button>
+        <button type="submit" class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">Crear</button>
       </div>
     </form>
   </div>
@@ -170,7 +163,7 @@
 
     imagenesInput.addEventListener("change", () => {
       const files = Array.from(imagenesInput.files);
-      archivosSeleccionados = files.slice(0, 5);
+      archivosSeleccionados = files.slice(0, 4);
       mostrarPrevisualizacion();
     });
 
@@ -185,7 +178,7 @@
       }
 
       if (archivosSeleccionados.length > 5) {
-        imageCount.textContent = "⚠️ Solo se permiten hasta 5 imágenes.";
+        imageCount.textContent = "⚠️ Solo se permiten hasta 4 imágenes.";
         imageCount.classList.add("text-red-600");
       } else {
         imageCount.classList.remove("text-red-600");
@@ -229,8 +222,8 @@
     document.getElementById("crearProyectoForm").addEventListener("submit", e => {
       e.preventDefault();
 
-      if (archivosSeleccionados.length > 5) {
-        alert("❌ Solo puedes subir hasta 5 imágenes.");
+      if (archivosSeleccionados.length > 4) {
+        alert("❌ Solo puedes subir hasta 4 imágenes.");
         return;
       }
 

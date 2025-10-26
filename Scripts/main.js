@@ -370,90 +370,103 @@ document.addEventListener('DOMContentLoaded', () => {
       return { ...d, categoria: categoriaLegible };
     });
 
+// ─── Construir HTML de la factura ───────────────────────────────
+box.innerHTML = `
+  <div id="factura-container" class="relative w-full mx-auto p-2 sm:p-6 bg-white shadow-lg rounded-lg">
 
-      // ─── Construir HTML de la factura ───────────────────────────────
-      box.innerHTML = `
-        <div id="factura-container" class="w-full mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg overflow-hidden">
-
-          <!-- ENCABEZADO --><br>
-          <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
-            <div class="flex items-center gap-6">
-              <img src="../assets/img/JB-CONSTRUCTORES.png"
-                alt="Logo JB-CONSTRUCTORES"
-                class="h-[60px] w-[60px] object-cover rounded-full border-2 border-teal-500">
-              <div>
-                <h1 class="text-1xl font-extrabold text-teal-700 leading-tight">JB-CONSTRUCTORES</h1>
-                <p class="text-lg text-gray-500 mt-1">Factura de Cotización</p>
-              </div>
-            </div>
-            <div class="text-right space-y-1">
-              <p class="text-base text-gray-600">Fecha: ${new Date().toLocaleDateString()}</p>
-              <p class="text-base text-gray-600">Cotización #${Math.floor(Math.random() * 100000)}</p>
-            </div>
-          </div>
-
-          <!-- DATOS DEL CLIENTE -->
-          <div class="mb-8">
-            <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 text-gray-700 text-sm">
-              <p><strong>Nombre:</strong> ${datosUsuario.nombreCompleto}</p>
-              <p><strong>Número Documento:</strong> ${datosUsuario.numeroDocumento}</p>
-              <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
-              <p><strong>Contacto:</strong> ${datosUsuario.contacto}</p>
-              <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
-              <p><strong>Dirección:</strong> ${datosUsuario.direccion}</p>
-          </div>
-
-          <!-- DETALLE DE SERVICIOS -->
-          <div class="mb-8"><br>
-            <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
-
-            <!-- Contenedor responsivo con scroll si es necesario -->
-            <div class="overflow-x-auto">
-              <table class="w-full border-collapse text-sm">
-                <thead>
-                  <tr class="bg-teal-100 text-teal-800">
-                    <th class="border p-2 text-left">Servicio</th>
-                    <th class="border p-2 text-left">Categoría</th>
-                    <th class="border p-2 text-right">m²</th>
-                    <th class="border p-2 text-right">Precio/m²</th>
-                    <th class="border p-2 text-right">Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${detalle.map(d => `
-                    <tr>
-                      <td class="border p-2">${d.servicio}</td>
-                      <td class="border p-2">${d.categoria}</td>
-                      <td class="border p-2 text-right">${d.m2}</td>
-                      <td class="border p-2 text-right">${formatearCOP(d.precioUnitario)}</td>
-                      <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-                <tfoot>
-                  <tr class="bg-gray-100">
-                    <td colspan="4" class="border p-2 text-right font-bold">Total Estimado</td>
-                    <td class="border p-2 text-right text-2xl font-bold text-red-600">${formatearCOP(total)}</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
-
-
-          <!-- NOTA -->
-          <p class="text-gray-600 text-sm italic">
-            * Los valores son estimados. Los precios finales pueden variar tras la visita técnica.
-          </p>
-
-          <!-- BOTONES DE EXPORTACIÓN -->
-          <div class="mt-6 flex flex-wrap gap-4 justify-center">
-            <button id="btnExportPDF" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Descargar Cotización</button>
-          </div>
-        </div>
+   <!-- ENCABEZADO -->
+    <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
+      <div class="flex flex-col items-center gap-2">
+        <img src="../assets/img/JB-CONSTRUCTORES.png"
+          alt="Logo JB-CONSTRUCTORES"
+          class="h-16 w-16 object-cover rounded-full border-2 border-teal-500">
+        <h1 class="text-lg font-extrabold text-teal-700 leading-tight">JB-CONSTRUCTORES</h1>
       </div>
-      `;
+
+      <div class="text-right space-y-1">
+        <p class="text-base text-gray-600">${new Date().toLocaleDateString()}</p>
+        <p class="text-base text-gray-600">${new Date().toLocaleTimeString()}</p>
+        <p class="text-base text-gray-600">Cotización #${Math.floor(Math.random() * 1000)}</p>
+      </div>
+    </div>
+
+    <!-- DATOS DEL CLIENTE -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 text-gray-700 text-sm">
+        <p><strong>Nombre:</strong> ${datosUsuario.nombreCompleto}</p>
+        <p><strong>Número Documento:</strong> ${datosUsuario.numeroDocumento}</p>
+        <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
+        <p><strong>Contacto:</strong> ${datosUsuario.contacto}</p>
+        <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
+        <p><strong>Dirección:</strong> ${datosUsuario.direccion}</p>
+      </div>
+    </div>
+
+    <!-- DETALLE DE SERVICIOS -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
+
+      <!-- Contenedor responsivo con scroll si es necesario -->
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="bg-teal-100 text-teal-800">
+              <th class="border p-2 text-left">Servicio</th>
+              <th class="border p-2 text-left">Categoría</th>
+              <th class="border p-2 text-right">m²</th>
+              <th class="border p-2 text-right">Precio/m²</th>
+              <th class="border p-2 text-right">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${detalle.map(d => `
+              <tr>
+                <td class="border p-2">${d.servicio}</td>
+                <td class="border p-2">${d.categoria}</td>
+                <td class="border p-2 text-right">${d.m2}</td>
+                <td class="border p-2 text-right">${formatearCOP(d.precioUnitario)}</td>
+                <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+          <tfoot>
+            <tr class="bg-gray-100">
+              <td colspan="4" class="border p-2 text-right font-bold">Total Estimado</td>
+              <td class="border p-2 text-right text-2xl font-bold text-red-600">${formatearCOP(total)}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- NOTA -->
+    <p class="text-gray-600 text-sm italic">
+      * Los valores son estimados. Los precios finales pueden variar tras la visita técnica.
+    </p>
+
+    <!-- BOTONES DE EXPORTACIÓN -->
+    <div class="mt-6 flex justify-center gap-4">
+      
+    <!-- Botón Cerrar -->
+      <button id="cerrarFactura" class="w-40 h-10 flex items-center justify-center text-white font-semibold rounded-lg shadow-md border transition-colors bg-red-600 border-red-700 hover:bg-red-700">Cerrar</button>
+
+      <!-- Botón Descargar -->
+      <button id="btnExportPDF" class="w-40 h-10 flex items-center justify-center text-white font-semibold rounded-lg shadow-md border transition-colors bg-teal-600 border-teal-700 hover:bg-teal-700">Descargar</button>
+    </div>
+  </div>
+`;
+
+// — Inserción del listener mínimo para el botón cerrar (restaura overflowX)
+const btnCerrar = document.getElementById('cerrarFactura');
+if (btnCerrar) {
+  btnCerrar.addEventListener('click', () => {
+    const factura = document.getElementById('factura-container');
+    if (factura) factura.remove();
+    document.documentElement.style.overflowX = '';
+    document.body.style.overflowX = '';
+  });
+}
       // ─── Ajustes de visualización en navegador ──────────
       document.documentElement.style.overflowX = 'hidden'; 
       document.body.style.overflowX = 'hidden';
@@ -518,7 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Generar PDF
         html2pdf().from(factura).set({
           margin: [10, 10, 10, 10],
-          filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
+          filename: `Cotizacion JB-CONTRUCCIONES_${new Date().toISOString().slice(0,10)}.pdf`,
           image: { type: 'jpeg', quality: 0.98 },
           html2canvas: { scale: 2, useCORS: true, letterRendering: true },
           jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
