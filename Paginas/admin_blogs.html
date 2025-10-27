@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Administrador de Videos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Roboto', sans-serif; background-color: #f3f4f6; }
+    iframe { border-radius: 0.5rem; border: 1px solid #161a7e; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="bg-transparent border-b-[3px] border-[#161a7e] py-4 px-6 shadow-sm">
+  <div class="flex justify-between items-center">
+    <h1 class="text-xl font-semibold text-gray-800">Administrador de Videos</h1>
+    <button onclick="window.location.href='../index.html'" 
+            class="px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
+      🏠 Inicio
+    </button>
+  </div>
+</header>
+
+<div class="border-[3px] border-[#161a7e] rounded-xl m-6 p-6 bg-[#f7f7f738] shadow-md">
+  <form id="videoForm" class="flex flex-col gap-6">
+
+    <!-- Título del Video -->
+    <div>
+      <label class="block font-medium text-gray-800 mb-1 text-lg">Título del Video</label>
+      <input type="text" name="titulo" class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]" placeholder="Título del video" required>
+    </div>
+
+    <!-- Descripción -->
+    <div>
+      <label class="block font-medium text-gray-800 mb-1 text-lg">Descripción</label>
+      <textarea name="descripcion" class="w-full px-2 py-1 min-h-[100px] border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]" placeholder="Descripción del video" required></textarea>
+    </div>
+
+    <!-- ID de YouTube -->
+    <div>
+      <label class="block font-medium text-gray-800 mb-1 text-lg">ID de YouTube</label>
+      <div class="flex gap-2 items-center">
+        <input type="text" id="youtubeID" name="youtubeID" class="flex-1 px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]" placeholder="Ej: OCMaOMj06aA" required>
+        <button type="button" onclick="window.open('https://studio.youtube.com/channel/UCfj5-JGfOtYcKCD8_nvgn1g/videos/upload?filter=%5B%5D&sort=%7B%22columnType%22%3A%22date%22%2C%22sortOrder%22%3A%22DESCENDING%22%7D','_blank')" class="px-3 py-1 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457] transition duration-200">Ir al canal</button>
+      </div>
+      <p class="text-gray-500 text-sm mt-1">Haz clic para abrir tu canal y copiar el ID del video.</p>
+    </div>
+
+    <!-- Vista previa del Video -->
+    <div id="previewContainer" class="flex justify-center mt-4">
+      <!-- Aquí se cargará dinámicamente el iframe -->
+    </div>
+
+    <!-- Estado y Categoría -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+        <label class="block font-medium text-gray-800 mb-1 text-lg">Estado</label>
+        <select name="estado" class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]">
+          <option value="borrador">Borrador</option>
+          <option value="publicado">Publicado</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-medium text-gray-800 mb-1 text-lg">Categoría</label>
+        <select name="categoria" class="w-full px-2 py-1 border border-[#161a7e] rounded-lg bg-[#f7f7f76e] text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#161a7e]">
+          <option value="">General</option>
+          <option value="progreso_obra">Progreso de Obra</option>
+          <option value="tips">Tips</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="flex justify-center gap-6 pt-4">
+      <button type="button" onclick="window.location.href='portafolio.html'" class="w-40 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">Cancelar</button>
+      <button type="submit" class="w-40 px-6 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457]">Publicar</button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  // Vista previa dinámica del iframe al escribir el ID
+  const youtubeInput = document.getElementById('youtubeID');
+  const previewContainer = document.getElementById('previewContainer');
+
+  youtubeInput.addEventListener('input', () => {
+    const id = youtubeInput.value.trim();
+    if(id){
+      previewContainer.innerHTML = `<iframe class="w-full h-48" src="https://www.youtube.com/embed/${id}" title="Video Preview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    } else {
+      previewContainer.innerHTML = '';
+    }
+  });
+</script>
+
+</body>
+</html>
+
