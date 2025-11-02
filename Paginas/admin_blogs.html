@@ -18,9 +18,7 @@
   <div class="flex justify-between items-center">
     <h1 class="text-xl font-semibold text-gray-800">Administrador de Videos</h1>
     <button onclick="window.location.href='../index.html'" 
-            class="px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
-      🏠 Inicio
-    </button>
+      class="px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">Inicio</button>
   </div>
 </header>
 
@@ -90,7 +88,7 @@
   youtubeInput.addEventListener('input', () => {
     const id = youtubeInput.value.trim();
     if(id){
-      previewContainer.innerHTML = `<iframe class="w-full h-48" src="https://www.youtube.com/embed/${id}" title="Video Preview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      previewContainer.innerHTML = `<iframe class="w-auto h-auto" src="https://www.youtube.com/embed/${id}" title="Video Preview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else {
       previewContainer.innerHTML = '';
     }
