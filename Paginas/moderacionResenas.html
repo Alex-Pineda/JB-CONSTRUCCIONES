@@ -1,114 +1,208 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moderación de Reseñas - JB Constructores</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Reseñas - Administrador</title>
   <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <data value="JB-CONSTRUCCIONES"></data>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css" />
   <style>
     body { font-family: 'Roboto', sans-serif; }
+    select:focus, input:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 6px rgba(30, 120, 90, 0.4);
+    }
+    .estado-aprobada { color: #15803d; }
+    .estado-pendiente { color: #b91c1c; }
   </style>
 </head>
+<body class="bg-gradient-to-b from-green-100 via-blue-50 to-blue-100 min-h-screen flex flex-col">
 
-<body class="bg-gray-50">
+  <!-- ENCABEZADO -->
+  <header class="bg-transparent shadow-none">
+    <div class="flex items-center justify-between px-6 py-4">
+      <h1 class="text-xl font-semibold text-gray-800">Gestión de Reseñas - Administrador</h1>
+      <button onclick="window.location.href='../index.html'"
+        class="px-3 py-1 bg-yellow-600 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
+        Inicio
+      </button>
+    </div>
+    <div class="h-1 w-full bg-blue-300"></div>
+  </header>
 
-  <div class="flex h-screen">
+  <!-- CONTENIDO -->
+  <main class="flex-1 p-6">
 
-    <!-- Contenido principal -->
-    <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- RESUMEN -->
+    <div id="resumen" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"></div>
 
-      <!-- Encabezado -->
-      <header class="bg-transparent border-b-[3px] border-[#161a7e] shadow-none">
-        <div class="flex items-center justify-between px-6 py-4">
-          <h1 class="text-2xl font-semibold text-gray-800">Moderación de Reseñas</h1>
-        </div>
-      </header>
+    <!-- FILTROS -->
+    <div class="bg-white rounded-2xl shadow-md p-4 mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
+      <div class="flex items-center gap-2">
+        <label for="filtroEstado" class="text-gray-700 font-medium">Filtrar por estado:</label>
+        <select id="filtroEstado" onchange="filtrarResenas()" class="border border-green-300 rounded-lg p-2">
+          <option value="todas">Todas</option>
+          <option value="pendiente">Pendientes</option>
+          <option value="aprobada">Aprobadas</option>
+        </select>
+      </div>
+      <button onclick="abrirModal()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition">
+        + Nueva Reseña
+      </button>
+    </div>
 
-      <!-- Contenido -->
-      <main class="flex-1 overflow-y-auto bg-gray-100">
-        <div class="max-w-7xl mx-auto px-6 py-8">
+    <!-- LISTADO DE RESEÑAS -->
+    <div id="contenedorResenas" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+  </main>
 
-          <!-- Panel de moderación -->
-          <section class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-800">Panel de Moderación</h2>
-            <p class="text-gray-600 mt-1">Administra y filtra las reseñas de los clientes.</p>
+  <!-- MODAL NUEVA RESEÑA -->
+  <div id="modalResena" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-2xl w-[90%] max-w-lg p-6 relative">
+      <button onclick="cerrarModal()" class="absolute top-2 right-3 text-red-600 text-lg font-bold">✖</button>
+      <h2 class="text-xl font-semibold text-center text-gray-800 mb-4">Agregar nueva reseña</h2>
 
-            <div class="flex space-x-4 mt-4">
-              <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition">
-                Actualizar Lista
-              </button>
-            </div>
-          </section>
+      <form id="formResena" onsubmit="publicarResena(event)">
+        <input type="text" id="nombre" placeholder="Nombre del cliente" required
+          class="w-full border border-green-300 rounded-lg p-3 mb-4">
 
-          <!-- Área de trabajo: lista y detalle -->
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <select id="calificacion" required class="w-full border border-green-300 rounded-lg p-3 mb-4">
+          <option value="">Selecciona una calificación</option>
+          <option value="5">5 - Excelente</option>
+          <option value="4">4 - Muy bueno</option>
+          <option value="3">3 - Bueno</option>
+          <option value="2">2 - Regular</option>
+          <option value="1">1 - Malo</option>
+        </select>
 
-            <!-- Lista de reseñas -->
-            <section class="bg-white rounded-lg shadow p-5 col-span-1">
-              <div class="flex space-x-4 mb-4">
-                <select class="border rounded-md p-2 w-1/2">
-                  <option>Todas las reseñas</option>
-                  <option>Pendientes</option>
-                  <option>Aprobadas</option>
-                  <option>Rechazadas</option>
-                </select>
-                <select class="border rounded-md p-2 w-1/2">
-                  <option>Todas las calificaciones</option>
-                  <option>1 estrella</option>
-                  <option>2 estrellas</option>
-                  <option>3 estrellas</option>
-                  <option>4 estrellas</option>
-                  <option>5 estrellas</option>
-                </select>
-              </div>
+        <textarea id="comentario" rows="4" placeholder="Comentario del cliente..." 
+          class="w-full border border-green-300 rounded-lg p-3 mb-4" required></textarea>
 
-              <div class="divide-y divide-gray-200 max-h-96 overflow-y-auto">
-                <div class="px-4 py-3 hover:bg-gray-50 cursor-pointer transition">
-                  <div class="text-sm font-medium">Administración</div>
-                  <div class="text-xs text-gray-500">05/11/2023</div>
-                  <p class="text-sm mt-1 truncate">Re: Consulta sobre materiales...</p>
-                </div>
-                <!-- Más reseñas -->
-              </div>
-            </section>
-
-            <!-- Detalle de reseña -->
-            <section class="bg-white rounded-lg shadow col-span-2">
-              <div class="px-6 py-4 border-b border-gray-200">
-                <h3 class="text-lg font-medium text-gray-800">Detalle de Reseña</h3>
-              </div>
-              <div class="p-6">
-                <div class="flex items-center justify-between mb-4">
-                  <h4 class="font-medium">Cliente: Juan Pérez</h4>
-                  <span class="text-yellow-500">★★★★★</span>
-                </div>
-
-                <p class="mb-4">"Excelente trabajo, muy profesionales."</p>
-
-                <h5 class="font-medium mb-2">Proyecto Relacionado:</h5>
-                <p>Casa Residencial Las Lomas</p>
-
-                <div class="mt-6 flex space-x-3">
-                  <button class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition">
-                    Aprobar Reseña
-                  </button>
-                  <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition">
-                    Rechazar Reseña
-                  </button>
-                </div>
-              </div>
-            </section>
-
-          </div><!-- /grid -->
-        </div><!-- /max-w-7xl -->
-      </main>
+        <button type="submit" class="w-full bg-green-600 text-white rounded-lg py-2 hover:bg-blue-600 transition font-semibold">
+          Guardar Reseña
+        </button>
+      </form>
     </div>
   </div>
 
-  <script src="../Scripts/main.js"></script>
+  <script>
+    // Ejemplos simulados
+    const resenas = [
+      { id: 1, nombre: "Laura Gómez", calificacion: 5, comentario: "Excelente servicio, atención rápida y amable.", estado: "aprobada" },
+      { id: 2, nombre: "Carlos Pérez", calificacion: 2, comentario: "El servicio tardó más de lo esperado.", estado: "pendiente" },
+      { id: 3, nombre: "Andrea Morales", calificacion: 4, comentario: "Muy buena atención, volvería a contratar.", estado: "aprobada" },
+      { id: 4, nombre: "Julián Ruiz", calificacion: 1, comentario: "Tuve inconvenientes con la reserva, no se confirmó a tiempo.", estado: "pendiente" }
+    ];
+
+    const contenedor = document.getElementById("contenedorResenas");
+    const resumen = document.getElementById("resumen");
+
+    function actualizarResumen() {
+      const total = resenas.length;
+      const aprobadas = resenas.filter(r => r.estado === "aprobada").length;
+      const pendientes = resenas.filter(r => r.estado === "pendiente").length;
+      const negativas = resenas.filter(r => r.calificacion <= 2).length;
+
+      resumen.innerHTML = `
+        <div class="bg-white p-4 rounded-xl shadow text-center">
+          <h3 class="text-sm text-gray-600">Total reseñas</h3>
+          <p class="text-2xl font-semibold text-gray-900">${total}</p>
+        </div>
+        <div class="bg-green-100 p-4 rounded-xl shadow text-center">
+          <h3 class="text-sm text-green-700">Publicadas</h3>
+          <p class="text-2xl font-semibold text-green-800">${aprobadas}</p>
+        </div>
+        <div class="bg-yellow-100 p-4 rounded-xl shadow text-center">
+          <h3 class="text-sm text-yellow-700">Pendientes</h3>
+          <p class="text-2xl font-semibold text-yellow-800">${pendientes}</p>
+        </div>
+        <div class="bg-red-100 p-4 rounded-xl shadow text-center">
+          <h3 class="text-sm text-red-700">Negativas</h3>
+          <p class="text-2xl font-semibold text-red-800">${negativas}</p>
+        </div>`;
+    }
+
+    // Mostrar reseñas
+    function mostrarResenas(lista) {
+      contenedor.innerHTML = "";
+      lista.forEach(r => {
+        const estrellas = "⭐".repeat(r.calificacion);
+        const colorEstado = r.estado === "pendiente" ? "estado-pendiente" : "estado-aprobada";
+        const negativo = r.calificacion <= 2 || r.comentario.includes("malo") || r.comentario.includes("inconveniente") || r.comentario.includes("tardó") || r.comentario.includes("lento");
+
+        contenedor.innerHTML += `
+          <div class="bg-white rounded-2xl shadow-md p-5 hover:shadow-lg transition relative">
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-lg font-semibold text-gray-800">${r.nombre}</h3>
+              <span class="text-yellow-500 text-sm">${estrellas}</span>
+            </div>
+            <p class="text-gray-600 mb-3">${r.comentario}</p>
+            <span class="text-xs font-semibold ${colorEstado}">
+              ${r.estado === "pendiente" ? "Pendiente de aprobación" : "Aprobada y publicada"}
+            </span>
+            ${r.estado === "pendiente" ? `
+              <div class="mt-4 flex gap-2 items-center justify-between">
+                <div class="flex gap-2 flex-1">
+                  <button onclick="aprobarResena(${r.id})" class="flex-1 bg-green-600 text-white rounded-md py-1 hover:bg-green-700 text-sm">Aprobar</button>
+                  <button onclick="rechazarResena(${r.id})" class="flex-1 bg-red-600 text-white rounded-md py-1 hover:bg-red-700 text-sm">Rechazar</button>
+                </div>
+                ${negativo ? `
+                  <a href="https://wa.me/573007413114?text=Hola%2C%20soy%20del%20equipo%20de%20soporte%20y%20quiero%20consultar%20su%20inconformidad%20sobre%20la%20reseña"
+                     target="_blank" class="flex items-center ml-2">
+                    <img src="../assets/img/whatsapp-fill.svg" alt="WhatsApp" class="w-7 h-7 transition-transform duration-200 hover:scale-125 hover:brightness-125"/>
+                  </a>` : ""}
+              </div>` : ""}
+          </div>`;
+      });
+      actualizarResumen();
+    }
+
+    function filtrarResenas() {
+      const filtro = document.getElementById("filtroEstado").value;
+      let filtradas = resenas;
+      if (filtro !== "todas") {
+        filtradas = resenas.filter(r => r.estado === filtro);
+      }
+      mostrarResenas(filtradas);
+    }
+
+    // Modal
+    function abrirModal() {
+      document.getElementById("modalResena").classList.remove("hidden");
+    }
+    function cerrarModal() {
+      document.getElementById("modalResena").classList.add("hidden");
+    }
+
+    // Agregar reseña
+    function publicarResena(e) {
+      e.preventDefault();
+      const nombre = document.getElementById("nombre").value;
+      const calificacion = parseInt(document.getElementById("calificacion").value);
+      const comentario = document.getElementById("comentario").value.toLowerCase();
+
+      const negativo = calificacion <= 2 || comentario.includes("malo") || comentario.includes("tardó") || comentario.includes("inconveniente") || comentario.includes("lento");
+      const estado = negativo ? "pendiente" : "aprobada";
+
+      const nueva = { id: resenas.length + 1, nombre, calificacion, comentario, estado };
+      resenas.unshift(nueva);
+
+      filtrarResenas();
+      cerrarModal();
+      e.target.reset();
+    }
+
+    function aprobarResena(id) {
+      const r = resenas.find(r => r.id === id);
+      if (r) { r.estado = "aprobada"; filtrarResenas(); }
+    }
+
+    function rechazarResena(id) {
+      const index = resenas.findIndex(r => r.id === id);
+      if (index !== -1) { resenas.splice(index, 1); filtrarResenas(); }
+    }
+
+    mostrarResenas(resenas);
+  </script>
 </body>
 </html>
