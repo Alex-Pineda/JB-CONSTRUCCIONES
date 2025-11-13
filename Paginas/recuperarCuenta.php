@@ -8,8 +8,8 @@ require __DIR__ . '/../PHPMailer-master/src/PHPMailer.php';
 require __DIR__ . '/../PHPMailer-master/src/SMTP.php';
 
 // Datos del usuario receptor (correo al que se enviará el mensaje)
-$correoDestino = "juanbustamante1128@gmail.com";
-$nombreUsuario = "Usuario Juan Bustamante";
+$correoDestino = "pineda.-.10@hotmail.com";
+$nombreUsuario = "Usuario Johnny Pineda";
 
 // Enlace de recuperación simulado
 $token = bin2hex(random_bytes(16));

@@ -46,6 +46,17 @@
             <form>
                 <!-- Datos Generales -->
                 <section class="mb-8">
+                    <div class="mb-4 flex flex-col md:flex-row items-center gap-4">
+                <label for="usuarioExistente" class="font-medium text-gray-700">Usuario registrado</label>
+                <select id="usuarioExistente" name="usuarioExistente" class="flex-1 border border-[#161a7e] rounded-md p-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#161a7e]">
+                    <option value="">-- Seleccione un usuario existente --</option>
+                    <!-- Opciones dinámicas desde la base de datos -->
+                </select>
+                <button type="button" onclick="abrirModalUsuario()" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition">
+                    Buscar Usuario
+                </button>
+                </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input type="text" id="nombre" placeholder="Nombre" 
                                class="w-full border border-[#161a7e] rounded-md p-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#161a7e]">
@@ -98,7 +109,8 @@
                         <label class="block text-gray-700 mb-2">Fecha Estimada Finalización</label>
                         <input type="date" 
                             class="w-full border border-[#161a7e] rounded-md p-2 bg-transparent focus:outline-none focus:ring-2 focus:ring-[#161a7e]">
-                    </div>
+                   
+                        </div>
 
         <!-- Subir Documentos -->
         <div class="md:col-span-3">
@@ -111,7 +123,11 @@
             <!-- Contenedor para mostrar miniaturas -->
             <div id="file-preview" class="mt-2 flex flex-wrap justify-center gap-4"></div>
   
-
+            <div class="mt-4 text-center">
+            <p id="estadoContrato" class="text-sm text-gray-600">
+                Estado del contrato: <span class="font-semibold text-yellow-600">Pendiente de firma</span>
+            </p>
+            </div>
         <!-- Botones -->
         <div class="flex justify-center items-center gap-6 mt-6 flex-wrap">
             <button type="submit" 
