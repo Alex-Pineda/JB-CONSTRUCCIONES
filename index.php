@@ -179,8 +179,6 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 </div>
 
-<!-- JS externo que genera tarjetas -->
-<script src="/JB-CONSTRUCCIONES/Scripts/main.js"></script>
 
 <script>
 const tabs = document.querySelectorAll("nav.tabs button");
@@ -196,6 +194,9 @@ tabs.forEach((tab) => {
   });
 });
 </script>
+
+<!-- JS externo que genera tarjetas -->
+<script src="./Scripts/main.js"></script>
 
 </body>
 </html>

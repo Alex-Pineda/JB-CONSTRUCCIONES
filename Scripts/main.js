@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!sidebarContainer) return; // si no existe en esta página, saltar
 
     // Determinar la ruta correcta al sidebar según la ubicación actual
-    let sidebarPath = "Encabezado_Pie/sidebar.html";
-    if (window.location.pathname.includes("/Paginas/") || window.location.pathname.includes("/Admin/")) {
-      sidebarPath = "../Encabezado_Pie/sidebar.html";
+    let sidebarPath = "Encabezado_Pie/sidebar.php";
+    if (window.location.pathname.includes("/app/views/") || window.location.pathname.includes("/Admin/")) {
+      sidebarPath = "../Encabezado_Pie/sidebar.php";
     }
 
     fetch(sidebarPath)
@@ -31,16 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ajustar rutas de los enlaces según la ubicación actual
         let adjustedHtml = html;
         if (
-          window.location.pathname.endsWith('/index.html') ||
+          window.location.pathname.endsWith('/index.php') ||
           window.location.pathname === '/' ||
-          window.location.pathname === '/index.html'
+          window.location.pathname === '/index.php'
         ) {
           // Si estamos en la raíz, no modificar rutas
         } else {
           // Si estamos en /Paginas o /Admin, ajustar las rutas relativas
-          adjustedHtml = adjustedHtml.replace(/href="(Paginas\/)/g, 'href="../Paginas/');
+          adjustedHtml = adjustedHtml.replace(/href="(Paginas\/)/g, 'href="../app/views/');
           adjustedHtml = adjustedHtml.replace(/href="(Admin\/)/g, 'href="../Admin/');
-          adjustedHtml = adjustedHtml.replace(/href="index.html"/g, 'href="../index.html"');
+          adjustedHtml = adjustedHtml.replace(/href="index.php"/g, 'href="../index.php"');
         }
         sidebarContainer.innerHTML = adjustedHtml;
 

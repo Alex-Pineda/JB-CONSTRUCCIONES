@@ -82,7 +82,7 @@
 <script>
 const estadisticas = [
   { titulo: "Gestión de Usuarios", cantidad: 120, icono: "👥", url: "/JB-CONSTRUCCIONES/app/views/usuarios.html" },
-  { titulo: "Gestión de Proyectos", cantidad: 18, icono: "🏗️", url: "/JB-CONSTRUCCIONES/app/views/gestionProyectos.html" },
+  { titulo: "Gestión de Proyectos", cantidad: 18, icono: "🏗️", url: "/JB-CONSTRUCCIONES/app/views/gestionproyectos.php" },
   { titulo: "Cotizaciones Generadas", cantidad: 40, icono: "💰", url: "/JB-CONSTRUCCIONES/app/views/admin/cotizaciones.html" },
   { titulo: "Estado de Pagos", cantidad: 14, icono: "💳", url: "/JB-CONSTRUCCIONES/app/views/admin/pagos.html" },
   { titulo: "Facturación Emitida", cantidad: 26, icono: "🧾", url: "/JB-CONSTRUCCIONES/app/views/admin/facturacion.html" },
