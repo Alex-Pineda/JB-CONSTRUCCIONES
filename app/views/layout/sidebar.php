@@ -31,7 +31,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="space-y-1 mb-8">
         <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Servicios</div>
 
-        <a href="/JB-CONSTRUCCIONES/app/views/simulador.html"
+        <a href="/JB-CONSTRUCCIONES/app/views/simulador.php"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
            💸 Cotización
         </a>

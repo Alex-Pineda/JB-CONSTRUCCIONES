@@ -125,66 +125,50 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   /* ============================
-     2) DATOS DE SERVICIOS (arrays)
+     2) DATOS DE SERVICIOS (sin arrays)
      ============================ */
-  // ... (sin cambios, tus arrays)
 
-  const obraNegraItems = [
-    { title: "Preparación y limpieza del terreno", img: "assets/img/obra_negra/preparacion_limpieza.jpg", description: "Despejamos y nivelamos el terreno para iniciar la construcción.", link: "https://www.youtube.com/watch?v=Mdm1iivGiTs" },
-    { title: "Verificación topográfica y marcación de ejes", img: "assets/img/obra_negra/verificacion_topografica_marcacion.jpg", description: "Comprobamos medidas y niveles, y trazamos los ejes para la cimentación.", link: "https://www.youtube.com/watch?v=VIDEO_ID2" },
-    { title: "Excavación y manejo de tierras", img: "assets/img/obra_negra/excavacion.jpg", description: "Realizamos excavaciones y gestionamos el material sobrante.", link: "https://www.youtube.com/watch?v=VIDEO_ID3" },
-    { title: "Relleno y compactación", img: "assets/img/obra_negra/relleno_compactacion.jpg", description: "Compactamos el terreno para garantizar la estabilidad de la cimentación.", link: "https://www.youtube.com/watch?v=VIDEO_ID4" },
-    { title: "Cimentación", img: "assets/img/obra_negra/cimentacion.jpg", description: "Construimos zapatas, pilotes o losa de cimentación según el diseño estructural.", link: "https://www.youtube.com/watch?v=VIDEO_ID5" },
-    { title: "Elaboración y armado de acero", img: "assets/img/obra_negra/estructura_metalica.jpg", description: "Cortamos, doblamos y ensamblamos el acero de refuerzo para la estructura.", link: "https://www.youtube.com/watch?v=VIDEO_ID6" },
-    { title: "Encofrado y vaciado de concreto", img: "assets/img/obra_negra/encofrados_vaciados.jpg", description: "Colocamos encofrados y vaciamos concreto para elementos estructurales.", link: "https://www.youtube.com/watch?v=VIDEO_ID7" },
-    { title: "Armado de losa", img: "assets/img/obra_negra/losas.jpg", description: "Preparamos y fundimos las losas de entrepiso o cubierta.", link: "https://www.youtube.com/watch?v=VIDEO_ID8" },
-    { title: "Curado y control de calidad", img: "assets/img/obra_negra/Curado.jpg", description: "Aplicamos curado y realizamos ensayos para garantizar la resistencia del concreto.", link: "https://www.youtube.com/watch?v=VIDEO_ID9" },
-    { title: "Replanteo de mampostería", img: "assets/img/obra_negra/replanteo_mamposteria.jpg", description: "Marcamos muros y aberturas antes de levantar mampostería.", link: "https://www.youtube.com/watch?v=VIDEO_ID10" },
-    { title: "Mampostería primer - segundo nivel", img: "assets/img/obra_negra/mamposteria.jpeg", description: "Levantamos muros y paredes en primer, segundo nivel.", link: "https://www.youtube.com/watch?v=VIDEO_ID11" },
-    { title: "Instalaciones hidrosanitarias", img: "assets/img/obra_negra/instalaciones_hidrosanitarias.jpg", description: "Instalamos tuberías de agua potable, aguas negras y pluviales.", link: "https://www.youtube.com/watch?v=VIDEO_ID12" },
-    { title: "Instalación eléctrica", img: "assets/img/obra_negra/instalacion_electrica.jpg", description: "Realizamos el tendido de conduits y puntos eléctricos.", link: "https://www.youtube.com/watch?v=VIDEO_ID13" },
-    { title: "Impermeabilización", img: "assets/img/obra_negra/impermeabilizacion.jpg", description: "Protegemos cubiertas y muros contra filtraciones de agua.", link: "https://www.youtube.com/watch?v=VIDEO_ID14" },
-    { title: "Revoque", img: "assets/img/obra_negra/revoque.jpg", description: "Aplicamos revoque en muros interiores y exteriores.", link: "https://www.youtube.com/watch?v=VIDEO_ID15" },
-    { title: "Morteros", img: "assets/img/obra_negra/morteros.jpg", description: "Preparamos y aplicamos morteros para nivelación y asiento.", link: "https://www.youtube.com/watch?v=VIDEO_ID16" },
-    { title: "Enchapes interiores", img: "assets/img/obra_negra/enchapes.jpg", description: "Colocamos cerámica o porcelanato en pisos y paredes.", link: "https://www.youtube.com/watch?v=VIDEO_ID17" },
-    { title: "Instalación de baños", img: "assets/img/obra_negra/instalacion_banos.jpg", description: "Montamos inodoros, lavamanos, duchas y grifería.", link: "https://www.youtube.com/watch?v=VIDEO_ID18" },
-    { title: "Enchape fachada", img: "assets/img/obra_negra/fachada.jpeg", description: "Revestimos la fachada con piedra, cerámica o materiales decorativos.", link: "https://www.youtube.com/watch?v=VIDEO_ID19" },
-    { title: "Lechada y fragüe", img: "assets/img/obra_negra/lechada.jpg", description: "Sellamos juntas y realizamos la limpieza final de los enchapes.", link: "https://www.youtube.com/watch?v=VIDEO_ID20" },
-    { title: "Pruebas y limpieza final", img: "assets/img/obra_negra/limpieza.jpg", description: "Realizamos pruebas de funcionamiento y limpieza general de obra.", link: "https://www.youtube.com/watch?v=VIDEO_ID21" },
-    { title: "Control de calidad y recepción", img: "assets/img/obra_negra/control_calidad.jpg", description: "Verificamos que la obra cumpla con las especificaciones antes de su entrega.", link: "https://www.youtube.com/watch?v=VIDEO_ID22" }
-  ];
+    document.querySelectorAll('.servicio-check').forEach(check => {
 
-  const obraBlancaItems = [
-    { title: "Revoque fino y estuco", img: "assets/img/obra_blanca/estuco.jpg", description: "Aplicamos revoque fino y estuco para alisar muros y dejarlos listos para pintura.", link: "https://www.youtube.com/watch?v=Mdm1iivGiTs" },
-    { title: "Pintura interior", img: "assets/img/obra_blanca/pintura.jpg", description: "Pintamos muros y cielos rasos con acabados decorativos y de protección." },
-    { title: "Pintura exterior", img: "assets/img/obra_blanca/pintura_exterior.jpeg", description: "Aplicamos pintura y selladores especiales para proteger fachadas." },
-    { title: "Instalación de pisos interiores", img: "assets/img/obra_blanca/piso_interior.jpg", description: "Colocamos pisos en cerámica, porcelanato, madera o laminados." },
-    { title: "Instalación de cielorrasos", img: "assets/img/obra_blanca/cieloraso.jpg", description: "Montamos cielorrasos en drywall, PVC o materiales acústicos." },
-    { title: "Enchapes y revestimientos decorativos", img: "assets/img/obra_blanca/revestimientos.jpg", description: "Instalamos enchapes y revestimientos en muros, cocinas y baños." },
-    { title: "Instalación de estructura metálica", img: "assets/img/obra_blanca/instalacion_estructura.jpg", description: "Armamos techos en hierro de diferentes dimensiones, barandas, rejas y elementos metálicos decorativos o de seguridad." },
-    { title: "Instalación de ventanas y vidrios", img: "assets/img/obra_blanca/ventanas.jpg", description: "Colocamos ventanas, ventanales y divisiones en vidrio templado o laminado." },
-    { title: "Instalación de grifería y accesorios", img: "assets/img/obra_blanca/griferia.jpg", description: "Montamos grifería, toalleros, espejos y demás accesorios en baños y cocinas." },
-    { title: "Instalación de iluminación", img: "assets/img/obra_blanca/iluminacion.jpeg", description: "Instalamos lámparas, bombillas LED y sistemas de iluminación decorativa." },
-    { title: "Instalación de tomacorrientes e interruptores", img: "assets/img/obra_blanca/tomacorriente.jpg", description: "Colocamos tomacorrientes, interruptores y placas eléctricas." },
-    { title: "Instalación de sanitarios y lavamanos", img: "assets/img/obra_blanca/instalacion_sanitarios.jpg", description: "Instalamos piezas sanitarias, lavamanos y lavaplatos." },
-    { title: "Colocación de espejos y cristales decorativos", img: "assets/img/obra_blanca/colocacion_espejos.jpg", description: "Instalamos espejos y vidrios decorativos en interiores." },
-    { title: "Colocación de rodapiés y molduras", img: "assets/img/obra_blanca/molduras.jpg", description: "Instalamos rodapiés, guardas y molduras decorativas." },
-    { title: "Limpieza final de obra", img: "assets/img/obra_blanca/limpieza_obra_blanca.jpg", description: "Realizamos limpieza profunda y detallada antes de la entrega." },
-    { title: "Entrega de la obra", img: "assets/img/obra_blanca/entrega.jpg", description: "Hacemos la entrega oficial al cliente con todos los acabados completos." }
-  ];
+        check.addEventListener('change', function () {
+            const input = this.closest('div').querySelector('.m2');
 
-  const mantenimientoItems = [
-    { title: "Reparación de Fisuras", img: "imagenes/mantenimiento/reparacion_fisuras.jpg", description: "Sellamos y reforzamos fisuras en muros, losas y elementos estructurales.", link: "https://www.youtube.com/watch?v=Mdm1iivGiTs" },
-    { title: "Refuerzo Estructural", img: "imagenes/mantenimiento/refuerzo_estructural.jpg", description: "Fortalecemos vigas, columnas y cimentaciones para prolongar la vida útil." },
-    { title: "Pintura Interior y Exterior", img: "imagenes/mantenimiento/pintura.jpg", description: "Aplicamos pintura de alta calidad para renovar y proteger superficies." },
-    { title: "Reparación de Enchapes", img: "imagenes/mantenimiento/reparacion_enchapes.jpg", description: "Restauramos y reemplazamos enchapes y cerámicas dañadas." },
-    { title: "Mantenimiento Eléctrico", img: "imagenes/mantenimiento/mantenimiento_electrico.jpg", description: "Revisamos y reparamos cableado, tableros y luminarias." },
-    { title: "Mantenimiento Hidrosanitario", img: "imagenes/mantenimiento/mantenimiento_hidrosanitario.jpg", description: "Corregimos fugas, drenajes y problemas en redes de agua." },
-    { title: "Impermeabilización de Cubiertas", img: "imagenes/mantenimiento/impermeabilizacion_cubiertas.jpg", description: "Evitamos filtraciones mediante impermeabilización profesional." },
-    { title: "Limpieza y Restauración de Fachadas", img: "imagenes/mantenimiento/limpieza_fachadas.jpg", description: "Realizamos limpieza profunda y restauración estética de fachadas." },
-    { title: "Revisión Preventiva", img: "imagenes/mantenimiento/revision_preventiva.jpg", description: "Inspeccionamos y realizamos mantenimientos periódicos para prevenir daños." },
-    { title: "Reparaciones Urgentes", img: "imagenes/mantenimiento/reparaciones_urgentes.jpg", description: "Atendemos daños imprevistos como filtraciones, cortos o desprendimientos." }
-  ];
+            if (this.checked) {
+                input.classList.remove('hidden');
+            } else {
+                input.classList.add('hidden');
+                input.value = '';
+            }
+        });
+
+    });
+
+      document.getElementById('formCotizacion').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let total = 0;
+      let detalle = [];
+
+      document.querySelectorAll('.servicio-check:checked').forEach(check => {
+
+          const container = check.closest('div');
+          const m2 = parseFloat(container.querySelector('.m2').value) || 0;
+          const precio = parseFloat(check.dataset.precio);
+
+          const subtotal = m2 * precio;
+
+          total += subtotal;
+
+          detalle.push({
+              servicio: container.querySelector('label').innerText,
+              m2,
+              precio,
+              subtotal
+          });
+      });
+
+      console.log(detalle, total);
+  });
 
   /* ============================
      3) RENDER DE TARJETAS (index u otras páginas)
@@ -313,9 +297,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // <- REEMPLAZA/CONECTA con tu DB o API
       // Ejemplo: precios por categoría base (valor por m²)
       const base = {
-        obraNegra: 120000,
-        obraBlanca: 45000,
-        mantenimiento: 30000
+        obraNegra: 0,
+        obraBlanca: 0,
+        mantenimiento: 0,
       };
       // Podrías mapear nombres concretos a precios más específicos aquí
       return base[categoria] || 0;
@@ -372,89 +356,100 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ─── Construir HTML de la factura ───────────────────────────────
 box.innerHTML = `
-  <div id="factura-container" class="relative w-full mx-auto p-2 sm:p-6 bg-white shadow-lg rounded-lg">
+<div id="factura-container" class="relative w-full mx-auto p-2 sm:p-6 bg-white shadow-lg rounded-lg">
 
-   <!-- ENCABEZADO -->
-    <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
-      <div class="flex flex-col items-center gap-2">
-        <img src="../assets/img/JB-CONSTRUCTORES.png"
-          alt="Logo JB-CONSTRUCTORES"
-          class="h-16 w-16 object-cover rounded-full border-2 border-teal-500">
-        <h1 class="text-lg font-extrabold text-teal-700 leading-tight">JB-CONSTRUCTORES</h1>
-      </div>
-
-      <div class="text-right space-y-1">
-        <p class="text-base text-gray-600">${new Date().toLocaleDateString()}</p>
-        <p class="text-base text-gray-600">${new Date().toLocaleTimeString()}</p>
-        <p class="text-base text-gray-600">Cotización #${Math.floor(Math.random() * 1000)}</p>
-      </div>
+  <!-- ENCABEZADO -->
+  <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
+    <div class="flex flex-col items-center gap-2">
+      <img src="../assets/img/JB-CONSTRUCTORES.png"
+        class="h-16 w-16 object-cover rounded-full border-2 border-teal-500">
+      <h1 class="text-lg font-extrabold text-teal-700">JB-CONSTRUCTORES</h1>
     </div>
 
-    <!-- DATOS DEL CLIENTE -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 print:grid-cols-2 gap-4 text-gray-700 text-sm">
-        <p><strong>Nombre:</strong> ${datosUsuario.nombreCompleto}</p>
-        <p><strong>Número Documento:</strong> ${datosUsuario.numeroDocumento}</p>
-        <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
-        <p><strong>Contacto:</strong> ${datosUsuario.contacto}</p>
-        <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
-        <p><strong>Dirección:</strong> ${datosUsuario.direccion}</p>
-      </div>
-    </div>
-
-    <!-- DETALLE DE SERVICIOS -->
-    <div class="mb-8">
-      <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
-
-      <!-- Contenedor responsivo con scroll si es necesario -->
-      <div class="overflow-x-auto">
-        <table class="w-full border-collapse text-sm">
-          <thead>
-            <tr class="bg-teal-100 text-teal-800">
-              <th class="border p-2 text-left">Servicio</th>
-              <th class="border p-2 text-left">Categoría</th>
-              <th class="border p-2 text-right">m²</th>
-              <th class="border p-2 text-right">Precio/m²</th>
-              <th class="border p-2 text-right">Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${detalle.map(d => `
-              <tr>
-                <td class="border p-2">${d.servicio}</td>
-                <td class="border p-2">${d.categoria}</td>
-                <td class="border p-2 text-right">${d.m2}</td>
-                <td class="border p-2 text-right">${formatearCOP(d.precioUnitario)}</td>
-                <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-          <tfoot>
-            <tr class="bg-gray-100">
-              <td colspan="4" class="border p-2 text-right font-bold">Total Estimado</td>
-              <td class="border p-2 text-right text-2xl font-bold text-red-600">${formatearCOP(total)}</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-
-    <!-- NOTA -->
-    <p class="text-gray-600 text-sm italic">
-      * Los valores son estimados. Los precios finales pueden variar tras la visita técnica.
-    </p>
-
-    <!-- BOTONES DE EXPORTACIÓN -->
-    <div class="mt-6 flex justify-center gap-4">
-      
-    <!-- Botón Cerrar -->
-      <button id="cerrarFactura" class="w-40 h-10 flex items-center justify-center text-white font-semibold rounded-lg shadow-md border transition-colors bg-red-600 border-red-700 hover:bg-red-700">Cerrar</button>
-
-      <!-- Botón Descargar -->
-      <button id="btnExportPDF" class="w-40 h-10 flex items-center justify-center text-white font-semibold rounded-lg shadow-md border transition-colors bg-teal-600 border-teal-700 hover:bg-teal-700">Descargar</button>
+    <div class="text-right space-y-1">
+      <p class="text-gray-600">${new Date().toLocaleDateString()}</p>
+      <p class="text-gray-600">${new Date().toLocaleTimeString()}</p>
+      <p class="text-gray-600">Cotización #${Math.floor(Math.random() * 10000)}</p>
     </div>
   </div>
+
+  <!-- DATOS CLIENTE -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <p><strong>Nombre:</strong> ${datosUsuario.nombreCompleto}</p>
+      <p><strong>Documento:</strong> ${datosUsuario.numeroDocumento}</p>
+      <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
+      <p><strong>Contacto:</strong> ${datosUsuario.contacto}</p>
+      <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
+      <p><strong>Dirección:</strong> ${datosUsuario.direccion}</p>
+    </div>
+  </div>
+
+  <!-- DETALLE -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
+
+    <div class="overflow-x-auto">
+      <table class="w-full border text-sm">
+        <thead>
+          <tr class="bg-teal-100">
+            <th class="border p-2">Servicio</th>
+            <th class="border p-2">Categoría</th>
+            <th class="border p-2 text-right">m²</th>
+            <th class="border p-2 text-right">Precio</th>
+            <th class="border p-2 text-right">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${detalle.map(d => `
+            <tr>
+              <td class="border p-2">${d.servicio_nombre}</td>
+              <td class="border p-2">${d.categoria}</td>
+              <td class="border p-2 text-right">${d.metros}</td>
+              <td class="border p-2 text-right">${formatearCOP(d.precio_unitario)}</td>
+              <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+        <tfoot>
+          <tr class="bg-gray-100">
+            <td colspan="4" class="text-right font-bold p-2">Total</td>
+            <td class="text-right text-xl font-bold text-red-600 p-2">
+              ${formatearCOP(total)}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- NOTA -->
+  <p class="text-sm italic text-gray-600">
+    * Valores estimados sujetos a validación técnica.
+  </p>
+
+  <!-- BOTONES -->
+  <div class="mt-6 flex justify-center gap-4 flex-wrap">
+
+    <button id="cerrarFactura"
+      class="w-40 h-10 bg-red-600 text-white rounded-lg hover:bg-red-700">
+      Cerrar
+    </button>
+
+    <button id="btnExportPDF"
+      class="w-40 h-10 bg-teal-600 text-white rounded-lg hover:bg-teal-700">
+      Descargar
+    </button>
+
+    <button id="btnEnviarCorreo"
+      class="w-40 h-10 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+      Enviar Correo
+    </button>
+
+  </div>
+
+</div>
 `;
 
 // — Inserción del listener mínimo para el botón cerrar (restaura overflowX)
