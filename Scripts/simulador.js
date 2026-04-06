@@ -170,11 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         Cerrar
         </button>
 
-        <button id="btnExportPDF"
-        class="w-40 h-10 bg-teal-600 text-white rounded-lg hover:bg-teal-700">
-        Descargar
-        </button>
-
         <button id="btnEnviarCorreo"
         class="w-40 h-10 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
         Enviar Correo
@@ -184,6 +179,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     </div>
     `;
+
+    const btnCerrar = document.getElementById('cerrarFactura');
+
+    if (btnCerrar) {
+    btnCerrar.addEventListener('click', () => {
+        const factura = document.getElementById('factura-container');
+        if (factura) factura.remove();
+    });
+    }
+
+
 const btnCorreo = document.getElementById('btnEnviarCorreo');
 
 if (btnCorreo) {
@@ -197,62 +203,48 @@ if (btnCorreo) {
     }
 
     try {
-      const res = await fetch('../controllers/EnviarCorreoController.php', {
+      const res = await fetch('/JB-CONSTRUCCIONES/app/controllers/EnviarCorreoController.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ correo, total, detalle })
+body: JSON.stringify({correo, total, detalle,
+cliente: {
+    nombreCompleto: document.getElementById("nombre").value + " " + document.getElementById("apellido").value,
+    numeroDocumento: document.getElementById("numeroDocumento").value,
+    correo: document.getElementById("correo").value,
+    contacto: document.getElementById("contacto").value,
+    ubicacion: document.getElementById("ubicacion").value,
+    direccion: document.getElementById("direccion").value
+  }
+})
       });
 
-      const data = await res.json();
+      // 🔥 IMPORTANTE: leer como texto primero
+      const text = await res.text();
+      console.log("RESPUESTA DEL SERVIDOR:", text);
+
+      let data;
+
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        alert("El servidor NO devolvió JSON válido");
+        return;
+      }
 
       if (data.ok) {
         alert('Correo enviado correctamente');
       } else {
-        alert('Error al enviar correo');
+        alert('Error: ' + (data.error || 'Error desconocido'));
       }
 
     } catch (err) {
-      console.error(err);
-      alert('Error de conexión');
+      console.error("ERROR FETCH:", err);
+      alert('Error de conexión real (fetch falló)');
     }
   });
 }
 
-document.getElementById('btnExportPDF').addEventListener('click', async () => {
-  const factura = document.getElementById('factura-container');
-  if (!factura) return;
-
-  // 🔧 Clonar para evitar efectos visuales
-  const clone = factura.cloneNode(true);
-  clone.style.boxShadow = 'none';
-  clone.style.transform = 'none';
-
-  // 🔧 Insertar fuera de pantalla
-  clone.style.position = 'fixed';
-  clone.style.top = '-9999px';
-  document.body.appendChild(clone);
-
-  await html2pdf().from(clone).set({
-    margin: 10,
-    filename: `Cotizacion_${new Date().toISOString().slice(0,10)}.pdf`,
-    html2canvas: {
-      scale: 2,
-      useCORS: true
-    },
-    jsPDF: {
-      unit: 'mm',
-      format: 'a4',
-      orientation: 'portrait'
-    }
-  }).save();
-
-  // 🧹 limpiar
-  document.body.removeChild(clone);
-});
-
-
-    box.scrollIntoView({ behavior: 'smooth' });
-  }
+}
 
   /* =========================
      6. Guardar en BD
