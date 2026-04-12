@@ -12,586 +12,156 @@ document.addEventListener('DOMContentLoaded', () => {
       .toLowerCase();
   }
 
-  /* ============================
-     1) SIDEBAR (cargar solo si existe contenedor)
-     ============================ */
-  (function loadSidebar() {
-    const sidebarContainer = document.getElementById('sidebar-container');
-    if (!sidebarContainer) return; // si no existe en esta página, saltar
+/* ============================
+   1) SIDEBAR (FIX COMPLETO)
+============================ */
+(function loadSidebar() {
 
-    // Determinar la ruta correcta al sidebar según la ubicación actual
-    let sidebarPath = "Encabezado_Pie/sidebar.php";
-    if (window.location.pathname.includes("/app/views/") || window.location.pathname.includes("/Admin/")) {
-      sidebarPath = "../Encabezado_Pie/sidebar.php";
+  const sidebar = document.getElementById('sidebar');
+  const menuToggle = document.getElementById('menu-toggle');
+
+  if (!sidebar || !menuToggle) return;
+
+  // Crear overlay si no existe
+  let overlay = document.getElementById('overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'overlay';
+    overlay.className = 'fixed inset-0 bg-black opacity-0 hidden z-30 transition-opacity duration-300';
+    document.body.appendChild(overlay);
+  }
+
+  let autoCloseTimer;
+
+  function openSidebar() {
+    if (window.innerWidth >= 768) return;
+
+    sidebar.classList.remove('-translate-x-full');
+    sidebar.classList.add('translate-x-0');
+
+    overlay.classList.remove('hidden');
+    setTimeout(() => overlay.classList.add('opacity-50'), 10);
+
+    resetTimer();
+  }
+
+  function closeSidebar() {
+    if (window.innerWidth >= 768) return;
+
+    sidebar.classList.add('-translate-x-full');
+    sidebar.classList.remove('translate-x-0');
+
+    overlay.classList.remove('opacity-50');
+    setTimeout(() => overlay.classList.add('hidden'), 300);
+
+    clearTimeout(autoCloseTimer);
+  }
+
+  function resetTimer() {
+    clearTimeout(autoCloseTimer);
+    autoCloseTimer = setTimeout(closeSidebar, 5000);
+  }
+
+  // EVENTO CLICK
+  menuToggle.addEventListener('click', () => {
+    if (sidebar.classList.contains('-translate-x-full')) {
+      openSidebar();
+    } else {
+      closeSidebar();
     }
-
-    fetch(sidebarPath)
-      .then(response => response.text())
-      .then(html => {
-        // Ajustar rutas de los enlaces según la ubicación actual
-        let adjustedHtml = html;
-        if (
-          window.location.pathname.endsWith('/index.php') ||
-          window.location.pathname === '/' ||
-          window.location.pathname === '/index.php'
-        ) {
-          // Si estamos en la raíz, no modificar rutas
-        } else {
-          // Si estamos en /Paginas o /Admin, ajustar las rutas relativas
-          adjustedHtml = adjustedHtml.replace(/href="(Paginas\/)/g, 'href="../app/views/');
-          adjustedHtml = adjustedHtml.replace(/href="(Admin\/)/g, 'href="../Admin/');
-          adjustedHtml = adjustedHtml.replace(/href="index.php"/g, 'href="../index.php"');
-        }
-        sidebarContainer.innerHTML = adjustedHtml;
-
-        const sidebar = document.getElementById('sidebar');
-        const menuToggle = document.getElementById('menu-toggle');
-
-        // overlay
-        let overlay = document.getElementById('overlay');
-        if (!overlay) {
-          overlay = document.createElement('div');
-          overlay.id = 'overlay';
-          overlay.className = 'fixed inset-0 bg-black opacity-0 z-30 hidden transition-opacity duration-300';
-          document.body.appendChild(overlay);
-        }
-
-        const links = sidebar ? sidebar.querySelectorAll('a') : [];
-        let autoCloseTimer;
-
-        function openSidebar() {
-          if (!sidebar) return;
-          if (window.innerWidth < 1024) {
-            sidebar.classList.remove("-translate-x-full", "hidden");
-            sidebar.classList.add("translate-x-0", "z-40");
-            overlay.classList.remove("hidden");
-            setTimeout(() => overlay.classList.add("opacity-50"), 10);
-            resetAutoCloseTimer();
-          }
-        }
-
-        function closeSidebar() {
-          if (!sidebar) return;
-          
-          if (window.innerWidth < 1024) {
-            sidebar.classList.add("-translate-x-full");
-            sidebar.classList.remove("translate-x-0");
-            overlay.classList.remove("opacity-50");
-            clearTimeout(autoCloseTimer);
-            setTimeout(() => overlay.classList.add("hidden"), 300);
-          }
-
-          // ✅ Restaurar color del botón incluso si no se hace animación
-          if (menuToggle) {
-            menuToggle.classList.remove("bg-white", "text-gray-800");
-            menuToggle.classList.add("bg-gray-800", "text-white");
-          }
-          }
-
-        function resetAutoCloseTimer() {
-          clearTimeout(autoCloseTimer);
-          autoCloseTimer = setTimeout(closeSidebar, 5000);
-        }
-
-        if (menuToggle) {
-          menuToggle.addEventListener('click', () => {
-            if (sidebar && sidebar.classList.contains("-translate-x-full")) {
-              openSidebar();
-            } else {
-              closeSidebar();
-            }
-          });
-        }
-
-        overlay.addEventListener("click", closeSidebar);
-        if (sidebar) {
-          sidebar.addEventListener("mousemove", resetAutoCloseTimer);
-          sidebar.addEventListener("click", resetAutoCloseTimer);
-        }
-
-        // Resaltar enlace activo
-        const currentPath = window.location.pathname.split('/').pop();
-        links.forEach(link => {
-          const href = (link.getAttribute('href') || '').split('/').pop();
-          if (href === currentPath) {
-            link.classList.add('bg-red-800', 'font-semibold', 'rounded-lg');
-          }
-          link.addEventListener('click', () => {
-            if (window.innerWidth < 1024) closeSidebar();
-          });
-        });
-      })
-      .catch(error => console.error("No se pudo cargar el sidebar:", error));
-  })();
-
-  /* ============================
-     2) DATOS DE SERVICIOS (sin arrays)
-     ============================ */
-
-    document.querySelectorAll('.servicio-check').forEach(check => {
-
-        check.addEventListener('change', function () {
-            const input = this.closest('div').querySelector('.m2');
-
-            if (this.checked) {
-                input.classList.remove('hidden');
-            } else {
-                input.classList.add('hidden');
-                input.value = '';
-            }
-        });
-
-    });
-
-      document.getElementById('formCotizacion').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      let total = 0;
-      let detalle = [];
-
-      document.querySelectorAll('.servicio-check:checked').forEach(check => {
-
-          const container = check.closest('div');
-          const m2 = parseFloat(container.querySelector('.m2').value) || 0;
-          const precio = parseFloat(check.dataset.precio);
-
-          const subtotal = m2 * precio;
-
-          total += subtotal;
-
-          detalle.push({
-              servicio: container.querySelector('label').innerText,
-              m2,
-              precio,
-              subtotal
-          });
-      });
-
-      console.log(detalle, total);
   });
+
+  // Overlay
+  overlay.addEventListener('click', closeSidebar);
+
+  // Actividad en sidebar
+  sidebar.addEventListener('mousemove', resetTimer);
+  sidebar.addEventListener('click', resetTimer);
+
+})();
 
   /* ============================
      3) RENDER DE TARJETAS (index u otras páginas)
      ============================ */
-  function createCard({ title, img, description, link }) {
-    return `
-      <div class="service-card cursor-pointer p-1 border rounded" title="${title}" data-link="${link || ''}">
-        <img src="${img || 'imagenes/default.jpg'}" alt="${title}" class="w-full h-36 object-cover rounded">
-        <h3 class="mt-2 font-semibold text-sm">${title}</h3>
-        <p class="text-xs text-gray-600 mt-1">${description || ''}</p>
-      </div>
-    `;
-  }
 
-  function renderCards(containerId, items) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    container.innerHTML = items.map(createCard).join('');
+function createCard(servicio) {
+  return `
+    <div class="service-card cursor-pointer p-1 border rounded">
+      <img src="${servicio.imagen}" 
+           alt="${servicio.nombre_servicio}" 
+           class="w-full h-36 object-cover rounded">
 
-    // Añadir evento click a cada tarjeta para redirigir a YouTube si tiene link
-    container.querySelectorAll('.service-card').forEach(card => {
-      const link = card.getAttribute('data-link');
-      if (link) {
-        card.addEventListener('click', () => {
-          window.open(link, '_blank');
-        });
-      }
-    });
-  }
+      <h3 class="mt-2 font-semibold text-sm">
+        ${servicio.nombre_servicio}
+      </h3>
 
-  renderCards('obra-negra-section', obraNegraItems);
-  renderCards('obra-blanca-section', obraBlancaItems);
-  renderCards('mantenimiento-section', mantenimientoItems);
+      <p class="text-xs text-gray-600 mt-1">
+        ${servicio.descripcion || ''}
+      </p>
+    </div>
+  `;
+}
 
-  /* ============================
-     4) SIMULADOR (solo si estamos en simulador.html)
-     ============================ */
-  if (window.location.pathname.includes('simulador.html')) {
+function renderCards(containerId, items) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-    // Mostrar título pasado por querystring (si existe)
-    (function mostrarTitulo() {
-      const params = new URLSearchParams(window.location.search);
-      const title = params.get('title');
-      if (title) {
-        const tituloElem = document.getElementById('simulador-titulo');
-        if (tituloElem) tituloElem.textContent = decodeURIComponent(title);
-      }
-    })();
+  container.innerHTML = items.map(createCard).join('');
+}
 
-    // Arrays que guardan selección con m2
-    const seleccion = {
-      obraNegra: [],
-      obraBlanca: [],
-      mantenimiento: []
-    };
+ async function cargarServicios() {
+  try {
+    const res = await fetch('/JB-CONSTRUCCIONES/app/controllers/ServicioApiController.php');
 
-    // Crear opciones (checkbox + input m2) a partir de un array de items
-    function crearOpcionesDesdeItems(categoria, contenedorId, items) {
-      const contenedor = document.getElementById(contenedorId);
-      if (!contenedor) return;
+    const data = await res.json(); // ✅ obligatorio
 
-      contenedor.innerHTML = '';
-
-      items.forEach(item => {
-        const idSafe = sanitizeId(item.title);
-        const chkId = `${categoria}-${idSafe}`;
-        const m2Id = `${chkId}-m2`;
-
-        const wrapper = document.createElement('div');
-        wrapper.className = 'flex items-center space-x-3';
-
-       wrapper.innerHTML = `
-  <div class="flex items-center space-x-2">
-    <input type="checkbox" id="${chkId}" class="form-checkbox h-4 w-4 text-red-600">
-    <label for="${chkId}" class="text-gray-700 text-sm">${item.title}</label>
-  </div>
-  <input type="number" min="0" step="1" id="${m2Id}" placeholder="m²"
-      class="ml-auto w-[4.5rem] sm:w-[5rem] md:w-[5.5rem] lg:w-[6rem] xl:w-[6.5rem]
-             border border-gray-300 rounded-md px-2 py-1
-             text-xs sm:text-sm text-center hidden
-             [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-      aria-label="metros cuadrados para ${item.title}">
-`;
-
-        // listeners
-        const checkbox = wrapper.querySelector(`#${chkId}`);
-        const m2input = wrapper.querySelector(`#${m2Id}`);
-
-        checkbox.addEventListener('change', (e) => {
-          if (e.target.checked) {
-            m2input.classList.remove('hidden');
-            // añadir al array si no existe
-            if (!seleccion[categoria].find(s => s.servicio === item.title)) {
-              seleccion[categoria].push({ servicio: item.title, m2: 0 });
-            }
-            m2input.focus();
-          } else {
-            m2input.classList.add('hidden');
-            m2input.value = '';
-            // quitar del array
-            const idx = seleccion[categoria].findIndex(s => s.servicio === item.title);
-            if (idx !== -1) seleccion[categoria].splice(idx, 1);
-          }
-        });
-
-        m2input.addEventListener('input', (e) => {
-          const val = parseFloat(e.target.value) || 0;
-          const obj = seleccion[categoria].find(s => s.servicio === item.title);
-          if (obj) obj.m2 = val;
-        });
-
-        contenedor.appendChild(wrapper);
-      });
+    if (!data.ok) {
+      console.error('Error:', data.error);
+      return;
     }
 
-    // Ejecutar para las 3 categorías usando tus arrays principales
-    crearOpcionesDesdeItems('obraNegra', 'obraNegraOpciones', obraNegraItems);
-    crearOpcionesDesdeItems('obraBlanca', 'obraBlancaOpciones', obraBlancaItems);
-    crearOpcionesDesdeItems('mantenimiento', 'mantenimientoOpciones', mantenimientoItems);
+    const servicios = data.data;
 
-    /* ============================
-       4.b) Manejar submit del formulario (calcular)
-       ============================ */
-    const form = document.getElementById('formCotizacion');
-    function obtenerPrecioSimulado(servicio, categoria) {
-      // <- REEMPLAZA/CONECTA con tu DB o API
-      // Ejemplo: precios por categoría base (valor por m²)
-      const base = {
-        obraNegra: 0,
-        obraBlanca: 0,
-        mantenimiento: 0,
+    const obraNegra = [];
+    const obraBlanca = [];
+    const obraGris = [];
+    const mantenimiento = [];
+
+    servicios.forEach(s => {
+
+      const item = {
+        nombre_servicio: s.nombre_servicio,
+        descripcion: s.descripcion,
+        imagen: s.imagen 
+          ? '/JB-CONSTRUCCIONES/' + s.imagen 
+          : '/JB-CONSTRUCCIONES/assets/img/default.jpg'
       };
-      // Podrías mapear nombres concretos a precios más específicos aquí
-      return base[categoria] || 0;
-    }
 
-    function formatearCOP(valor) {
-      try {
-        return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(valor);
-      } catch (err) {
-        return `$ ${Math.round(valor).toLocaleString()}`;
+      const categoria = (s.categoria || '').toLowerCase().trim();
+
+      if (categoria.includes('obra negra')) {
+        obraNegra.push(item);
+      } else if (categoria.includes('obra blanca')) {
+        obraBlanca.push(item);
+      } else if (categoria.includes('obra gris')) {
+        obraGris.push(item);
+      } else {
+        mantenimiento.push(item);
       }
-    }
-     function mostrarResultado(total, detalle) {
-      // ─── Capturar datos del formulario ───────────────────────────────
-    const datosUsuario = {
-      nombreCompleto: `${document.getElementById("nombre").value} ${document.getElementById("apellido").value || 'Cliente'}`.trim(),
-      tipoDocumento: document.getElementById("tipoDocumento").value || 'No especificado',
-      numeroDocumento: document.getElementById("numeroDocumento").value || 'No especificado',
-      correo: document.getElementById("correo").value || 'No especificado',
-      contacto: document.getElementById("contacto").value || 'No especificado',
-      ubicacion: document.getElementById("ubicacion").value || 'No especificada',
-      direccion: document.getElementById("direccion").value || 'No especificada',
-      contactoPersonalizado: document.getElementById("contactoPersonalizado").checked ? "Sí" : "No",
-      fechaVisita: document.getElementById("contactoPersonalizado").checked ? (document.getElementById("fechaVisita").value || 'No especificada') : 'No solicitada',
-      descripcion: document.getElementById("descripcion").value || 'Sin descripción',
-    };
-
-    // ─── Crear contenedor si no existe ──────────────────────────────
-    let box = document.getElementById('resultado-cotizacion');
-    if (!box) {
-      box = document.createElement('div');
-      box.id = 'resultado-cotizacion';
-      box.className = 'max-w-4xl mx-auto mt-6';
-      form.after(box);
-    }
-    // ─── Normalizar nombres de categoría ───────────────────────────────
-    detalle = detalle.map(d => {
-      let categoriaLegible = d.categoria;
-
-      switch (d.categoria) {
-        case 'obraNegra':
-          categoriaLegible = 'Obra Negra';
-          break;
-        case 'obraBlanca':
-          categoriaLegible = 'Obra Blanca';
-          break;
-        case 'mantenimiento':
-          categoriaLegible = 'Mantenimiento';
-          break;
-      }
-
-      return { ...d, categoria: categoriaLegible };
     });
 
-// ─── Construir HTML de la factura ───────────────────────────────
-box.innerHTML = `
-<div id="factura-container" class="relative w-full mx-auto p-2 sm:p-6 bg-white shadow-lg rounded-lg">
+    console.log("DATOS:", { obraNegra, obraBlanca, obraGris, mantenimiento });
 
-  <!-- ENCABEZADO -->
-  <div class="flex justify-between items-center border-b-2 border-teal-500 pb-6 mb-8">
-    <div class="flex flex-col items-center gap-2">
-      <img src="../assets/img/JB-CONSTRUCTORES.png"
-        class="h-16 w-16 object-cover rounded-full border-2 border-teal-500">
-      <h1 class="text-lg font-extrabold text-teal-700">JB-CONSTRUCTORES</h1>
-    </div>
+    renderCards('obra-negra-section', obraNegra);
+    renderCards('obra-blanca-section', obraBlanca);
+    renderCards('obra-gris-section', obraGris);
+    renderCards('mantenimiento-section', mantenimiento);
 
-    <div class="text-right space-y-1">
-      <p class="text-gray-600">${new Date().toLocaleDateString()}</p>
-      <p class="text-gray-600">${new Date().toLocaleTimeString()}</p>
-      <p class="text-gray-600">Cotización #${Math.floor(Math.random() * 10000)}</p>
-    </div>
-  </div>
-
-  <!-- DATOS CLIENTE -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-teal-600 mb-2">Datos del Cliente</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-      <p><strong>Nombre:</strong> ${datosUsuario.nombreCompleto}</p>
-      <p><strong>Documento:</strong> ${datosUsuario.numeroDocumento}</p>
-      <p><strong>Correo:</strong> ${datosUsuario.correo}</p>
-      <p><strong>Contacto:</strong> ${datosUsuario.contacto}</p>
-      <p><strong>Ubicación:</strong> ${datosUsuario.ubicacion}</p>
-      <p><strong>Dirección:</strong> ${datosUsuario.direccion}</p>
-    </div>
-  </div>
-
-  <!-- DETALLE -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-teal-600 mb-2">Detalle de Servicios</h2>
-
-    <div class="overflow-x-auto">
-      <table class="w-full border text-sm">
-        <thead>
-          <tr class="bg-teal-100">
-            <th class="border p-2">Servicio</th>
-            <th class="border p-2">Categoría</th>
-            <th class="border p-2 text-right">m²</th>
-            <th class="border p-2 text-right">Precio</th>
-            <th class="border p-2 text-right">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${detalle.map(d => `
-            <tr>
-              <td class="border p-2">${d.servicio_nombre}</td>
-              <td class="border p-2">${d.categoria}</td>
-              <td class="border p-2 text-right">${d.metros}</td>
-              <td class="border p-2 text-right">${formatearCOP(d.precio_unitario)}</td>
-              <td class="border p-2 text-right font-semibold">${formatearCOP(d.subtotal)}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-        <tfoot>
-          <tr class="bg-gray-100">
-            <td colspan="4" class="text-right font-bold p-2">Total</td>
-            <td class="text-right text-xl font-bold text-red-600 p-2">
-              ${formatearCOP(total)}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
-
-  <!-- NOTA -->
-  <p class="text-sm italic text-gray-600">
-    * Valores estimados sujetos a validación técnica.
-  </p>
-
-  <!-- BOTONES -->
-  <div class="mt-6 flex justify-center gap-4 flex-wrap">
-
-    <button id="cerrarFactura"
-      class="w-40 h-10 bg-red-600 text-white rounded-lg hover:bg-red-700">
-      Cerrar
-    </button>
-
-    <button id="btnExportPDF"
-      class="w-40 h-10 bg-teal-600 text-white rounded-lg hover:bg-teal-700">
-      Descargar
-    </button>
-
-    <button id="btnEnviarCorreo"
-      class="w-40 h-10 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-      Enviar Correo
-    </button>
-
-  </div>
-
-</div>
-`;
-
-// — Inserción del listener mínimo para el botón cerrar (restaura overflowX)
-const btnCerrar = document.getElementById('cerrarFactura');
-if (btnCerrar) {
-  btnCerrar.addEventListener('click', () => {
-    const factura = document.getElementById('factura-container');
-    if (factura) factura.remove();
-    document.documentElement.style.overflowX = '';
-    document.body.style.overflowX = '';
-  });
-}
-      // ─── Ajustes de visualización en navegador ──────────
-      document.documentElement.style.overflowX = 'hidden'; 
-      document.body.style.overflowX = 'hidden';
-
-      // ─── Función para escalar solo el contenedor ──────────
-      function ajustarEscala() {
-        const factura = document.querySelector('#factura-container');
-        if (!factura) return;
-
-      }
-
-      // Ejecutar al cargar y al redimensionar
-      ajustarEscala();
-      window.addEventListener('resize', ajustarEscala);
-      window.addEventListener('orientationchange', ajustarEscala);
-
-      // ─── Exportar PDF ──────────
-      document.getElementById('btnExportPDF').addEventListener('click', () => {
-        const factura = document.querySelector('#factura-container');
-        if (!factura) return;
-
-        // 1) localizar el contenedor de "Datos del Cliente"
-        let clienteGrid = factura.querySelector('#datos-cliente'); 
-        if (!clienteGrid) {
-          const h2s = factura.querySelectorAll('h2');
-          for (const h of h2s) {
-            if (h.textContent.trim().toLowerCase().includes('datos del cliente')) {
-              clienteGrid = h.parentElement.querySelector('.grid') || h.nextElementSibling;
-              break;
-            }
-          }
-        }
-
-        // Guardar estado original
-        const oldClienteStyle = clienteGrid ? clienteGrid.getAttribute('style') || '' : null;
-        const oldClienteClass = clienteGrid ? clienteGrid.className : null;
-
-        // Forzar 2 columnas en exportación
-        if (clienteGrid) {
-          try { clienteGrid.classList.remove('grid-cols-1'); } catch(e){}
-          clienteGrid.style.display = 'grid';
-          clienteGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
-          clienteGrid.style.gap = '0.75rem';
-          clienteGrid.style.gridAutoRows = 'min-content';
-          clienteGrid.querySelectorAll('p').forEach(p => p.style.margin = '0');
-        }
-
-        // Quitar sombra para evitar manchas
-        const card = factura.querySelector('.shadow-2xl');
-        const hadShadow = !!card;
-        if (card) card.classList.remove('shadow-2xl');
-
-        // Quitar botones al exportar
-        const exportButtons = factura.querySelector('#botones-export') || factura.querySelector('.mt-6');
-        let placeholder = null, parent = null;
-        if (exportButtons) {
-          parent = exportButtons.parentNode;
-          placeholder = document.createComment('export-placeholder');
-          parent.replaceChild(placeholder, exportButtons);
-        }
-
-        // Generar PDF
-        html2pdf().from(factura).set({
-          margin: [10, 10, 10, 10],
-          filename: `Cotizacion JB-CONTRUCCIONES_${new Date().toISOString().slice(0,10)}.pdf`,
-          image: { type: 'jpeg', quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        }).save()
-          .catch(err => console.error('Error generando PDF:', err))
-          .finally(() => {
-            // Restaurar botones
-            if (exportButtons && parent && placeholder) parent.replaceChild(exportButtons, placeholder);
-
-            // Restaurar grid
-            if (clienteGrid) {
-              clienteGrid.setAttribute('style', oldClienteStyle);
-              clienteGrid.className = oldClienteClass;
-              clienteGrid.querySelectorAll('p').forEach(p => p.style.margin = '');
-            }
-
-            // Restaurar sombra
-            if (card && hadShadow) card.classList.add('shadow-2xl');
-
-            // Restaurar transform de pantalla
-            factura.style.transform = oldTransform;
-          });
-      });
-
-      // ─── Scroll al resultado ────────────────────────────────────────
-      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    if (form) {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const detalle = [];
-        let total = 0;
-        ['obraNegra', 'obraBlanca', 'mantenimiento'].forEach(categoria => {
-          seleccion[categoria].forEach(item => {
-            const precioUnitario = obtenerPrecioSimulado(item.servicio, categoria);
-            const subtotal = (item.m2 || 0) * precioUnitario;
-            detalle.push({ categoria, servicio: item.servicio, m2: item.m2 || 0, precioUnitario, subtotal });
-            total += subtotal;
-          });
-        });
-
-        if (detalle.length === 0) {
-          alert('Por favor seleccione al menos un servicio y registre los m² correspondientes.');
-          return;
-        }
-
-        mostrarResultado(total, detalle);
-      });
-    }
+  } catch (error) {
+    console.error('Error cargando servicios:', error);
   }
-  const contactoCheckbox = document.getElementById('contactoPersonalizado');
-const campoFechaVisita = document.getElementById('campoFechaVisita');
-
-if (contactoCheckbox && campoFechaVisita) {
-  contactoCheckbox.addEventListener('change', () => {
-    if (contactoCheckbox.checked) {
-      campoFechaVisita.classList.remove('hidden');
-    } else {
-      campoFechaVisita.classList.add('hidden');
-      // Opcional: limpiar fecha al ocultar
-      document.getElementById('fechaVisita').value = '';
-    }
-  });
 }
+
+cargarServicios();
 
 });

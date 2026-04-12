@@ -4,10 +4,10 @@ session_start();
 // Vaciar variables de sesión
 $_SESSION = [];
 
-// Destruir sesión
+// Destruir sesión completamente
 session_destroy();
 
-// Eliminar cookie de sesión (MUY IMPORTANTE)
+// Eliminar cookie de sesión (CRÍTICO)
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(
@@ -21,6 +21,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Redirigir al index público
-header("Location: index.php");
+// Redirección ABSOLUTA (evita errores de rutas)
+header("Location: /JB-CONSTRUCCIONES/index.php");
 exit();

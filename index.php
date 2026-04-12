@@ -1,4 +1,10 @@
 <?php
+
+require_once __DIR__ . '/app/controllers/ServicioController.php';
+$controller = new ServicioController();
+$servicios = $controller->listarPorCategoria();
+
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -10,7 +16,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>JB Constructores - Construcción y Mantenimiento</title>
+    <title>Construcción y Mantenimiento</title>
 
     <link rel="icon" href="/JB-CONSTRUCCIONES/assets/img/favicon.ico" type="image/x-icon" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -121,26 +127,34 @@ if (session_status() === PHP_SESSION_NONE) {
                 Registrarse
             </a>
 
-            <button id="menu-toggle"
-                class="md:hidden p-1 sm:p-2 w-[2.3rem] text-white bg-gray-800 transition-colors duration-300">
-                &#9776;
-            </button>
-
         <?php endif; ?>
+        <!-- SIEMPRE -->
+
+
+      <button id="menu-toggle" class="md:hidden p-2 text-white bg-gray-800">
+          ☰
+      </button>
 
       </div>
 
     </div>
 
   </div>
-</header>
 
+<?php if (isset($_GET['session']) && $_GET['session'] === 'expirada'): ?>
+    <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+        Tu sesión expiró por inactividad.
+    </div>
+<?php endif; ?>
+
+</header>
 
       <!-- Navegación pestañas -->
       <nav class="tabs mt-[0.1rem] mb-[0.1rem] text-base md:text-lg flex flex-row sm:gap-1 gap-[0.5px] justify-evenly items-center flex-wrap">
 
         <button class="active" data-tab="obra-negra">Obra Negra</button>
         <button data-tab="obra-blanca">Obra Blanca</button>
+        <button data-tab="obra-gris">Obra Gris</button>
         <button data-tab="mantenimiento">Mantenimiento</button>
 
         <a href="https://wa.me/573007413114?text=Hola%2C%20quiero%20más%20información%20sobre%20sus%20servicios"
@@ -168,17 +182,20 @@ if (session_status() === PHP_SESSION_NONE) {
           </div>
         </section>
 
+        <section id="obra-gris" class="tab-content hidden w-full">
+          <div id="obra-gris-section"
+               class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-4 w-full mt-4">
+          </div>
+        </section>
+
         <section id="mantenimiento" class="tab-content hidden w-full">
           <div id="mantenimiento-section"
                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-4 w-full mt-4">
           </div>
         </section>
-
       </main>
-
     </div>
 </div>
-
 
 <script>
 const tabs = document.querySelectorAll("nav.tabs button");
@@ -195,8 +212,12 @@ tabs.forEach((tab) => {
 });
 </script>
 
+<script>
+  const serviciosDB = <?= json_encode($servicios); ?>;
+</script>
+
 <!-- JS externo que genera tarjetas -->
-<script src="./Scripts/main.js"></script>
+<script src="http://localhost/JB-CONSTRUCCIONES/Scripts/main.js"></script>
 
 </body>
 </html>

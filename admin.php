@@ -1,4 +1,12 @@
 <?php
+  require_once __DIR__ . '/config/session.php';
+
+  // Validar si está logueado
+  if (!isset($_SESSION['usuario'])) {
+      header("Location: /JB-CONSTRUCCIONES/index.php");
+      exit();
+  }
+
   if (session_status() === PHP_SESSION_NONE) {
       session_start();
   }

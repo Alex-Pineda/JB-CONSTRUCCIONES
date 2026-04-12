@@ -90,12 +90,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         session_regenerate_id(true);
 
+        // Guardar datos del usuario
         $_SESSION['usuario'] = [
             'idusuario' => $data['idusuario'],
             'nombre_usuario' => $data['nombre_usuario'],
             'idrol' => $data['idrol'],
             'rol' => $data['rol']
         ];
+
+        // Inicializar seguridad de sesión
+        $_SESSION['LAST_ACTIVITY'] = time();
+        $_SESSION['IP'] = $_SERVER['REMOTE_ADDR'];
+        $_SESSION['USER_AGENT'] = $_SERVER['HTTP_USER_AGENT'];
 
         // Solo administrador va a admin
         if ($data['idrol'] == 1) {

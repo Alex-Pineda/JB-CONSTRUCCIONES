@@ -1,5 +1,12 @@
 <?php
+require_once __DIR__ . '/../../config/session.php';
 require_once __DIR__ . '/../controllers/proyectocontroller.php';
+
+// Validar si está logueado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /JB-CONSTRUCCIONES/index.php");
+    exit();
+}
 
 $controller = new ProyectoController();
 $proyectos = $controller->listar();

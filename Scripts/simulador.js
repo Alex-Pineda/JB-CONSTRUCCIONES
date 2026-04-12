@@ -206,21 +206,26 @@ if (btnCorreo) {
       const res = await fetch('/JB-CONSTRUCCIONES/app/controllers/EnviarCorreoController.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({correo, total, detalle,
-cliente: {
-    nombreCompleto: document.getElementById("nombre").value + " " + document.getElementById("apellido").value,
-    numeroDocumento: document.getElementById("numeroDocumento").value,
-    correo: document.getElementById("correo").value,
-    contacto: document.getElementById("contacto").value,
-    ubicacion: document.getElementById("ubicacion").value,
-    direccion: document.getElementById("direccion").value
-  }
-})
+        body: JSON.stringify({correo, total, detalle,
+        cliente: {
+            nombreCompleto: document.getElementById("nombre").value + " " + document.getElementById("apellido").value,
+            numeroDocumento: document.getElementById("numeroDocumento").value,
+            correo: document.getElementById("correo").value,
+            contacto: document.getElementById("contacto").value,
+            ubicacion: document.getElementById("ubicacion").value,
+            direccion: document.getElementById("direccion").value
+          }
+        })
       });
 
       // 🔥 IMPORTANTE: leer como texto primero
       const text = await res.text();
-      console.log("RESPUESTA DEL SERVIDOR:", text);
+      if (response.success) {
+        alert("Cotización guardada correctamente ID: " + response.id_cotizacion);
+      } else {
+        console.error("Error backend:", response);
+        alert("Error al guardar cotización");
+      }
 
       let data;
 
@@ -246,29 +251,75 @@ cliente: {
 
 }
 
+
+function obtenerDetalleServicios() {
+  const servicios = document.querySelectorAll('.servicio-item');
+
+  const detalle = [];
+
+  servicios.forEach(item => {
+    const check = item.querySelector('.servicio-check');
+    const inputM2 = item.querySelector('.m2');
+
+    if (check.checked && inputM2.value) {
+      const metros = parseFloat(inputM2.value);
+      const precio = parseFloat(check.dataset.precio);
+
+      detalle.push({
+        servicio_id: check.dataset.id,
+        metros: metros,
+        precio_unitario: precio,
+        subtotal: metros * precio
+      });
+    }
+  });
+
+  return detalle;
+}
+
+
   /* =========================
      6. Guardar en BD
      ========================= */
   async function guardarCotizacion(detalle, total) {
 
-    const datosUsuario = {
-    nombreCompleto: `${document.getElementById("nombre")?.value || ''} ${document.getElementById("apellido")?.value || ''}`.trim() || 'No especificado',
-    tipoDocumento: document.getElementById("tipoDocumento")?.value || 'No especificado',
-    numeroDocumento: document.getElementById("numeroDocumento")?.value || 'No especificado',
-    correo: document.getElementById("correo")?.value || 'No especificado',
-    contacto: document.getElementById("contacto")?.value || 'No especificado',
-    ubicacion: document.getElementById("ubicacion")?.value || 'No especificada',
-    direccion: document.getElementById("direccion")?.value || 'No especificada',
-    descripcion: document.getElementById("descripcion")?.value || 'Sin descripción',
-    fechaVisita: document.getElementById("fechaVisita")?.value || 'No especificada'
+    const nombres = document.getElementById("nombre")?.value || '';
+    const apellidos = document.getElementById("apellido")?.value || '';
+
+    const datos = {
+      nombres: nombres || 'No especificado',
+      apellidos: apellidos || 'No especificado',
+      tipo_documento: document.getElementById("tipoDocumento")?.value || 'No especificado',
+      numero_documento: document.getElementById("numeroDocumento")?.value || 'No especificado',
+      correo: document.getElementById("correo")?.value || 'No especificado',
+      contacto: document.getElementById("contacto")?.value || 'No especificado',
+      ubicacion: document.getElementById("ubicacion")?.value || 'No especificada',
+      direccion: document.getElementById("direccion")?.value || 'No especificada',
+      descripcion: document.getElementById("descripcion")?.value || 'Sin descripción',
+      ser_contactado: 1,
+      fecha_visita: document.getElementById("fechaVisita")?.value || null,
+      total_estimado: total,
+      detalle: detalle
     };
 
     try {
-      await fetch('../controllers/CotizacionController.php', {
+      const res = await fetch('/JB-CONSTRUCCIONES/app/controllers/CotizacionController.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datos)
       });
+
+      const text = await res.text();
+      console.log("RAW RESPONSE:", text);
+
+      let response;
+      try {
+        response = JSON.parse(text);
+      } catch (e) {
+        console.error("JSON inválido:", text);
+        return;
+      }
+
     } catch (err) {
       console.error('Error guardando:', err);
     }
@@ -277,45 +328,18 @@ cliente: {
   /* =========================
      7. SUBMIT (CLAVE)
      ========================= */
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
-    const checks = document.querySelectorAll('.servicio-check:checked');
+  const detalle = obtenerDetalleServicios();
 
-    let total = 0;
-    const detalle = [];
+  if (detalle.length === 0) {
+    alert("Selecciona al menos un servicio");
+    return;
+  }
 
-    checks.forEach(check => {
+  const total = detalle.reduce((acc, d) => acc + d.subtotal, 0);
 
-      const container = check.closest('.servicio-item');
-      const m2input = container.querySelector('.m2');
-
-      const metros = parseFloat(m2input.value) || 0;
-      const precio = parseFloat(check.dataset.precio);
-      const idServicio = check.dataset.id;
-
-      if (metros <= 0) return;
-
-      const subtotal = metros * precio;
-      total += subtotal;
-
-      detalle.push({
-        servicio_id: idServicio,
-        servicio_nombre: container.querySelector('label').innerText,
-        categoria: obtenerCategoria(container),
-        metros,
-        precio_unitario: precio,
-        subtotal
-      });
-    });
-
-    if (detalle.length === 0) {
-      alert('Selecciona al menos un servicio con m²');
-      return;
-    }
-
-    mostrarResultado(total, detalle);
-    await guardarCotizacion(detalle, total);
-  });
-
+  guardarCotizacion(detalle, total);
+});
 });
