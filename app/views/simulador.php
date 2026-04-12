@@ -11,6 +11,7 @@ $servicios = $controller->listarPorCategoria();
 // Agrupar por categoría
 $categorias = [
     'Obra negra' => [],
+    'Obra gris' => [],
     'Obra blanca' => [],
     'Mantenimiento' => []
 ];
@@ -21,6 +22,9 @@ $categorias = [
 
         if ($categoria === 'obra negra') {
             $categorias['Obra negra'][] = $s;
+
+        } elseif ($categoria === 'obra gris') {
+            $categorias['Obra gris'][] = $s;
 
         } elseif ($categoria === 'obra blanca') {
             $categorias['Obra blanca'][] = $s;
@@ -43,7 +47,7 @@ $categorias = [
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="/JB-CONSTRUCCIONES/assets/css/style.css">
   <style>
     .input-estilo {
       width: 100%;
@@ -86,7 +90,7 @@ $categorias = [
         <div class="w-full max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
           <h1 class="text-2xl font-semibold text-teal-700">SIMULADOR</h1>
           <button 
-            onclick="window.location.href='../index.html'" 
+            onclick="window.location.href='../../index.php'" 
             class="px-3 py-1 bg-teal-600 text-white rounded-lg text-sm hover:bg-teal-700 transition duration-200">Inicio</button>
         </div>
       </header>
@@ -94,7 +98,7 @@ $categorias = [
       <!-- MAIN (Scroll solo aquí) -->
     <main class="flex-1 overflow-y-auto pt-2 pr-2 pl-2 pb-2 bg-gray-100">
 
-        <div class="w-full max-w-5xl mx-auto">
+        <div class="w-full max-w mx-auto">
           <p class="text-teal-700 text-2xl font-bold text-center mt-8 -mb-8" id="simulador-titulo"></p>
 
           <!-- FORMULARIO -->
@@ -153,9 +157,29 @@ $categorias = [
                 <h2 class="text-center font-semibold text-teal-700 mb-6 text-2xl">
                   Selecciona los Servicios y sus m²
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div id="obraNegraOpciones" class="space-y-3 flex-1">
                     <?php foreach ($categorias['Obra negra'] as $s): ?>
+                        <div class="flex items-center space-x-3 servicio-item">
+
+                            <input type="checkbox"
+                                class="servicio-check"
+                                data-id="<?= $s['idservicio'] ?>"
+                                data-precio="<?= $s['precio_base'] ?>">
+
+                            <label class="text-sm">
+                                <?= htmlspecialchars($s['nombre_servicio']) ?>
+                            </label>
+
+                            <input type="number"
+                                class="m2 hidden border rounded px-2 py-1 text-center"
+                                placeholder="m²">
+                        </div>
+                    <?php endforeach; ?>
+                    </div>
+
+                  <div id="obraGrisOpciones" class="space-y-3 flex-1">
+                    <?php foreach ($categorias['Obra gris'] as $s): ?>
                         <div class="flex items-center space-x-3 servicio-item">
 
                             <input type="checkbox"
@@ -231,13 +255,16 @@ $categorias = [
   <style>
     /* Todos los inputs numéricos dentro de las tarjetas tendrán 3rem de ancho */
     #obraNegraOpciones input[type="number"],
+    #obraGrisOpciones input[type="number"],
     #obraBlancaOpciones input[type="number"],
     #mantenimientoOpciones input[type="number"] {
-      width: 3rem;
+      width: 4rem;
       text-align: center;
+      font-size:small;
     }
   </style>
 
     <script src="../../Scripts/simulador.js"></script>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-require_once './config/data.php';
+require_once __DIR__ . '/../../config/data.php';
 
 session_start();
 $usuario_id = $_SESSION['usuario']['idusuario'] ?? null;

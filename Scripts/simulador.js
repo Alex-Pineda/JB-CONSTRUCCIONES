@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = columna.id;
 
     if (id.includes('obraNegra')) return 'Obra Negra';
+    if (id.includes('obraGris')) return 'Obra Gris';
     if (id.includes('obraBlanca')) return 'Obra Blanca';
     if (id.includes('mantenimiento')) return 'Mantenimiento';
 
@@ -206,8 +207,7 @@ if (btnCorreo) {
       const res = await fetch('/JB-CONSTRUCCIONES/app/controllers/EnviarCorreoController.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({correo, total, detalle,
-        cliente: {
+        body: JSON.stringify({correo, total, detalle,cliente: {
             nombreCompleto: document.getElementById("nombre").value + " " + document.getElementById("apellido").value,
             numeroDocumento: document.getElementById("numeroDocumento").value,
             correo: document.getElementById("correo").value,
@@ -218,24 +218,20 @@ if (btnCorreo) {
         })
       });
 
-      // 🔥 IMPORTANTE: leer como texto primero
+      // ✅ LEER RESPUESTA CORRECTAMENTE
       const text = await res.text();
-      if (response.success) {
-        alert("Cotización guardada correctamente ID: " + response.id_cotizacion);
-      } else {
-        console.error("Error backend:", response);
-        alert("Error al guardar cotización");
-      }
+      console.log("RAW RESPONSE CORREO:", text);
 
       let data;
-
       try {
         data = JSON.parse(text);
       } catch (e) {
-        alert("El servidor NO devolvió JSON válido");
+        console.error("El servidor no devolvió JSON válido:", text);
+        alert("Error inesperado del servidor");
         return;
       }
 
+      // ✅ VALIDACIÓN CORRECTA
       if (data.ok) {
         alert('Correo enviado correctamente');
       } else {
@@ -244,7 +240,7 @@ if (btnCorreo) {
 
     } catch (err) {
       console.error("ERROR FETCH:", err);
-      alert('Error de conexión real (fetch falló)');
+      alert('Error de conexión (fetch falló)');
     }
   });
 }
@@ -260,6 +256,7 @@ function obtenerDetalleServicios() {
   servicios.forEach(item => {
     const check = item.querySelector('.servicio-check');
     const inputM2 = item.querySelector('.m2');
+    const label = item.querySelector('label');
 
     if (check.checked && inputM2.value) {
       const metros = parseFloat(inputM2.value);
@@ -267,6 +264,8 @@ function obtenerDetalleServicios() {
 
       detalle.push({
         servicio_id: check.dataset.id,
+        servicio_nombre: label.textContent.trim(), // ✅ NOMBRE
+        categoria: obtenerCategoria(item), // ✅ CATEGORÍA
         metros: metros,
         precio_unitario: precio,
         subtotal: metros * precio
@@ -281,49 +280,62 @@ function obtenerDetalleServicios() {
   /* =========================
      6. Guardar en BD
      ========================= */
-  async function guardarCotizacion(detalle, total) {
+async function guardarCotizacion(detalle, total) {
 
-    const nombres = document.getElementById("nombre")?.value || '';
-    const apellidos = document.getElementById("apellido")?.value || '';
+  const nombres = document.getElementById("nombre")?.value || '';
+  const apellidos = document.getElementById("apellido")?.value || '';
 
-    const datos = {
-      nombres: nombres || 'No especificado',
-      apellidos: apellidos || 'No especificado',
-      tipo_documento: document.getElementById("tipoDocumento")?.value || 'No especificado',
-      numero_documento: document.getElementById("numeroDocumento")?.value || 'No especificado',
-      correo: document.getElementById("correo")?.value || 'No especificado',
-      contacto: document.getElementById("contacto")?.value || 'No especificado',
-      ubicacion: document.getElementById("ubicacion")?.value || 'No especificada',
-      direccion: document.getElementById("direccion")?.value || 'No especificada',
-      descripcion: document.getElementById("descripcion")?.value || 'Sin descripción',
-      ser_contactado: 1,
-      fecha_visita: document.getElementById("fechaVisita")?.value || null,
-      total_estimado: total,
-      detalle: detalle
-    };
+  const datos = {
+    nombres: nombres || 'No especificado',
+    apellidos: apellidos || 'No especificado',
+    tipo_documento: document.getElementById("tipoDocumento")?.value || 'No especificado',
+    numero_documento: document.getElementById("numeroDocumento")?.value || 'No especificado',
+    correo: document.getElementById("correo")?.value || 'No especificado',
+    contacto: document.getElementById("contacto")?.value || 'No especificado',
+    ubicacion: document.getElementById("ubicacion")?.value || 'No especificada',
+    direccion: document.getElementById("direccion")?.value || 'No especificada',
+    descripcion: document.getElementById("descripcion")?.value || 'Sin descripción',
+    ser_contactado: 1,
+    fecha_visita: document.getElementById("fechaVisita")?.value || null,
+    total_estimado: total,
+    detalle: detalle
+  };
 
+  try {
+    const res = await fetch('/JB-CONSTRUCCIONES/app/controllers/CotizacionController.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+
+    const text = await res.text();
+    console.log("RAW RESPONSE:", text);
+
+    let response;
     try {
-      const res = await fetch('/JB-CONSTRUCCIONES/app/controllers/CotizacionController.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(datos)
-      });
-
-      const text = await res.text();
-      console.log("RAW RESPONSE:", text);
-
-      let response;
-      try {
-        response = JSON.parse(text);
-      } catch (e) {
-        console.error("JSON inválido:", text);
-        return;
-      }
-
-    } catch (err) {
-      console.error('Error guardando:', err);
+      response = JSON.parse(text);
+    } catch (e) {
+      console.error("JSON inválido:", text);
+      return;
     }
+
+    // ❗ VALIDACIÓN REAL
+    if (response.success) {
+
+      console.log("Cotización guardada:", response.id_cotizacion);
+
+      // 🔥 AQUÍ SE SOLUCIONA TU PROBLEMA
+      mostrarResultado(total, detalle);
+
+    } else {
+      console.error("Error backend:", response);
+      alert("Error al guardar cotización");
+    }
+
+  } catch (err) {
+    console.error('Error guardando:', err);
   }
+}
 
   /* =========================
      7. SUBMIT (CLAVE)
