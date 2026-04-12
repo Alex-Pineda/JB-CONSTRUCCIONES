@@ -217,7 +217,7 @@ tabs.forEach((tab) => {
 </script>
 
 <!-- JS externo que genera tarjetas -->
-<script src="http://localhost/JB-CONSTRUCCIONES/Scripts/main.js"></script>
+<script src="/JB-CONSTRUCCIONES/Scripts/main.js"></script>
 
 </body>
 </html>
