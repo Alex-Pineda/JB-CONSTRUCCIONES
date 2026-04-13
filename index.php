@@ -104,7 +104,7 @@ if (session_status() === PHP_SESSION_NONE) {
       </div>
 
       <div class="flex flex-row space-x-2 mt-3 sm:mt-0 w-full sm:w-auto justify-center sm:justify-end"
-           style="white-space: nowrap; min-width: 100px; margin-top: 0.7rem;">
+           style="white-space: nowrap; min-width: 100px; margin-top: 0.3rem;">
 
         <?php if (isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])): ?>
 
@@ -116,22 +116,26 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <?php else: ?>
 
+            <a href="https://wa.me/573007413114?text=Hola%2C%20quiero%20más%20información%20sobre%20sus%20servicios"
+               class="flex items-center"><img src="/JB-CONSTRUCCIONES/assets/img/whatsapp-fill.svg"alt="WhatsApp"
+               class="w-7 h-7 mt-[-0.7rem] transition-transform duration-200 hover:scale-125 hover:brightness-130"/>
+            </a>
+
             <!-- Solo visible cuando NO está logueado -->
             <a href="/JB-CONSTRUCCIONES/app/views/auth/login.php"
-               class="px-2 py-0 sm:px-3 sm:py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition duration-200">
+               class="mt-0.5 px-2 py-1 sm:px-3 sm:py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition duration-200">
                 Iniciar sesión
             </a>
 
             <a href="/JB-CONSTRUCCIONES/app/views/auth/registro.php"
-               class="px-2 py-0 sm:px-3 sm:py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition duration-200">
+               class="mt-0.5 px-2 py-1 sm:px-3 sm:py-1 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition duration-200">
                 Registrarse
             </a>
 
         <?php endif; ?>
         <!-- SIEMPRE -->
 
-
-      <button id="menu-toggle" class="md:hidden p-2 text-white bg-gray-800">
+      <button id="menu-toggle" class=" md:hidden p-2 py-1 text-white bg-gray-800">
           ☰
       </button>
 
@@ -157,12 +161,6 @@ if (session_status() === PHP_SESSION_NONE) {
         <button data-tab="obra-gris">Obra Gris</button>
         <button data-tab="mantenimiento">Mantenimiento</button>
 
-        <a href="https://wa.me/573007413114?text=Hola%2C%20quiero%20más%20información%20sobre%20sus%20servicios"
-           class="flex items-center">
-          <img src="/JB-CONSTRUCCIONES/assets/img/whatsapp-fill.svg"
-               alt="WhatsApp"
-               class="w-7 h-7 mt-[-0.7rem] transition-transform duration-200 hover:scale-125 hover:brightness-130"/>
-        </a>
       </nav>
 
       <!-- Contenido principal -->
