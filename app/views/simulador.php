@@ -264,6 +264,6 @@ $categorias = [
     }
   </style>
 
-    <script src="/JB-CONSTRUCCIONES/Scripts/main.js"></script>
+    <script src="/JB-CONSTRUCCIONES/Scripts/simulador.js"></script>
 </body>
 </html>
