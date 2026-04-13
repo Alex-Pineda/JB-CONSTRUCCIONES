@@ -38,7 +38,7 @@ foreach ($proyectos as $proy) {
   <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="/JB-CONSTRUCCIONES/assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -52,7 +52,7 @@ foreach ($proyectos as $proy) {
 
 <header class="border-b-[3px] border-[#161a7e] py-4 px-6 shadow-sm flex justify-between items-center">
     <h1 class="text-xl font-semibold text-gray-700">Gestión Proyectos</h1>
-    <button onclick="window.location.href='../index.html'"
+    <button onclick="window.location.href='/JB-CONSTRUCCIONES/admin.php'"
     class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Inicio</button>
 </header>
 
