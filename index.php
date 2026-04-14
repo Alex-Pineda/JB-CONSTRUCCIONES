@@ -68,11 +68,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <div class="flex min-h-screen">
 
-    <!-- Sidebar REAL en PHP -->
+    <!-- Sidebar -->
     <?php require_once __DIR__ . '/app/views/layout/sidebar.php'; ?>
 
     <!-- Main content -->
-    <div class="flex-1 flex flex-col h-full">
+<div class="flex-1 flex flex-col h-full">
 
       <!-- Header -->
 <header class="bg-transparent shadow-none">
@@ -110,11 +110,21 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <!-- Solo visible cuando está logueado -->
             <a href="/JB-CONSTRUCCIONES/logout.php"
-               class="px-2 py-0 sm:px-3 sm:py-1 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
+               class="px-2 py-1 sm:px-3 sm:py-1 bg-red-600 text-white rounded-lg text-sm hover:bg-red-700 transition duration-200">
                 Cerrar sesión
             </a>
 
-        <?php else: ?>
+        <!--  SOLO ADMIN -->
+          <?php if (isset($_SESSION['usuario']['rol']) && $_SESSION['usuario']['rol'] === 'administrador'): ?>
+
+              <a href="/JB-CONSTRUCCIONES/admin.php"
+                class="px-2 py-1 sm:px-3 sm:py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition duration-200">
+                  Panel
+              </a>
+
+          <?php endif; ?>
+
+      <?php else: ?>
 
             <a href="https://wa.me/573007413114?text=Hola%2C%20quiero%20más%20información%20sobre%20sus%20servicios"
                class="flex items-center"><img src="/JB-CONSTRUCCIONES/assets/img/whatsapp-fill.svg"alt="WhatsApp"
@@ -145,13 +155,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
   </div>
 
-<?php if (isset($_GET['session']) && $_GET['session'] === 'expirada'): ?>
-    <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
-        Tu sesión expiró por inactividad.
-    </div>
-<?php endif; ?>
-
 </header>
+
+        <?php if (isset($_GET['session']) && $_GET['session'] === 'expirada'): ?>
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+            Tu sesión expiró por inactividad.
+        </div>
+        <?php endif; ?>
 
       <!-- Navegación pestañas -->
       <nav class="tabs mt-[0.1rem] mb-[0.1rem] text-base md:text-lg flex flex-row sm:gap-1 gap-[0.5px] justify-evenly items-center flex-wrap">

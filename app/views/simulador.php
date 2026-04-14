@@ -90,9 +90,10 @@ $categorias = [
         <div class="w-full max-w-5xl mx-auto flex items-center justify-between px-6 py-4">
           <h1 class="text-2xl font-semibold text-teal-700">SIMULADOR</h1>
           <button 
-            onclick="window.location.href='../../index.php'" 
+            onclick="window.location.href='/JB-CONSTRUCCIONES/index.php'" 
             class="px-3 py-1 bg-teal-600 text-white rounded-lg text-sm hover:bg-teal-700 transition duration-200">Inicio</button>
         </div>
+
       </header>
 
       <!-- MAIN (Scroll solo aquí) -->

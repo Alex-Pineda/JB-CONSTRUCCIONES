@@ -27,6 +27,8 @@ if (session_status() === PHP_SESSION_NONE) {
         </a>
     </div>
 
+
+
     <!-- Servicios -->
     <div class="space-y-1 mb-8">
         <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Servicios</div>
@@ -35,6 +37,9 @@ if (session_status() === PHP_SESSION_NONE) {
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
            💸 Cotización
         </a>
+   
+        <!-- Enlaces ocultos - Se activaran cuando se migren a php 
+
 
         <a href="/JB-CONSTRUCCIONES/app/views/portafolio.html"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
@@ -50,6 +55,10 @@ if (session_status() === PHP_SESSION_NONE) {
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
            📝 Reseñas
         </a>
+
+      -->
+
+
     </div>
 
 </aside>

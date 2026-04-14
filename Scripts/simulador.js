@@ -218,7 +218,7 @@ if (btnCorreo) {
         })
       });
 
-      // ✅ LEER RESPUESTA CORRECTAMENTE
+      //  LEER RESPUESTA CORRECTAMENTE
       const text = await res.text();
       console.log("RAW RESPONSE CORREO:", text);
 
@@ -231,7 +231,7 @@ if (btnCorreo) {
         return;
       }
 
-      // ✅ VALIDACIÓN CORRECTA
+      // VALIDACIÓN CORRECTA
       if (data.ok) {
         alert('Correo enviado correctamente');
       } else {
@@ -264,8 +264,8 @@ function obtenerDetalleServicios() {
 
       detalle.push({
         servicio_id: check.dataset.id,
-        servicio_nombre: label.textContent.trim(), // ✅ NOMBRE
-        categoria: obtenerCategoria(item), // ✅ CATEGORÍA
+        servicio_nombre: label.textContent.trim(), //  NOMBRE
+        categoria: obtenerCategoria(item), //  CATEGORÍA
         metros: metros,
         precio_unitario: precio,
         subtotal: metros * precio
@@ -319,12 +319,12 @@ async function guardarCotizacion(detalle, total) {
       return;
     }
 
-    // ❗ VALIDACIÓN REAL
+    //  VALIDACIÓN REAL
     if (response.success) {
 
       console.log("Cotización guardada:", response.id_cotizacion);
 
-      // 🔥 AQUÍ SE SOLUCIONA TU PROBLEMA
+      //  AQUÍ SE SOLUCIONA TU PROBLEMA
       mostrarResultado(total, detalle);
 
     } else {

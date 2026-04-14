@@ -58,9 +58,9 @@ try {
 
     // Enviar el correo
     $mail->send();
-    echo "✅ Correo de prueba enviado correctamente a $correoDestino.";
+    echo "Correo de prueba enviado correctamente a $correoDestino.";
 
 } catch (Exception $e) {
-    echo "❌ Error al enviar el correo: {$mail->ErrorInfo}";
+    echo "Error al enviar el correo: {$mail->ErrorInfo}";
 }
 ?>
