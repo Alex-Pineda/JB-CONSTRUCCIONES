@@ -1,5 +1,8 @@
 <?php
-require_once '../../models/usuario.php';
+
+require_once __DIR__ . '/../../../config/data.php'; 
+
+require_once __DIR__ . '/../../models/usuario.php';
 
 $token = $_GET['token'] ?? null;
 
@@ -55,7 +58,7 @@ if (!$usuario) {
       </div>
     <?php endif; ?>
 
-    <form action="../../controllers/authcontroller.php" method="POST" autocomplete="off">
+    <form action="<?= BASE_URL ?>app/controllers/authcontroller.php" method="POST" autocomplete="off">
 
       <input type="hidden" name="accion" value="restablecer">
       <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
@@ -80,7 +83,7 @@ if (!$usuario) {
       </button>
 
       <div class="mt-6 text-center">
-        <a href="login.php" class="text-green-700 hover:text-blue-700 font-medium">
+        <a href="<?= BASE_URL ?>login.php" class="text-green-700 hover:text-blue-700 font-medium">
           Volver al inicio de sesión
         </a>
       </div>
@@ -88,6 +91,12 @@ if (!$usuario) {
     </form>
 
   </div>
+
+<script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>
+
 
 </body>
 </html>

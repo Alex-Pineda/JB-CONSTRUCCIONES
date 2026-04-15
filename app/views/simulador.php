@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../config/session.php';
+require_once __DIR__ . '/../../config/data.php';
 require_once __DIR__ . '/../controllers/ServicioController.php';
+
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -42,12 +44,10 @@ $categorias = [
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulador de Cotizaciones</title>
 
-  <link rel="icon" href="</JB-CONSTRUCCIONES/assets/img/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="<?= BASE_URL ?>assets/img/favicon.ico" type="image/x-icon" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/JB-CONSTRUCCIONES/assets/css/style.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
   <style>
     .input-estilo {
       width: 100%;
@@ -265,6 +265,11 @@ $categorias = [
     }
   </style>
 
-    <script src="/JB-CONSTRUCCIONES/Scripts/simulador.js"></script>
+  <script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+  </script>
+
+<script src="<?= BASE_URL ?>Scripts/simulador.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -13,8 +14,7 @@ $nombreUsuario = "Usuario Johnny Pineda";
 
 // Enlace de recuperación simulado
 $token = bin2hex(random_bytes(16));
-$enlace = "https://localhost/JB-CONSTRUCCIONES/Paginas/restablecerContrasena.php?token=$token";
-
+$enlace = BASE_URL . "Paginas/restablecerContrasena.php?token=" . $token;
 $mail = new PHPMailer(true);
 $mail->CharSet = 'UTF-8';
 
@@ -23,8 +23,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'alexkrimen@gmail.com'; // Gmail del remitente
-    $mail->Password = 'zkapjqncddxshatv'; // Contraseña de aplicación de Gmail
+    $mail->Username = 'alexkrimen@gmail.com';
+    $mail->Password = 'zkapjqncddxshatv';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
     $mail->Port = 587;
 
@@ -64,3 +64,7 @@ try {
     echo "Error al enviar el correo: {$mail->ErrorInfo}";
 }
 ?>
+<script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>

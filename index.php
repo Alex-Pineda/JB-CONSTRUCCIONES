@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/config/data.php';
 require_once __DIR__ . '/app/controllers/ServicioController.php';
 $controller = new ServicioController();
 $servicios = $controller->listarPorCategoria();
@@ -206,6 +206,11 @@ if (session_status() === PHP_SESSION_NONE) {
 </div>
 
 <script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>
+
+<script>
 const tabs = document.querySelectorAll("nav.tabs button");
 const contents = document.querySelectorAll(".tab-content");
 
@@ -225,7 +230,7 @@ tabs.forEach((tab) => {
 </script>
 
 <!-- JS externo que genera tarjetas -->
-<script src="/JB-CONSTRUCCIONES/Scripts/main.js"></script>
+<script src="<?= BASE_URL ?>Scripts/main.js"></script>
 
 </body>
 </html>

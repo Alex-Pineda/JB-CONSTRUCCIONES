@@ -111,9 +111,9 @@ function renderCards(containerId, items) {
 
  async function cargarServicios() {
   try {
-    const res = await fetch('/JB-CONSTRUCCIONES/app/controllers/ServicioApiController.php');
+    const res = await fetch('<?= BASE_URL ?>app/controllers/ServicioApiController.php');
 
-    const data = await res.json(); // ✅ obligatorio
+    const data = await res.json();
 
     if (!data.ok) {
       console.error('Error:', data.error);
@@ -133,8 +133,8 @@ function renderCards(containerId, items) {
         nombre_servicio: s.nombre_servicio,
         descripcion: s.descripcion,
         imagen: s.imagen 
-          ? '/JB-CONSTRUCCIONES/' + s.imagen 
-          : '/JB-CONSTRUCCIONES/assets/img/default.jpg'
+          ? '<?= BASE_URL ?>' + s.imagen 
+          : '<?= BASE_URL ?>assets/img/default.jpg'
       };
 
       const categoria = (s.categoria || '').toLowerCase().trim();

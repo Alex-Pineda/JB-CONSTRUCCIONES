@@ -1,11 +1,15 @@
 <?php
+require_once __DIR__ . '/../../../config/data.php'; 
 session_start();
 
-if(isset($_SESSION['idusuario'])) {
-    header("Location: ../../../index.php");
+$title = "Iniciar Sesión - JB Construcciones";
+
+if(isset($_SESSION['usuario']['idusuario'])) { 
+    header("Location: " . BASE_URL . "index.php");
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -46,7 +50,7 @@ if(isset($_SESSION['idusuario'])) {
         </div>
     <?php endif; ?>
 
-    <form action="../../controllers/authcontroller.php" method="POST" autocomplete="off">
+    <form action="<?= BASE_URL ?>app/controllers/authcontroller.php" method="POST" autocomplete="off">
 
       <div class="mb-5">
         <label class="block text-gray-700 font-medium mb-2">Nombre de Usuario</label>
@@ -61,7 +65,7 @@ if(isset($_SESSION['idusuario'])) {
       </div>
 
       <div class="flex justify-center mb-6">
-        <a href="#" onclick="abrirModal()" class="text-green-700 hover:text-green-900 text-sm font-medium text-center">
+        <a href="javascript:void(0)" onclick="abrirModal()" class="text-green-700 hover:text-green-900 text-sm font-medium text-center">
           ¿Olvidó su usuario o contraseña?
         </a>
       </div>
@@ -73,7 +77,7 @@ if(isset($_SESSION['idusuario'])) {
 
       <div class="mt-6 text-center">
         <p class="text-gray-600 mb-2">¿No tienes una cuenta?</p>
-        <a href="registro.php" class="text-green-700 hover:text-blue-700 font-medium">Regístrate aquí</a>
+        <a href="<?= BASE_URL ?>app/views/auth/registro.php" class="text-green-700 hover:text-blue-700 font-medium">Regístrate aquí</a>
       </div>
 
     </form>
@@ -90,7 +94,7 @@ if(isset($_SESSION['idusuario'])) {
         Ingrese su correo electrónico registrado para recibir el enlace de recuperación de su cuenta.
       </p>
 
-    <form action="../../controllers/authcontroller.php" method="POST" class="space-y-4">
+    <form action="<?= BASE_URL ?>app/controllers/authcontroller.php" method="POST" class="space-y-4">
 
     <input type="hidden" name="accion" value="recuperacion">
 
@@ -106,6 +110,11 @@ if(isset($_SESSION['idusuario'])) {
 
     </div>
   </div>
+
+  <script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+  </script>
 
   <script>
     function abrirModal() {

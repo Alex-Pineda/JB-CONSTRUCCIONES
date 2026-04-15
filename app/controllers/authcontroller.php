@@ -1,6 +1,10 @@
 <?php
+
+require_once __DIR__ . '/../../config/data.php';
+
 session_start();
-require_once '../models/usuario.php';
+
+require_once __DIR__ . '/../models/usuario.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -8,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $modelo = new Usuario();
 
     /* =====================================================
-       1️⃣ REGISTRO
+       1️ REGISTRO
     ===================================================== */
     if (isset($_POST['accion']) && $_POST['accion'] === 'registro') {
 
@@ -16,17 +20,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($resultado === "ok") {
 
-            header("Location: ../../app/views/auth/login.php?success=registro");
+            header("Location: " . BASE_URL . "app/views/auth/login.php?success=registro");
             exit();
 
         } elseif ($resultado === "existe") {
 
-            header("Location: ../../app/views/auth/registro.php?error=Usuario ya registrado");
+            header("Location: " . BASE_URL . "app/views/auth/registro.php?error=Usuario ya registrado");
             exit();
 
         } else {
 
-            header("Location: ../../app/views/auth/registro.php?error=Error en el registro");
+            header("Location: " . BASE_URL . "app/views/auth/registro.php?error=Error en el registro");
             exit();
         }
     }
@@ -39,13 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $correo = trim($_POST['correoRecuperacion'] ?? '');
 
         if (empty($correo)) {
-            header("Location: ../../app/views/auth/login.php?error=correo");
+            header("Location: " . BASE_URL . "app/views/auth/login.php?error=correo");
             exit();
         }
 
         $resultado = $modelo->procesarRecuperacion($correo);
 
-        header("Location: ../../app/views/auth/login.php?success=recuperacion");
+        header("Location: " . BASE_URL . "app/views/auth/login.php?success=recuperacion");
         exit();
     }
 
@@ -60,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $confirmar = $_POST['confirmar_contrasena'] ?? '';
 
         if ($nueva !== $confirmar) {
-            header("Location: ../../app/views/auth/restablecer.php?token=$token&error=1");
+            header("Location: " . BASE_URL . "app/views/auth/restablecer.php?token=$token&error=1");
             exit();
         }
 
@@ -68,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $modelo->actualizarContrasenaPorToken($token, $hash);
 
-        header("Location: ../../app/views/auth/login.php?success=actualizada");
+        header("Location: " . BASE_URL . "app/views/auth/login.php?success=actualizada");
         exit();
     }
 
@@ -80,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $contrasena = trim($_POST['contrasena'] ?? '');
 
     if (empty($usuario) || empty($contrasena)) {
-        header("Location: ../../app/views/auth/login.php?error=campos");
+        header("Location: " . BASE_URL . "app/views/auth/login.php?error=campos");
         exit();
     }
 
@@ -105,16 +109,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Solo administrador va a admin
         if ($data['idrol'] == 1) {
-            header("Location: ../../admin.php");
+            header("Location: " . BASE_URL . "admin.php");
         } else {
-            header("Location: ../../index.php");
+            header("Location: " . BASE_URL . "index.php");
         }
 
         exit();
 
     } else {
 
-        header("Location: ../../app/views/auth/login.php?error=credenciales");
+        header("Location: " . BASE_URL . "app/views/auth/login.php?error=credenciales");
         exit();
     }
 }

@@ -1,4 +1,8 @@
-<?php if(isset($_GET['error'])): ?>
+<?php 
+
+require_once __DIR__ . '/../../../config/data.php'; 
+
+if(isset($_GET['error'])): ?>
 <div class="fixed top-4 right-4 bg-red-100 text-red-700 px-4 py-2 rounded shadow">
     <?= htmlspecialchars($_GET['error']) ?>
 </div>
@@ -30,7 +34,7 @@
     <h2 class="text-center text-2xl font-bold text-green-800 mb-2">Registro de Usuario</h2>
     <p class="text-center text-gray-600 mb-8">Complete sus datos para registrarse</p>
 
-    <form action="../../controllers/authcontroller.php" method="POST" class="relative z-10">
+    <form action="<?= BASE_URL ?>app/controllers/authcontroller.php" method="POST" class="relative z-10">
 
         <input type="hidden" name="accion" value="registro">
 
@@ -106,13 +110,18 @@
                 Registrarse
             </button>
 
-            <a href="/JB-CONSTRUCCIONES/index.php"
+            <a href="<?= BASE_URL ?>index.php"
                 class="bg-gray-600 hover:bg-gray-700 text-white py-3 rounded-xl font-semibold transition transform hover:scale-105 min-w-[10rem] text-center">
                 Cancelar
             </a>
         </div>
     </form>
 </div>
+
+<script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>
 
 </body>
 </html>

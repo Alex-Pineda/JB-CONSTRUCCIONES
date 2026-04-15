@@ -101,9 +101,9 @@ class Usuario {
 
     private function enviarCorreoBienvenida($correoDestino, $usuario) {
 
-    require_once '../../PHPMailer-master/src/PHPMailer.php';
-    require_once '../../PHPMailer-master/src/SMTP.php';
-    require_once '../../PHPMailer-master/src/Exception.php';
+    require_once __DIR__ . '/../../PHPMailer-master/src/PHPMailer.php';
+    require_once __DIR__ . '/../../PHPMailer-master/src/SMTP.php';
+    require_once __DIR__ . '/../../PHPMailer-master/src/Exception.php';
 
     $mail = new PHPMailer\PHPMailer\PHPMailer(true);
 
@@ -207,7 +207,7 @@ class Usuario {
             $mail->setFrom('alexkrimen@gmail.com', 'Administración JB-CONSTRUCCIONES');
             $mail->addAddress($correoDestino, $nombreUsuario);
 
-            $enlace = "http://localhost/JB-CONSTRUCCIONES/app/views/auth/restablecer.php?token=$token";
+            $enlace = BASE_URL . "app/views/auth/restablecer.php?token=$token";
 
             $mail->isHTML(true);
             $mail->Subject = 'Recuperación de cuenta';

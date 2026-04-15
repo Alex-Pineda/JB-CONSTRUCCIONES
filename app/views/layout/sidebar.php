@@ -13,7 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!-- Logo -->
     <div class="flex items-center justify-center mb-6">
-        <img src="/JB-CONSTRUCCIONES/assets/img/JB-CONSTRUCTORES.png"
+        <img src="<?= BASE_URL ?>assets/img/JB-CONSTRUCTORES.png"
              alt="Logo JB-CONSTRUCTORES"
              class="w-26 h-26 rounded-full border-4 border-teal-500 shadow-md object-cover">
     </div>
@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Principal -->
     <div class="space-y-1 mb-8">
         <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Principal</div>
-        <a href="/JB-CONSTRUCCIONES/index.php"
+        <a href="<?= BASE_URL ?>index.php"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
            🏠 Inicio
         </a>
@@ -33,7 +33,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="space-y-1 mb-8">
         <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Servicios</div>
 
-        <a href="/JB-CONSTRUCCIONES/app/views/simulador.php"
+        <a href="<?= BASE_URL ?>app/views/simulador.php"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
            💸 Cotización
         </a>
@@ -58,7 +58,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
       -->
 
-
     </div>
 
 </aside>
+
+<script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>

@@ -4,7 +4,7 @@ require_once __DIR__ . '/../controllers/proyectocontroller.php';
 
 // Validar si está logueado
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /JB-CONSTRUCCIONES/index.php");
+    header("Location: " . BASE_URL . "index.php");
     exit();
 }
 
@@ -35,10 +35,10 @@ foreach ($proyectos as $proy) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestión de Proyectos</title>
-  <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="<?= BASE_URL ?>assets/img/favicon.ico" type="image/x-icon" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/JB-CONSTRUCCIONES/assets/css/style.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -52,15 +52,13 @@ foreach ($proyectos as $proy) {
 
 <header class="border-b-[3px] border-[#161a7e] py-4 px-6 shadow-sm flex justify-between items-center">
     <h1 class="text-xl font-semibold text-gray-700">Gestión Proyectos</h1>
-    <button onclick="window.location.href='/JB-CONSTRUCCIONES/admin.php'"
+    <button onclick="window.location.href='<?= BASE_URL ?>admin.php'"
     class="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Inicio</button>
 </header>
 
 <div class="flex flex-col sm:flex-row gap-3 mt-8 mb-6 items-center justify-between px-4">
 
-    <input id="buscarProyecto"
-        type="text"
-        placeholder="Buscar por nombre..."
+    <input id="buscarProyecto" type="text" placeholder="Buscar por nombre..."
         class="w-full sm:w-2/2 border border-[#161a7e]/40 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#161a7e]">
 
     <select id="estadoProyecto"
@@ -74,7 +72,7 @@ foreach ($proyectos as $proy) {
     </select>
 
     <div class="flex gap-2">
-        <button onclick="window.location.href='nuevoProyecto.php'"
+        <button onclick="window.location.href='<?= BASE_URL ?>app/views/nuevoProyecto.php'"
             class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-800">
             Agregar
         </button>
@@ -165,7 +163,7 @@ default => 'bg-gray-100 text-gray-700 border-gray-300'
                 <a href="https://wa.me/57<?= preg_replace('/[^0-9]/', '', $p['cliente_telefono']) ?>"
                    target="_blank"
                    class="flex-shrink-0">
-                    <img src="../../assets/img/whatsapp-fill.svg" 
+                    <img src="<?= BASE_URL ?>assets/img/whatsapp-fill.svg" 
                          alt="WhatsApp"
                          class="w-8 h-8 hover:scale-110 transition">
                 </a>
@@ -192,16 +190,23 @@ default => 'bg-gray-100 text-gray-700 border-gray-300'
     </div>
 
     <div class="flex justify-end gap-2 mt-4 pt-3 border-t">
-        <a href="editarProyecto.php?id=<?= $p['idproyecto'] ?>"
+        <a href="<?= BASE_URL ?>progresoObra.html?id=<?= $p['idproyecto'] ?>"
            class="text-xs px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-800">
            Editar
         </a>
+
+
+        <!--
 
         <a href="eliminarProyecto.php?id=<?= $p['idproyecto'] ?>"
            onclick="return confirm('¿Seguro que deseas eliminar este proyecto?')"
            class="text-xs px-3 py-1 bg-red-600 text-white rounded hover:bg-red-800">
            Eliminar
         </a>
+
+        -->
+
+
     </div>
 
 </div>
@@ -234,6 +239,11 @@ No hay proyectos registrados.
 
     </div>
 </div>
+
+<script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>
 
 
 <script>

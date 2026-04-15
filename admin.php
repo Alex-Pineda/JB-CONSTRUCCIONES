@@ -1,9 +1,10 @@
 <?php
+  require_once __DIR__ . '/config/data.php';
   require_once __DIR__ . '/config/session.php';
 
   // Validar si está logueado
   if (!isset($_SESSION['usuario'])) {
-      header("Location: /JB-CONSTRUCCIONES/index.php");
+      header("Location: " . BASE_URL . "index.php");
       exit();
   }
 
@@ -13,13 +14,13 @@
 
   // Verificar sesión activa
   if (!isset($_SESSION['usuario'])) {
-      header("Location: /JB-CONSTRUCCIONES/app/views/auth/login.php");
+      header("Location: " . BASE_URL . "app/views/auth/login.php");
       exit();
   }
 
   // Verificar rol administrador
   if ($_SESSION['usuario']['rol'] !== 'administrador') {
-      header("Location: /JB-CONSTRUCCIONES/index.php");
+      header("Location: " . BASE_URL . "index.php");
       exit();
   }
 
@@ -35,7 +36,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="/JB-CONSTRUCCIONES/assets/img/favicon.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/JB-CONSTRUCCIONES/assets/css/style.css" />
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css" />
 </head>
 
 <body class="bg-gray-100 font-['Roboto']">
@@ -57,7 +58,7 @@
         Bienvenido, <?= htmlspecialchars($usuario['nombre_usuario']); ?>
     </span>
 
-        <a href="/JB-CONSTRUCCIONES/logout.php"
+        <a href="<?= BASE_URL ?>logout.php"
            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
           Cerrar sesión
         </a>
@@ -86,6 +87,11 @@
 </div>
 
 <!-- ================= SCRIPTS ================= -->
+
+<script>
+    // Variable global en JavaScript con el valor de PHP
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>
 
 <script>
 const estadisticas = [
@@ -171,7 +177,7 @@ function cargarVisitas(data) {
 cargarVisitas(visitasPendientes);
 </script>
 
-<script src="/JB-CONSTRUCCIONES/Scripts/main.js"></script>
+<script src="<?= BASE_URL ?>Scripts/main.js"></script>
 
 </body>
 </html>
