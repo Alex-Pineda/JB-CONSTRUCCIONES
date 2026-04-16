@@ -7,7 +7,7 @@ if ($domain === 'localhost') {
     define('BASE_URL', $protocol . $domain . '/JB-CONSTRUCCIONES/');
     
     define('DB_HOST', 'localhost');
-    define('DB_NAME', 'jb_constructores'); // Verifica si es 'jb_construcciones' o 'jb_constructores'
+    define('DB_NAME', 'jb_constructores');
     define('DB_USER', 'root');
     define('DB_PASS', '');
 } else {
