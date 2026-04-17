@@ -208,7 +208,7 @@ Líneas de evolución:
 
 ---
 
-##Autor
+## Autor
 
 Johnny Alexander Pineda Bustamante
 Tegnologo en analisis y desarrollado de Software
