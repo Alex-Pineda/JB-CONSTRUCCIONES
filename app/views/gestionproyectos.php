@@ -8,8 +8,24 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+$usuario = $_SESSION['usuario'];
+$rol = $usuario['rol_idrol'] ?? null; // asegúrate que lo tengas en sesión
+$usuario_id = $usuario['idusuario'];
+
+
 $controller = new ProyectoController();
-$proyectos = $controller->listar();
+
+$usuario = $_SESSION['usuario'];
+$rol = $usuario['rol_idrol'] ?? null;
+$usuario_id = $usuario['idusuario'];
+
+if ($rol == 2) {
+    // CLIENTE → SOLO SUS PROYECTOS
+    $proyectos = $controller->listarPorUsuario($usuario_id);
+} else {
+    // ADMIN → TODOS
+    $proyectos = $controller->listar();
+}
 
 /* ===== ESTADÍSTICAS ===== */
 $total = count($proyectos);
@@ -71,6 +87,7 @@ foreach ($proyectos as $proy) {
         <option value="cancelado">Cancelado</option>
     </select>
 
+    <?php if ($rol != 2): ?>
     <div class="flex gap-2">
         <button onclick="window.location.href='<?= BASE_URL ?>app/views/nuevoProyecto.php'"
             class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-800">
@@ -81,6 +98,7 @@ foreach ($proyectos as $proy) {
             Exportar
         </button>
     </div>
+    <?php endif; ?>
 
 </div>
 
@@ -188,13 +206,13 @@ default => 'bg-gray-100 text-gray-700 border-gray-300'
 
         </div>
     </div>
+    
 
     <div class="flex justify-end gap-2 mt-4 pt-3 border-t">
-        <a href="<?= BASE_URL ?>progresoObra.html?id=<?= $p['idproyecto'] ?>"
+        <a href="<?= BASE_URL ?>progresoObra.php?id=<?= $p['idproyecto'] ?>"
            class="text-xs px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-800">
-           Editar
+           Progreso
         </a>
-
 
         <!--
 

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administrador - Progreso de Obra</title>
+  <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom right, #e3e6ff, #f3f4f6);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #222;
+    }
+
+    /* 🔹 Glass Effect */
+    .glass {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(22, 26, 126, 0.25);
+      box-shadow: 0 8px 25px rgba(22, 26, 126, 0.15);
+      border-radius: 1rem;
+    }
+
+    input, select, textarea {
+      background-color: rgba(255, 255, 255, 0.45);
+      border: 1px solid #161a7e;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 6px rgba(22, 26, 126, 0.3);
+    }
+
+    .btn {
+      transition: all 0.25s ease-in-out;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      iframe { height: 200px !important; }
+    }
+  </style>
+</head>
+
+    <body class="text-gray-800">
+    <header class="w-full bg-transparent border-b-[3px] border-[#161a7e] py-4 px-6 flex justify-between items-center">
+    <h1 class="text-2xl font-semibold text-gray-800">Progreso de Obra</h1>
+    <button onclick="window.location.href='../index.html'" 
+            class="px-3 py-1 bg-yellow-500 text-white rounded-lg text-sm hover:bg-red-700 transition">
+        Inicio
+    </button>
+    </header>
+
+  <!-- 🔹 Contenedor principal -->
+  <main class="glass mt-8 p-6 w-full max-w-[950px]">
+    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-2">Gestión de Avances de Obra</h2>
+    <p class="text-center text-gray-600 mb-6">Desde aquí puedes publicar avances de tus obras, grabados o en vivo.</p>
+
+    <!-- Formulario de publicación -->
+   <form id="formVideo" class="grid grid-cols-1 md:grid-cols-2 gap-8" data-role="admin">
+
+  <!-- COLUMNA IZQUIERDA -->
+<div class="flex flex-col gap-2 border border-gray-700 rounded-xl p-5 overflow-hidden">
+
+  <!-- Título -->
+  <div>
+    <input id="titulo" type="text" 
+           placeholder="Título del avance (Ej: Avance de cimientos)"
+           class="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-[#161a7e]" 
+           required>
+  </div>
+
+  <!-- Descripción -->
+  <div>
+    <textarea id="descripcion" rows="4" 
+              placeholder="Descripción del avance..."
+              class="w-full px-3 py-2 rounded-lg focus:ring-2 focus:ring-[#161a7e]" 
+              required></textarea>
+  </div>
+
+  <!-- ID YouTube + Tipo + Botones -->
+<div>
+  <div class="flex flex-col gap-2
+              lg:flex-row lg:items-center lg:gap-2">
+
+    <!-- Input: ID YouTube -->
+    <input id="youtubeID" type="text"
+           placeholder="ID de YouTube"
+           class="flex-1 min-w-[150px] px-3 py-2 rounded-lg focus:ring-2 focus:ring-[#161a7e] h-10"
+           required>
+
+    <!-- Select: Tipo -->
+    <select id="tipo"
+            class="flex-1 min-w-[150px] px-3 py-2 rounded-lg focus:ring-2 focus:ring-[#161a7e] h-10">
+      <option value="">Elegir tipo</option>
+      <option value="video">Video grabado</option>
+      <option value="vivo">Transmisión en vivo</option>
+    </select>
+
+    <!-- BOTONES -->
+    <div class="flex flex-col sm:flex-row gap-2 lg:flex-row">
+
+      <!-- Botón Canal -->
+      <button type="button"
+              onclick="window.open('https://studio.youtube.com/channel/UCfj5-JGfOtYcKCD8_nvgn1g/videos/upload','_blank')"
+              class="px-3 py-2 h-10 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457] btn flex-1">
+        Canal
+      </button>
+
+      <!-- Botón Transmisión -->
+      <button type="button"
+              onclick="window.open('https://studio.youtube.com/channel/UCfj5-JGfOtYcKCD8_nvgn1g/livestreaming','_blank')"
+              class="px-3 py-2 h-10 bg-red-600 text-white rounded-lg hover:bg-red-700 btn flex-1">
+        Transmisión
+      </button>
+
+    </div>
+
+  </div>
+
+  <p class="text-gray-500 text-sm mt-2">
+    Copia el ID de tu video o inicia una transmisión en vivo.
+  </p>
+</div>
+  </div>
+
+
+<!-- COLUMNA DERECHA -->
+<div class="flex flex-col gap-6 border border-gray-700 rounded-xl p-5 overflow-hidden">
+
+  <!-- Vista previa -->
+  <div id="previewContainer" class="flex justify-center"></div>
+
+
+ <!-- Botones -->
+ <div class="flex flex-col sm:flex-row justify-center justify-betweenitems-center gap-2">
+
+    <button type="button"
+            onclick="formVideo.reset(); previewContainer.innerHTML='';"
+            class="w-full sm:w-32 px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 btn">
+      Limpiar
+    </button>
+
+    <button type="submit"
+            class="w-full sm:w-32 px-4 py-2 bg-[#161a7e] text-white rounded-lg hover:bg-[#0f1457] btn">
+      Publicar
+    </button>
+
+    <button type="button"
+            onclick="window.location.href='../app/views/gestionProyectos.html';"
+            class="w-full sm:w-32 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 btn">
+      Cancelar
+    </button>
+
+  </div>
+  </div>
+
+</form>
+
+
+    <!-- Sección de videos publicados -->
+    <section class="mt-10">
+      <h3 class="text-xl font-semibold mb-4 text-gray-800 border-b border-[#161a7e] pb-2 text-center">
+        Avances Publicados
+      </h3>
+      <div id="videosContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+  </main>
+
+  <script>
+  const form = document.getElementById('formVideo');
+  const preview = document.getElementById('previewContainer');
+  const videosContainer = document.getElementById('videosContainer');
+  const youtubeInput = document.getElementById('youtubeID');
+  const videos = [];
+  let editIndex = null; // Para saber si se está editando un video existente
+
+  // Vista previa en tiempo real del video
+  youtubeInput.addEventListener('input', () => {
+    const id = youtubeInput.value.trim();
+    preview.innerHTML = id
+    ? `<div class="flex justify-center"><iframe class=" w-60 h-50 rounded-lg" src="https://www.youtube.com/embed/${id}" allowfullscreen></iframe></div>`
+      : '';
+  });
+
+  // Publicar o actualizar video
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const titulo = document.getElementById('titulo').value.trim();
+    const descripcion = document.getElementById('descripcion').value.trim();
+    const youtubeID = youtubeInput.value.trim();
+    const tipo = document.getElementById('tipo').value;
+
+    if (!titulo || !youtubeID) return alert("Por favor completa los campos requeridos.");
+
+    if (editIndex !== null) {
+      // 🔹 Actualizar video existente
+      videos[editIndex] = { titulo, descripcion, youtubeID, tipo };
+      editIndex = null;
+    } else {
+      // 🔹 Agregar nuevo video
+      videos.push({ titulo, descripcion, youtubeID, tipo });
+    }
+
+    renderVideos();
+    form.reset();
+    preview.innerHTML = '';
+  });
+
+  // Renderizar tarjetas
+  function renderVideos() {
+    videosContainer.innerHTML = '';
+    videos.forEach((v, index) => {
+      const live = v.tipo === 'vivo'
+        ? '<span class="bg-red-600 text-white text-xs px-2 py-1 rounded-md ml-2">EN VIVO 🔴</span>'
+        : '';
+
+      videosContainer.innerHTML += `
+        <div class="bg-white/60 backdrop-blur-md rounded-lg shadow-md overflow-hidden hover:shadow-lg transition transform hover:-translate-y-1">
+          <iframe class="w-full h-48" src="https://www.youtube.com/embed/${v.youtubeID}" allowfullscreen></iframe>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-800">${v.titulo} ${live}</h3>
+            <p class="text-gray-600 text-sm">${v.descripcion}</p>
+
+            <!-- Botones de acción -->
+            <div class="flex justify-center gap-3 mt-3">
+              <button onclick="editVideo(${index})"
+                class="px-3 py-1 bg-yellow-500 text-white text-sm rounded-lg hover:bg-yellow-600 transition">✏️ Editar</button>
+              <button onclick="deleteVideo(${index})"
+                class="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition">🗑️ Eliminar</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  // Función: Eliminar video
+  function deleteVideo(index) {
+    if (confirm("¿Seguro que deseas eliminar este video?")) {
+      videos.splice(index, 1);
+      renderVideos();
+    }
+  }
+
+  // Función: Editar video
+  function editVideo(index) {
+    const v = videos[index];
+    document.getElementById('titulo').value = v.titulo;
+    document.getElementById('descripcion').value = v.descripcion;
+    document.getElementById('youtubeID').value = v.youtubeID;
+    document.getElementById('tipo').value = v.tipo;
+    editIndex = index;
+
+    // Mostrar vista previa
+    preview.innerHTML = `<div class="flex justify-center"><iframe class="w-60 h-50 rounded-lg" src="https://www.youtube.com/embed/${v.youtubeID}" allowfullscreen></iframe></div>`;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

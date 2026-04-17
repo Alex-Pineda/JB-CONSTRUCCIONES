@@ -2,7 +2,32 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+require_once __DIR__ . '/../../controllers/proyectocontroller.php';
+$mostrarProyectos = false;
+
+if (isset($_SESSION['usuario'])) {
+
+    $usuario = $_SESSION['usuario'];
+    $rol = $usuario['rol_idrol'] ?? null;
+    $usuario_id = $usuario['idusuario'];
+
+    if ($rol == 2) {
+        // cliente → validar si tiene proyectos
+        $controller = new ProyectoController();
+        $proyectosCliente = $controller->listarPorUsuario($usuario_id);
+
+        if (!empty($proyectosCliente)) {
+            $mostrarProyectos = true;
+        }
+    } else {
+        // admin siempre ve
+        $mostrarProyectos = true;
+    }
+}
+
 ?>
+
 
 <aside id="sidebar"
     aria-label="Menú lateral"
@@ -23,7 +48,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Principal</div>
         <a href="<?= BASE_URL ?>index.php"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
-           🏠 Inicio
+           Inicio
         </a>
     </div>
 
@@ -33,9 +58,17 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="space-y-1 mb-8">
         <div class="text-red-400 text-xs uppercase font-semibold px-2 mb-2">Servicios</div>
 
+
+        <?php if ($mostrarProyectos): ?>
+        <a href="<?= BASE_URL ?>app/views/gestionproyectos.php"
+        class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
+        Proyectos
+        </a>
+        <?php endif; ?>
+
         <a href="<?= BASE_URL ?>app/views/simulador.php"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
-           💸 Cotización
+           Cotización
         </a>
    
         <!-- Enlaces ocultos - Se activaran cuando se migren a php 
@@ -43,17 +76,17 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <a href="/JB-CONSTRUCCIONES/app/views/portafolio.html"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
-           📂 Portafolio
+           Portafolio
         </a>
 
         <a href="/JB-CONSTRUCCIONES/app/views/blogs.html"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
-           📰 Blogs
+           Blogs
         </a>
 
         <a href="/JB-CONSTRUCCIONES/app/views/resenas.html"
            class="block px-4 py-2 hover:bg-red-800 rounded-lg text-green-300">
-           📝 Reseñas
+           Reseñas
         </a>
 
       -->

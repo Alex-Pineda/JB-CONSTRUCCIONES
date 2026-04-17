@@ -12,4 +12,17 @@ class ProyectoController {
     public function listar() {
         return $this->modelo->obtenerTodos();
     }
+
+    public function listarPorUsuario($usuario_id) {
+        return $this->modelo->obtenerPorUsuario($usuario_id);
+    }
+
+    public function obtenerRolUsuario($usuario_id) {
+    return $this->modelo->obtenerRolUsuario($usuario_id);
+    }
+
+    public function tieneProyectos($usuario_id) {
+    return $this->modelo->tieneProyectos($usuario_id);
+    }
+
 }

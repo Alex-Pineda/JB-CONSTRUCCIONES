@@ -6,7 +6,9 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: " . BASE_URL . "index.php");
     exit();
 }
-?>
+    $usuario = $_SESSION['usuario'];
+    $rol = $usuario['rol_idrol'] ?? null;
+    ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -19,69 +21,140 @@ if (!isset($_SESSION['usuario'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
 
-<div class="max-w-7xl mx-auto p-6">
+<div class="max-w-[1400px] mx-auto p-6">
 
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">Nuevo Proyecto</h1>
-        <a href="gestionproyectos.php" class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition">
-            Volver
+    <!-- HEADER -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">Nuevo Proyecto</h1>
+            <p class="text-gray-500 text-sm">Gestión y registro de proyectos</p>
+        </div>
+
+        <a href="gestionproyectos.php"
+           class="bg-gray-800 text-white px-5 py-2 rounded-lg shadow hover:bg-gray-900 transition">
+            ← Volver
         </a>
     </div>
 
-    <div class="bg-white rounded-xl shadow-md p-4 mb-6 flex flex-col md:flex-row gap-4 items-center">
-        <input id="buscarCotizacion" type="text"
-            placeholder="Buscar por ID cotización o documento..."
-            class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+    <!-- BUSCADOR -->
+    <div class="bg-white rounded-xl shadow-lg p-5 mb-8 border border-gray-200">
+        <div class="flex flex-col md:flex-row gap-4 items-center">
 
-        <button type="button" onclick="buscarCotizacion()"
-            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-            Buscar
-        </button>
+            <input id="buscarCotizacion" type="text"
+                placeholder="Buscar cotización por ID o documento..."
+                class="flex-1 border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none transition">
+
+            <button type="button" onclick="buscarCotizacion()"
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 shadow-md transition">
+                Buscar
+            </button>
+
+        </div>
     </div>
 
-    <form id="formProyecto" class="bg-white rounded-xl shadow-md p-6 space-y-6">
+    <!-- FORMULARIO -->
+    <form id="formProyecto" class="bg-white rounded-xl shadow-lg p-8 border border-gray-200 space-y-8">
+
         <input type="hidden" id="cotizacion_id">
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="bg-gray-50 p-4 rounded-lg border">
-                <h2 class="text-lg font-semibold mb-4 text-gray-700">Datos del Cliente</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <input id="nombre" placeholder="Nombre" class="border p-2 rounded-lg bg-white">
-                    <input id="apellido" placeholder="Apellido" class="border p-2 rounded-lg bg-white">
-                    <input id="correo" placeholder="Correo" class="border p-2 rounded-lg col-span-2 bg-white">
-                    <input id="contacto" placeholder="Contacto" class="border p-2 rounded-lg bg-white">
-                    <input id="ubicacion" placeholder="Ubicación" class="border p-2 rounded-lg bg-white">
-                    <input id="direccion" placeholder="Dirección" class="border p-2 rounded-lg col-span-2 bg-white">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+
+            <!-- CLIENTE -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
+                <h2 class="text-lg font-semibold mb-5 text-gray-700 border-b pb-2">
+                    Datos del Cliente
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <input id="nombre" placeholder="Nombre"
+                        class="input">
+
+                    <input id="apellido" placeholder="Apellido"
+                        class="input">
+
+                    <input id="numero_documento" placeholder="Documento"
+                        class="input">
+
+                    <select id="tipo_documento" class="border p-2 rounded-lg bg-white">
+                        <option value="">Tipo documento</option>
+                        <option value="CC">Cédula</option>
+                        <option value="CE">Cédula Extranjería</option>
+                        <option value="NIT">NIT</option>
+                        <option value="PAS">Pasaporte</option>
+                    </select>
+
+                    <input id="correo" placeholder="Correo"
+                        class="input md:col-span-2">
+
+                    <input id="contacto" placeholder="Contacto"
+                        class="input">
+
+                    <input id="ubicacion" placeholder="Ubicación"
+                        class="input">
+
+                    <input id="direccion" placeholder="Dirección"
+                        class="input md:col-span-2">
+
                 </div>
             </div>
 
-            <div class="bg-gray-50 p-4 rounded-lg border">
-                <h2 class="text-lg font-semibold mb-4 text-gray-700">Datos del Proyecto</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    <input id="nombre_proyecto" placeholder="Nombre del proyecto" class="border p-2 rounded-lg col-span-2" required>
-                    <input type="date" id="fecha_inicio" class="border p-2 rounded-lg" required>
-                    <input type="date" id="fecha_fin" class="border p-2 rounded-lg" required>
-                    <textarea id="descripcion" placeholder="Descripción del proyecto" class="border p-2 rounded-lg col-span-2" required></textarea>
+            <!-- PROYECTO -->
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
+                <h2 class="text-lg font-semibold mb-5 text-gray-700 border-b pb-2">
+                    Datos del Proyecto
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <input id="nombre_proyecto"
+                        placeholder="Nombre del proyecto"
+                        class="input md:col-span-2"
+                        required>
+
+                    <input type="date" id="fecha_inicio"
+                        class="input"
+                        required>
+
+                    <input type="date" id="fecha_fin"
+                        class="input"
+                        required>
+
+                    <textarea id="descripcion"
+                        placeholder="Descripción del proyecto"
+                        class="input md:col-span-2 h-24 resize-none"
+                        required></textarea>
+
                 </div>
             </div>
+
         </div>
 
-        <div class="flex justify-end gap-4 pt-4 border-t">
-            <button type="button" onclick="this.form.reset()" class="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500">
+        <!-- BOTONES -->
+        <div class="flex justify-end gap-4 pt-6 border-t">
+
+            <button type="button" onclick="this.form.reset()"
+                class="bg-gray-300 text-gray-700 px-5 py-2 rounded-lg hover:bg-gray-400 transition">
                 Limpiar
             </button>
-            <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+
+            <button type="submit"
+                class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 shadow-md transition">
                 Guardar Proyecto
             </button>
+
         </div>
+
     </form>
+
 </div>
 
 <script>
     // Usamos el BASE_URL de PHP para que los fetch funcionen en cualquier lado
     const BASE_URL = "<?= BASE_URL ?>";
+
 
     async function buscarCotizacion() {
         const valorInput = document.getElementById("buscarCotizacion").value.trim();
@@ -128,7 +201,7 @@ if (!isset($_SESSION['usuario'])) {
             nombre: document.getElementById("nombre").value,
             apellido: document.getElementById("apellido").value,
             correo: document.getElementById("correo").value,
-            contacto: document.getElementById("contacto").value,
+            numero_documento: document.getElementById("numero_documento").value,
             ubicacion: document.getElementById("ubicacion").value,
             direccion: document.getElementById("direccion").value,
             descripcion: document.getElementById("descripcion").value,
