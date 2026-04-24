@@ -45,7 +45,7 @@ try {
         $correo = $data['correo'] ?? '';
         $documento = $data['numero_documento'] ?? '';
 
-        // 🔍 Buscar usuario existente
+        //  Buscar usuario existente
         $sql = "SELECT idusuario 
                 FROM usuario 
                 WHERE correo = ? OR numero_documento = ?

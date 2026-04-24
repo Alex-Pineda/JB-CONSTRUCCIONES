@@ -17,7 +17,6 @@ if (isset($_SESSION['LAST_ACTIVITY'])) {
         session_unset();
         session_destroy();
         
-        // Ahora BASE_URL sí funcionará porque cargamos config.php arriba
         header("Location: " . BASE_URL . "index.php?session=expirada");
         exit();
     }

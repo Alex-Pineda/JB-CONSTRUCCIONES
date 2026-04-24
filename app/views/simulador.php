@@ -73,7 +73,6 @@ $categorias = [
     }
 
     textarea.input-estilo {
-      height: auto;
       padding-top: 0.75rem;
       padding-bottom: 0.75rem;
       resize: none;
@@ -110,133 +109,209 @@ $categorias = [
 
               <!-- DATOS GENERALES -->
               <section>
-                <h2 class="text-center font-semibold text-teal-700 mb-6 text-2xl">Datos Generales</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  <input type="text" id="nombre" class="input-estilo" placeholder="Nombre">
-                  <input type="text" id="apellido" class="input-estilo" placeholder="Apellido">
-                  <select id="tipoDocumento" class="input-estilo">
-                    <option value="">Tipo de Documento</option>
-                    <option value="dni">DNI</option>
-                    <option value="cedula">Cédula</option>
-                    <option value="pasaporte">Pasaporte</option>
-                    <option value="otro">Otro</option>
-                  </select>
-                  <input type="text" id="numeroDocumento" class="input-estilo" placeholder="Número de Documento">
-                  <input type="email" id="correo" class="input-estilo" placeholder="Correo Electrónico">
-                  <input type="tel" id="contacto" class="input-estilo" placeholder="Número de Contacto">
-                  <input type="text" id="ubicacion" class="input-estilo" placeholder="Departamento - Ciudad">
-                  <input type="text" id="direccion" class="input-estilo" placeholder="Dirección del Proyecto">
-                  <div class="md:col-span-2">
-                    <textarea id="descripcion" rows="3" class="input-estilo resize-none" placeholder="Descripción del trabajo a realizar"></textarea>
+              <h2 class="text-center font-semibold text-teal-700 mb-8 text-2xl">
+                Datos Generales
+              </h2>
+
+              <div class="flex justify-center">
+                <div class="w-full max-w-6xl bg-white p-6 rounded-xl shadow border border-teal-300">
+
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <!-- COLUMNA 1 -->
+                    <div class="space-y-4">
+                      <input type="text" id="nombre" class="input-estilo" placeholder="Nombre">
+                      <input type="text" id="apellido" class="input-estilo" placeholder="Apellido">
+
+                      <select id="tipoDocumento" class="input-estilo">
+                        <option value="">Tipo de Documento</option>
+                        <option value="dni">DNI</option>
+                        <option value="cedula">Cédula</option>
+                        <option value="pasaporte">Pasaporte</option>
+                        <option value="otro">Otro</option>
+                      </select>
+
+                      <input type="text" id="numeroDocumento" class="input-estilo" placeholder="Número de Documento">
+                    </div>
+
+                    <!-- COLUMNA 2 -->
+                    <div class="space-y-4">
+                      <input type="email" id="correo" class="input-estilo" placeholder="Correo Electrónico">
+                      <input type="tel" id="contacto" class="input-estilo" placeholder="Número de Contacto">
+                      <input type="text" id="ubicacion" class="input-estilo" placeholder="Departamento - Ciudad">
+                      <input type="text" id="direccion" class="input-estilo" placeholder="Dirección del Proyecto">
+                    </div>
+
+                    <!-- COLUMNA 3 -->
+                    <div class="space-y-2">
+                      <textarea id="descripcion"class="input-estilo h-[208px]"placeholder="Describe el trabajo a realizar"></textarea>
+                    </div>
+
+                </div>
+              </div>
+            </section>
+
+              <!-- CONTACTO PERSONALIZADO -->
+            <div class="flex justify-center mt-6">
+              <div class="w-full max-w-6xl">
+
+                <div class="flex flex-col md:flex-row items-center gap-4 bg-teal-50 border border-teal-200 rounded-lg p-6">
+                  
+                  <label for="contactoPersonalizado" class="text-teal-800 font-medium flex-1">
+                    ¿Deseas que te contactemos para una valoración personalizada del servicio?
+                  </label>
+
+                  <div class="flex items-center gap-2">
+                    <input type="checkbox" id="contactoPersonalizado"
+                      class="h-5 w-5 text-teal-600 border-teal-400 rounded">
+                    <span class="text-teal-700">Sí, deseo ser contactado</span>
                   </div>
-                </div>
-              </section>
 
-              <!-- Contacto personalizado -->
-              <div class="flex flex-col md:flex-row items-center gap-4 bg-teal-50 border border-teal-200 rounded-lg p-6 mt-6">
-                <label for="contactoPersonalizado" class="text-teal-800 font-medium flex-1">
-                  ¿Deseas que te contactemos para una valoración personalizada del servicio?
-                </label>
-                <div class="flex items-center gap-2">
-                  <input type="checkbox" id="contactoPersonalizado" name="contactoPersonalizado"
-                    class="h-5 w-5 text-teal-600 border-teal-400 rounded focus:ring-teal-300">
-                  <span class="text-teal-700">Sí, deseo ser contactado</span>
                 </div>
-              </div>
 
-              <!-- Fecha estimada visita -->
-              <div id="campoFechaVisita" class="hidden flex flex-col items-center mt-4">
-                <label for="fechaVisita" class="block text-teal-800 font-semibold mb-2 text-center">
-                  Por favor, indique la fecha estimada para la visita especializada:
-                </label>
-                <input type="date" id="fechaVisita" name="fechaVisita"
-                  class="w-full md:w-1/3 px-4 py-2 border border-teal-300 rounded-md focus:ring-2 focus:ring-teal-400 focus:outline-none">
               </div>
+            </div>
+
+
+            <!-- FECHA -->
+            <div id="campoFechaVisita" class="hidden flex justify-center mt-4">
+              <div class="w-full max-w-6xl">
+
+                <div class="bg-white border border-teal-200 rounded-lg p-6 text-center">
+                  
+                  <label class="block text-teal-800 font-semibold mb-2">
+                    Fecha estimada para la visita
+                  </label>
+
+                  <input type="date"
+                    id="fechaVisita"
+                    class="w-full md:w-1/3 px-4 py-2 border border-teal-300 rounded-md focus:ring-2 focus:ring-teal-400">
+
+                </div>
+
+              </div>
+            </div>
 
               <!-- SERVICIOS -->
-              <section>
-                <h2 class="text-center font-semibold text-teal-700 mb-6 text-2xl">
+              <section class="mt-8">
+
+                <h2 class="text-center font-semibold text-teal-700 mb-8 text-2xl">
                   Selecciona los Servicios y sus m²
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div id="obraNegraOpciones" class="space-y-3 flex-1">
-                    <?php foreach ($categorias['Obra negra'] as $s): ?>
-                        <div class="flex items-center space-x-3 servicio-item">
+
+                <!-- CONTENEDOR CENTRADO -->
+                <div class="flex justify-center">
+                  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-6xl">
+
+                    <!-- OBRA NEGRA -->
+                    <div id="obraNegraOpciones" class="bg-white p-4 rounded-xl shadow border border-gray-300">
+                      <h3 class="text-lg font-semibold text-teal-700 mb-4 text-center border-b pb-2">
+                        Obra Negra
+                      </h3>
+
+                      <div class="space-y-3">
+                        <?php foreach ($categorias['Obra negra'] as $s): ?>
+                          <div class="flex items-center justify-between gap-2 servicio-item">
 
                             <input type="checkbox"
-                                class="servicio-check"
-                                data-id="<?= $s['idservicio'] ?>"
-                                data-precio="<?= $s['precio_base'] ?>">
+                              class="servicio-check"
+                              data-id="<?= $s['idservicio'] ?>"
+                              data-precio="<?= $s['precio_base'] ?>">
 
-                            <label class="text-sm">
-                                <?= htmlspecialchars($s['nombre_servicio']) ?>
+                            <label class="text-sm flex-1">
+                              <?= htmlspecialchars($s['nombre_servicio']) ?>
                             </label>
 
                             <input type="number"
-                                class="m2 hidden border rounded px-2 py-1 text-center"
-                                placeholder="m²">
-                        </div>
-                    <?php endforeach; ?>
+                              class="m2 hidden w-20 border rounded px-2 py-1 text-center"
+                              placeholder="m²">
+                          </div>
+                        <?php endforeach; ?>
+                      </div>
                     </div>
 
-                  <div id="obraGrisOpciones" class="space-y-3 flex-1">
-                    <?php foreach ($categorias['Obra gris'] as $s): ?>
-                        <div class="flex items-center space-x-3 servicio-item">
+                    <!-- OBRA GRIS -->
+                    <div id="obraGrisOpciones" class="bg-white p-4 rounded-xl shadow border border-gray-300">
+                      <h3 class="text-lg font-semibold text-teal-700 mb-4 text-center border-b pb-2">
+                        Obra Gris
+                      </h3>
+
+                      <div class="space-y-3">
+                        <?php foreach ($categorias['Obra gris'] as $s): ?>
+                          <div class="flex items-center justify-between gap-2 servicio-item">
 
                             <input type="checkbox"
-                                class="servicio-check"
-                                data-id="<?= $s['idservicio'] ?>"
-                                data-precio="<?= $s['precio_base'] ?>">
+                              class="servicio-check"
+                              data-id="<?= $s['idservicio'] ?>"
+                              data-precio="<?= $s['precio_base'] ?>">
 
-                            <label class="text-sm">
-                                <?= htmlspecialchars($s['nombre_servicio']) ?>
+                            <label class="text-sm flex-1">
+                              <?= htmlspecialchars($s['nombre_servicio']) ?>
                             </label>
 
                             <input type="number"
-                                class="m2 hidden border rounded px-2 py-1 text-center"
-                                placeholder="m²">
-                        </div>
-                    <?php endforeach; ?>
+                              class="m2 hidden w-20 border rounded px-2 py-1 text-center"
+                              placeholder="m²">
+                          </div>
+                        <?php endforeach; ?>
+                      </div>
                     </div>
-                        
-                  <div id="obraBlancaOpciones" class="space-y-3 flex-1">
-                    <?php foreach ($categorias['Obra blanca'] as $s): ?>
-                        <div class="flex items-center space-x-3 servicio-item">
+
+                    <!-- OBRA BLANCA -->
+                    <div id="obraBlancaOpciones" class="bg-white p-4 rounded-xl shadow border border-gray-300">
+                      <h3 class="text-lg font-semibold text-teal-700 mb-4 text-center border-b pb-2">
+                        Obra Blanca
+                      </h3>
+
+                      <div class="space-y-3">
+                        <?php foreach ($categorias['Obra blanca'] as $s): ?>
+                          <div class="flex items-center justify-between gap-2 servicio-item">
 
                             <input type="checkbox"
-                                class="servicio-check"
-                                data-id="<?= $s['idservicio'] ?>"
-                                data-precio="<?= $s['precio_base'] ?>">
+                              class="servicio-check"
+                              data-id="<?= $s['idservicio'] ?>"
+                              data-precio="<?= $s['precio_base'] ?>">
 
-                            <label class="text-sm">
-                                <?= htmlspecialchars($s['nombre_servicio']) ?>
+                            <label class="text-sm flex-1">
+                              <?= htmlspecialchars($s['nombre_servicio']) ?>
                             </label>
 
                             <input type="number"
-                                class="m2 hidden border rounded px-2 py-1 text-center"
-                                placeholder="m²">
-                        </div>
-                    <?php endforeach; ?>
+                              class="m2 hidden w-20 border rounded px-2 py-1 text-center"
+                              placeholder="m²">
+                          </div>
+                        <?php endforeach; ?>
+                      </div>
                     </div>
-                <div id="mantenimientoOpciones" class="space-y-3 flex-1">
-                    <?php foreach ($categorias['Mantenimiento'] as $s): ?>
-                        <div class="flex items-center space-x-3 servicio-item">
+
+                    <!-- MANTENIMIENTO -->
+                    <div id="mantenimientoOpciones" class="bg-white p-4 rounded-xl shadow border border-gray-300">
+                      <h3 class="text-lg font-semibold text-teal-700 mb-4 text-center border-b pb-2">
+                        Mantenimiento
+                      </h3>
+
+                      <div class="space-y-3">
+                        <?php foreach ($categorias['Mantenimiento'] as $s): ?>
+                          <div class="flex items-center justify-between gap-2 servicio-item">
 
                             <input type="checkbox"
-                                class="servicio-check"
-                                data-id="<?= $s['idservicio'] ?>"
-                                data-precio="<?= $s['precio_base'] ?>">
+                              class="servicio-check"
+                              data-id="<?= $s['idservicio'] ?>"
+                              data-precio="<?= $s['precio_base'] ?>">
 
-                            <label class="text-sm">
-                                <?= htmlspecialchars($s['nombre_servicio']) ?>
+                            <label class="text-sm flex-1">
+                              <?= htmlspecialchars($s['nombre_servicio']) ?>
                             </label>
 
                             <input type="number"
-                                class="m2 hidden border rounded px-2 py-1 text-center"
-                                placeholder="m²">
-                        </div>
-                    <?php endforeach; ?>
+                              class="m2 hidden w-20 border rounded px-2 py-1 text-center"
+                              placeholder="m²">
+                          </div>
+                        <?php endforeach; ?>
+                      </div>
                     </div>
+
+                  </div>
                 </div>
               </section>
 

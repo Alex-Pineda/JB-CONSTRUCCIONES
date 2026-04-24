@@ -14,7 +14,7 @@ class RegistroController {
 
         try {
 
-            // 🔹 Iniciar transacción
+            //  Iniciar transacción
             $this->conn->beginTransaction();
 
             // 1️ Verificar duplicados
@@ -69,14 +69,14 @@ class RegistroController {
                 ':idusuario' => $idUsuario
             ]);
 
-            // 🔹 Confirmar transacción
+            //  Confirmar transacción
             $this->conn->commit();
 
             return "ok";
 
         } catch (Exception $e) {
 
-            // 🔹 Revertir si algo falla
+            //  Revertir si algo falla
             $this->conn->rollBack();
             return "error";
         }
