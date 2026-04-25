@@ -60,9 +60,9 @@ class RegistroController {
             // 4️ Obtener ID generado
             $idUsuario = $this->conn->lastInsertId();
 
-            // 5️ Asignar rol visitante (4)
+            // 5️ Asignar rol visitante (2)
             $sqlRol = "INSERT INTO usuario_has_rol (rol_idrol, usuario_idusuario)
-                       VALUES (4, :idusuario)";
+                       VALUES (2, :idusuario)";
 
             $stmtRol = $this->conn->prepare($sqlRol);
             $stmtRol->execute([

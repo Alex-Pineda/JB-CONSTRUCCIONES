@@ -8,15 +8,11 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-$usuario = $_SESSION['usuario'];
-$rol = $usuario['rol_idrol'] ?? null; // asegúrate que lo tengas en sesión
-$usuario_id = $usuario['idusuario'];
-
 
 $controller = new ProyectoController();
 
 $usuario = $_SESSION['usuario'];
-$rol = $usuario['rol_idrol'] ?? null;
+$rol = $usuario['idrol'] ?? null;
 $usuario_id = $usuario['idusuario'];
 
 if ($rol == 2) {

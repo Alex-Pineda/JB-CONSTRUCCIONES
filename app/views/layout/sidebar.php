@@ -9,7 +9,7 @@ $mostrarProyectos = false;
 if (isset($_SESSION['usuario'])) {
 
     $usuario = $_SESSION['usuario'];
-    $rol = $usuario['rol_idrol'] ?? null;
+    $rol = $usuario['idrol'] ?? null;
     $usuario_id = $usuario['idusuario'];
 
     if ($rol == 2) {

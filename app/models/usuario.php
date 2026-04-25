@@ -13,26 +13,29 @@ class Usuario {
 
     public function login($usuario) {
 
-        $query = "
-            SELECT u.idusuario, 
-                u.nombre_usuario, 
-                u.hash_password,
-                r.idrol,
-                r.nombre AS rol
-            FROM usuario u
-            INNER JOIN usuario_has_rol ur ON u.idusuario = ur.usuario_idusuario
-            INNER JOIN rol r ON ur.rol_idrol = r.idrol
-            WHERE u.nombre_usuario = :usuario
-            AND u.estado = 'activo'
-            LIMIT 1
-        ";
+    $query = "
+        SELECT 
+            u.idusuario, 
+            u.nombre_usuario, 
+            u.hash_password,
+            r.idrol,
+            r.nombre AS rol
+        FROM usuario u
+        INNER JOIN usuario_has_rol ur 
+            ON u.idusuario = ur.usuario_idusuario
+        INNER JOIN rol r 
+            ON ur.rol_idrol = r.idrol
+        WHERE (u.nombre_usuario = :usuario OR u.correo = :usuario)
+        AND u.estado = 'activo'
+        LIMIT 1
+    ";
 
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(":usuario", $usuario);
-        $stmt->execute();
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(":usuario", $usuario);
+    $stmt->execute();
 
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
     public function registrar($datos) {
 

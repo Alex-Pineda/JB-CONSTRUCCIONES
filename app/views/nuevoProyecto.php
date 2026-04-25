@@ -75,21 +75,23 @@ if (!isset($_SESSION['usuario'])) {
                     <input id="apellido" placeholder="Apellido"
                         class="input">
 
-                    <input id="numero_documento" placeholder="Documento"
-                        class="input">
 
-                    <select id="tipo_documento" class="border p-2 rounded-lg bg-white">
-                        <option value="">Tipo documento</option>
-                        <option value="CC">Cédula</option>
-                        <option value="CE">Cédula Extranjería</option>
-                        <option value="NIT">NIT</option>
-                        <option value="PAS">Pasaporte</option>
+                    <select id="tipo_documento" required>
+                        <option value="">Tipo de Documento</option>
+                        <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+                        <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                        <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
                     </select>
+
+                    <input id="numero_documento" type="text" required
+                        placeholder="número de documento">
+    
 
                     <input id="correo" placeholder="Correo"
                         class="input md:col-span-2">
 
-                    <input id="contacto" placeholder="Contacto"
+                    <input id="celular" placeholder="Contacto"
                         class="input">
 
                     <input id="ubicacion" placeholder="Ubicación"
@@ -178,14 +180,18 @@ if (!isset($_SESSION['usuario'])) {
                 document.getElementById("cotizacion_id").value = c.idcotizacion;
                 document.getElementById("nombre").value = c.nombres;
                 document.getElementById("apellido").value = c.apellidos;
+                document.getElementById("tipo_documento").value = c.tipo_documento;
+                document.getElementById("numero_documento").value = c.numero_documento;
                 document.getElementById("correo").value = c.correo;
-                document.getElementById("contacto").value = c.contacto;
+                document.getElementById("celular").value = c.contacto;
                 document.getElementById("ubicacion").value = c.ubicacion;
                 document.getElementById("direccion").value = c.direccion;
                 document.getElementById("descripcion").value = c.descripcion;
                 alert("Cotización cargada ✔");
             } else {
+                document.getElementById("cotizacion_id").value = "";
                 alert(data.error || "No encontrada");
+    
             }
         } catch (error) {
             console.error(error);
@@ -202,6 +208,7 @@ if (!isset($_SESSION['usuario'])) {
             apellido: document.getElementById("apellido").value,
             correo: document.getElementById("correo").value,
             numero_documento: document.getElementById("numero_documento").value,
+            tipo_documento: document.getElementById("tipo_documento").value,
             ubicacion: document.getElementById("ubicacion").value,
             direccion: document.getElementById("direccion").value,
             descripcion: document.getElementById("descripcion").value,

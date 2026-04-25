@@ -77,20 +77,22 @@ try {
                 correo,
                 celular,
                 numero_documento,
+                tipo_documento,
                 nombre_usuario,
                 hash_password,
                 estado,
                 acepta_terminos
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, 'activo', 1)";
-
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'activo', 1)";
+            
             $stmtInsert = $conn->prepare($sqlInsert);
 
             $stmtInsert->execute([
                 $data['nombre'],
                 $data['apellido'],
                 $correo,
-                $data['contacto'],
+                $data['celular'] ?? '',
                 $documento,
+                $data['tipo_documento'],
                 $username,
                 $hash
             ]);
@@ -133,5 +135,11 @@ try {
     echo json_encode(["success" => true]);
 
 } catch (Exception $e) {
-    echo json_encode(["error" => $e->getMessage()]);
+    echo json_encode([
+    "success" => false,
+    "error" => $e->getMessage(),
+    "line" => $e->getLine(),
+    "file" => $e->getFile()
+]);
+exit;
 }
