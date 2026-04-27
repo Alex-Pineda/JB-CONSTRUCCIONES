@@ -205,7 +205,7 @@ default => 'bg-gray-100 text-gray-700 border-gray-300'
     
 
     <div class="flex justify-end gap-2 mt-4 pt-3 border-t">
-        <a href="<?= BASE_URL ?>progresoObra.php?id=<?= $p['idproyecto'] ?>"
+        <a href="<?= BASE_URL ?>app/views/progresoObra.html?id=<?= $p['idproyecto'] ?>"
            class="text-xs px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-800">
            Progreso
         </a>
