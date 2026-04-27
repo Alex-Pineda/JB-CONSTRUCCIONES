@@ -83,9 +83,9 @@ class Usuario {
 
         $idUsuario = $this->conn->lastInsertId();
 
-        // Asignar rol visitante (4)
+        // Asignar rol cliente (2)
         $sqlRol = "INSERT INTO usuario_has_rol (rol_idrol, usuario_idusuario)
-                   VALUES (4, :idusuario)";
+                   VALUES (2, :idusuario)";
 
         $stmtRol = $this->conn->prepare($sqlRol);
         $stmtRol->execute([
