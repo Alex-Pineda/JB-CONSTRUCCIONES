@@ -81,7 +81,7 @@ border-radius:1rem;
 <div class="max-w-6xl mx-auto">
 
 <!-- HEADER -->
-<div class="glass p-5 mb-6 flex justify-between items-center">
+<div class="glass p-4 mb-3 flex justify-between items-center">
 <div>
 <h1 class="text-2xl font-bold text-gray-800">Progreso de Obra</h1>
 <p class="text-sm text-gray-600">
@@ -96,13 +96,13 @@ Volver
 </div>
 
 <!-- AVANCE GENERAL -->
-<div class="glass p-5 mb-6">
+<div class="glass p-4 mb-3">
 <div class="flex justify-between mb-2">
 <span class="font-semibold">Avance total</span>
 <span id="textoAvance"><?= $proyecto['porcentaje_avance'] ?>%</span>
 </div>
 
-<div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+<div class="w-full bg-gray-170 rounded-full h-3 overflow-hidden">
 <div id="barraAvance"
 class="bg-green-600 h-4"
 style="width:<?= $proyecto['porcentaje_avance'] ?>%">
@@ -112,76 +112,105 @@ style="width:<?= $proyecto['porcentaje_avance'] ?>%">
 
 <?php if($esAdmin): ?>
 
-<!-- FORMULARIO ADMIN -->
-<div class="glass p-6 mb-8">
+<div class="glass p-6 mb-6">
 
-<h2 class="text-xl font-semibold mb-4">Publicar nuevo avance</h2>
+<h2 class="text-xl font-bold text-gray-800 mb-3 border-b pb-2">Publicar nuevo avance
+</h2>
 
-<form id="formAvance" class="grid md:grid-cols-2 gap-4">
+<form id="formAvance" class="grid lg:grid-cols-2 gap-5">
 
 <input type="hidden" id="idproyecto" value="<?= $idproyecto ?>">
 
+<!-- COLUMNA IZQUIERDA -->
+<div class="space-y-3">
+
 <input id="titulo"
 type="text"
-placeholder="Título del avance"
-class="border rounded-lg p-3 w-full"
+placeholder="Título breve del avance"
+class="border rounded-xl p-3 w-full bg-white/80 shadow-sm focus:ring-2 focus:ring-blue-600"
 required>
 
 <textarea id="descripcion"
-placeholder="Descripción"
-class="border rounded-lg p-3 w-full"
-rows="4"></textarea>
+rows="5"
+placeholder="Describe lo realizado en este avance..."
+class="border rounded-xl p-3 w-full bg-white/80 shadow-sm focus:ring-2 focus:ring-blue-600"></textarea>
+
+<div class="grid md:grid-cols-2 gap-4">
 
 <input id="youtube_video_id"
 type="text"
-placeholder="ID de YouTube"
-class="border rounded-lg p-3 w-full"
+placeholder="ID YouTube"
+class="border rounded-xl p-3 w-full bg-white/80 shadow-sm"
 required>
 
-<select id="tipo_video"
-class="border rounded-lg p-3 w-full">
-<option value="video">Video grabado</option>
-<option value="vivo">En vivo</option>
-</select>
-
-<!-- INPUT NUEVO PORCENTAJE -->
 <input id="porcentaje_aporte"
 type="number"
 min="1"
 max="100"
 step="0.01"
-placeholder="% aporte del avance"
-class="border rounded-lg p-3 w-full"
+placeholder="% progreso"
+class="border rounded-xl p-3 w-full bg-white/80 shadow-sm"
 required>
 
-<div class="flex gap-3">
-<button type="submit"
-class="bg-blue-700 text-white px-5 py-3 rounded-lg hover:bg-blue-900">
-Publicar
+</div>
+
+<select id="tipo_video"
+class="border rounded-xl p-3 w-full bg-white/80 shadow-sm">
+<option value="video">Video grabado</option>
+<option value="vivo">En vivo</option>
+</select>
+
+</div>
+
+<!-- COLUMNA DERECHA -->
+<div class="space-y-5">
+
+<div class="glass p-4 min-h-[200px] flex items-center justify-center">
+<div id="previewVideo" class="w-full"></div>
+</div>
+
+<div class="grid grid-cols-2 gap-3">
+
+<button type="button"
+onclick="window.open('https://studio.youtube.com/channel/UCfj5-JGfOtYcKCD8_nvgn1g/videos/upload','_blank')"
+class="bg-indigo-700 text-white py-3 rounded-xl hover:bg-indigo-900">
+Canal
+</button>
+
+<button type="button"
+onclick="window.open('https://studio.youtube.com/channel/UCfj5-JGfOtYcKCD8_nvgn1g/livestreaming','_blank')"
+class="bg-red-600 text-white py-3 rounded-xl hover:bg-red-800">
+En Vivo
 </button>
 
 <button type="reset"
-class="bg-gray-400 text-white px-5 py-3 rounded-lg hover:bg-gray-500">
+class="bg-gray-400 text-white py-3 rounded-xl hover:bg-gray-600">
 Limpiar
 </button>
+
+<button type="submit"
+class="bg-green-600 text-white py-3 rounded-xl hover:bg-green-800 shadow-lg">
+Publicar
+</button>
+
+</div>
+
 </div>
 
 </form>
-
-<!-- PREVIEW -->
-<div id="previewVideo" class="mt-5"></div>
-
 </div>
 
 <?php endif; ?>
 
 <!-- LISTADO -->
-<div>
-<h2 class="text-xl font-semibold mb-4">Avances publicados</h2>
+<div class="mt-8 border-t-4 border-blue-700 pt-8">
+
+<h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+Avances publicados
+</h2>
 
 <div id="contenedorVideos"
-class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-</div>
+class="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
 </div>
 
 </div>
@@ -202,7 +231,7 @@ const id = youtube.value.trim();
 
 document.getElementById("previewVideo").innerHTML = id
 ? `
-<iframe class="w-full h-64 rounded-xl"
+<iframe class="w-full h-48 rounded-xl"
 src="https://www.youtube.com/embed/${id}"
 allowfullscreen></iframe>
 `
