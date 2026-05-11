@@ -24,5 +24,6 @@ class ProyectoController {
     public function tieneProyectos($usuario_id) {
     return $this->modelo->tieneProyectos($usuario_id);
     }
+    
 
 }

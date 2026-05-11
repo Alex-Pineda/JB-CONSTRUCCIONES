@@ -125,4 +125,18 @@ class Proyecto {
 
         return $stmt->fetch() ? true : false;
     }
+
+    public function actualizarEstado($idproyecto, $estado)
+{
+    $sql = "UPDATE proyecto
+            SET estado_proyecto = :estado
+            WHERE idproyecto = :idproyecto";
+
+    $stmt = $this->conn->prepare($sql);
+
+    return $stmt->execute([
+        ':estado' => $estado,
+        ':idproyecto' => $idproyecto
+    ]);
+}
 }

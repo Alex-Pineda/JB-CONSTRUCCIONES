@@ -267,13 +267,14 @@ body: JSON.stringify(datos)
 const r = await res.json();
 
 if(r.success){
-alert("Avance publicado");
-form.reset();
-document.getElementById("previewVideo").innerHTML='';
-cargarVideos();
-}else{
-alert(r.error || "Error");
-}
+    form.reset();
+    document.getElementById("previewVideo").innerHTML='';
+    cargarVideos();
+    }
+    else{
+
+    alert(r.error || "Error");
+    }
 
 });
 
@@ -364,7 +365,6 @@ data.avance_total + "%";
 ========================================= */
 async function eliminar(id){
 
-if(!confirm("Eliminar avance?")) return;
 
 const res = await fetch(`${BASE_URL}app/ajax/eliminarProgreso.php`,{
 method:"POST",

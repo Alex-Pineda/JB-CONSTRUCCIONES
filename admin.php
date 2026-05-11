@@ -1,6 +1,12 @@
 <?php
   require_once __DIR__ . '/config/data.php';
   require_once __DIR__ . '/config/session.php';
+  require_once __DIR__ . '/app/controllers/visita.php';
+
+
+$data = new Data();
+$conn = $data->getConnection();
+
 
   // Validar si está logueado
   if (!isset($_SESSION['usuario'])) {
@@ -25,7 +31,39 @@
   }
 
   $usuario = $_SESSION['usuario'];
+
+
+  /* =========================
+   TOTAL PROYECTOS
+========================= */
+$sqlProyectos = "SELECT COUNT(*) as total FROM proyecto";
+$stmtProyectos = $conn->prepare($sqlProyectos);
+$stmtProyectos->execute();
+
+$totalProyectos = $stmtProyectos->fetch(PDO::FETCH_ASSOC)['total'];
+
+
+/* =========================
+   TOTAL COTIZACIONES
+========================= */
+$sqlCotizaciones = "SELECT COUNT(*) as total FROM cotizacion";
+$stmtCotizaciones = $conn->prepare($sqlCotizaciones);
+$stmtCotizaciones->execute();
+
+$totalCotizaciones = $stmtCotizaciones->fetch(PDO::FETCH_ASSOC)['total'];
+
+
+/* =========================
+   TOTAL USUARIOS
+========================= */
+$sqlUsuarios = "SELECT COUNT(*) as total FROM usuario";
+$stmtUsuarios = $conn->prepare($sqlUsuarios);
+$stmtUsuarios->execute();
+
+$totalUsuarios = $stmtUsuarios->fetch(PDO::FETCH_ASSOC)['total'];
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -62,6 +100,7 @@
            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
           Cerrar sesión
         </a>
+
       </div>
 
     <!-- Panel de estadísticas -->
@@ -89,60 +128,76 @@
 <!-- ================= SCRIPTS ================= -->
 
 <script>
+  
     // Variable global en JavaScript con el valor de PHP
     const BASE_URL = "<?= BASE_URL ?>";
 </script>
 
 <script>
 const estadisticas = [
- // { titulo: "Gestión de Usuarios", cantidad: 120, icono: "👥", url: "/JB-CONSTRUCCIONES/app/views/usuarios.html" },
-  { titulo: "Gestión de Proyectos", cantidad: 18, icono: "🏗️", url: "/JB-CONSTRUCCIONES/app/views/gestionproyectos.php" },
- // { titulo: "Cotizaciones Generadas", cantidad: 40, icono: "💰", url: "/JB-CONSTRUCCIONES/app/views/admin/cotizaciones.html" },
- // { titulo: "Estado de Pagos", cantidad: 14, icono: "💳", url: "/JB-CONSTRUCCIONES/app/views/admin/pagos.html" },
- // { titulo: "Facturación Emitida", cantidad: 26, icono: "🧾", url: "/JB-CONSTRUCCIONES/app/views/admin/facturacion.html" },
- // { titulo: "Administrar Portafolios", cantidad: 48, icono: "📁", url: "/JB-CONSTRUCCIONES/app/views/portafolio.html" },
- // { titulo: "Moderación de Reseñas", cantidad: 19, icono: "⭐", url: "/JB-CONSTRUCCIONES/app/views/moderacionResenas.html" },
- // { titulo: "Gestión de Contenido", cantidad: 25, icono: "📝", url: "/JB-CONSTRUCCIONES/app/views/admin/blogs.html" }
-];
 
-
-
-const visitasPendientes = [
   {
-    nombre: "Juan Pérez",
-    documento: "123456789",
-    correo: "juan.perez@example.com",
-    contacto: "3001234567",
-    ubicacion: "Antioquia - Medellín",
-    direccion: "Cra 45 # 12-34",
-    fechaVisita: "2025-10-20"
+    titulo: "Gestión de Proyectos",
+    cantidad: <?= $totalProyectos ?>,
+    icono: "🏗️",
+    url: "/JB-CONSTRUCCIONES/app/views/gestionproyectos.php"
+  },
+
+  {
+    titulo: "Cotizaciones Totales",
+    cantidad: <?= $totalCotizaciones ?>,
+    icono: "💰",
+    url: " "
+  },
+
+  {
+    titulo: "Usuarios Registrados",
+    cantidad: <?= $totalUsuarios ?>,
+    icono: "👥",
+    url: " "
   }
+
 ];
 
 const contenedorTarjetas = document.getElementById("tarjetas-estadisticas");
 
 estadisticas.forEach(item => {
+
   const tarjeta = document.createElement("a");
+
   tarjeta.href = item.url;
+
   tarjeta.className = `
     bg-white rounded-lg shadow p-2 border border-gray-200
-    hover:bg-indigo-100 hover:ring-2 hover:ring-indigo-400 transition
+    hover:bg-indigo-100 hover:ring-2 hover:ring-indigo-400 transition cursor-pointer
     flex flex-col items-center text-center
   `;
 
   tarjeta.innerHTML = `
     <div class="text-3xl">${item.icono}</div>
-    <h3 class="text-gray-600 font-semibold">${item.titulo}</h3>
-    <p class="text-3xl font-bold text-gray-800">${item.cantidad}</p>
+
+    <h3 class="text-gray-600 font-semibold">
+      ${item.titulo}
+    </h3>
+
+    <p class="text-3xl font-bold text-gray-800">
+      ${item.cantidad}
+    </p>
   `;
 
   contenedorTarjetas.appendChild(tarjeta);
 });
 
+</script>
+
+<script>
+
+const visitasPendientes = <?= json_encode($visitasPendientes ?? []) ?>;
 const listaContainer = document.getElementById('lista-visitas');
 const mensajeVacio = document.getElementById('mensaje-vacio');
 
 function cargarVisitas(data) {
+
   listaContainer.innerHTML = '';
 
   if (!data.length) {
@@ -153,7 +208,67 @@ function cargarVisitas(data) {
   mensajeVacio.classList.add('hidden');
 
   const tabla = document.createElement('table');
+
   tabla.className = 'min-w-full text-sm divide-y divide-gray-200';
+
+  let filas = '';
+
+  data.forEach(visita => {
+
+    filas += `
+      <tr class="border-b hover:bg-gray-50">
+
+        <td class="px-4 py-2">
+          ${visita.nombres} ${visita.apellidos}
+        </td>
+
+        <td class="px-4 py-2">
+          ${visita.numero_documento}
+        </td>
+
+        <td class="px-4 py-2">
+          ${visita.correo}
+        </td>
+
+        <td class="px-4 py-2">
+          ${visita.contacto}
+        </td>
+
+        <td class="px-4 py-2">
+          ${visita.ubicacion}
+        </td>
+
+        <td class="px-4 py-2">
+          ${visita.direccion}
+        </td>
+
+        <td class="px-4 py-2">
+          ${visita.fecha_visita ?? 'Sin fecha'}
+        </td>
+
+<td class="px-4 py-2 text-center">
+
+  <div class="flex gap-2 justify-center">
+
+    <button
+      class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm"
+      onclick="confirmarVisita(${visita.idcotizacion})"
+    >
+      Confirmar
+    </button>
+
+    <button
+      class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+      onclick="cancelarVisita(${visita.idcotizacion})"
+    >
+      Cancelar
+    </button>
+
+  </div>
+
+</td>
+    `;
+  });
 
   tabla.innerHTML = `
     <thead class="bg-gray-100 text-gray-700 text-left">
@@ -168,13 +283,81 @@ function cargarVisitas(data) {
         <th class="px-4 py-2 text-center">Acciones</th>
       </tr>
     </thead>
-    <tbody id="tbody-visitas"></tbody>
+
+    <tbody>
+      ${filas}
+    </tbody>
   `;
 
   listaContainer.appendChild(tabla);
 }
 
 cargarVisitas(visitasPendientes);
+
+
+function confirmarVisita(idcotizacion)
+{
+   
+  fetch(`${BASE_URL}app/controllers/visita.php`, {
+
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+
+        body:
+            `accion=confirmar&idcotizacion=${idcotizacion}`
+    })
+
+    .then(response => response.text())
+
+    .then(resultado => {
+
+        if (resultado === 'ok') {
+
+            window.location.href =
+                `${BASE_URL}app/views/nuevoProyecto.php?idcotizacion=${idcotizacion}`;
+
+        } else {
+
+            alert('Error al confirmar visita');
+        }
+    });
+}
+
+
+
+function cancelarVisita(idcotizacion)
+{
+    
+    fetch(`${BASE_URL}app/controllers/visita.php`, {
+
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+
+        body:
+            `accion=cancelar&idcotizacion=${idcotizacion}`
+    })
+
+    .then(response => response.text())
+
+    .then(resultado => {
+
+        if (resultado === 'ok') {
+
+            location.reload();
+
+        } else {
+
+            alert('Error al cancelar visita');
+        }
+    });
+}
+
 </script>
 
 <script src="<?= BASE_URL ?>Scripts/main.js"></script>

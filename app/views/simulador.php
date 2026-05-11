@@ -4,6 +4,39 @@ require_once __DIR__ . '/../../config/data.php';
 require_once __DIR__ . '/../controllers/ServicioController.php';
 
 
+$usuarioData = null;
+
+/* =========================
+   VALIDAR USUARIO LOGUEADO
+========================= */
+if (isset($_SESSION['usuario'])) {
+
+    $data = new Data();
+
+    $conn = $data->getConnection();
+
+
+    $sql = "SELECT
+                nombres,
+                apellidos,
+                tipo_documento,
+                numero_documento,
+                correo,
+                celular
+            FROM usuario
+            WHERE idusuario = :idusuario
+            LIMIT 1";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->execute([
+        ':idusuario' => $_SESSION['usuario']['idusuario']
+    ]);
+
+    $usuarioData = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -120,26 +153,44 @@ $categorias = [
 
                     <!-- COLUMNA 1 -->
                     <div class="space-y-4">
-                      <input type="text" id="nombre" class="input-estilo" placeholder="Nombre">
-                      <input type="text" id="apellido" class="input-estilo" placeholder="Apellido">
+                      <input type="text" id="nombre" class="input-estilo" placeholder="Nombre" value="<?= htmlspecialchars($usuarioData['nombres'] ?? '') ?>">
+                      <input type="text" id="apellido" class="input-estilo" placeholder="Apellido" value="<?= htmlspecialchars($usuarioData['apellidos'] ?? '') ?>">
 
                       <select id="tipoDocumento" class="input-estilo">
-                        <option value="">Tipo de Documento</option>
-                        <option value="dni">DNI</option>
-                        <option value="cedula">Cédula</option>
-                        <option value="pasaporte">Pasaporte</option>
-                        <option value="otro">Otro</option>
-                      </select>
 
-                      <input type="text" id="numeroDocumento" class="input-estilo" placeholder="Número de Documento">
+                          <option value="">Tipo de Documento</option>
+
+                          <option value="Cédula de Ciudadanía"
+                              <?= ($usuarioData['tipo_documento'] ?? '') === 'Cédula de Ciudadanía' ? 'selected' : '' ?>>
+                              Cédula de Ciudadanía
+                          </option>
+
+                          <option value="Cédula de Extranjería"
+                              <?= ($usuarioData['tipo_documento'] ?? '') === 'Cédula de Extranjería' ? 'selected' : '' ?>>
+                              Cédula de Extranjería
+                          </option>
+
+                          <option value="Pasaporte"
+                              <?= ($usuarioData['tipo_documento'] ?? '') === 'Pasaporte' ? 'selected' : '' ?>>
+                              Pasaporte
+                          </option>
+
+                          <option value="Tarjeta de Identidad"
+                              <?= ($usuarioData['tipo_documento'] ?? '') === 'Tarjeta de Identidad' ? 'selected' : '' ?>>
+                              Tarjeta de Identidad
+                          </option>
+
+                      </select>
+              
+                      <input type="text" id="numeroDocumento" class="input-estilo" placeholder="Número de Documento" value="<?= htmlspecialchars($usuarioData['numero_documento'] ?? '') ?>">
                     </div>
 
                     <!-- COLUMNA 2 -->
                     <div class="space-y-4">
-                      <input type="email" id="correo" class="input-estilo" placeholder="Correo Electrónico">
-                      <input type="tel" id="contacto" class="input-estilo" placeholder="Número de Contacto">
-                      <input type="text" id="ubicacion" class="input-estilo" placeholder="Departamento - Ciudad">
-                      <input type="text" id="direccion" class="input-estilo" placeholder="Dirección del Proyecto">
+                      <input type="email" id="correo" class="input-estilo" placeholder="Correo Electrónico" value="<?= htmlspecialchars($usuarioData['correo'] ?? '') ?>">
+                      <input type="tel" id="contacto" class="input-estilo" placeholder="Número de Contacto" value="<?= htmlspecialchars($usuarioData['celular'] ?? '') ?>">
+                      <input type="text" id="ubicacion" class="input-estilo" placeholder="Departamento - Ciudad" value="<?= htmlspecialchars($usuarioData['ubicacion'] ?? '') ?>">
+                      <input type="text" id="direccion" class="input-estilo" placeholder="Dirección del Proyecto" value="<?= htmlspecialchars($usuarioData['direccion'] ?? '') ?>">
                     </div>
 
                     <!-- COLUMNA 3 -->
@@ -343,6 +394,7 @@ $categorias = [
   <script>
     // Variable global en JavaScript con el valor de PHP
     const BASE_URL = "<?= BASE_URL ?>";
+    
   </script>
 
 <script src="<?= BASE_URL ?>Scripts/simulador.js"></script>

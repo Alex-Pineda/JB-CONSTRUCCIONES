@@ -8,6 +8,9 @@ if (!isset($_SESSION['usuario'])) {
 }
     $usuario = $_SESSION['usuario'];
     $rol = $usuario['rol_idrol'] ?? null;
+  
+    $idcotizacion = $_GET['idcotizacion'] ?? '';
+
     ?>
 
 <!DOCTYPE html>
@@ -20,6 +23,24 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
+<stile>
+    <body {
+        font-family: 'Roboto', sans-serif;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        width: 100%;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .input:focus {
+        border-color: #3182ce;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+        outline: none;
+    }
+</stile>
+
 
 <body class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
 
@@ -42,7 +63,7 @@ if (!isset($_SESSION['usuario'])) {
     <div class="bg-white rounded-xl shadow-lg p-5 mb-8 border border-gray-200">
         <div class="flex flex-col md:flex-row gap-4 items-center">
 
-            <input id="buscarCotizacion" type="text"
+            <input id="buscarCotizacion" type="text" value="<?= htmlspecialchars($idcotizacion) ?>"
                 placeholder="Buscar cotización por ID o documento..."
                 class="flex-1 border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none transition">
 
@@ -62,7 +83,7 @@ if (!isset($_SESSION['usuario'])) {
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
 
             <!-- CLIENTE -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
+            <div class="bg-gray-300 p-6 rounded-xl border border-gray-200 shadow-sm">
                 <h2 class="text-lg font-semibold mb-5 text-gray-700 border-b pb-2">
                     Datos del Cliente
                 </h2>
@@ -104,7 +125,7 @@ if (!isset($_SESSION['usuario'])) {
             </div>
 
             <!-- PROYECTO -->
-            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm">
+            <div class="bg-gray-300 p-6 rounded-xl border border-gray-200 shadow-sm">
                 <h2 class="text-lg font-semibold mb-5 text-gray-700 border-b pb-2">
                     Datos del Proyecto
                 </h2>
@@ -153,6 +174,7 @@ if (!isset($_SESSION['usuario'])) {
 
 </div>
 
+
 <script>
     // Usamos el BASE_URL de PHP para que los fetch funcionen en cualquier lado
     const BASE_URL = "<?= BASE_URL ?>";
@@ -187,7 +209,6 @@ if (!isset($_SESSION['usuario'])) {
                 document.getElementById("ubicacion").value = c.ubicacion;
                 document.getElementById("direccion").value = c.direccion;
                 document.getElementById("descripcion").value = c.descripcion;
-                alert("Cotización cargada ✔");
             } else {
                 document.getElementById("cotizacion_id").value = "";
                 alert(data.error || "No encontrada");
@@ -230,7 +251,7 @@ if (!isset($_SESSION['usuario'])) {
             if (r.success) {
                 alert("Proyecto creado ✔");
                 // Redirección dinámica segura
-                window.location.href = "gestionproyectos.php";
+                window.location.href = `${BASE_URL}app/views/gestionproyectos.php`;
             } else {
                 alert(r.error || "Error al guardar");
             }
@@ -239,6 +260,20 @@ if (!isset($_SESSION['usuario'])) {
             alert("Error de conexión al intentar guardar");
         }
     });
+
+
+    window.addEventListener('DOMContentLoaded', () => {
+
+        const input = document.getElementById('buscarCotizacion');
+
+        if (input.value.trim() !== '') {
+
+            buscarCotizacion();
+        }
+
+    });
+
+
 </script>
 
 </body>
